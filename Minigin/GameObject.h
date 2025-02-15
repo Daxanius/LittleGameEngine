@@ -25,7 +25,7 @@ namespace dae
 		// However, you do have to check for a nullptr every frame in other Components because a component or GameObject
 		// could have been deleted in the previous frame.
 		template<typename ComponentType>
-		ComponentType* GetComponent() const {
+		[[nodiscard]] ComponentType* GetComponent() const {
 			auto it{ m_Components.find(std::type_index(typeid(ComponentType))) };
 			return (it != m_Components.end()) ? static_cast<ComponentType*>(it->second.get()) : nullptr;
 		}

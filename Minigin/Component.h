@@ -10,10 +10,10 @@ namespace dae {
 		Component& operator=(const Component& other) = delete;
 		Component& operator=(Component&& other) = delete;
 
-		virtual void Ready(GameObject*) {};
+		virtual void Ready([[maybe_unused]] GameObject* obj) {};
 
 		virtual void FixedUpdate() {};
-		virtual void Update(float) {};
+		virtual void Update([[maybe_unused]] float deltaTime) {};
 		virtual void Render() const {};
 
 	protected:
