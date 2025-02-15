@@ -4,7 +4,7 @@
 
 namespace dae
 {
-	class Minigin
+	class Minigin final
 	{
 	public:
 		explicit Minigin(const std::string& dataPath);
@@ -15,5 +15,7 @@ namespace dae
 		Minigin(Minigin&& other) = delete;
 		Minigin& operator=(const Minigin& other) = delete;
 		Minigin& operator=(Minigin&& other) = delete;
+
+		constexpr static float FIXED_UPDATE_INTERVAL{ .02f };
 	};
 }

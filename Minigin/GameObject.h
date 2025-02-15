@@ -1,21 +1,15 @@
 #pragma once
 #include <memory>
-#include "Transform.h"
+#include <unordered_map>
+#include <typeindex>
 
 namespace dae
 {
-	class Texture2D;
+	class Component;
 
-	// todo: this should become final.
-	class GameObject 
+	class GameObject final 
 	{
 	public:
-		virtual void Update();
-		virtual void Render() const;
-
-		void SetTexture(const std::string& filename);
-		void SetPosition(float x, float y);
-
 		GameObject() = default;
 		virtual ~GameObject();
 		GameObject(const GameObject& other) = delete;
@@ -23,9 +17,40 @@ namespace dae
 		GameObject& operator=(const GameObject& other) = delete;
 		GameObject& operator=(GameObject&& other) = delete;
 
+		virtual void FixedUpdate();
+		virtual void Update(float deltaTime);
+		virtual void Render() const;
+
+		// The component returned is owned by the GameObject, there is no need to free the pointer.
+		// However, you do have to check for a nullptr every frame in other Components because a component or GameObject
+		// could have been deleted in the previous frame.
+		template<typename ComponentType>
+		ComponentType* GetComponent() const {
+			auto it{ m_Components.find(std::type_index(typeid(ComponentType))) };
+			return (it != m_Components.end()) ? static_cast<ComponentType*>(it->second.get()) : nullptr;
+		}
+
+		// Takes ownership of the component
+		template<typename ComponentType>
+		void AddComponent(std::unique_ptr<ComponentType> component) {
+			const auto id{ std::type_index(typeid(ComponentType)) };
+			m_Components[id] = std::move(component);
+			m_Components[id]->Ready(this);
+		}
+
+		// Removes a component by the next frame
+		template<typename ComponentType>
+		void RemoveComponent(std::unique_ptr<ComponentType> component) {
+			const auto id{ std::type_index(typeid(ComponentType)) };
+			m_ComponentsToBeRemoved.push_back(id);
+		}
 	private:
-		Transform m_transform{};
-		// todo: mmm, every gameobject has a texture? Is that correct?
-		std::shared_ptr<Texture2D> m_texture{};
+		void RemoveQueuedComponents();
+
+		// Components can be held in multiple places (though it's usually just other components)
+		std::unordered_map<std::type_index, std::unique_ptr<Component>> m_Components;
+
+		// A queue of components to be removed
+		std::vector<std::type_index> m_ComponentsToBeRemoved;
 	};
 }

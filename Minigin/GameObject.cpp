@@ -2,23 +2,38 @@
 #include "GameObject.h"
 #include "ResourceManager.h"
 #include "Renderer.h"
+#include "Component.h"
 
-dae::GameObject::~GameObject() = default;
+dae::GameObject::~GameObject() {
+	m_Components.clear();
+}
 
-void dae::GameObject::Update(){}
+void dae::GameObject::FixedUpdate() {
+	for (auto& kvs : m_Components) {
+		kvs.second->FixedUpdate();
+	}
+}
+
+void dae::GameObject::Update(float deltaTime){
+	for (auto& kvs : m_Components) {
+		kvs.second->Update(deltaTime);
+	}
+
+	RemoveQueuedComponents();
+}
 
 void dae::GameObject::Render() const
 {
-	const auto& pos = m_transform.GetPosition();
-	Renderer::GetInstance().RenderTexture(*m_texture, pos.x, pos.y);
+	for (const auto& kvs : m_Components) {
+		kvs.second->Render();
+	}
 }
 
-void dae::GameObject::SetTexture(const std::string& filename)
-{
-	m_texture = ResourceManager::GetInstance().LoadTexture(filename);
-}
+void dae::GameObject::RemoveQueuedComponents() {
+	for (const auto& id : m_ComponentsToBeRemoved) {
+		m_Components.erase(id);
+	}
 
-void dae::GameObject::SetPosition(float x, float y)
-{
-	m_transform.SetPosition(x, y, 0.0f);
+	// After the components have been removed, the queue can be cleared
+	m_ComponentsToBeRemoved.clear();
 }

@@ -1,18 +1,22 @@
 #include <stdexcept>
 #include <SDL_ttf.h>
-#include "TextObject.h"
+#include "TextComponent.h"
 #include "Renderer.h"
 #include "Font.h"
 #include "Texture2D.h"
 
-dae::TextObject::TextObject(const std::string& text, std::shared_ptr<Font> font) 
-	: m_needsUpdate(true), m_text(text), m_font(std::move(font)), m_textTexture(nullptr)
-{ }
+dae::TextComponent::TextComponent(const std::string& text, std::shared_ptr<Font> font)
+	: Component(), m_needsUpdate(true), m_text(text), m_font(std::move(font)), m_textTexture(nullptr)
+{ 
+}
 
-void dae::TextObject::Update()
-{
-	if (m_needsUpdate)
-	{
+void dae::TextComponent::Ready(GameObject* obj) {
+	m_Transform = obj->GetComponent<TransformComponent>();
+	assert(m_Transform); // A transform should exist for this component
+}
+
+void dae::TextComponent::Update(float) {
+	if (m_needsUpdate) {
 		const SDL_Color color = { 255,255,255,255 }; // only white text is supported now
 		const auto surf = TTF_RenderText_Blended(m_font->GetFont(), m_text.c_str(), color);
 		if (surf == nullptr) 
@@ -30,25 +34,17 @@ void dae::TextObject::Update()
 	}
 }
 
-void dae::TextObject::Render() const
-{
-	if (m_textTexture != nullptr)
-	{
-		const auto& pos = m_transform.GetPosition();
-		Renderer::GetInstance().RenderTexture(*m_textTexture, pos.x, pos.y);
+void dae::TextComponent::Render() const {
+	if (m_textTexture != nullptr) {
+		const auto& position{ m_Transform->GetPosition() };
+		Renderer::GetInstance().RenderTexture(*m_textTexture, position.x, position.y);
 	}
 }
 
 // This implementation uses the "dirty flag" pattern
-void dae::TextObject::SetText(const std::string& text)
-{
+void dae::TextComponent::SetText(const std::string& text) {
 	m_text = text;
 	m_needsUpdate = true;
-}
-
-void dae::TextObject::SetPosition(const float x, const float y)
-{
-	m_transform.SetPosition(x, y, 0.0f);
 }
 
 
