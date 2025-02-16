@@ -22,8 +22,8 @@ namespace dae
 		virtual void Render() const;
 
 		// The component returned is owned by the GameObject, there is no need to free the pointer.
-		// However, you do have to check for a nullptr every frame in other Components because a component or GameObject
-		// could have been deleted in the previous frame.
+		// However, you do have to check if the component has been removed in PostUpdate
+		// to make sure that the pointer is still valid.
 		template<typename ComponentType>
 		[[nodiscard]] ComponentType* GetComponent() const {
 			auto it{ m_Components.find(std::type_index(typeid(ComponentType))) };
@@ -40,9 +40,16 @@ namespace dae
 
 		// Removes a component by the next frame
 		template<typename ComponentType>
-		void RemoveComponent(std::unique_ptr<ComponentType> component) {
+		void RemoveComponent() {
 			const auto id{ std::type_index(typeid(ComponentType)) };
 			m_ComponentsToBeRemoved.push_back(id);
+		}
+
+		// WAWAHAWHAWHA, just for the requirement and a clean PostUpdate I guess
+		template<typename ComponentType>
+		[[nodiscard]] bool HasComponent() const {
+			auto it{ m_Components.find(std::type_index(typeid(ComponentType))) };
+			return it != m_Components.end();
 		}
 	private:
 		void RemoveQueuedComponents();

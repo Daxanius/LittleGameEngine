@@ -8,8 +8,11 @@ namespace dae {
 	public:
 		void Ready(GameObject* obj) override;
 		void Update(float deltaTime) override;
-		
+		void PostUpdate() override;
+
 	private:
-		TextComponent* m_Text{ nullptr };
+		GameObject* m_GameObject{ nullptr };
+
+		TextComponent* m_TextComponentPtr{ nullptr };
 	};
 }

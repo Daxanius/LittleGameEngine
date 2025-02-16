@@ -76,8 +76,7 @@ dae::Minigin::~Minigin()
 	SDL_Quit();
 }
 
-void dae::Minigin::Run(const std::function<void()>& load)
-{
+void dae::Minigin::Run(const std::function<void()>& load) {
 	load();
 
 	auto& renderer = Renderer::GetInstance();
@@ -89,8 +88,7 @@ void dae::Minigin::Run(const std::function<void()>& load)
 	float lag{ 0.f };
 
 	bool doContinue = true;
-	while (doContinue)
-	{
+	while (doContinue) {
 		// Calculate time difference (delta time)
 		const auto currentTime{ clock::now() };
 		const std::chrono::duration<float> dtChrono{ currentTime - previousTime };
@@ -98,7 +96,9 @@ void dae::Minigin::Run(const std::function<void()>& load)
 
 		// Convert to seconds (a floating point value)
 		const float deltaTime{ dtChrono.count() };
+		lag += deltaTime;
 
+		// Process fixed updates
 		while (lag >= FIXED_UPDATE_INTERVAL) {
 			sceneManager.FixedUpdate();
 			lag -= FIXED_UPDATE_INTERVAL;
@@ -108,7 +108,13 @@ void dae::Minigin::Run(const std::function<void()>& load)
 		sceneManager.Update(deltaTime);
 		renderer.Render();
 
-		const auto sleep_time{ currentTime + std::chrono::milliseconds(6) - std::chrono::high_resolution_clock::now() };
-		std::this_thread::sleep_for(sleep_time);
+		// Sleep to maintain constant frame rate
+		const auto frameEndTime = clock::now();
+		const std::chrono::duration<float> frameDuration = frameEndTime - previousTime;
+
+		if (frameDuration.count() < FRAME_TIME) {
+			const auto sleepDuration = std::chrono::duration<float>(FRAME_TIME - frameDuration.count());
+			std::this_thread::sleep_for(std::chrono::duration_cast<std::chrono::milliseconds>(sleepDuration));
+		}
 	}
 }

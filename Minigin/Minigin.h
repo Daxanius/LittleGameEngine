@@ -17,5 +17,7 @@ namespace dae
 		Minigin& operator=(Minigin&& other) = delete;
 
 		constexpr static float FIXED_UPDATE_INTERVAL{ .02f };
+		constexpr static float TARGET_FPS{ 60.0f };
+		constexpr static float FRAME_TIME{ 1.0f / TARGET_FPS };
 	};
 }

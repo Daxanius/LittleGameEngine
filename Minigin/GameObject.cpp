@@ -20,6 +20,11 @@ void dae::GameObject::Update(float deltaTime){
 	}
 
 	RemoveQueuedComponents();
+
+	// Run the post-update for all components
+	for (auto& kvs : m_Components) {
+		kvs.second->PostUpdate();
+	}
 }
 
 void dae::GameObject::Render() const

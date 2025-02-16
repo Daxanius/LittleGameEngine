@@ -14,6 +14,7 @@ namespace dae {
 
 		virtual void FixedUpdate() {};
 		virtual void Update([[maybe_unused]] float deltaTime) {};
+		virtual void PostUpdate() {}; // Used to remove objects if they have been deleted
 		virtual void Render() const {};
 
 	protected:

@@ -24,15 +24,18 @@ namespace dae
 		void Ready(GameObject* obj) override;
 		void Update(float deltaTime) override;
 		void Render() const override;
+		void PostUpdate() override;
 
 		void SetText(const std::string& text);
 	private:
-		bool m_needsUpdate;
-		std::string m_text;
+		bool m_NeedsUpdate;
+		std::string m_Text;
 
-		std::shared_ptr<Font> m_font;
-		std::shared_ptr<Texture2D> m_textTexture;
+		std::shared_ptr<Font> m_Font;
+		std::shared_ptr<Texture2D> m_TextTexture;
 
-		TransformComponent* m_Transform{ nullptr };
+		TransformComponent* m_TransformComponent{ nullptr };
+
+		GameObject* m_GameObject{ nullptr };
 	};
 }

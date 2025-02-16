@@ -7,11 +7,21 @@ dae::TextureComponent::TextureComponent(const std::string& filename) : Component
 }
 
 void dae::TextureComponent::Ready(GameObject* obj) {
-	m_Transform = obj->GetComponent<TransformComponent>();
-	assert(m_Transform);
+	m_GameObject = obj;
+	m_TransformComponent = obj->GetComponent<TransformComponent>();
+	assert(m_TransformComponent);
 }
 
 void dae::TextureComponent::Render() const {
-	const auto& pos = m_Transform->GetPosition();
-	Renderer::GetInstance().RenderTexture(*m_Texture, pos.x, pos.y);
+	if (m_TransformComponent) {
+		const auto& pos = m_TransformComponent->GetPosition();
+		Renderer::GetInstance().RenderTexture(*m_Texture, pos.x, pos.y);
+	}
+}
+
+void dae::TextureComponent::PostUpdate() {
+	// Just set the transform to null for now
+	if (!m_GameObject->HasComponent<TransformComponent>()) {
+		m_TransformComponent = nullptr;
+	}
 }

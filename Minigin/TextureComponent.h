@@ -11,9 +11,12 @@ namespace dae {
 
 		void Ready(GameObject* obj) override;
 		void Render() const override;
+		void PostUpdate() override;
 	private:
 		std::shared_ptr<Texture2D> m_Texture;
 
-		TransformComponent* m_Transform{ nullptr };
+		TransformComponent* m_TransformComponent{ nullptr };
+
+		GameObject* m_GameObject{ nullptr };
 	};
 }
