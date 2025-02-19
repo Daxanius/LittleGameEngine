@@ -10,10 +10,10 @@ namespace dae {
 		Component& operator=(const Component& other) = delete;
 		Component& operator=(Component&& other) = delete;
 
-		virtual void Ready([[maybe_unused]] GameObject* obj) {};
+		virtual void Ready(GameObject*) {};
 
 		virtual void FixedUpdate() {};
-		virtual void Update([[maybe_unused]] float deltaTime) {};
+		virtual void Update(float) {};
 		virtual void PostUpdate() {}; // Used to remove objects if they have been deleted
 		virtual void Render() const {};
 
