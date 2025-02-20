@@ -22,8 +22,7 @@ namespace dae
 		virtual void Render() const;
 
 		// The component returned is owned by the GameObject, there is no need to free the pointer.
-		// However, you do have to check if the component has been removed in PostUpdate
-		// to make sure that the pointer is still valid.
+		// However, you do have to check if the component has been removed in PostUpdate.
 		template<typename ComponentType>
 		requires std::derived_from<ComponentType, BaseComponent>
 		[[nodiscard]] ComponentType* GetComponent() const {
