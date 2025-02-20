@@ -98,13 +98,14 @@ void dae::Minigin::Run(const std::function<void()>& load) {
 		const float deltaTime{ dtChrono.count() };
 		lag += deltaTime;
 
+		doContinue = input.ProcessInput();
+
 		// Process fixed updates
 		while (lag >= FIXED_UPDATE_INTERVAL) {
 			sceneManager.FixedUpdate();
 			lag -= FIXED_UPDATE_INTERVAL;
 		}
 
-		doContinue = input.ProcessInput();
 		sceneManager.Update(deltaTime);
 		renderer.Render();
 
