@@ -40,7 +40,7 @@ void dae::TextComponent::Render() const {
 
 void dae::TextComponent::PostUpdate() {
 	// Destroy ourselves if our lover died :(
-	if (m_pTransformComponent->IsDestroyed()) {
+	if (!GetOwner().HasComponent<TransformComponent>()) {
 		Destroy();
 	}
 }

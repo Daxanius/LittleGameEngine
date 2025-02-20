@@ -14,7 +14,7 @@ void dae::FpsComponent::Update(float deltaTime) {
 
 void dae::FpsComponent::PostUpdate() {
 	// Since this component cannot function anymore after the text has been destroyed, it will just destroy itself
-	if (m_pTextComponent->IsDestroyed()) {
+	if (!GetOwner().HasComponent<TextComponent>()) {
 		Destroy();
 	}
 }

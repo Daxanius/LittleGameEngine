@@ -15,7 +15,7 @@ void dae::TextureComponent::Render() const {
 
 void dae::TextureComponent::PostUpdate() {
 	// I can't live without youu!
-	if (m_pTransformComponent->IsDestroyed()) {
+	if (!GetOwner().HasComponent<TransformComponent>()) {
 		Destroy();
 	}
 }
