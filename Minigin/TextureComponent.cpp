@@ -9,15 +9,13 @@ dae::TextureComponent::TextureComponent(GameObject& pOwner, const std::string& f
 }
 
 void dae::TextureComponent::Render() const {
-	if (m_pTransformComponent) {
-		const auto& pos = m_pTransformComponent->GetPosition();
-		Renderer::GetInstance().RenderTexture(*m_pTexture, pos.x, pos.y);
-	}
+	const auto& pos = m_pTransformComponent->GetPosition();
+	Renderer::GetInstance().RenderTexture(*m_pTexture, pos.x, pos.y);
 }
 
 void dae::TextureComponent::PostUpdate() {
-	// Just set the transform to null for now
+	// I can't live without youu!
 	if (m_pTransformComponent->IsDestroyed()) {
-		m_pTransformComponent = nullptr;
+		Destroy();
 	}
 }

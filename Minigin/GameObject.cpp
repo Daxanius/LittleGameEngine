@@ -16,15 +16,17 @@ void dae::GameObject::FixedUpdate() {
 
 void dae::GameObject::Update(float deltaTime){
 	for (auto& component : m_components) {
-		component->Update(deltaTime);
+		if (!component->IsDestroyed()) {
+			component->Update(deltaTime);
+		}
 	}
+
+	RemoveDestroyedComponents();
 
 	// Run the post-update for all components
 	for (auto& component : m_components) {
 		component->PostUpdate();
 	}
-
-	RemoveDestroyedComponents();
 }
 
 void dae::GameObject::Render() const

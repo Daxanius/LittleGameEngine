@@ -6,15 +6,15 @@ dae::FpsComponent::FpsComponent(GameObject& pOwner) : BaseComponent(pOwner) {
 }
 
 void dae::FpsComponent::Update(float deltaTime) {
-	if (m_pTextComponent && deltaTime > 0.f) {
+	if (deltaTime > 0.f) {
 		const float fps = 1.0f / deltaTime;
 		m_pTextComponent->SetText(std::to_string(static_cast<int>(std::roundf(fps))));
 	}
 }
 
 void dae::FpsComponent::PostUpdate() {
-	// Just set text to a nullptr for now, no rechecking for creating new components and stuff
+	// Since this component cannot function anymore after the text has been destroyed, it will just destroy itself
 	if (m_pTextComponent->IsDestroyed()) {
-		m_pTextComponent = nullptr;
+		Destroy();
 	}
 }
