@@ -110,8 +110,8 @@ void dae::Minigin::Run(const std::function<void()>& load) {
 		renderer.Render();
 
 		// Sleep to maintain constant frame rate
-		const auto frameEndTime = clock::now();
-		const std::chrono::duration<float> frameDuration = frameEndTime - previousTime;
+		const auto frameEndTime{ clock::now() };
+		const std::chrono::duration<float> frameDuration{ frameEndTime - previousTime };
 
 		if (frameDuration.count() < FRAME_TIME) {
 			const auto sleepDuration = std::chrono::duration<float>(FRAME_TIME - frameDuration.count());
