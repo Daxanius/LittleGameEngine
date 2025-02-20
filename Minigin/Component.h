@@ -10,14 +10,17 @@ namespace dae {
 		Component& operator=(const Component& other) = delete;
 		Component& operator=(Component&& other) = delete;
 
-		virtual void Ready(GameObject*) {};
-
-		virtual void FixedUpdate() {};
-		virtual void Update(float) {};
-		virtual void PostUpdate() {}; // Used to remove objects if they have been deleted
-		virtual void Render() const {};
+		virtual void FixedUpdate() = 0;
+		virtual void Update(float deltaTime) = 0;
+		virtual void PostUpdate()  = 0; // Used to remove objects if they have been deleted
+		virtual void Render() const = 0;
 
 	protected:
-		Component() = default;
+		explicit Component(GameObject& pOwner);
+
+		GameObject& GetOwner();
+
+	private:
+		GameObject* m_pOwner;
 	};
 }

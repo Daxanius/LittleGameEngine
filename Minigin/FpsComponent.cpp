@@ -1,21 +1,20 @@
 #include "FpsComponent.h"
 
-void dae::FpsComponent::Ready(GameObject* obj) {
-	m_GameObject = obj;
-	m_TextComponentPtr = obj->GetComponent<TextComponent>();
-	assert(m_TextComponentPtr);
+dae::FpsComponent::FpsComponent(GameObject& pOwner) : Component(pOwner) {
+	m_pTextComponent = GetOwner().GetComponent<TextComponent>();
+	assert(m_pTextComponent);
 }
 
 void dae::FpsComponent::Update(float deltaTime) {
-	if (m_TextComponentPtr && deltaTime > 0.f) {
+	if (m_pTextComponent && deltaTime > 0.f) {
 		const float fps = 1.0f / deltaTime;
-		m_TextComponentPtr->SetText(std::to_string(static_cast<int>(std::roundf(fps))));
+		m_pTextComponent->SetText(std::to_string(static_cast<int>(std::roundf(fps))));
 	}
 }
 
 void dae::FpsComponent::PostUpdate() {
 	// Just set text to a nullptr for now, no rechecking for creating new components and stuff
-	if (!m_GameObject->HasComponent<TextComponent>()) {
-		m_TextComponentPtr = nullptr;
+	if (!GetOwner().HasComponent<TextComponent>()) {
+		m_pTextComponent = nullptr;
 	}
 }

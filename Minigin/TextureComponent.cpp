@@ -2,26 +2,22 @@
 #include "ResourceManager.h"
 #include "Renderer.h"
 
-dae::TextureComponent::TextureComponent(const std::string& filename) : Component() {
-	m_Texture = ResourceManager::GetInstance().LoadTexture(filename);
-}
-
-void dae::TextureComponent::Ready(GameObject* obj) {
-	m_GameObject = obj;
-	m_TransformComponent = obj->GetComponent<TransformComponent>();
-	assert(m_TransformComponent);
+dae::TextureComponent::TextureComponent(GameObject& pOwner, const std::string& filename) : Component(pOwner) {
+	m_pTexture = ResourceManager::GetInstance().LoadTexture(filename);
+	m_pTransformComponent = GetOwner().GetComponent<TransformComponent>();
+	assert(m_pTransformComponent);
 }
 
 void dae::TextureComponent::Render() const {
-	if (m_TransformComponent) {
-		const auto& pos = m_TransformComponent->GetPosition();
-		Renderer::GetInstance().RenderTexture(*m_Texture, pos.x, pos.y);
+	if (m_pTransformComponent) {
+		const auto& pos = m_pTransformComponent->GetPosition();
+		Renderer::GetInstance().RenderTexture(*m_pTexture, pos.x, pos.y);
 	}
 }
 
 void dae::TextureComponent::PostUpdate() {
 	// Just set the transform to null for now
-	if (!m_GameObject->HasComponent<TransformComponent>()) {
-		m_TransformComponent = nullptr;
+	if (!GetOwner().HasComponent<TransformComponent>()) {
+		m_pTransformComponent = nullptr;
 	}
 }

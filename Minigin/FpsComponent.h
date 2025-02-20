@@ -4,15 +4,16 @@
 #include "TextComponent.h"
 
 namespace dae {
-	class FpsComponent : public Component {
+	class FpsComponent final : public Component {
 	public:
-		void Ready(GameObject* obj) override;
+		FpsComponent(GameObject& pOwner);
+
+		void FixedUpdate() override {};
 		void Update(float deltaTime) override;
 		void PostUpdate() override;
+	  void Render() const override {};
 
 	private:
-		GameObject* m_GameObject{ nullptr };
-
-		TextComponent* m_TextComponentPtr{ nullptr };
+		TextComponent* m_pTextComponent{ nullptr };
 	};
 }

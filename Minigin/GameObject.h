@@ -35,7 +35,6 @@ namespace dae
 		void AddComponent(std::unique_ptr<ComponentType> component) {
 			const auto id{ std::type_index(typeid(ComponentType)) };
 			m_Components[id] = std::move(component);
-			m_Components[id]->Ready(this);
 		}
 
 		// Removes a component by the next frame

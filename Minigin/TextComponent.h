@@ -13,7 +13,7 @@ namespace dae
 	class TextComponent final : public Component
 	{
 	public:
-		TextComponent(const std::string& text, std::shared_ptr<Font> font);
+		TextComponent(GameObject& pOwner, const std::string& text, std::shared_ptr<Font> font);
 
 		virtual ~TextComponent() = default;
 		TextComponent(const TextComponent& other) = delete;
@@ -21,7 +21,7 @@ namespace dae
 		TextComponent& operator=(const TextComponent& other) = delete;
 		TextComponent& operator=(TextComponent&& other) = delete;
 
-		void Ready(GameObject* obj) override;
+		void FixedUpdate() override {};
 		void Update(float deltaTime) override;
 		void Render() const override;
 		void PostUpdate() override;
@@ -34,8 +34,6 @@ namespace dae
 		std::shared_ptr<Font> m_Font;
 		std::shared_ptr<Texture2D> m_TextTexture;
 
-		TransformComponent* m_TransformComponent{ nullptr };
-
-		GameObject* m_GameObject{ nullptr };
+		TransformComponent* m_pTransformComponent{ nullptr };
 	};
 }

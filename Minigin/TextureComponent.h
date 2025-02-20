@@ -7,16 +7,15 @@
 namespace dae {
 	class TextureComponent final : public Component {
 	public:
-		TextureComponent(const std::string& filename);
+		TextureComponent(GameObject& pOwner, const std::string& filename);
 
-		void Ready(GameObject* obj) override;
+		void FixedUpdate() override {};
+		void Update(float) override {};
 		void Render() const override;
 		void PostUpdate() override;
 	private:
-		std::shared_ptr<Texture2D> m_Texture;
+		std::shared_ptr<Texture2D> m_pTexture;
 
-		TransformComponent* m_TransformComponent{ nullptr };
-
-		GameObject* m_GameObject{ nullptr };
+		TransformComponent* m_pTransformComponent{ nullptr };
 	};
 }
