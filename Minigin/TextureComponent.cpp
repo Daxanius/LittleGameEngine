@@ -17,7 +17,7 @@ void dae::TextureComponent::Render() const {
 
 void dae::TextureComponent::PostUpdate() {
 	// Just set the transform to null for now
-	if (!GetOwner().HasComponent<TransformComponent>()) {
+	if (m_pTransformComponent->IsDestroyed()) {
 		m_pTransformComponent = nullptr;
 	}
 }

@@ -15,6 +15,8 @@ namespace dae {
 		virtual void PostUpdate()  = 0; // Used to remove objects if they have been deleted
 		virtual void Render() const = 0;
 
+		void Destroy();
+		[[nodiscard]] bool IsDestroyed() const;
 	protected:
 		explicit BaseComponent(GameObject& pOwner);
 
@@ -22,5 +24,6 @@ namespace dae {
 
 	private:
 		GameObject* m_pOwner;
+		bool m_destroyed{ false };
 	};
 }

@@ -14,7 +14,7 @@ void dae::FpsComponent::Update(float deltaTime) {
 
 void dae::FpsComponent::PostUpdate() {
 	// Just set text to a nullptr for now, no rechecking for creating new components and stuff
-	if (!GetOwner().HasComponent<TextComponent>()) {
+	if (m_pTextComponent->IsDestroyed()) {
 		m_pTextComponent = nullptr;
 	}
 }

@@ -25,38 +25,38 @@ namespace dae
 		// However, you do have to check if the component has been removed in PostUpdate
 		// to make sure that the pointer is still valid.
 		template<typename ComponentType>
+		requires std::derived_from<ComponentType, BaseComponent>
 		[[nodiscard]] ComponentType* GetComponent() const {
-			auto it{ m_Components.find(std::type_index(typeid(ComponentType))) };
-			return (it != m_Components.end()) ? static_cast<ComponentType*>(it->second.get()) : nullptr;
+			ComponentType* resultComponent{};
+			std::ignore = std::ranges::find_if(m_Components, [&resultComponent](auto& basecomponent) {
+				resultComponent = dynamic_cast<ComponentType*>(basecomponent.get());
+				return resultComponent != nullptr;
+			});
+
+			return resultComponent;
 		}
 
-		// Takes ownership of the component
-		template<typename ComponentType>
-		void AddComponent(std::unique_ptr<ComponentType> component) {
-			const auto id{ std::type_index(typeid(ComponentType)) };
-			m_Components[id] = std::move(component);
+
+		// Creates a component, similar to std::make_unique
+		template<typename ComponentType, typename... Args>
+		requires std::derived_from<ComponentType, BaseComponent>
+		void AddComponent(Args&&... args) {
+			m_Components.push_back(std::make_unique<ComponentType>(*this, std::forward<Args>(args)...));
 		}
 
-		// Removes a component by the next frame
 		template<typename ComponentType>
-		void RemoveComponent() {
-			const auto id{ std::type_index(typeid(ComponentType)) };
-			m_ComponentsToBeRemoved.push_back(id);
-		}
-
-		// WAWAHAWHAWHA, just for the requirement and a clean PostUpdate I guess
-		template<typename ComponentType>
+		requires std::derived_from<ComponentType, BaseComponent>
 		[[nodiscard]] bool HasComponent() const {
-			auto it{ m_Components.find(std::type_index(typeid(ComponentType))) };
+			auto it = std::ranges::find_if(m_Components, [](const auto& basecomponent) {
+				return dynamic_cast<ComponentType*>(basecomponent.get()) != nullptr;
+			});
+
 			return it != m_Components.end();
 		}
 	private:
-		void RemoveQueuedComponents();
+		void RemoveDestroyedComponents();
 
-		// Components can be held in multiple places (though it's usually just other components)
-		std::unordered_map<std::type_index, std::unique_ptr<BaseComponent>> m_Components;
-
-		// A queue of components to be removed
-		std::vector<std::type_index> m_ComponentsToBeRemoved;
+		// GameObjects won't have that many components, thus having a single vector of BaseComponents is fine.
+		std::vector<std::unique_ptr<BaseComponent>> m_Components;
 	};
 }

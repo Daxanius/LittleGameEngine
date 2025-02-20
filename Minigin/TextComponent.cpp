@@ -40,7 +40,7 @@ void dae::TextComponent::Render() const {
 
 void dae::TextComponent::PostUpdate() {
 	// Just a basic null setting
-	if (!GetOwner().HasComponent<TransformComponent>()) {
+	if (m_pTransformComponent->IsDestroyed()) {
 		m_pTransformComponent = nullptr;
 	}
 }
