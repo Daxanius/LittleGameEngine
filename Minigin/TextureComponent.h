@@ -1,11 +1,11 @@
 #pragma once
 #include "GameObject.h"
 #include "Texture2D.h"
-#include "Component.h"
+#include "BaseComponent.h"
 #include "TransformComponent.h"
 
 namespace dae {
-	class TextureComponent final : public Component {
+	class TextureComponent final : public BaseComponent {
 	public:
 		TextureComponent(GameObject& pOwner, const std::string& filename);
 

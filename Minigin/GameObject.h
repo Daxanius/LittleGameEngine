@@ -5,7 +5,7 @@
 
 namespace dae
 {
-	class Component;
+	class BaseComponent;
 
 	class GameObject final 
 	{
@@ -54,7 +54,7 @@ namespace dae
 		void RemoveQueuedComponents();
 
 		// Components can be held in multiple places (though it's usually just other components)
-		std::unordered_map<std::type_index, std::unique_ptr<Component>> m_Components;
+		std::unordered_map<std::type_index, std::unique_ptr<BaseComponent>> m_Components;
 
 		// A queue of components to be removed
 		std::vector<std::type_index> m_ComponentsToBeRemoved;

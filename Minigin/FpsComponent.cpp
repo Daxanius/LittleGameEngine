@@ -1,6 +1,6 @@
 #include "FpsComponent.h"
 
-dae::FpsComponent::FpsComponent(GameObject& pOwner) : Component(pOwner) {
+dae::FpsComponent::FpsComponent(GameObject& pOwner) : BaseComponent(pOwner) {
 	m_pTextComponent = GetOwner().GetComponent<TextComponent>();
 	assert(m_pTextComponent);
 }

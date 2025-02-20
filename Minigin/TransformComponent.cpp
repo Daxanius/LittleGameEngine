@@ -1,11 +1,11 @@
 #include "TransformComponent.h"
 #include "SDL.h"
 
-dae::TransformComponent::TransformComponent(GameObject& pOwner) : Component(pOwner) {
+dae::TransformComponent::TransformComponent(GameObject& pOwner) : BaseComponent(pOwner) {
 	SetPosition(0.f, 0.f, 0.f);
 }
 
-dae::TransformComponent::TransformComponent(GameObject& pOwner, const float x, const float y,  const float z) : Component(pOwner) {
+dae::TransformComponent::TransformComponent(GameObject& pOwner, const float x, const float y,  const float z) : BaseComponent(pOwner) {
 	SetPosition(x, y, z);
 }
 

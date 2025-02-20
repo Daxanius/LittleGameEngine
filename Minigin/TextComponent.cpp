@@ -6,7 +6,7 @@
 #include "Texture2D.h"
 
 dae::TextComponent::TextComponent(GameObject& pOwner, const std::string& text, std::shared_ptr<Font> font)
-	: Component(pOwner), m_NeedsUpdate(true), m_Text(text), m_Font(std::move(font)), m_TextTexture(nullptr)
+	: BaseComponent(pOwner), m_NeedsUpdate(true), m_Text(text), m_Font(std::move(font)), m_TextTexture(nullptr)
 { 
 	m_pTransformComponent = GetOwner().GetComponent<TransformComponent>();
 	assert(m_pTransformComponent); // A transform should exist for this component

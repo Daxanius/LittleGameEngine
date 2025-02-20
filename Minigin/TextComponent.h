@@ -2,7 +2,7 @@
 #include <string>
 #include <memory>
 #include "GameObject.h"
-#include "Component.h"
+#include "BaseComponent.h"
 #include "TransformComponent.h"
 
 namespace dae
@@ -10,7 +10,7 @@ namespace dae
 	class Font;
 	class Texture2D;
 
-	class TextComponent final : public Component
+	class TextComponent final : public BaseComponent
 	{
 	public:
 		TextComponent(GameObject& pOwner, const std::string& text, std::shared_ptr<Font> font);

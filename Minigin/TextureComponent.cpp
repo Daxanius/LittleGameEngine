@@ -2,7 +2,7 @@
 #include "ResourceManager.h"
 #include "Renderer.h"
 
-dae::TextureComponent::TextureComponent(GameObject& pOwner, const std::string& filename) : Component(pOwner) {
+dae::TextureComponent::TextureComponent(GameObject& pOwner, const std::string& filename) : BaseComponent(pOwner) {
 	m_pTexture = ResourceManager::GetInstance().LoadTexture(filename);
 	m_pTransformComponent = GetOwner().GetComponent<TransformComponent>();
 	assert(m_pTransformComponent);

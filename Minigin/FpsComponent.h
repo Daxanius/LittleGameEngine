@@ -1,10 +1,10 @@
 #pragma once
 #include "GameObject.h"
-#include "Component.h"
+#include "BaseComponent.h"
 #include "TextComponent.h"
 
 namespace dae {
-	class FpsComponent final : public Component {
+	class FpsComponent final : public BaseComponent {
 	public:
 		FpsComponent(GameObject& pOwner);
 

@@ -2,7 +2,7 @@
 #include "GameObject.h"
 #include "ResourceManager.h"
 #include "Renderer.h"
-#include "Component.h"
+#include "BaseComponent.h"
 
 dae::GameObject::~GameObject() {
 	m_Components.clear();
