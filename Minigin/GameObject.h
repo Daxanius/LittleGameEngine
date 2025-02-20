@@ -35,7 +35,6 @@ namespace dae
 			return resultComponent;
 		}
 
-
 		// Creates a component, similar to std::make_unique
 		template<typename ComponentType, typename... Args>
 		requires std::derived_from<ComponentType, BaseComponent>
