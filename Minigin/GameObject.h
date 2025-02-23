@@ -33,8 +33,8 @@ namespace dae
 		void Render() const;
 
 		void SetLocalTransform(const Transform& transform);
-		Transform GetLocalTransform() const;
-		Transform GetWorldTransform();
+		const Transform& GetLocalTransform() const;
+		const Transform& GetWorldTransform();
 
 		bool IsChild(GameObject* pObj) const;
 

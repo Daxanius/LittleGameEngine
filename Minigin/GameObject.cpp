@@ -77,11 +77,11 @@ void dae::GameObject::SetLocalTransform(const Transform& transform) {
 	MarkTransformDirty();
 }
 
-dae::Transform dae::GameObject::GetLocalTransform() const {
+const dae::Transform& dae::GameObject::GetLocalTransform() const {
 	return m_localTransform;
 }
 
-dae::Transform dae::GameObject::GetWorldTransform() {
+const dae::Transform& dae::GameObject::GetWorldTransform() {
 	if (m_transformDirty) {
 		UpdateWorldTransform();
 	}
