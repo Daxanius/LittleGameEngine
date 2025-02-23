@@ -71,7 +71,7 @@ namespace dae
 			return it != m_components.end();
 		}
 	private:
-		void SetTransformDirty();
+		void MarkTransformDirty();
 		void UpdateWorldTransform();
 		void RemoveDestroyedComponents();
 
