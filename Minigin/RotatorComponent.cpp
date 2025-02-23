@@ -7,14 +7,6 @@ void dae::RotatorComponent::Update(float deltaTime) {
 	GameObject& pOwner{ GetOwner() };
 
 	pOwner.SetLocalTransform(Transform(std::cosf(m_progress * m_speed) * m_radius, std::sinf(m_progress * m_speed) * m_radius));
-
-	for (auto child : pOwner.GetChildren()) {
-		child->SetLocalTransform(Transform(
-			std::cosf(m_progress * m_speed) * m_radius,
-			std::sinf(m_progress * m_speed) * m_radius
-		));
-	}
-
 	m_progress += deltaTime;
 }
 
