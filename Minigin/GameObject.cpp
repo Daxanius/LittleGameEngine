@@ -38,7 +38,7 @@ void dae::GameObject::SetParent(GameObject* pParent, bool keepWorldTransform) {
 		SetLocalTransform(GetWorldTransform());
 	}
 
-	SetTransformDirty();
+	MarkTransformDirty();
 }
 
 dae::GameObject* dae::GameObject::GetParent() {
@@ -74,7 +74,7 @@ void dae::GameObject::Render() const {
 
 void dae::GameObject::SetLocalTransform(const Transform& transform) {
 	m_localTransform = transform;
-	SetTransformDirty();
+	MarkTransformDirty();
 }
 
 dae::Transform dae::GameObject::GetLocalTransform() const {
@@ -103,12 +103,12 @@ std::vector<dae::GameObject*>& dae::GameObject::GetChildren() {
 	return m_pChildren;
 }
 
-void dae::GameObject::SetTransformDirty() {
+void dae::GameObject::MarkTransformDirty() {
 	m_transformDirty = true;
 
 	// Mark the transforms for all children dirty
 	for (auto& child : m_pChildren) {
-		child->SetTransformDirty();
+		child->MarkTransformDirty();
 	}
 }
 
