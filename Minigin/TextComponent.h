@@ -3,7 +3,6 @@
 #include <memory>
 #include "GameObject.h"
 #include "BaseComponent.h"
-#include "TransformComponent.h"
 
 namespace dae
 {
@@ -23,8 +22,8 @@ namespace dae
 
 		void FixedUpdate() override {};
 		void Update(float deltaTime) override;
-		void Render() const override;
-		void PostUpdate() override;
+		void Render() override;
+		void PostUpdate() override {};
 
 		void SetText(const std::string& text);
 	private:
@@ -33,7 +32,5 @@ namespace dae
 
 		std::shared_ptr<Font> m_pFont;
 		std::shared_ptr<Texture2D> m_textTexture;
-
-		TransformComponent* m_pTransformComponent{ nullptr };
 	};
 }

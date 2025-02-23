@@ -11,7 +11,7 @@ namespace dae {
 		void FixedUpdate() override {};
 		void Update(float deltaTime) override;
 		void PostUpdate() override;
-	  void Render() const override {};
+	  void Render() override {};
 
 	private:
 		TextComponent* m_pTextComponent{ nullptr };

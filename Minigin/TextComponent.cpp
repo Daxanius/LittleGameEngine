@@ -8,12 +8,10 @@
 dae::TextComponent::TextComponent(GameObject& pOwner, const std::string& text, std::shared_ptr<Font> font)
 	: BaseComponent(pOwner), m_needsUpdate(true), m_Text(text), m_pFont(std::move(font)), m_textTexture(nullptr)
 { 
-	m_pTransformComponent = GetOwner().GetComponent<TransformComponent>();
-	assert(m_pTransformComponent); // A transform should exist for this component
 }
 
 void dae::TextComponent::Update(float) {
-	if (m_needsUpdate && m_pTransformComponent) {
+	if (m_needsUpdate) {
 		const SDL_Color color = { 255,255,255,255 }; // only white text is supported now
 		const auto surf = TTF_RenderText_Blended(m_pFont->GetFont(), m_Text.c_str(), color);
 		if (surf == nullptr) 
@@ -31,17 +29,10 @@ void dae::TextComponent::Update(float) {
 	}
 }
 
-void dae::TextComponent::Render() const {
+void dae::TextComponent::Render() {
 	if (m_textTexture) {
-		const auto& position{ m_pTransformComponent->GetPosition() };
+		const auto& position{ GetOwner().GetWorldTransform().GetPosition() };
 		Renderer::GetInstance().RenderTexture(*m_textTexture, position.x, position.y);
-	}
-}
-
-void dae::TextComponent::PostUpdate() {
-	// Destroy ourselves if our lover died :(
-	if (!GetOwner().HasComponent<TransformComponent>()) {
-		Destroy();
 	}
 }
 
@@ -50,5 +41,3 @@ void dae::TextComponent::SetText(const std::string& text) {
 	m_Text = text;
 	m_needsUpdate = true;
 }
-
-

@@ -3,6 +3,8 @@
 #include <unordered_map>
 #include <typeindex>
 
+#include "Transform.h"
+
 namespace dae
 {
 	class BaseComponent;
@@ -11,15 +13,28 @@ namespace dae
 	{
 	public:
 		GameObject() = default;
+		GameObject(Transform transform);
+
 		virtual ~GameObject();
 		GameObject(const GameObject& other) = delete;
 		GameObject(GameObject&& other) = delete;
 		GameObject& operator=(const GameObject& other) = delete;
 		GameObject& operator=(GameObject&& other) = delete;
 
-		virtual void FixedUpdate();
-		virtual void Update(float deltaTime);
-		virtual void Render() const;
+		// Parent can be null (meaning the scene is the parent, 'tis a root game object)
+		// Don't keep world position by default 
+		void SetParent(GameObject* pParent, bool keepWorldTransform);
+		GameObject* GetParent();
+
+		void FixedUpdate();
+		void Update(float deltaTime);
+		void Render() const;
+
+		void SetLocalTransform(Transform transform);
+		Transform GetLocalTransform() const;
+		Transform GetWorldTransform();
+
+		bool IsChild(GameObject* pObj) const;
 
 		// The component returned is owned by the GameObject, there is no need to free the pointer.
 		// However, you do have to check if the component has been removed in PostUpdate.
@@ -52,9 +67,20 @@ namespace dae
 			return it != m_components.end();
 		}
 	private:
+		void SetTransformDirty();
+		void UpdateWorldTransform();
 		void RemoveDestroyedComponents();
+
+		// The transform for this game object
+		Transform m_localTransform{};
+		Transform m_worldTransform{};
+		bool m_transformDirty{ true };
 
 		// GameObjects won't have that many components, thus having a single vector of BaseComponents is fine.
 		std::vector<std::unique_ptr<BaseComponent>> m_components;
+
+		// Objects are not owned by GameObject, they're just references
+		GameObject* m_pParent{ nullptr };
+		std::vector<GameObject*> m_pChildren;
 	};
 }
