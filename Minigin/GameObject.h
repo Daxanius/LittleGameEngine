@@ -25,7 +25,7 @@ namespace dae
 
 		// Parent can be null (meaning the scene is the parent, 'tis a root game object)
 		// Don't keep world position by default 
-		void SetParent(GameObject* pParent, bool keepWorldTransform);
+		void SetParent(GameObject* pParent, bool keepWorldTransform = false);
 		GameObject* GetParent();
 
 		void FixedUpdate();
