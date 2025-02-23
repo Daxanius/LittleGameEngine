@@ -72,7 +72,7 @@ void dae::GameObject::Render() const {
 	}
 }
 
-void dae::GameObject::SetLocalTransform(Transform transform) {
+void dae::GameObject::SetLocalTransform(const Transform& transform) {
 	m_localTransform = transform;
 	SetTransformDirty();
 }

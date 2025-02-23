@@ -13,6 +13,8 @@ namespace dae
 	{
 	public:
 		GameObject() = default;
+
+		// Can optionally take ownership when used with std::move
 		GameObject(Transform transform);
 
 		virtual ~GameObject();
@@ -30,7 +32,7 @@ namespace dae
 		void Update(float deltaTime);
 		void Render() const;
 
-		void SetLocalTransform(Transform transform);
+		void SetLocalTransform(const Transform& transform);
 		Transform GetLocalTransform() const;
 		Transform GetWorldTransform();
 
