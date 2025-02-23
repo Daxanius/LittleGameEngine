@@ -38,6 +38,8 @@ namespace dae
 
 		bool IsChild(GameObject* pObj) const;
 
+		std::vector<GameObject*>& GetChildren();
+
 		// The component returned is owned by the GameObject, there is no need to free the pointer.
 		// However, you do have to check if the component has been removed in PostUpdate.
 		template<typename ComponentType>

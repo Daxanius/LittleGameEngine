@@ -99,6 +99,10 @@ bool dae::GameObject::IsChild(GameObject* pObj) const {
 	return false;
 }
 
+std::vector<dae::GameObject*>& dae::GameObject::GetChildren() {
+	return m_pChildren;
+}
+
 void dae::GameObject::SetTransformDirty() {
 	m_transformDirty = true;
 

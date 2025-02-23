@@ -12,7 +12,7 @@ namespace dae {
 
 		virtual void FixedUpdate() = 0;
 		virtual void Update(float deltaTime) = 0;
-		virtual void PostUpdate()  = 0; // Used to remove objects if they have been deleted
+		virtual void PostUpdate()  = 0; // Used to remove components if they have been deleted
 		virtual void Render() = 0;
 
 		void Destroy();
