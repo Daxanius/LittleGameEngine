@@ -117,7 +117,7 @@
       <SDLCheck>true</SDLCheck>
       <PreprocessorDefinitions>_DEBUG;_CONSOLE;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <ConformanceMode>true</ConformanceMode>
-      <AdditionalIncludeDirectories>$(SolutionDir)3rdParty\ImGui;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>$(SolutionDir)3rdParty\ImGui-plot\include;$(SolutionDir)3rdParty\ImGui;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
       <TreatWarningAsError>true</TreatWarningAsError>
       <LanguageStandard>stdcpp20</LanguageStandard>
     </ClCompile>
@@ -160,7 +160,7 @@
       <SDLCheck>true</SDLCheck>
       <PreprocessorDefinitions>NDEBUG;_CONSOLE;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <ConformanceMode>true</ConformanceMode>
-      <AdditionalIncludeDirectories>$(SolutionDir)3rdParty\ImGui;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>$(SolutionDir)3rdParty\ImGui-plot\include;$(SolutionDir)3rdParty\ImGui;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
       <TreatWarningAsError>true</TreatWarningAsError>
       <LanguageStandard>stdcpp20</LanguageStandard>
     </ClCompile>
@@ -175,6 +175,7 @@
     <PostBuildEvent />
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClInclude Include="..\3rdParty\ImGui-plot\include\imgui_plot.h" />
     <ClInclude Include="..\3rdParty\ImGui\backends\imgui_impl_opengl3.h" />
     <ClInclude Include="..\3rdParty\ImGui\backends\imgui_impl_sdl2.h" />
     <ClInclude Include="..\3rdParty\ImGui\imconfig.h" />
@@ -201,6 +202,7 @@
     <ClInclude Include="Transform.h" />
   </ItemGroup>
   <ItemGroup>
+    <ClCompile Include="..\3rdParty\ImGui-plot\src\imgui_plot.cpp" />
     <ClCompile Include="..\3rdParty\ImGui\backends\imgui_impl_opengl3.cpp" />
     <ClCompile Include="..\3rdParty\ImGui\backends\imgui_impl_sdl2.cpp" />
     <ClCompile Include="..\3rdParty\ImGui\imgui.cpp" />
