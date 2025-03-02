@@ -6,8 +6,7 @@
 #include "BaseComponent.h"
 
 namespace dae {
-	class ThrashTheCacheComponent : public BaseComponent {
-	public:
+	namespace ttc {
 		struct Transform {
 			float matrix[16] = {
 				1,0,0,0,
@@ -16,31 +15,45 @@ namespace dae {
 				0,0,0,1 };
 		};
 
-		class GameObject3D {
+		class GameObject3D final {
 		public:
 			Transform transform;
 			int ID;
 		};
 
-		ThrashTheCacheComponent(GameObject& pOwner, int samples = 1, int dataSize = 100000000);
+		class GameObject3DAlt final {
+		public:
+			Transform* transform;
+			int ID;
+		};
 
-		void FixedUpdate() override {};
-		void Update(float) override {};
-		void Render() override;
-		void PostUpdate() override {};
-	private:
-		void GenerateUsingIntegers();
-		void GenerateUsingObjects();
+		struct GraphData {
+			std::vector<float> iterations{};
+			std::vector<float> timingData{};
+			float maxTimeTaken{};
+			bool hasGeneratedData;
+		};
 
-		std::vector<float> m_iterations{};
-		std::vector<float> m_timingData{};
+		class ThrashTheCacheComponent final : public BaseComponent {
+		public:
+			ThrashTheCacheComponent(GameObject& pOwner, int samples = 1, int dataSize = 100000000);
 
-		int m_samples;
-		int m_dataSize;
+			void FixedUpdate() override {};
+			void Update(float) override {};
+			void Render() override;
+			void PostUpdate() override {};
+		private:
+			void GenerateUsingIntegers();
+			void GenerateUsingObjects();
+			void GenerateUsingAltObjects();
 
-		float m_maxTimeTaken{};
+			int m_samples;
+			int m_dataSize;
 
-		bool m_hasGeneratedData{};
-	};
+			GraphData m_gameObjectGraph{};
+			GraphData m_altGameObjectGraph{};
+			GraphData m_intGraph{};
+		};
+	}
 }
 
