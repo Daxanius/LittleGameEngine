@@ -35,7 +35,7 @@ void dae::ttc::ThrashTheCacheComponent::Render() {
 		conf.scale.min = 0;
 		conf.scale.max = m_intGraph.maxTimeTaken;
 		conf.tooltip.show = true;
-		conf.tooltip.format = "Sep Size: %.2f, Time in Seconds: %.2f";
+		conf.tooltip.format = "Sep Size: %.2f, Time: %.2f";
 		conf.frame_size = ImVec2(300, 140);
 		conf.line_thickness = 2.f;
 		ImGui::Plot("Integers", conf);
