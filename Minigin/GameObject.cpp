@@ -17,6 +17,16 @@ void dae::GameObject::SetParent(GameObject* pParent, bool keepWorldTransform) {
 		return;
 	}
 
+	if (pParent == nullptr) {
+		SetLocalTransform(GetWorldTransform());
+	} else {
+		if (keepWorldTransform) {
+			SetLocalTransform(GetWorldTransform() - pParent->GetWorldTransform());
+		}
+
+		MarkTransformDirty();
+	}
+
 	// Notify existing parent child got stolen lol
 	if (m_pParent) {
 		// Erase self from children lol
@@ -28,17 +38,10 @@ void dae::GameObject::SetParent(GameObject* pParent, bool keepWorldTransform) {
 	// Set the current parent
 	m_pParent = pParent;
 
+	// Notify the new parent they have another child
 	if (m_pParent) {
 		m_pParent->m_pChildren.push_back(this);
-
-		if (keepWorldTransform) {
-			SetLocalTransform(GetWorldTransform() - pParent->GetWorldTransform());
-		}
-	} else {
-		SetLocalTransform(GetWorldTransform());
 	}
-
-	MarkTransformDirty();
 }
 
 dae::GameObject* dae::GameObject::GetParent() {
@@ -82,10 +85,7 @@ const dae::Transform& dae::GameObject::GetLocalTransform() const {
 }
 
 const dae::Transform& dae::GameObject::GetWorldTransform() {
-	if (m_transformDirty) {
-		UpdateWorldTransform();
-	}
-
+	UpdateWorldTransform();
 	return m_worldTransform;
 }
 
@@ -113,10 +113,12 @@ void dae::GameObject::MarkTransformDirty() {
 }
 
 void dae::GameObject::UpdateWorldTransform() {
-	if (m_pParent) {
-		m_worldTransform = m_localTransform + m_pParent->GetWorldTransform();
-	} else {
-		m_worldTransform = m_localTransform;
+	if (m_transformDirty) {
+		if (m_pParent) {
+			m_worldTransform = m_localTransform + m_pParent->GetWorldTransform();
+		} else {
+			m_worldTransform = m_localTransform;
+		}
 	}
 
 	m_transformDirty = false;
