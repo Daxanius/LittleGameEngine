@@ -4,9 +4,9 @@
 #include <typeindex>
 
 #include "Transform.h"
-
 namespace dae
 {
+	class Command;
 	class BaseComponent;
 
 	class GameObject final 
@@ -37,6 +37,8 @@ namespace dae
 		const Transform& GetWorldTransform();
 
 		bool IsChild(GameObject* pObj) const;
+
+		void AddCommandReference(Command* m_Command);
 
 		std::vector<GameObject*>& GetChildren();
 
@@ -86,5 +88,10 @@ namespace dae
 		// Objects are not owned by GameObject, they're just references
 		GameObject* m_pParent{ nullptr };
 		std::vector<GameObject*> m_pChildren;
+
+		// Game objects may receive ActorCommandsd that refer to them
+		// However, these commands need to be notified when their object has been removed
+		// such that they can be unbound. Thus they are kept over here.
+		std::vector<Command*> m_boundCommands;
 	};
 }

@@ -28,7 +28,9 @@ namespace dae {
 		[[nodiscard]] virtual bool IsConnected() const = 0;
 
 		void Bind(int button, InputAction action);
-		void Unbind(int button);
+
+		// Actions may not exist
+		InputAction* GetAction(int button);
 
 		// Dissalow this type of stuff
 		InputDevice(const InputDevice& other) = delete;
@@ -39,10 +41,11 @@ namespace dae {
 	protected:
 		InputDevice() = default;
 
-		// Actions may not exist
-		InputAction* GetAction(int button);
-
 	private:
+		// To unbind commands you have to mark the command itself for unbinding (safety reasons, such as when objects refer to commands)
+		// One can get bindings using GetAction
+		void Unbind(int button);
+
 		std::unordered_map<int, InputAction> m_Bindings;
 	};
 }
