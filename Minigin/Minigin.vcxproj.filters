@@ -139,6 +139,9 @@
     <ClInclude Include="LogCommand.h">
       <Filter>Source\Commands</Filter>
     </ClInclude>
+    <ClInclude Include="MoveCommand.h">
+      <Filter>Source\Commands</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Main.cpp">
@@ -235,6 +238,9 @@
       <Filter>Engine\Core\Input\Device</Filter>
     </ClCompile>
     <ClCompile Include="LogCommand.cpp">
+      <Filter>Source\Commands</Filter>
+    </ClCompile>
+    <ClCompile Include="MoveCommand.cpp">
       <Filter>Source\Commands</Filter>
     </ClCompile>
   </ItemGroup>
