@@ -1,40 +1,28 @@
-#pragma once
+﻿#pragma once
 #include <SDL.h>
 #include <optional>
-
-#include "backends/imgui_impl_sdl2.h"
+#include <unordered_map>
 
 #include "Keyboard.h"
 
 class dae::Keyboard::impl {
 public:
-	std::optional<InputState> PollEvent() {
-		SDL_Event e;
-
-		if (!SDL_PollEvent(&e)) {
-			return std::nullopt;
-		}
-
-		if (e.type == SDL_KEYDOWN) {
-
-		}
-
-		if (e.type == SDL_MOUSEBUTTONDOWN) {
-
-		}
-
-		// Allow imgui to process the event too. I know, weird to put it here
-		ImGui_ImplSDL2_ProcessEvent(&e);
+	void Initialize() {
+		m_keyboardState = SDL_GetKeyboardState(&m_numKeys);
 	}
 
-	InputActionType MapType(Uint32 eventType) {
-		switch (eventType) {
-		case SDL_KEYDOWN:
-			return InputActionType::Press;
-		case SDL_KEYUP:
-			return InputActionType::Release;
-		default:
-			return InputActionType::None;
-		}
+	void UpdateState() {
+		SDL_PumpEvents(); // Update the state of the keyboard for SDL
 	}
+
+	bool PollKey(int button) {
+		return m_keyboardState[SDL_GetScancodeFromKey(static_cast<SDL_Keycode>(button))];
+	}
+
+	int GetKeycount() const {
+		return m_numKeys;
+	}
+private:
+	const Uint8* m_keyboardState{ nullptr };
+	int m_numKeys{};
 };

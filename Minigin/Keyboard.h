@@ -4,8 +4,8 @@
 namespace dae {
 	class Keyboard final : public InputDevice {
 	public:
-		struct InputState {
-			int button;
+		struct KeyState {
+			int key;
 			InputActionType actionType;
 		};
 
@@ -14,9 +14,14 @@ namespace dae {
 
 		void UpdateState() override;
 		void ProcessInput() override;
+
 		bool IsConnected() const override;
 	private:
+		void ProcessState(const KeyState& state);
+
 		class impl;
 		std::unique_ptr<impl> m_pImpl;
+
+		std::vector<KeyState> m_keyStates;
 	};
 }
