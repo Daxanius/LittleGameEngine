@@ -21,22 +21,18 @@ void dae::Keyboard::UpdateState() {
 }
 
 void dae::Keyboard::ProcessInput() {
-	for (int i{}; i < m_pImpl->GetKeycount(); i++) {
-		// Previous state information
-		InputActionType& prevState = m_keyStates[i].actionType;
-		const bool wasPressed{ prevState == InputActionType::Hold || prevState == InputActionType::Press };
+	// Going through all 512 keys is faster than going through the bindings of the hashmap lol.
+	for (auto& keyState : m_keyStates) {
+		InputActionType& prevState = keyState.actionType;
+		const bool wasPressed = (prevState == InputActionType::Hold || prevState == InputActionType::Press);
 
-		// Poll to check of the button is pressed
-		const bool isPressedNow{ m_pImpl->PollKey(i) };
+		const bool isPressedNow = m_pImpl->PollKey(keyState.key);
 
-		if (isPressedNow) {
-			prevState = wasPressed ? InputActionType::Hold : InputActionType::Press;
-		} else {
-			prevState = wasPressed ? InputActionType::Release : InputActionType::None;
-		}
+		prevState = isPressedNow
+			? (wasPressed ? InputActionType::Hold : InputActionType::Press)
+			: (wasPressed ? InputActionType::Release : InputActionType::None);
 
-		// Process the key state
-		ProcessState(m_keyStates[i]);
+		ProcessState(keyState);
 	}
 }
 
@@ -53,6 +49,8 @@ void dae::Keyboard::ProcessState(const KeyState& state) {
 		return;
 	}
 
-	// Execute the command if the action matches
-	action->command->Execute();
+	// Execute the command if the action matches and a command is bound
+	if (action->command) {
+		action->command->Execute();
+	}
 }

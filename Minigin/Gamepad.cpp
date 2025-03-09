@@ -51,8 +51,10 @@ void dae::Gamepad::ProcessState(const ButtonState& state) {
 		return;
 	}
 
-	// Execute the command if the action matches
-	action->command->Execute();
+	// Execute the command if the action matches and a command is bound
+	if (action->command) {
+		action->command->Execute();
+	}
 }
 
 bool dae::Gamepad::IsConnected() const {
