@@ -1,14 +1,16 @@
 #pragma once
 #include "Command.h"
+#include "MoveComponent.h"
 
 namespace dae {
 	class MoveCommand final : public ActorCommand {
 	public:
-		MoveCommand(GameObject* actor, glm::vec2 direction, float speed);
+		MoveCommand(GameObject* actor, glm::vec2 direction);
 
 		void Execute() override;
 	private:
 		glm::vec2 m_direction;
-		float m_speed;
+
+		MoveComponent* m_MoveComponent;
 	};
 }

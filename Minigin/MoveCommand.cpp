@@ -1,11 +1,13 @@
 #include "MoveCommand.h"
+#include <stdexcept>
 
-dae::MoveCommand::MoveCommand(GameObject* actor, glm::vec2 direction, float speed) : ActorCommand(actor), m_direction(direction), m_speed(speed) {
+dae::MoveCommand::MoveCommand(GameObject* actor, glm::vec2 direction) : ActorCommand(actor), m_direction(direction) {
+	m_MoveComponent = GetActor()->GetComponent<MoveComponent>();
+	if (m_MoveComponent == nullptr) {
+		throw std::runtime_error("Actor does not contain move component!");
+	}
 }
 
 void dae::MoveCommand::Execute() {
-	Transform transform{ GetActor()->GetLocalTransform() };
-	const glm::uvec3 position{};
-	transform.SetPosition(transform.GetPosition() + glm::vec3(m_direction, 0.0f) * m_speed);
-	GetActor()->SetLocalTransform(transform);
+	m_MoveComponent->AddDirection(m_direction); // Add our direction to the move component for this frame
 }
