@@ -19,7 +19,7 @@ public:
 
 
 	// Polls to check if a button is pressed
-	bool PollButton(Button buttonToPoll) const {
+	[[nodiscard]] bool PollButton(Button buttonToPoll) const {
 		WORD buttonMask{ m_state.Gamepad.wButtons };
 
 		// Since the switch returns values, breaks are not required
@@ -57,11 +57,11 @@ public:
 		}
 	}
 
-	bool IsConnected() const {
+	[[nodiscard]] bool IsConnected() const {
 		return m_isConnected;
 	}
 
-	unsigned int GetId() const {
+	[[nodiscard]] unsigned int GetId() const {
 		return m_id;
 	}
 private:

@@ -17,7 +17,7 @@ namespace dae
 		// Returns false if it failed (player with given device id probably already exists)
 		void AddInputDevice(std::unique_ptr<InputDevice> device);
 
-		const std::vector<std::unique_ptr<InputDevice>>& GetDevices() const;
+		[[nodiscard]] const std::vector<std::unique_ptr<InputDevice>>& GetDevices() const;
 
 		bool ProcessInput();
 	private:

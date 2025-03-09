@@ -14,13 +14,13 @@ public:
 		SDL_PumpEvents(); // Update the state of the keyboard for SDL
 	}
 
-	bool PollKey(int button) {
+	[[nodiscard]] bool PollKey(int button) {
 		int scancode = SDL_GetScancodeFromKey(static_cast<SDL_Keycode>(button));
 		if (scancode < 0 || scancode >= m_numKeys) return false; // Prevent OOB access
 		return m_keyboardState[scancode];
 	}
 
-	int GetKeycount() const {
+	[[nodiscard]] int GetKeycount() const {
 		return m_numKeys;
 	}
 private:

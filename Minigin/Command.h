@@ -12,7 +12,7 @@ namespace dae {
 	protected:
 		ActorCommand(GameObject* actor);
 
-		GameObject* GetActor() const;
+		[[nodiscard]] GameObject* GetActor() const;
 
 	private:
 		GameObject* m_Actor{ nullptr };

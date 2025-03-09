@@ -15,7 +15,7 @@ namespace dae {
 		void UpdateState() override;
 		void ProcessInput() override;
 
-		bool IsConnected() const override;
+		[[nodiscard]] bool IsConnected() const override;
 	private:
 		void ProcessState(const KeyState& state);
 

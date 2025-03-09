@@ -25,7 +25,7 @@ namespace dae {
 
 		virtual void UpdateState() = 0;  // Update state allows devices to check if they are still connected and other stuff
 		virtual void ProcessInput() = 0; // Only gets executed if the device is marked as connected
-		virtual bool IsConnected() const = 0;
+		[[nodiscard]] virtual bool IsConnected() const = 0;
 
 		void Bind(int button, InputAction action);
 		void Unbind(int button);
