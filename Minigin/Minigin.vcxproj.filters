@@ -32,6 +32,18 @@
     <Filter Include="ImGui-plot">
       <UniqueIdentifier>{9eafa8bc-487a-41c4-8627-841332598547}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Engine\Core\Input">
+      <UniqueIdentifier>{5df0df42-16b4-4bfa-b1fd-a4f14411b07f}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Engine\Core\Input\Device">
+      <UniqueIdentifier>{4d5215a3-caeb-40ae-ba3f-fa3284b67d74}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Engine\Core\Input\Device\Impl">
+      <UniqueIdentifier>{b3677b53-6ed3-4c37-8a11-4ed43cd831da}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source\Commands">
+      <UniqueIdentifier>{9f739f06-f983-47ff-8e03-e5ccddbf54d1}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="TextComponent.h">
@@ -53,9 +65,6 @@
       <Filter>Engine\Util</Filter>
     </ClInclude>
     <ClInclude Include="ResourceManager.h">
-      <Filter>Engine\Core\Manager</Filter>
-    </ClInclude>
-    <ClInclude Include="InputManager.h">
       <Filter>Engine\Core\Manager</Filter>
     </ClInclude>
     <ClInclude Include="SceneManager.h">
@@ -112,6 +121,24 @@
     <ClInclude Include="ThrashTheCacheComponent.h">
       <Filter>Source\Components</Filter>
     </ClInclude>
+    <ClInclude Include="InputManager.h">
+      <Filter>Engine\Core\Input</Filter>
+    </ClInclude>
+    <ClInclude Include="Command.h">
+      <Filter>Engine\Core\Input</Filter>
+    </ClInclude>
+    <ClInclude Include="Gamepad.h">
+      <Filter>Engine\Core\Input\Device</Filter>
+    </ClInclude>
+    <ClInclude Include="InputDevice.h">
+      <Filter>Engine\Core\Input\Device</Filter>
+    </ClInclude>
+    <ClInclude Include="Keyboard.h">
+      <Filter>Engine\Core\Input\Device</Filter>
+    </ClInclude>
+    <ClInclude Include="LogCommand.h">
+      <Filter>Source\Commands</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Main.cpp">
@@ -133,9 +160,6 @@
       <Filter>Engine\Core</Filter>
     </ClCompile>
     <ClCompile Include="ResourceManager.cpp">
-      <Filter>Engine\Core\Manager</Filter>
-    </ClCompile>
-    <ClCompile Include="InputManager.cpp">
       <Filter>Engine\Core\Manager</Filter>
     </ClCompile>
     <ClCompile Include="SceneManager.cpp">
@@ -188,6 +212,30 @@
     </ClCompile>
     <ClCompile Include="ThrashTheCacheComponent.cpp">
       <Filter>Source\Components</Filter>
+    </ClCompile>
+    <ClCompile Include="InputManager.cpp">
+      <Filter>Engine\Core\Input</Filter>
+    </ClCompile>
+    <ClCompile Include="Command.cpp">
+      <Filter>Engine\Core\Input</Filter>
+    </ClCompile>
+    <ClCompile Include="GamepadXInput.cpp">
+      <Filter>Engine\Core\Input\Device\Impl</Filter>
+    </ClCompile>
+    <ClCompile Include="Gamepad.cpp">
+      <Filter>Engine\Core\Input\Device</Filter>
+    </ClCompile>
+    <ClCompile Include="InputDevice.cpp">
+      <Filter>Engine\Core\Input\Device</Filter>
+    </ClCompile>
+    <ClCompile Include="KeyboardSDL.cpp">
+      <Filter>Engine\Core\Input\Device\Impl</Filter>
+    </ClCompile>
+    <ClCompile Include="Keyboard.cpp">
+      <Filter>Engine\Core\Input\Device</Filter>
+    </ClCompile>
+    <ClCompile Include="LogCommand.cpp">
+      <Filter>Source\Commands</Filter>
     </ClCompile>
   </ItemGroup>
 </Project>
