@@ -27,7 +27,8 @@ namespace dae {
 		virtual void ProcessInput() = 0; // Only gets executed if the device is marked as connected
 		virtual bool IsConnected() const = 0;
 
-		void BindButton(int button, InputAction action);
+		void Bind(int button, InputAction action);
+		void Unbind(int button);
 
 		// Dissalow this type of stuff
 		InputDevice(const InputDevice& other) = delete;
