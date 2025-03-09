@@ -10,7 +10,7 @@ dae::Gamepad::Gamepad(int playerId, unsigned long controllerId) : InputDevice(pl
 	m_buttonStates.reserve(buttonsToReserve);
 
 	// Fill states
-	for (size_t i{}; i < static_cast<size_t>(Button::Size); i++) {
+	for (size_t i{}; i < buttonsToReserve; i++) {
 		m_buttonStates.emplace_back(static_cast<Button>(i), InputActionType::None);
 	}
 }

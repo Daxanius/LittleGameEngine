@@ -7,7 +7,8 @@
 
 class dae::Keyboard::impl {
 public:
-	void Initialize() {
+	dae::Keyboard::impl() {
+		// Initialize the keyboard implementation, SDL has been initialized by the time the game loads.
 		m_keyboardState = SDL_GetKeyboardState(&m_numKeys);
 	}
 

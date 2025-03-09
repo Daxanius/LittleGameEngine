@@ -4,8 +4,16 @@
 // Default deconstructor is sufficient
 dae::Keyboard::~Keyboard() = default;
 
-dae::Keyboard::Keyboard(int playerId) : InputDevice(playerId) {
-	m_pImpl->Initialize(); // Initialize the keyboard implementation, SDL has been initialized by the time the game loads.
+dae::Keyboard::Keyboard(int playerId) : InputDevice(playerId), m_pImpl(std::make_unique<Keyboard::impl>()) {
+	const int keysToReserve{ m_pImpl->GetKeycount() };
+
+	// Reserve all the button states
+	m_keyStates.reserve(keysToReserve);
+
+	// Fill states
+	for (int i{}; i < keysToReserve; i++) {
+		m_keyStates.emplace_back(i, InputActionType::None);
+	}
 }
 
 void dae::Keyboard::UpdateState() {
