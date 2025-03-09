@@ -4,7 +4,7 @@
 // Default deconstructor is sufficient
 dae::Keyboard::~Keyboard() = default;
 
-dae::Keyboard::Keyboard(int playerId) : InputDevice(playerId), m_pImpl(std::make_unique<Keyboard::impl>()) {
+dae::Keyboard::Keyboard() : InputDevice(), m_pImpl(std::make_unique<Keyboard::impl>()) {
 	const int keysToReserve{ m_pImpl->GetKeycount() };
 
 	// Reserve all the button states

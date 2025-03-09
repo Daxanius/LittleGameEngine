@@ -15,10 +15,12 @@ namespace dae
 	public:
 		// Adds an input device capable of controlling a character to the game.
 		// Returns false if it failed (player with given device id probably already exists)
-		bool AddInputDevice(std::unique_ptr<InputDevice> device);
+		void AddInputDevice(std::unique_ptr<InputDevice> device);
+
+		const std::vector<std::unique_ptr<InputDevice>>& GetDevices() const;
 
 		bool ProcessInput();
 	private:
-		std::vector<std::unique_ptr<InputDevice>> m_players; // Maps player ID to devices
+		std::vector<std::unique_ptr<InputDevice>> m_devices;
 	};
 }

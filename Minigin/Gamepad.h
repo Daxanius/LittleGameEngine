@@ -33,7 +33,7 @@ namespace dae {
 			InputActionType actionType;
 		};
 
-		Gamepad(int playerId, unsigned long controllerId);
+		Gamepad(unsigned long controllerId);
 		~Gamepad();
 
 		void UpdateState() override;

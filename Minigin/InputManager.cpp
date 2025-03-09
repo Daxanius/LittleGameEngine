@@ -2,19 +2,12 @@
 #include "InputManager.h"
 #include "backends/imgui_impl_sdl2.h"
 
-bool dae::InputManager::AddInputDevice(std::unique_ptr<InputDevice> device) {
-	for (auto& existingDevice : m_players) {
-		// Why do I not store these in an unordered map for ids? Latency.
-		// Vectors are **blazingly** fast (usually due to cache coherence).
-		// Unodered maps have the overhead of hashing ids and looping over them is slower
-		// Doing this simple unique check once is more than enough.
-		if (existingDevice->GetId() == device->GetId()) {
-			return false; // Players with the same device are not allowed to exist
-		}
-	}
+void dae::InputManager::AddInputDevice(std::unique_ptr<InputDevice> device) {
+	m_devices.emplace_back(std::move(device));
+}
 
-	m_players.emplace_back(std::move(device));
-	return true;
+const std::vector<std::unique_ptr<dae::InputDevice>>& dae::InputManager::GetDevices() const {
+	return m_devices;
 }
 
 bool dae::InputManager::ProcessInput()
@@ -29,7 +22,7 @@ bool dae::InputManager::ProcessInput()
 	}
 
 	// Go through all the devices
-	for (auto& device : m_players) {
+	for (auto& device : m_devices) {
 		device->UpdateState(); // Allow the device to check for reconnections
 
 		if (!device->IsConnected()) {

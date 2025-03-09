@@ -9,7 +9,7 @@ namespace dae {
 			InputActionType actionType;
 		};
 
-		Keyboard(int playerId);
+		Keyboard();
 		~Keyboard();
 
 		void UpdateState() override;

@@ -29,10 +29,6 @@ namespace dae {
 
 		void BindButton(int button, InputAction action);
 
-		// Unique player identifier (each player gets only 1 device, need to look into this toward future for example
-		// keyboard player also could own first controller)
-		int GetId() const;
-
 		// Dissalow this type of stuff
 		InputDevice(const InputDevice& other) = delete;
 		InputDevice(InputDevice&& other) = delete;
@@ -40,15 +36,12 @@ namespace dae {
 		InputDevice& operator=(InputDevice&& other) = delete;
 
 	protected:
-		InputDevice(int id);
+		InputDevice() = default;
 
 		// Actions may not exist
 		InputAction* GetAction(int button);
 
 	private:
 		std::unordered_map<int, InputAction> m_Bindings;
-
-		// The identifier for this device / player
-		int m_id;
 	};
 }

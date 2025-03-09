@@ -3,7 +3,7 @@
 
 dae::Gamepad::~Gamepad() = default;
 
-dae::Gamepad::Gamepad(int playerId, unsigned long controllerId) : InputDevice(playerId), m_pImpl(std::make_unique<Gamepad::impl>(controllerId)) {
+dae::Gamepad::Gamepad(unsigned long controllerId) : InputDevice(), m_pImpl(std::make_unique<Gamepad::impl>(controllerId)) {
 	const size_t buttonsToReserve{ static_cast<size_t>(Button::Size) };
 
 	// Reserve all the button states
