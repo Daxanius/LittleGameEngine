@@ -16,6 +16,10 @@ void dae::Transform::SetPosition(const float x, const float y, const float z)
 	m_position.z = z;
 }
 
+void dae::Transform::SetPosition(glm::vec3 position) {
+	m_position = position;
+}
+
 dae::Transform dae::Transform::operator+(const Transform& other) const {
 	return Transform(m_position.x + other.m_position.x,
 									 m_position.y + other.m_position.y,

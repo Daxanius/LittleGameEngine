@@ -10,6 +10,7 @@ namespace dae
 		Transform(float x, float y, float z = 0.f);
 
 		void SetPosition(float x, float y, float z);
+		void SetPosition(glm::vec3 position);
 
 		const glm::vec3& GetPosition() const { return m_position; };
 

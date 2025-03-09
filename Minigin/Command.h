@@ -8,7 +8,7 @@ namespace dae {
 		virtual void Execute() = 0;
 	};
 
-	class ActorCommand : Command {
+	class ActorCommand : public Command {
 	protected:
 		ActorCommand(GameObject* actor);
 
