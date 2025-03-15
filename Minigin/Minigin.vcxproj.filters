@@ -44,6 +44,9 @@
     <Filter Include="Source\Commands">
       <UniqueIdentifier>{9f739f06-f983-47ff-8e03-e5ccddbf54d1}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Engine\Core\Event">
+      <UniqueIdentifier>{6cf9cde1-77c4-4c1f-b308-ef4ee3634093}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="TextComponent.h">
@@ -145,6 +148,18 @@
     <ClInclude Include="MoveComponent.h">
       <Filter>Source\Components</Filter>
     </ClInclude>
+    <ClInclude Include="Observer.h">
+      <Filter>Engine\Core\Event</Filter>
+    </ClInclude>
+    <ClInclude Include="Event.h">
+      <Filter>Engine\Core\Event</Filter>
+    </ClInclude>
+    <ClInclude Include="hash.h">
+      <Filter>Engine\Util</Filter>
+    </ClInclude>
+    <ClInclude Include="Subject.h">
+      <Filter>Engine\Core\Event</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Main.cpp">
@@ -172,9 +187,6 @@
       <Filter>Engine\Core\Manager</Filter>
     </ClCompile>
     <ClCompile Include="Renderer.cpp">
-      <Filter>Engine\Core</Filter>
-    </ClCompile>
-    <ClCompile Include="Texture2D.cpp">
       <Filter>Engine\Core</Filter>
     </ClCompile>
     <ClCompile Include="TextureComponent.cpp">
@@ -248,6 +260,12 @@
     </ClCompile>
     <ClCompile Include="MoveComponent.cpp">
       <Filter>Source\Components</Filter>
+    </ClCompile>
+    <ClCompile Include="Texture2D.cpp">
+      <Filter>Engine\Util</Filter>
+    </ClCompile>
+    <ClCompile Include="Subject.cpp">
+      <Filter>Engine\Core\Event</Filter>
     </ClCompile>
   </ItemGroup>
 </Project>
