@@ -1,26 +1,21 @@
 #include "Subject.h"
+#include "GameObject.h"
 
 dae::Subject::Subject(GameObject* gameObject) : m_gameObject(gameObject) {
 }
 
-void dae::Subject::AddObserver(std::weak_ptr<Observer> observer) {
+void dae::Subject::AddObserver(std::shared_ptr<Observer> observer) {
 	m_observers.push_back(observer);
 }
 
-void dae::Subject::RemoveObserver(std::weak_ptr<Observer> observer) {
-	std::erase_if(m_observers, [&observer](const std::weak_ptr<Observer>& other) {
-		auto lockedObserver = observer.lock();
-		auto lockedOther = other.lock();
-
-		return lockedObserver == lockedOther;
+void dae::Subject::RemoveObserver(std::shared_ptr<Observer> observer) {
+	std::erase_if(m_observers, [&observer](const std::shared_ptr<Observer>& other) {
+		return observer == other;
 	});
 }
 
-void dae::Subject::NotifyObservers(Event event) {
+void dae::Subject::Notify(Event event) {
 	for (auto& observer : m_observers) {
-		// Check if observer is still valid
-		if (auto sharedObserver = observer.lock()) {
-			sharedObserver->Notify(event, m_gameObject);
-		}
+		observer->Notify(event, m_gameObject);
 	}
 }

@@ -214,6 +214,7 @@ xcopy "$(SolutionDir)steam_appid.txt" "$(OutputPath)" /Y</Command>
     <ClInclude Include="..\3rdParty\ImGui\imstb_rectpack.h" />
     <ClInclude Include="..\3rdParty\ImGui\imstb_textedit.h" />
     <ClInclude Include="..\3rdParty\ImGui\imstb_truetype.h" />
+    <ClInclude Include="AchievementObserver.h" />
     <ClInclude Include="BaseComponent.h" />
     <ClInclude Include="Command.h" />
     <ClInclude Include="Event.h" />
@@ -236,6 +237,8 @@ xcopy "$(SolutionDir)steam_appid.txt" "$(OutputPath)" /Y</Command>
     <ClInclude Include="SceneManager.h" />
     <ClInclude Include="hash.h" />
     <ClInclude Include="Singleton.h" />
+    <ClInclude Include="SteamAchievement.h" />
+    <ClInclude Include="SteamAchievementManager.h" />
     <ClInclude Include="Subject.h" />
     <ClInclude Include="TextComponent.h" />
     <ClInclude Include="Texture2D.h" />
@@ -252,6 +255,7 @@ xcopy "$(SolutionDir)steam_appid.txt" "$(OutputPath)" /Y</Command>
     <ClCompile Include="..\3rdParty\ImGui\imgui_draw.cpp" />
     <ClCompile Include="..\3rdParty\ImGui\imgui_tables.cpp" />
     <ClCompile Include="..\3rdParty\ImGui\imgui_widgets.cpp" />
+    <ClCompile Include="AchievementObserver.cpp" />
     <ClCompile Include="BaseComponent.cpp" />
     <ClCompile Include="Command.cpp" />
     <ClCompile Include="Font.cpp" />
@@ -273,6 +277,7 @@ xcopy "$(SolutionDir)steam_appid.txt" "$(OutputPath)" /Y</Command>
     <ClCompile Include="RotatorComponent.cpp" />
     <ClCompile Include="Scene.cpp" />
     <ClCompile Include="SceneManager.cpp" />
+    <ClCompile Include="SteamAchievementManager.cpp" />
     <ClCompile Include="Subject.cpp" />
     <ClCompile Include="TextComponent.cpp" />
     <ClCompile Include="Texture2D.cpp" />

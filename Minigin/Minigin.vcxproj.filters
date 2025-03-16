@@ -47,6 +47,15 @@
     <Filter Include="Engine\Core\Event">
       <UniqueIdentifier>{6cf9cde1-77c4-4c1f-b308-ef4ee3634093}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Source\Observers">
+      <UniqueIdentifier>{176b061c-4841-4102-9f73-8a6ed33444e3}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Engine\Core\Steam">
+      <UniqueIdentifier>{d70dd7fe-6c97-4e40-a5c7-0f0cb16412f4}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Engine\Core\Steam\Achievement">
+      <UniqueIdentifier>{37431b6d-ed2a-48ff-9090-212f31668848}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="TextComponent.h">
@@ -160,6 +169,15 @@
     <ClInclude Include="Subject.h">
       <Filter>Engine\Core\Event</Filter>
     </ClInclude>
+    <ClInclude Include="AchievementObserver.h">
+      <Filter>Source\Observers</Filter>
+    </ClInclude>
+    <ClInclude Include="SteamAchievement.h">
+      <Filter>Engine\Core\Steam\Achievement</Filter>
+    </ClInclude>
+    <ClInclude Include="SteamAchievementManager.h">
+      <Filter>Engine\Core\Steam\Achievement</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Main.cpp">
@@ -266,6 +284,12 @@
     </ClCompile>
     <ClCompile Include="Subject.cpp">
       <Filter>Engine\Core\Event</Filter>
+    </ClCompile>
+    <ClCompile Include="AchievementObserver.cpp">
+      <Filter>Source\Observers</Filter>
+    </ClCompile>
+    <ClCompile Include="SteamAchievementManager.cpp">
+      <Filter>Engine\Core\Steam\Achievement</Filter>
     </ClCompile>
   </ItemGroup>
 </Project>

@@ -3,10 +3,14 @@
 #include "Renderer.h"
 #include "BaseComponent.h"
 #include "Command.h"
+#include "Subject.h"
 
 #include <string>
 
-dae::GameObject::GameObject(Transform transform) : m_localTransform(std::move(transform)) {
+dae::GameObject::GameObject() : m_subject(std::make_unique<Subject>(this)) {
+}
+
+dae::GameObject::GameObject(Transform transform) : m_localTransform(std::move(transform)), m_subject(std::make_unique<Subject>(this)) {
 }
 
 dae::GameObject::~GameObject() {
@@ -120,6 +124,10 @@ void dae::GameObject::AddCommandReference(dae::Command* m_Command) {
 
 std::vector<dae::GameObject*>& dae::GameObject::GetChildren() {
 	return m_pChildren;
+}
+
+dae::Subject* dae::GameObject::GetSubject() const {
+	return m_subject.get();
 }
 
 void dae::GameObject::MarkTransformDirty() {
