@@ -11,7 +11,7 @@ void dae::AchievementObserver::Notify(Event event, GameObject*) {
 			std::pair<int, int> score{ any_cast<std::pair<int, int>>(event.data) };
 
 			if (score.second >= 500) {
-				SteamAchievementManager::GetInstance().SetAchievement("NEW_ACHIEVEMENT_0_4");
+				SteamAchievementManager::GetInstance().SetAchievement("ACH_WIN_ONE_GAME");
 			}
 
 			break;

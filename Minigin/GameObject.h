@@ -63,8 +63,11 @@ namespace dae
 		// Creates a component, similar to std::make_unique
 		template<typename ComponentType, typename... Args>
 		requires std::derived_from<ComponentType, BaseComponent>
-		void AddComponent(Args&&... args) {
-			m_components.push_back(std::make_unique<ComponentType>(*this, std::forward<Args>(args)...));
+		ComponentType* AddComponent(Args&&... args) {
+			std::unique_ptr<ComponentType> component{ std::make_unique<ComponentType>(*this, std::forward<Args>(args)...) };
+			ComponentType* rComponent{ component.get() }; // Get a non-owning pointer
+			m_components.push_back(std::move(component));
+			return rComponent; // Return a pointer to the component that was created
 		}
 
 		template<typename ComponentType>

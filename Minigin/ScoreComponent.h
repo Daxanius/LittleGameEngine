@@ -13,6 +13,8 @@ namespace dae {
 		void Render() override {};
 
 		void AddToScore(int amount);
+		void RemoveFromScore(int amount);
+
 		int GetScore() const;
 	private:
 		int m_score;

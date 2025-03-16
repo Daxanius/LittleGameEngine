@@ -184,6 +184,18 @@
     <ClInclude Include="IncreaseScoreCommand.h">
       <Filter>Source\Commands</Filter>
     </ClInclude>
+    <ClInclude Include="HealthComponent.h">
+      <Filter>Source\Components</Filter>
+    </ClInclude>
+    <ClInclude Include="ScoreObserver.h">
+      <Filter>Source\Observers</Filter>
+    </ClInclude>
+    <ClInclude Include="HealthObserver.h">
+      <Filter>Source\Observers</Filter>
+    </ClInclude>
+    <ClInclude Include="DamageCommand.h">
+      <Filter>Source\Commands</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Main.cpp">
@@ -301,6 +313,18 @@
       <Filter>Source\Components</Filter>
     </ClCompile>
     <ClCompile Include="IncreaseScoreCommand.cpp">
+      <Filter>Source\Commands</Filter>
+    </ClCompile>
+    <ClCompile Include="HealthComponent.cpp">
+      <Filter>Source\Components</Filter>
+    </ClCompile>
+    <ClCompile Include="ScoreObserver.cpp">
+      <Filter>Source\Observers</Filter>
+    </ClCompile>
+    <ClCompile Include="HealthObserver.cpp">
+      <Filter>Source\Observers</Filter>
+    </ClCompile>
+    <ClCompile Include="DamageCommand.cpp">
       <Filter>Source\Commands</Filter>
     </ClCompile>
   </ItemGroup>

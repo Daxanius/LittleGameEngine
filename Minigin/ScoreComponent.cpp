@@ -17,6 +17,18 @@ void dae::ScoreComponent::AddToScore(int amount) {
 	GetOwner().GetSubject()->Notify(event);
 }
 
+void dae::ScoreComponent::RemoveFromScore(int amount) {
+	if (amount < 0) {
+		return;
+	}
+
+	m_score = std::max(0, m_score - amount);
+
+	Event event{ make_sdbm_hash("score_decreased") };
+	event.data = std::pair<int, int>(amount, m_score);
+	GetOwner().GetSubject()->Notify(event);
+}
+
 int dae::ScoreComponent::GetScore() const {
 	return m_score;
 }

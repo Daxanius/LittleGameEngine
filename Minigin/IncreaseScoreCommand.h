@@ -11,7 +11,7 @@ namespace dae {
 	private:
 		int m_amount;
 
-		ScoreComponent* m_ScoreComponent;
+		ScoreComponent* m_pScoreComponent;
 	};
 }
 
