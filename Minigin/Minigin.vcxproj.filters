@@ -178,6 +178,12 @@
     <ClInclude Include="SteamAchievementManager.h">
       <Filter>Engine\Core\Steam\Achievement</Filter>
     </ClInclude>
+    <ClInclude Include="ScoreComponent.h">
+      <Filter>Source\Components</Filter>
+    </ClInclude>
+    <ClInclude Include="IncreaseScoreCommand.h">
+      <Filter>Source\Commands</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Main.cpp">
@@ -290,6 +296,12 @@
     </ClCompile>
     <ClCompile Include="SteamAchievementManager.cpp">
       <Filter>Engine\Core\Steam\Achievement</Filter>
+    </ClCompile>
+    <ClCompile Include="ScoreComponent.cpp">
+      <Filter>Source\Components</Filter>
+    </ClCompile>
+    <ClCompile Include="IncreaseScoreCommand.cpp">
+      <Filter>Source\Commands</Filter>
     </ClCompile>
   </ItemGroup>
 </Project>

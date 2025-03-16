@@ -9,7 +9,6 @@ dae::SteamAchievementManager::SteamAchievementManager() :
 	m_CallbackAchievementStored(this, &SteamAchievementManager::OnAchievementStored)
 {
 	m_iAppID = SteamUtils()->GetAppID();
-	RequestStats();
 }
 
 bool dae::SteamAchievementManager::RequestStats() {
@@ -21,6 +20,7 @@ bool dae::SteamAchievementManager::RequestStats() {
 	if (!SteamUser()->BLoggedOn()) {
 		return false;
 	}
+
 	// Request user stats.
 	return SteamUserStats()->RequestCurrentStats();
 }
@@ -36,14 +36,30 @@ bool dae::SteamAchievementManager::SetAchievement(const char* ID) {
 	return false;
 }
 
-void dae::SteamAchievementManager::OnUserStatsReceived(UserStatsReceived_t*) {
+void dae::SteamAchievementManager::OnUserStatsReceived(UserStatsReceived_t* pCallback) {
 	// we may get callbacks for other games' stats arriving, ignore them
+	if (static_cast<uint64>(m_iAppID) == pCallback->m_nGameID) {
+		if (k_EResultOK == pCallback->m_eResult) {
+			std::cout << "Received stats and achievements from Steam" << std::endl;
+			m_bInitialized = true;
+		}
+	}
 }
 
-void dae::SteamAchievementManager::OnUserStatsStored(UserStatsStored_t*) {
+void dae::SteamAchievementManager::OnUserStatsStored(UserStatsStored_t* pCallback) {
 	// we may get callbacks for other games' stats arriving, ignore them
+	if (static_cast<uint64>(m_iAppID) == pCallback->m_nGameID) {
+		if (k_EResultOK == pCallback->m_eResult) {
+			std::cout << "Stored stats for Steam" << std::endl;
+		} else {
+			std::cout << "Failed to store stats for steam" << std::endl;
+		}
+	}
 }
 
-void dae::SteamAchievementManager::OnAchievementStored(UserAchievementStored_t*) {
+void dae::SteamAchievementManager::OnAchievementStored(UserAchievementStored_t* pCallback) {
 	// we may get callbacks for other games' stats arriving, ignore them
+	if (static_cast<uint64>(m_iAppID) == pCallback->m_nGameID) {
+		std::cout << "Stored achievement for Steam" << std::endl;
+	}
 }
