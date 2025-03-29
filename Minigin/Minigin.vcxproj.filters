@@ -1,13 +1,6 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
   <ItemGroup>
-    <Filter Include="Source">
-      <UniqueIdentifier>{4FC737F1-C7A5-4376-A066-2A32D752A2FF}</UniqueIdentifier>
-      <Extensions>cpp;c;cc;cxx;def;odl;idl;hpj;bat;asm;asmx</Extensions>
-    </Filter>
-    <Filter Include="Source\Components">
-      <UniqueIdentifier>{6dc84665-177a-400e-8ef1-3cae68076951}</UniqueIdentifier>
-    </Filter>
     <Filter Include="Engine">
       <UniqueIdentifier>{89f6904c-4a24-430c-b0e5-54af41c27f8c}</UniqueIdentifier>
     </Filter>
@@ -41,14 +34,8 @@
     <Filter Include="Engine\Core\Input\Device\Impl">
       <UniqueIdentifier>{b3677b53-6ed3-4c37-8a11-4ed43cd831da}</UniqueIdentifier>
     </Filter>
-    <Filter Include="Source\Commands">
-      <UniqueIdentifier>{9f739f06-f983-47ff-8e03-e5ccddbf54d1}</UniqueIdentifier>
-    </Filter>
     <Filter Include="Engine\Core\Event">
       <UniqueIdentifier>{6cf9cde1-77c4-4c1f-b308-ef4ee3634093}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="Source\Observers">
-      <UniqueIdentifier>{176b061c-4841-4102-9f73-8a6ed33444e3}</UniqueIdentifier>
     </Filter>
     <Filter Include="Engine\Core\Steam">
       <UniqueIdentifier>{d70dd7fe-6c97-4e40-a5c7-0f0cb16412f4}</UniqueIdentifier>
@@ -58,9 +45,6 @@
     </Filter>
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="TextComponent.h">
-      <Filter>Source\Components</Filter>
-    </ClInclude>
     <ClInclude Include="Minigin.h">
       <Filter>Engine</Filter>
     </ClInclude>
@@ -88,20 +72,11 @@
     <ClInclude Include="Texture2D.h">
       <Filter>Engine\Core</Filter>
     </ClInclude>
-    <ClInclude Include="TextureComponent.h">
-      <Filter>Source\Components</Filter>
-    </ClInclude>
-    <ClInclude Include="FpsComponent.h">
-      <Filter>Source\Components</Filter>
-    </ClInclude>
     <ClInclude Include="BaseComponent.h">
       <Filter>Engine\Core\Scene\Object</Filter>
     </ClInclude>
     <ClInclude Include="Transform.h">
       <Filter>Engine\Core</Filter>
-    </ClInclude>
-    <ClInclude Include="RotatorComponent.h">
-      <Filter>Source\Components</Filter>
     </ClInclude>
     <ClInclude Include="..\3rdParty\ImGui\imconfig.h">
       <Filter>ImGui</Filter>
@@ -130,9 +105,6 @@
     <ClInclude Include="..\3rdParty\ImGui-plot\include\imgui_plot.h">
       <Filter>ImGui-plot</Filter>
     </ClInclude>
-    <ClInclude Include="ThrashTheCacheComponent.h">
-      <Filter>Source\Components</Filter>
-    </ClInclude>
     <ClInclude Include="InputManager.h">
       <Filter>Engine\Core\Input</Filter>
     </ClInclude>
@@ -148,15 +120,6 @@
     <ClInclude Include="Keyboard.h">
       <Filter>Engine\Core\Input\Device</Filter>
     </ClInclude>
-    <ClInclude Include="LogCommand.h">
-      <Filter>Source\Commands</Filter>
-    </ClInclude>
-    <ClInclude Include="MoveCommand.h">
-      <Filter>Source\Commands</Filter>
-    </ClInclude>
-    <ClInclude Include="MoveComponent.h">
-      <Filter>Source\Components</Filter>
-    </ClInclude>
     <ClInclude Include="Observer.h">
       <Filter>Engine\Core\Event</Filter>
     </ClInclude>
@@ -169,43 +132,16 @@
     <ClInclude Include="Subject.h">
       <Filter>Engine\Core\Event</Filter>
     </ClInclude>
-    <ClInclude Include="AchievementObserver.h">
-      <Filter>Source\Observers</Filter>
-    </ClInclude>
     <ClInclude Include="SteamAchievement.h">
       <Filter>Engine\Core\Steam\Achievement</Filter>
     </ClInclude>
     <ClInclude Include="SteamAchievementManager.h">
       <Filter>Engine\Core\Steam\Achievement</Filter>
     </ClInclude>
-    <ClInclude Include="ScoreComponent.h">
-      <Filter>Source\Components</Filter>
-    </ClInclude>
-    <ClInclude Include="IncreaseScoreCommand.h">
-      <Filter>Source\Commands</Filter>
-    </ClInclude>
-    <ClInclude Include="HealthComponent.h">
-      <Filter>Source\Components</Filter>
-    </ClInclude>
-    <ClInclude Include="ScoreObserver.h">
-      <Filter>Source\Observers</Filter>
-    </ClInclude>
-    <ClInclude Include="HealthObserver.h">
-      <Filter>Source\Observers</Filter>
-    </ClInclude>
-    <ClInclude Include="DamageCommand.h">
-      <Filter>Source\Commands</Filter>
-    </ClInclude>
   </ItemGroup>
   <ItemGroup>
-    <ClCompile Include="Main.cpp">
-      <Filter>Source</Filter>
-    </ClCompile>
     <ClCompile Include="Minigin.cpp">
       <Filter>Engine</Filter>
-    </ClCompile>
-    <ClCompile Include="TextComponent.cpp">
-      <Filter>Source\Components</Filter>
     </ClCompile>
     <ClCompile Include="GameObject.cpp">
       <Filter>Engine\Core\Scene\Object</Filter>
@@ -225,20 +161,11 @@
     <ClCompile Include="Renderer.cpp">
       <Filter>Engine\Core</Filter>
     </ClCompile>
-    <ClCompile Include="TextureComponent.cpp">
-      <Filter>Source\Components</Filter>
-    </ClCompile>
-    <ClCompile Include="FpsComponent.cpp">
-      <Filter>Source\Components</Filter>
-    </ClCompile>
     <ClCompile Include="BaseComponent.cpp">
       <Filter>Engine\Core\Scene\Object</Filter>
     </ClCompile>
     <ClCompile Include="Transform.cpp">
       <Filter>Engine\Core</Filter>
-    </ClCompile>
-    <ClCompile Include="RotatorComponent.cpp">
-      <Filter>Source\Components</Filter>
     </ClCompile>
     <ClCompile Include="..\3rdParty\ImGui\imgui.cpp">
       <Filter>ImGui</Filter>
@@ -264,9 +191,6 @@
     <ClCompile Include="..\3rdParty\ImGui-plot\src\imgui_plot.cpp">
       <Filter>ImGui-plot</Filter>
     </ClCompile>
-    <ClCompile Include="ThrashTheCacheComponent.cpp">
-      <Filter>Source\Components</Filter>
-    </ClCompile>
     <ClCompile Include="InputManager.cpp">
       <Filter>Engine\Core\Input</Filter>
     </ClCompile>
@@ -288,44 +212,14 @@
     <ClCompile Include="Keyboard.cpp">
       <Filter>Engine\Core\Input\Device</Filter>
     </ClCompile>
-    <ClCompile Include="LogCommand.cpp">
-      <Filter>Source\Commands</Filter>
-    </ClCompile>
-    <ClCompile Include="MoveCommand.cpp">
-      <Filter>Source\Commands</Filter>
-    </ClCompile>
-    <ClCompile Include="MoveComponent.cpp">
-      <Filter>Source\Components</Filter>
-    </ClCompile>
     <ClCompile Include="Texture2D.cpp">
       <Filter>Engine\Util</Filter>
     </ClCompile>
     <ClCompile Include="Subject.cpp">
       <Filter>Engine\Core\Event</Filter>
     </ClCompile>
-    <ClCompile Include="AchievementObserver.cpp">
-      <Filter>Source\Observers</Filter>
-    </ClCompile>
     <ClCompile Include="SteamAchievementManager.cpp">
       <Filter>Engine\Core\Steam\Achievement</Filter>
-    </ClCompile>
-    <ClCompile Include="ScoreComponent.cpp">
-      <Filter>Source\Components</Filter>
-    </ClCompile>
-    <ClCompile Include="IncreaseScoreCommand.cpp">
-      <Filter>Source\Commands</Filter>
-    </ClCompile>
-    <ClCompile Include="HealthComponent.cpp">
-      <Filter>Source\Components</Filter>
-    </ClCompile>
-    <ClCompile Include="ScoreObserver.cpp">
-      <Filter>Source\Observers</Filter>
-    </ClCompile>
-    <ClCompile Include="HealthObserver.cpp">
-      <Filter>Source\Observers</Filter>
-    </ClCompile>
-    <ClCompile Include="DamageCommand.cpp">
-      <Filter>Source\Commands</Filter>
     </ClCompile>
   </ItemGroup>
 </Project>
