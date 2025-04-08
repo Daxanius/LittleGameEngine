@@ -1,5 +1,4 @@
 #include <SDL.h>
-#include <steam_api.h>
 #include <iostream>
 
 #if _DEBUG
@@ -9,7 +8,6 @@
 #endif
 #endif
 
-#include "SteamAchievementManager.h"
 #include "Minigin.h"
 #include "SceneManager.h"
 #include "ResourceManager.h"
@@ -26,7 +24,6 @@
 #include "LogCommand.h"
 #include "MoveCommand.h"
 #include "ScoreComponent.h"
-#include "AchievementObserver.h"
 #include "Subject.h"
 #include "IncreaseScoreCommand.h"
 #include "HealthComponent.h"
@@ -97,7 +94,6 @@ static void load() {
 	player1->AddComponent<dae::HealthComponent>(playerLives);
 
 	// Register observers
-	player1->GetSubject()->AddObserver(std::make_shared<dae::AchievementObserver>());
 	player1->GetSubject()->AddObserver(std::make_shared<dae::HealthObserver>(player1HealthTextComponent));
 	player1->GetSubject()->AddObserver(std::make_shared<dae::ScoreObserver>(player1ScoreTextComponent));
 
@@ -215,20 +211,8 @@ static void load() {
 }
 
 int main(int, char* []) {
-	if (!SteamAPI_Init()) {
-		std::cerr << "Fatal Error - Steam must be running to play this game (SteamAPI_Init() failed)." << std::endl;
-		return 1;
-	}
-
-	if (!dae::SteamAchievementManager::GetInstance().RequestStats()) {
-		std::cerr << "Error - Failed to get Steam user stats." << std::endl;
-	}
-
-	std::cout << "Successfully initialized steam." << std::endl;
-
 	dae::Minigin engine("../Data/");
 	engine.Run(load);
 
-	SteamAPI_Shutdown();
 	return 0;
 }

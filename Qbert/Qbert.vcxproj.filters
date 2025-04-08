@@ -18,9 +18,6 @@
     <ClCompile Include="Main.cpp">
       <Filter>Source</Filter>
     </ClCompile>
-    <ClCompile Include="AchievementObserver.cpp">
-      <Filter>Source\Observers</Filter>
-    </ClCompile>
     <ClCompile Include="DamageCommand.cpp">
       <Filter>Source\Commands</Filter>
     </ClCompile>
@@ -65,9 +62,6 @@
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="AchievementObserver.h">
-      <Filter>Source\Observers</Filter>
-    </ClInclude>
     <ClInclude Include="DamageCommand.h">
       <Filter>Source\Commands</Filter>
     </ClInclude>

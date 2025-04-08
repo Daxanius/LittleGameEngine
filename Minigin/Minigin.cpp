@@ -1,7 +1,6 @@
 #include <stdexcept>
 #define WIN32_LEAN_AND_MEAN 
 #include <windows.h>
-#include <steam_api.h>
 #include <SDL.h>
 #include <SDL_image.h>
 #include <SDL_ttf.h>
@@ -107,7 +106,6 @@ void dae::Minigin::Run(const std::function<void()>& load) {
 			lag -= FIXED_UPDATE_INTERVAL;
 		}
 
-		SteamAPI_RunCallbacks();
 		sceneManager.Update(deltaTime);
 		renderer.Render();
 
