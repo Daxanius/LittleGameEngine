@@ -37,6 +37,12 @@
     <Filter Include="Engine\Core\Event">
       <UniqueIdentifier>{6cf9cde1-77c4-4c1f-b308-ef4ee3634093}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Engine\Core\Audio">
+      <UniqueIdentifier>{949c4a99-9c9d-401f-a264-3dd4fabfa8f2}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Engine\Core\Audio\Impl">
+      <UniqueIdentifier>{74cff051-c939-4151-a570-7d5d518804c3}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Minigin.h">
@@ -126,6 +132,9 @@
     <ClInclude Include="Subject.h">
       <Filter>Engine\Core\Event</Filter>
     </ClInclude>
+    <ClInclude Include="AudioPlayer.h">
+      <Filter>Engine\Core\Audio</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Minigin.cpp">
@@ -205,6 +214,12 @@
     </ClCompile>
     <ClCompile Include="Subject.cpp">
       <Filter>Engine\Core\Event</Filter>
+    </ClCompile>
+    <ClCompile Include="AudioPlayer.cpp">
+      <Filter>Engine\Core\Audio</Filter>
+    </ClCompile>
+    <ClCompile Include="SDLMixer.cpp">
+      <Filter>Engine\Core\Audio\Impl</Filter>
     </ClCompile>
   </ItemGroup>
 </Project>
