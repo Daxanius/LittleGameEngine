@@ -138,6 +138,9 @@
     <ClInclude Include="AudioManager.h">
       <Filter>Engine\Core\Manager</Filter>
     </ClInclude>
+    <ClInclude Include="ServiceLocator.h">
+      <Filter>Engine\Core\Manager</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Minigin.cpp">
@@ -225,6 +228,9 @@
       <Filter>Engine\Core\Audio\Impl</Filter>
     </ClCompile>
     <ClCompile Include="AudioManager.cpp">
+      <Filter>Engine\Core\Manager</Filter>
+    </ClCompile>
+    <ClCompile Include="ServiceLocator.cpp">
       <Filter>Engine\Core\Manager</Filter>
     </ClCompile>
   </ItemGroup>
