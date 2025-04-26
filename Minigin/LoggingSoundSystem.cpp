@@ -1,7 +1,7 @@
 #include "LoggingSoundSystem.h"
 #include <iostream>
 
-dae::LoggingSoundSystem::LoggingSoundSystem(std::unique_ptr<SoundSystem> soundSystem) : m_soundSystem(std::move(soundSystem)) {
+dae::LoggingSoundSystem::LoggingSoundSystem(std::unique_ptr<AbstractSoundSystem> soundSystem) : m_soundSystem(std::move(soundSystem)) {
 }
 
 void dae::LoggingSoundSystem::Play(const SoundId id, const float volume) {

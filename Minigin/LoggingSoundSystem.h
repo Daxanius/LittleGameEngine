@@ -1,11 +1,11 @@
 #pragma once
-#include "SoundSystem.h"
+#include "AbstractSoundSystem.h"
 #include <memory>
 
 namespace dae {
-	class LoggingSoundSystem final : public SoundSystem {
+	class LoggingSoundSystem final : public AbstractSoundSystem {
 	public:
-		explicit LoggingSoundSystem(std::unique_ptr<SoundSystem> soundSystem);
+		explicit LoggingSoundSystem(std::unique_ptr<AbstractSoundSystem> soundSystem);
 
 		void Play(const SoundId id, const float volume) override;
 		SoundId RegisterSound(const std::string& path) override;
@@ -17,6 +17,6 @@ namespace dae {
 		LoggingSoundSystem& operator=(LoggingSoundSystem&& other) noexcept = delete;
 		virtual ~LoggingSoundSystem() override = default;
 	private:
-		std::unique_ptr<SoundSystem> m_soundSystem;
+		std::unique_ptr<AbstractSoundSystem> m_soundSystem;
 	};
 }

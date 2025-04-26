@@ -3,17 +3,17 @@
 #include <memory>
 
 namespace dae {
-	class SoundSystem;
+	class AbstractSoundSystem;
 
 	class ServiceLocator final : public Singleton<ServiceLocator> {
 	public:
 		// Allows the service locator to initialze with default values (for example null sound system)
 		ServiceLocator();
 
-		static SoundSystem& GetSoundSystem();
-		static void RegisterSoundSystem(std::unique_ptr<SoundSystem> soundSystem);
+		static AbstractSoundSystem& GetSoundSystem();
+		static void RegisterSoundSystem(std::unique_ptr<AbstractSoundSystem> soundSystem);
 
 	private:
-		static std::unique_ptr<SoundSystem> m_soundSystemInstance;
+		static std::unique_ptr<AbstractSoundSystem> m_soundSystemInstance;
 	};
 }

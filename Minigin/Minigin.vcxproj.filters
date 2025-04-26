@@ -135,7 +135,7 @@
     <ClInclude Include="ServiceLocator.h">
       <Filter>Engine\Core\Manager</Filter>
     </ClInclude>
-    <ClInclude Include="SoundSystem.h">
+    <ClInclude Include="AbstractSoundSystem.h">
       <Filter>Engine\Core\Sound</Filter>
     </ClInclude>
     <ClInclude Include="NullSoundSystem.h">

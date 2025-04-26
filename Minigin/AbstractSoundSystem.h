@@ -4,9 +4,9 @@
 namespace dae {
 	using SoundId = unsigned short;
 
-	class SoundSystem {
+	class AbstractSoundSystem {
 	public:
-		virtual ~SoundSystem() = default;
+		virtual ~AbstractSoundSystem() = default;
 		virtual void Play(const SoundId id, const float volume) = 0;
 		virtual SoundId RegisterSound(const std::string& path) = 0;
 	};
