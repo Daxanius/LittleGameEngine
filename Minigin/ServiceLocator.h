@@ -1,14 +1,19 @@
 #pragma once
+#include "Singleton.h"
+#include <memory>
 
 namespace dae {
-	class AudioManager;
+	class SoundSystem;
 
-	class ServiceLocator {
+	class ServiceLocator final : public Singleton<ServiceLocator> {
 	public:
-		static void Provide(AudioManager* service) { m_AudioService = service; }
-		static AudioManager* GetAudio() { return m_AudioService; }
+		// Allows the service locator to initialze with default values (for example null sound system)
+		ServiceLocator();
+
+		static SoundSystem& GetSoundSystem();
+		static void RegisterSoundSystem(std::unique_ptr<SoundSystem> soundSystem);
 
 	private:
-		inline static AudioManager* m_AudioService = nullptr;
+		static std::unique_ptr<SoundSystem> m_soundSystemInstance;
 	};
 }

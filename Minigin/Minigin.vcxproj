@@ -206,8 +206,10 @@
     <ClInclude Include="..\3rdParty\ImGui\imstb_rectpack.h" />
     <ClInclude Include="..\3rdParty\ImGui\imstb_textedit.h" />
     <ClInclude Include="..\3rdParty\ImGui\imstb_truetype.h" />
-    <ClInclude Include="AudioManager.h" />
-    <ClInclude Include="AudioPlayer.h" />
+    <ClInclude Include="LoggingSoundSystem.h" />
+    <ClInclude Include="NullSoundSystem.h" />
+    <ClInclude Include="SoundSystem.h" />
+    <ClInclude Include="SDLSoundSystem.h" />
     <ClInclude Include="BaseComponent.h" />
     <ClInclude Include="Command.h" />
     <ClInclude Include="Event.h" />
@@ -239,8 +241,6 @@
     <ClCompile Include="..\3rdParty\ImGui\imgui_draw.cpp" />
     <ClCompile Include="..\3rdParty\ImGui\imgui_tables.cpp" />
     <ClCompile Include="..\3rdParty\ImGui\imgui_widgets.cpp" />
-    <ClCompile Include="AudioManager.cpp" />
-    <ClCompile Include="AudioPlayer.cpp" />
     <ClCompile Include="BaseComponent.cpp" />
     <ClCompile Include="Command.cpp" />
     <ClCompile Include="Font.cpp" />
@@ -251,12 +251,14 @@
     <ClCompile Include="InputManager.cpp" />
     <ClCompile Include="Keyboard.cpp" />
     <ClCompile Include="KeyboardSDL.cpp" />
+    <ClCompile Include="LoggingSoundSystem.cpp" />
     <ClCompile Include="Minigin.cpp" />
+    <ClCompile Include="NullSoundSystem.cpp" />
+    <ClCompile Include="SDLSoundSystem.cpp" />
     <ClCompile Include="Renderer.cpp" />
     <ClCompile Include="ResourceManager.cpp" />
     <ClCompile Include="Scene.cpp" />
     <ClCompile Include="SceneManager.cpp" />
-    <ClCompile Include="SDLMixer.cpp" />
     <ClCompile Include="ServiceLocator.cpp" />
     <ClCompile Include="Subject.cpp" />
     <ClCompile Include="Texture2D.cpp" />
