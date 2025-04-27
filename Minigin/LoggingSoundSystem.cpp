@@ -11,6 +11,6 @@ void dae::LoggingSoundSystem::Play(const SoundId id, const float volume) {
 
 dae::SoundId dae::LoggingSoundSystem::RegisterSound(const std::string& path) {
 	SoundId id{ m_soundSystem->RegisterSound(path) };
-	std::cout << "Registered sound at path" << path << " with id " << id << std::endl;
+	std::cout << "Registered sound at path " << path << " with id " << id << std::endl;
 	return id;
 }
