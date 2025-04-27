@@ -8,6 +8,9 @@
 #endif
 #endif
 
+#include "ServiceLocator.h"
+#include "LoggingSoundSystem.h"
+#include "SDLSoundSystem.h"
 #include "Minigin.h"
 #include "SceneManager.h"
 #include "ResourceManager.h"
@@ -23,6 +26,7 @@
 #include "Keyboard.h"
 #include "LogCommand.h"
 #include "MoveCommand.h"
+#include "PlaySoundCommand.h"
 #include "ScoreComponent.h"
 #include "Subject.h"
 #include "IncreaseScoreCommand.h"
@@ -32,6 +36,10 @@
 #include "DamageCommand.h"
 
 static void load() {
+	auto soundSystemSDL{ std::make_unique<dae::SDLSoundSystem>() };
+	auto soundSystemLogging{ std::make_unique<dae::LoggingSoundSystem>(std::move(soundSystemSDL)) };
+	dae::ServiceLocator::GetInstance().RegisterSoundSystem(std::move(soundSystemLogging));
+
 	auto& scene = dae::SceneManager::GetInstance().CreateScene("Demo");
 
 	// Create the background object
@@ -115,6 +123,14 @@ static void load() {
 
 	// Keyboard player
 	std::unique_ptr<dae::InputDevice> keyboard{ std::make_unique<dae::Keyboard>() };
+
+	// Sound key binding
+	keyboard->Bind(
+		static_cast<int>(SDLK_SPACE),
+		dae::InputDevice::InputAction{
+			dae::InputDevice::InputActionType::Release,
+			std::move(std::make_unique<dae::PlaySoundCommand>(player1.get(), "audio/sfx/fx_17a.wav", 1.f))
+		});
 
 	keyboard->Bind(
 		static_cast<int>(SDLK_a),

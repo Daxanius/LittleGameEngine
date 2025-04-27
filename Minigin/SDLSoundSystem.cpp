@@ -148,7 +148,9 @@ private:
 	bool m_running; // Determines whether we should keep processing the queue
 };
 
-dae::SDLSoundSystem::SDLSoundSystem() : m_pImpl(std::make_unique<Impl>()) {
+dae::SDLSoundSystem::~SDLSoundSystem() = default;
+
+dae::SDLSoundSystem::SDLSoundSystem() : m_pImpl(std::make_unique<dae::SDLSoundSystem::Impl>()) {
 	
 }
 

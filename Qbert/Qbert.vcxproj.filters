@@ -60,6 +60,9 @@
     <ClCompile Include="ThrashTheCacheComponent.cpp">
       <Filter>Source\Components</Filter>
     </ClCompile>
+    <ClCompile Include="PlaySoundCommand.cpp">
+      <Filter>Source\Commands</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="DamageCommand.h">
@@ -106,6 +109,9 @@
     </ClInclude>
     <ClInclude Include="ThrashTheCacheComponent.h">
       <Filter>Source\Components</Filter>
+    </ClInclude>
+    <ClInclude Include="PlaySoundCommand.h">
+      <Filter>Source\Commands</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>

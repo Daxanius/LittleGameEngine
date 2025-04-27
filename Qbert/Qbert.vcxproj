@@ -176,6 +176,7 @@
     <ClCompile Include="Main.cpp" />
     <ClCompile Include="MoveCommand.cpp" />
     <ClCompile Include="MoveComponent.cpp" />
+    <ClCompile Include="PlaySoundCommand.cpp" />
     <ClCompile Include="RotatorComponent.cpp" />
     <ClCompile Include="ScoreComponent.cpp" />
     <ClCompile Include="ScoreObserver.cpp" />
@@ -192,6 +193,7 @@
     <ClInclude Include="LogCommand.h" />
     <ClInclude Include="MoveCommand.h" />
     <ClInclude Include="MoveComponent.h" />
+    <ClInclude Include="PlaySoundCommand.h" />
     <ClInclude Include="RotatorComponent.h" />
     <ClInclude Include="ScoreComponent.h" />
     <ClInclude Include="ScoreEventData.h" />

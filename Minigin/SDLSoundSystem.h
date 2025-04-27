@@ -14,7 +14,7 @@ namespace dae {
 		SDLSoundSystem(SDLSoundSystem&& other) noexcept = delete;
 		SDLSoundSystem& operator=(const SDLSoundSystem& other) = delete;
 		SDLSoundSystem& operator=(SDLSoundSystem&& other) noexcept = delete;
-		virtual ~SDLSoundSystem() override = default;
+		virtual ~SDLSoundSystem() override;
 	private:
 		class Impl;
 		std::unique_ptr<Impl> m_pImpl;
