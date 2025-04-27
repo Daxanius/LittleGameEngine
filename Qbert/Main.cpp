@@ -129,7 +129,7 @@ static void load() {
 		static_cast<int>(SDLK_SPACE),
 		dae::InputDevice::InputAction{
 			dae::InputDevice::InputActionType::Release,
-			std::move(std::make_unique<dae::PlaySoundCommand>(player1.get(), "audio/sfx/fx_17a.wav", 1.f))
+			std::move(std::make_unique<dae::PlaySoundCommand>(player1.get(), "../Data/audio/sfx/fx_17a.wav", 1.f))
 		});
 
 	keyboard->Bind(
