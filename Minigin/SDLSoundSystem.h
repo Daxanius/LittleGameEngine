@@ -5,8 +5,9 @@
 namespace dae {
 	class SDLSoundSystem final : public AbstractSoundSystem {
 	public:
+		SDLSoundSystem();
 		void Play(const SoundId id, const float volume) override;
-		SoundId RegisterSound(const std::string& path) override;
+		SoundId RegisterSound(const std::string& filePath) override;
 
 		// Delete these monkeys 
 		SDLSoundSystem(const SDLSoundSystem& other) = delete;
