@@ -6,7 +6,7 @@ dae::LoggingSoundSystem::LoggingSoundSystem(std::unique_ptr<AbstractSoundSystem>
 
 void dae::LoggingSoundSystem::Play(const SoundId id, const float volume) {
 	std::cout << "Playing sound with id " << id << " at volume " << volume << std::endl;
-
+	m_soundSystem->Play(id, volume);
 }
 
 dae::SoundId dae::LoggingSoundSystem::RegisterSound(const std::string& path) {
