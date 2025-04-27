@@ -130,8 +130,8 @@ private:
 			}
 
 			Sound* sound = m_sounds[info.id].get();
-			sound->Load();						 // Make sure the sound is loaded (loading does it's own checks)
-			sound->Play(info.volume);  // Play the sound with the provided volume
+			sound->Load();						// Make sure the sound is loaded (loading does it's own checks)
+			sound->Play(info.volume); // Play the sound with the provided volume
 		}
 	}
 
