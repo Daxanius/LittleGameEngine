@@ -20,7 +20,6 @@
 #include "FpsComponent.h"
 #include "RotatorComponent.h"
 #include "InputManager.h"
-#include "InputDevice.h"
 #include "Gamepad.h"
 #include "Keyboard.h"
 #include "LogCommand.h"
@@ -113,110 +112,6 @@ static void load() {
 
 	// Add player
 	scene.Add(player2);
-
-	// Keyboard player
-	std::unique_ptr<dae::InputDevice> keyboard{ std::make_unique<dae::Keyboard>() };
-
-	// Sound key binding
-	keyboard->Bind(
-		static_cast<int>(SDLK_SPACE),
-		dae::InputDevice::InputAction{
-			dae::InputDevice::InputActionType::Release,
-			std::move(std::make_unique<dae::PlaySoundCommand>(player1.get(), "../Data/audio/sfx/fx_17a.wav", 1.f))
-		});
-
-	keyboard->Bind(
-		static_cast<int>(SDLK_a),
-		dae::InputDevice::InputAction{
-			dae::InputDevice::InputActionType::Hold,
-			std::move(std::make_unique<dae::MoveCommand>(player1.get(), glm::vec2(-1, 0)))
-		});
-
-	keyboard->Bind(
-		static_cast<int>(SDLK_d),
-		dae::InputDevice::InputAction{
-			dae::InputDevice::InputActionType::Hold,
-			std::move(std::make_unique<dae::MoveCommand>(player1.get(), glm::vec2(1, 0)))
-		});
-
-	keyboard->Bind(
-		static_cast<int>(SDLK_s),
-		dae::InputDevice::InputAction{
-			dae::InputDevice::InputActionType::Hold,
-			std::move(std::make_unique<dae::MoveCommand>(player1.get(), glm::vec2(0, 1)))
-		});
-
-
-	keyboard->Bind(
-		static_cast<int>(SDLK_w),
-		dae::InputDevice::InputAction{
-			dae::InputDevice::InputActionType::Hold,
-			std::move(std::make_unique<dae::MoveCommand>(player1.get(), glm::vec2(0, -1)))
-		});
-
-	keyboard->Bind(
-		static_cast<int>(SDLK_e),
-		dae::InputDevice::InputAction{
-			dae::InputDevice::InputActionType::Release,
-			std::move(std::make_unique<dae::IncreaseScoreCommand>(player1.get(), 100))
-		});
-
-	keyboard->Bind(
-		static_cast<int>(SDLK_f),
-		dae::InputDevice::InputAction{
-			dae::InputDevice::InputActionType::Release,
-			std::move(std::make_unique<dae::DamageCommand>(player1.get(), 1))
-		});
-
-	dae::InputManager::GetInstance().AddInputDevice(std::move(keyboard));
-
-	// Controller player, which is the first connected device (hence 0)
-	std::unique_ptr<dae::InputDevice> gamepad{ std::make_unique<dae::Gamepad>(0) };
-
-	gamepad->Bind(
-		static_cast<int>(dae::Gamepad::Button::Left),
-		dae::InputDevice::InputAction{
-			dae::InputDevice::InputActionType::Hold,
-			std::move(std::make_unique<dae::MoveCommand>(player2.get(), glm::vec2(-1, 0)))
-		});
-
-	gamepad->Bind(
-		static_cast<int>(dae::Gamepad::Button::Right),
-		dae::InputDevice::InputAction{
-			dae::InputDevice::InputActionType::Hold,
-			std::move(std::make_unique<dae::MoveCommand>(player2.get(), glm::vec2(1, 0)))
-		});
-
-	gamepad->Bind(
-		static_cast<int>(dae::Gamepad::Button::Down),
-		dae::InputDevice::InputAction{
-			dae::InputDevice::InputActionType::Hold,
-			std::move(std::make_unique<dae::MoveCommand>(player2.get(), glm::vec2(0, 1)))
-		});
-
-
-	gamepad->Bind(
-		static_cast<int>(dae::Gamepad::Button::Up),
-		dae::InputDevice::InputAction{
-			dae::InputDevice::InputActionType::Hold,
-			std::move(std::make_unique<dae::MoveCommand>(player2.get(), glm::vec2(0, -1)))
-		});
-
-	gamepad->Bind(
-		static_cast<int>(dae::Gamepad::Button::A),
-		dae::InputDevice::InputAction{
-			dae::InputDevice::InputActionType::Release,
-			std::move(std::make_unique<dae::IncreaseScoreCommand>(player2.get(), 100))
-		});
-
-	gamepad->Bind(
-		static_cast<int>(dae::Gamepad::Button::B),
-		dae::InputDevice::InputAction{
-			dae::InputDevice::InputActionType::Release,
-			std::move(std::make_unique<dae::DamageCommand>(player2.get(), 1))
-		});
-
-	dae::InputManager::GetInstance().AddInputDevice(std::move(gamepad));
 }
 
 int main(int, char* []) {

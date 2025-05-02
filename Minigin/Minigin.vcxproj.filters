@@ -117,9 +117,6 @@
     <ClInclude Include="Gamepad.h">
       <Filter>Engine\Core\Input\Device</Filter>
     </ClInclude>
-    <ClInclude Include="InputDevice.h">
-      <Filter>Engine\Core\Input\Device</Filter>
-    </ClInclude>
     <ClInclude Include="Keyboard.h">
       <Filter>Engine\Core\Input\Device</Filter>
     </ClInclude>
@@ -225,9 +222,6 @@
       <Filter>Engine\Core\Input\Device\Impl</Filter>
     </ClCompile>
     <ClCompile Include="Gamepad.cpp">
-      <Filter>Engine\Core\Input\Device</Filter>
-    </ClCompile>
-    <ClCompile Include="InputDevice.cpp">
       <Filter>Engine\Core\Input\Device</Filter>
     </ClCompile>
     <ClCompile Include="KeyboardSDL.cpp">

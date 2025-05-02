@@ -218,7 +218,6 @@
     <ClInclude Include="Font.h" />
     <ClInclude Include="GameObject.h" />
     <ClInclude Include="Gamepad.h" />
-    <ClInclude Include="InputDevice.h" />
     <ClInclude Include="InputManager.h" />
     <ClInclude Include="Keyboard.h" />
     <ClInclude Include="Minigin.h" />
@@ -252,7 +251,6 @@
     <ClCompile Include="GameObject.cpp" />
     <ClCompile Include="Gamepad.cpp" />
     <ClCompile Include="GamepadXInput.cpp" />
-    <ClCompile Include="InputDevice.cpp" />
     <ClCompile Include="InputManager.cpp" />
     <ClCompile Include="Keyboard.cpp" />
     <ClCompile Include="KeyboardSDL.cpp" />

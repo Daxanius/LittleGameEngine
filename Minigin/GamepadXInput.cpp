@@ -2,70 +2,79 @@
 #include "Gamepad.h"
 
 #include <windows.h>
-#include <Xinput.h> // Xinput used for controller stuffs
+#include <Xinput.h>
+#include <vector>
+#include <cstring>
 
 class dae::Gamepad::impl {
 public:
-	dae::Gamepad::impl(unsigned long id) : m_id(id) {
-	};
+	impl(unsigned long id) : m_id(id) {
+		std::memset(&m_state, 0, sizeof(XINPUT_STATE));
+		std::memset(&m_prevState, 0, sizeof(XINPUT_STATE));
+	}
 
 	void UpdateState() {
+		m_buttonStates.clear();
+
+		m_prevState = m_state; // Store previous state
 		std::memset(&m_state, 0, sizeof(XINPUT_STATE));
 
-		// Getting the state 
-		DWORD dwResult = XInputGetState(m_id, &m_state);
-		m_isConnected = dwResult == ERROR_SUCCESS;
-	};
+		DWORD result = XInputGetState(m_id, &m_state);
+		m_isConnected = result == ERROR_SUCCESS;
 
+		if (!m_isConnected)
+			return;
 
-	// Polls to check if a button is pressed
-	[[nodiscard]] bool PollButton(Button buttonToPoll) const {
-		WORD buttonMask{ m_state.Gamepad.wButtons };
+		WORD currentButtons = m_state.Gamepad.wButtons;
+		WORD previousButtons = m_prevState.Gamepad.wButtons;
 
-		// Since the switch returns values, breaks are not required
-		switch (buttonToPoll) {
-			case Button::Start:
-				return buttonMask & XINPUT_GAMEPAD_START;
-			case Button::Back:
-				return buttonMask & XINPUT_GAMEPAD_BACK;
-			case Button::Up:
-				return buttonMask & XINPUT_GAMEPAD_DPAD_UP;
-			case Button::Down:
-				return buttonMask & XINPUT_GAMEPAD_DPAD_DOWN;
-			case Button::Left:
-				return buttonMask & XINPUT_GAMEPAD_DPAD_LEFT;
-			case Button::Right:
-				return buttonMask & XINPUT_GAMEPAD_DPAD_RIGHT;
-			case Button::A:
-				return buttonMask & XINPUT_GAMEPAD_A;
-			case Button::B:
-				return buttonMask & XINPUT_GAMEPAD_B;
-			case Button::X:
-				return buttonMask & XINPUT_GAMEPAD_X;
-			case Button::Y:
-				return buttonMask & XINPUT_GAMEPAD_Y;
-			case Button::LeftThumb:
-				return buttonMask & XINPUT_GAMEPAD_LEFT_THUMB;
-			case Button::RightThumb:
-				return buttonMask & XINPUT_GAMEPAD_RIGHT_THUMB;
-			case Button::LeftShoulder:
-				return buttonMask & XINPUT_GAMEPAD_LEFT_SHOULDER;
-			case Button::RightShoulder:
-				return buttonMask & XINPUT_GAMEPAD_RIGHT_SHOULDER;
-			default:
-				return false;
+		for (const auto& [bitmask, button] : s_ButtonMappings) {
+			bool wasDown = previousButtons & bitmask;
+			bool isDown = currentButtons & bitmask;
+
+			ActionType type = ActionType::None;
+			if (!wasDown && isDown)
+				type = ActionType::Press;
+			else if (wasDown && !isDown)
+				type = ActionType::Release;
+			else if (wasDown && isDown)
+				type = ActionType::Hold;
+
+			if (type != ActionType::None) {
+				m_buttonStates.emplace_back(ButtonState{ button, type });
+			}
 		}
+	}
+
+	[[nodiscard]] const std::vector<ButtonState>& GetButtonStates() const {
+		return m_buttonStates;
 	}
 
 	[[nodiscard]] bool IsConnected() const {
 		return m_isConnected;
 	}
 
-	[[nodiscard]] unsigned int GetId() const {
-		return m_id;
-	}
 private:
-	XINPUT_STATE m_state{}; // Gamepad state
-	DWORD m_id{};					  // Gamepad id
+	static constexpr std::pair<WORD, Button> s_ButtonMappings[] = {
+			{ static_cast<WORD>(XINPUT_GAMEPAD_START), Button::Start },
+			{ static_cast<WORD>(XINPUT_GAMEPAD_BACK), Button::Back },
+			{ static_cast<WORD>(XINPUT_GAMEPAD_LEFT_THUMB), Button::LeftThumb },
+			{ static_cast<WORD>(XINPUT_GAMEPAD_RIGHT_THUMB), Button::RightThumb },
+			{ static_cast<WORD>(XINPUT_GAMEPAD_LEFT_SHOULDER), Button::LeftShoulder },
+			{ static_cast<WORD>(XINPUT_GAMEPAD_RIGHT_SHOULDER), Button::RightShoulder },
+			{ static_cast<WORD>(XINPUT_GAMEPAD_DPAD_UP), Button::Up },
+			{ static_cast<WORD>(XINPUT_GAMEPAD_DPAD_DOWN), Button::Down },
+			{ static_cast<WORD>(XINPUT_GAMEPAD_DPAD_LEFT), Button::Left },
+			{ static_cast<WORD>(XINPUT_GAMEPAD_DPAD_RIGHT), Button::Right },
+			{ static_cast<WORD>(XINPUT_GAMEPAD_A), Button::A },
+			{ static_cast<WORD>(XINPUT_GAMEPAD_B), Button::B },
+			{ static_cast<WORD>(XINPUT_GAMEPAD_X), Button::X },
+			{ static_cast<WORD>(XINPUT_GAMEPAD_Y), Button::Y }
+	};
+
+	XINPUT_STATE m_state{};
+	XINPUT_STATE m_prevState{};
+	DWORD m_id{};
 	bool m_isConnected{ true };
+	std::vector<ButtonState> m_buttonStates;
 };
