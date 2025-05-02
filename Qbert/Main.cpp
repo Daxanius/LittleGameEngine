@@ -19,7 +19,6 @@
 #include "Scene.h"
 #include "FpsComponent.h"
 #include "RotatorComponent.h"
-#include "ThrashTheCacheComponent.h"
 #include "InputManager.h"
 #include "InputDevice.h"
 #include "Gamepad.h"
@@ -31,8 +30,6 @@
 #include "Subject.h"
 #include "IncreaseScoreCommand.h"
 #include "HealthComponent.h"
-#include "HealthObserver.h"
-#include "ScoreObserver.h"
 #include "DamageCommand.h"
 
 static void load() {
@@ -77,16 +74,12 @@ static void load() {
 	infoObjectP2->AddComponent<dae::TextComponent>("Press A to increase P2 score. Press B to decrease P2 lives.", font);
 
 	auto player1HealthObject{ std::make_shared<dae::GameObject>(std::move(dae::Transform(0, 100))) };
-	auto player1HealthTextComponent = player1HealthObject->AddComponent<dae::TextComponent>("Lives: 3", font);
 
 	auto player1ScoreObject{ std::make_shared<dae::GameObject>(std::move(dae::Transform(0, 130))) }; \
-		auto player1ScoreTextComponent = player1ScoreObject->AddComponent<dae::TextComponent>("Score: 0", font);
 
 	auto player2HealthObject{ std::make_shared<dae::GameObject>(std::move(dae::Transform(0, 160))) };
-	auto player2HealthTextComponent = player2HealthObject->AddComponent<dae::TextComponent>("Lives: 3", font);
 
 	auto player2ScoreObject{ std::make_shared<dae::GameObject>(std::move(dae::Transform(0, 190))) }; \
-		auto player2ScoreTextComponent = player2ScoreObject->AddComponent<dae::TextComponent>("Score: 0", font);
 
 	scene.Add(infoObjectP1);
 	scene.Add(infoObjectP2);
@@ -102,8 +95,8 @@ static void load() {
 	player1->AddComponent<dae::HealthComponent>(playerLives);
 
 	// Register observers
-	player1->GetSubject()->AddObserver(std::make_shared<dae::HealthObserver>(player1HealthTextComponent));
-	player1->GetSubject()->AddObserver(std::make_shared<dae::ScoreObserver>(player1ScoreTextComponent));
+	//player1->GetSubject()->AddObserver(std::make_shared<dae::HealthObserver>(player1HealthTextComponent));
+	//player1->GetSubject()->AddObserver(std::make_shared<dae::ScoreObserver>(player1ScoreTextComponent));
 
 	// Add player
 	scene.Add(player1);
@@ -115,8 +108,8 @@ static void load() {
 	player2->AddComponent<dae::HealthComponent>(playerLives);
 
 	// Register observers
-	player2->GetSubject()->AddObserver(std::make_shared<dae::HealthObserver>(player2HealthTextComponent));
-	player2->GetSubject()->AddObserver(std::make_shared<dae::ScoreObserver>(player2ScoreTextComponent));
+	//player2->GetSubject()->AddObserver(std::make_shared<dae::HealthObserver>(player2HealthTextComponent));
+	//player2->GetSubject()->AddObserver(std::make_shared<dae::ScoreObserver>(player2ScoreTextComponent));
 
 	// Add player
 	scene.Add(player2);

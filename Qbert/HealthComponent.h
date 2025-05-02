@@ -1,5 +1,6 @@
 #pragma once
 #include "BaseComponent.h"
+#include "Subject.h"
 
 namespace dae {
 	class HealthComponent : public BaseComponent {
@@ -23,5 +24,7 @@ namespace dae {
 	private:
 		int m_maxHealth;
 		int m_health;
+
+		Subject m_subject;
 	};
 }

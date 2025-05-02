@@ -21,14 +21,8 @@
     <ClCompile Include="DamageCommand.cpp">
       <Filter>Source\Commands</Filter>
     </ClCompile>
-    <ClCompile Include="FpsComponent.cpp">
-      <Filter>Source\Components</Filter>
-    </ClCompile>
     <ClCompile Include="HealthComponent.cpp">
       <Filter>Source\Components</Filter>
-    </ClCompile>
-    <ClCompile Include="HealthObserver.cpp">
-      <Filter>Source\Observers</Filter>
     </ClCompile>
     <ClCompile Include="IncreaseScoreCommand.cpp">
       <Filter>Source\Commands</Filter>
@@ -42,22 +36,7 @@
     <ClCompile Include="MoveComponent.cpp">
       <Filter>Source\Components</Filter>
     </ClCompile>
-    <ClCompile Include="RotatorComponent.cpp">
-      <Filter>Source\Components</Filter>
-    </ClCompile>
     <ClCompile Include="ScoreComponent.cpp">
-      <Filter>Source\Components</Filter>
-    </ClCompile>
-    <ClCompile Include="ScoreObserver.cpp">
-      <Filter>Source\Observers</Filter>
-    </ClCompile>
-    <ClCompile Include="TextComponent.cpp">
-      <Filter>Source\Components</Filter>
-    </ClCompile>
-    <ClCompile Include="TextureComponent.cpp">
-      <Filter>Source\Components</Filter>
-    </ClCompile>
-    <ClCompile Include="ThrashTheCacheComponent.cpp">
       <Filter>Source\Components</Filter>
     </ClCompile>
     <ClCompile Include="PlaySoundCommand.cpp">
@@ -68,14 +47,8 @@
     <ClInclude Include="DamageCommand.h">
       <Filter>Source\Commands</Filter>
     </ClInclude>
-    <ClInclude Include="FpsComponent.h">
-      <Filter>Source\Components</Filter>
-    </ClInclude>
     <ClInclude Include="HealthComponent.h">
       <Filter>Source\Components</Filter>
-    </ClInclude>
-    <ClInclude Include="HealthObserver.h">
-      <Filter>Source\Observers</Filter>
     </ClInclude>
     <ClInclude Include="IncreaseScoreCommand.h">
       <Filter>Source\Commands</Filter>
@@ -89,26 +62,11 @@
     <ClInclude Include="MoveComponent.h">
       <Filter>Source\Components</Filter>
     </ClInclude>
-    <ClInclude Include="RotatorComponent.h">
-      <Filter>Source\Components</Filter>
-    </ClInclude>
     <ClInclude Include="ScoreComponent.h">
       <Filter>Source\Components</Filter>
     </ClInclude>
     <ClInclude Include="ScoreEventData.h">
       <Filter>Source</Filter>
-    </ClInclude>
-    <ClInclude Include="ScoreObserver.h">
-      <Filter>Source\Observers</Filter>
-    </ClInclude>
-    <ClInclude Include="TextComponent.h">
-      <Filter>Source\Components</Filter>
-    </ClInclude>
-    <ClInclude Include="TextureComponent.h">
-      <Filter>Source\Components</Filter>
-    </ClInclude>
-    <ClInclude Include="ThrashTheCacheComponent.h">
-      <Filter>Source\Components</Filter>
     </ClInclude>
     <ClInclude Include="PlaySoundCommand.h">
       <Filter>Source\Commands</Filter>

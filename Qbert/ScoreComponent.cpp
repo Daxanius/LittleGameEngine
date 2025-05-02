@@ -2,7 +2,7 @@
 #include "Subject.h"
 #include "hash.h"
 
-dae::ScoreComponent::ScoreComponent(GameObject& pOwner) : BaseComponent(pOwner), m_score(0) {
+dae::ScoreComponent::ScoreComponent(GameObject& pOwner) : BaseComponent(pOwner), m_score(0), m_subject() {
 }
 
 void dae::ScoreComponent::AddToScore(int amount) {
@@ -14,7 +14,7 @@ void dae::ScoreComponent::AddToScore(int amount) {
 
 	Event event{ make_sdbm_hash("score_increased") };
 	event.data = std::pair<int, int>(amount, m_score);
-	GetOwner().GetSubject()->Notify(event);
+	m_subject.Notify(event);
 }
 
 void dae::ScoreComponent::RemoveFromScore(int amount) {
@@ -26,7 +26,7 @@ void dae::ScoreComponent::RemoveFromScore(int amount) {
 
 	Event event{ make_sdbm_hash("score_decreased") };
 	event.data = std::pair<int, int>(amount, m_score);
-	GetOwner().GetSubject()->Notify(event);
+	m_subject.Notify(event);
 }
 
 int dae::ScoreComponent::GetScore() const {

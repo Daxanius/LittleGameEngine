@@ -168,39 +168,25 @@
   </ItemDefinitionGroup>
   <ItemGroup>
     <ClCompile Include="DamageCommand.cpp" />
-    <ClCompile Include="FpsComponent.cpp" />
     <ClCompile Include="HealthComponent.cpp" />
-    <ClCompile Include="HealthObserver.cpp" />
     <ClCompile Include="IncreaseScoreCommand.cpp" />
     <ClCompile Include="LogCommand.cpp" />
     <ClCompile Include="Main.cpp" />
     <ClCompile Include="MoveCommand.cpp" />
     <ClCompile Include="MoveComponent.cpp" />
     <ClCompile Include="PlaySoundCommand.cpp" />
-    <ClCompile Include="RotatorComponent.cpp" />
     <ClCompile Include="ScoreComponent.cpp" />
-    <ClCompile Include="ScoreObserver.cpp" />
-    <ClCompile Include="TextComponent.cpp" />
-    <ClCompile Include="TextureComponent.cpp" />
-    <ClCompile Include="ThrashTheCacheComponent.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="DamageCommand.h" />
-    <ClInclude Include="FpsComponent.h" />
     <ClInclude Include="HealthComponent.h" />
-    <ClInclude Include="HealthObserver.h" />
     <ClInclude Include="IncreaseScoreCommand.h" />
     <ClInclude Include="LogCommand.h" />
     <ClInclude Include="MoveCommand.h" />
     <ClInclude Include="MoveComponent.h" />
     <ClInclude Include="PlaySoundCommand.h" />
-    <ClInclude Include="RotatorComponent.h" />
     <ClInclude Include="ScoreComponent.h" />
     <ClInclude Include="ScoreEventData.h" />
-    <ClInclude Include="ScoreObserver.h" />
-    <ClInclude Include="TextComponent.h" />
-    <ClInclude Include="TextureComponent.h" />
-    <ClInclude Include="ThrashTheCacheComponent.h" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\Minigin\Minigin.vcxproj">

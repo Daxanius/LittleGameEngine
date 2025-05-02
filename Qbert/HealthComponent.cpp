@@ -2,7 +2,7 @@
 #include "Subject.h"
 #include "hash.h"
 
-dae::HealthComponent::HealthComponent(GameObject& pOwner, int maxHealth) : BaseComponent(pOwner), m_maxHealth(maxHealth), m_health(maxHealth) {
+dae::HealthComponent::HealthComponent(GameObject& pOwner, int maxHealth) : BaseComponent(pOwner), m_maxHealth(maxHealth), m_health(maxHealth), m_subject() {
 }
 
 float dae::HealthComponent::GetPercentage() const {
@@ -26,7 +26,7 @@ void dae::HealthComponent::Damage(int amount) {
 
 	Event event{ make_sdbm_hash("health_decreased") };
 	event.data = std::pair<int, int>(amount, m_health);
-	GetOwner().GetSubject()->Notify(event);
+	m_subject.Notify(event);
 }
 
 void dae::HealthComponent::Heal(int amount) {
@@ -38,7 +38,7 @@ void dae::HealthComponent::Heal(int amount) {
 
 	Event event{ make_sdbm_hash("health_increased") };
 	event.data = std::pair<int, int>(amount, m_health);
-	GetOwner().GetSubject()->Notify(event);
+	m_subject.Notify(event);
 }
 
 void dae::HealthComponent::Reset() {

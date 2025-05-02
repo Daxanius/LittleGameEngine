@@ -1,5 +1,6 @@
 #pragma once
 #include "BaseComponent.h"
+#include "Subject.h"
 
 namespace dae {
 	class ScoreComponent : public BaseComponent {
@@ -18,6 +19,8 @@ namespace dae {
 		int GetScore() const;
 	private:
 		int m_score;
+
+		Subject m_subject;
 	};
 }
 

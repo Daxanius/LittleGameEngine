@@ -8,7 +8,6 @@ namespace dae
 {
 	class Command;
 	class BaseComponent;
-	class Subject;
 
 	class GameObject final 
 	{
@@ -42,9 +41,6 @@ namespace dae
 		void AddCommandReference(Command* m_Command);
 
 		std::vector<GameObject*>& GetChildren();
-
-		// Used for subscribing observers
-		Subject* GetSubject() const;
 
 		// The component returned is owned by the GameObject, there is no need to free the pointer.
 		// However, you do have to check if the component has been removed in PostUpdate.
@@ -100,8 +96,5 @@ namespace dae
 		// However, these commands need to be notified when their object has been removed
 		// such that they can be unbound. Thus they are kept over here.
 		std::vector<Command*> m_boundCommands;
-
-		// Subjects can be used for all events, given events are keyed with strings
-		std::unique_ptr<Subject> m_subject;
 	};
 }
