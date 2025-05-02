@@ -13,12 +13,6 @@ dae::GameObject::GameObject(Transform transform) : m_localTransform(std::move(tr
 }
 
 dae::GameObject::~GameObject() {
-	// Mark all commands for deletion
-	for (Command* command : m_boundCommands) {
-		command->MarkToUnbind();
-	}
-
-	m_boundCommands.clear();
 	m_components.clear();
 }
 
@@ -78,13 +72,6 @@ void dae::GameObject::Update(float deltaTime){
 	for (auto& component : m_components) {
 		component->PostUpdate();
 	}
-
-	// If commands have been unbound, this will remove them
-	for (int index{ static_cast<int>(m_boundCommands.size()) - 1 }; index >= 0; --index) {
-		if (m_boundCommands[index]->IsUnbound()) {
-			m_boundCommands.erase(m_boundCommands.begin() + index);
-		}
-	}
 }
 
 void dae::GameObject::Render() const {
@@ -115,10 +102,6 @@ bool dae::GameObject::IsChild(GameObject* pObj) const {
 	}
 
 	return false;
-}
-
-void dae::GameObject::AddCommandReference(dae::Command* m_Command) {
-	m_boundCommands.push_back(m_Command);
 }
 
 std::vector<dae::GameObject*>& dae::GameObject::GetChildren() {

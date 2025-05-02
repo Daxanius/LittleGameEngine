@@ -11,13 +11,6 @@ dae::InputDevice::InputAction* dae::InputDevice::GetAction(int button) {
 		return nullptr;
 	}
 
-	// If the command has been marked for deletion, remove it 
-	// from the bindings and return false.
-	if (mapping->second.command->IsUnbound()) {
-		Unbind(button);
-		return nullptr;
-	}
-
 	return &mapping->second;
 }
 
