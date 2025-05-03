@@ -170,24 +170,32 @@
     <ClCompile Include="DamageCommand.cpp" />
     <ClCompile Include="HealthComponent.cpp" />
     <ClCompile Include="IncreaseScoreCommand.cpp" />
+    <ClCompile Include="LoadSceneCommand.cpp" />
     <ClCompile Include="LogCommand.cpp" />
     <ClCompile Include="Main.cpp" />
+    <ClCompile Include="MenuCommand.cpp" />
     <ClCompile Include="MoveCommand.cpp" />
     <ClCompile Include="MoveComponent.cpp" />
     <ClCompile Include="PlaySoundCommand.cpp" />
     <ClCompile Include="Qbert.cpp" />
     <ClCompile Include="ScoreComponent.cpp" />
+    <ClCompile Include="SelectionMenuComponent.cpp" />
+    <ClCompile Include="SoundObserver.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="DamageCommand.h" />
     <ClInclude Include="HealthComponent.h" />
     <ClInclude Include="IncreaseScoreCommand.h" />
+    <ClInclude Include="LoadSceneCommand.h" />
     <ClInclude Include="LogCommand.h" />
+    <ClInclude Include="MenuCommand.h" />
     <ClInclude Include="MoveCommand.h" />
     <ClInclude Include="MoveComponent.h" />
     <ClInclude Include="PlaySoundCommand.h" />
     <ClInclude Include="Qbert.h" />
     <ClInclude Include="ScoreComponent.h" />
+    <ClInclude Include="SelectionMenuComponent.h" />
+    <ClInclude Include="SoundObserver.h" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\Minigin\Minigin.vcxproj">

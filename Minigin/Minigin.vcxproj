@@ -206,6 +206,7 @@
     <ClInclude Include="..\3rdParty\ImGui\imstb_rectpack.h" />
     <ClInclude Include="..\3rdParty\ImGui\imstb_textedit.h" />
     <ClInclude Include="..\3rdParty\ImGui\imstb_truetype.h" />
+    <ClInclude Include="Color.h" />
     <ClInclude Include="FpsComponent.h" />
     <ClInclude Include="LoggingSoundSystem.h" />
     <ClInclude Include="NullSoundSystem.h" />

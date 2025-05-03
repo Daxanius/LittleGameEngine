@@ -23,6 +23,13 @@ namespace dae
 		void Update(float deltaTime);
 		void Render();
 	private:
+		void ApplyPendingChanges();
+
 		std::vector<std::shared_ptr<Scene>> m_scenes;
+
+		std::shared_ptr<Scene> m_pendingSceneReplacement;
+
+		std::vector<std::shared_ptr<Scene>> m_pendingAdditions;
+		std::vector<std::shared_ptr<Scene>> m_pendingRemovals;
 	};
 }

@@ -13,11 +13,19 @@
 #include "SDLSoundSystem.h"
 #include "Minigin.h"
 #include "SceneManager.h"
+#include "Qbert.h"
 
 static void load() {
-	auto soundSystemSDL{ std::make_unique<dae::SDLSoundSystem>() };
-	auto soundSystemLogging{ std::make_unique<dae::LoggingSoundSystem>(std::move(soundSystemSDL)) };
-	dae::ServiceLocator::GetInstance().RegisterSoundSystem(std::move(soundSystemLogging));
+	std::unique_ptr<dae::AbstractSoundSystem> soundSystem = std::make_unique<dae::SDLSoundSystem>();
+
+#ifndef NDEBUG
+	soundSystem = std::make_unique<dae::LoggingSoundSystem>(std::move(soundSystem));
+#endif
+
+	dae::ServiceLocator::GetInstance().RegisterSoundSystem(std::move(soundSystem));
+
+	// Create the qbert game instance
+	dae::Qbert::GetInstance();
 }
 
 int main(int, char* []) {

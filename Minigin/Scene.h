@@ -7,6 +7,8 @@ namespace dae
 	class Scene final
 	{
 	public:
+		explicit Scene(const std::string& name);
+
 		void Add(std::shared_ptr<GameObject> object);
 		void Remove(std::shared_ptr<GameObject> object);
 		void RemoveAll();
@@ -22,8 +24,6 @@ namespace dae
 		Scene& operator=(Scene&& other) = delete;
 
 	private: 
-		explicit Scene(const std::string& name);
-
 		std::string m_name;
 		std::vector <std::shared_ptr<GameObject>> m_objects{};
 

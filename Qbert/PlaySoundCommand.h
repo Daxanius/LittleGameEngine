@@ -5,9 +5,9 @@
 #include <string>
 
 namespace dae {
-	class PlaySoundCommand : public ActorCommand {
+	class PlaySoundCommand : public Command {
 	public:
-		PlaySoundCommand(GameObject* actor, const std::string& file, float volume);
+		PlaySoundCommand(const std::string& file, float volume);
 
 		void Execute() override;
 	private:

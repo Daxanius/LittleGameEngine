@@ -3,16 +3,15 @@
 #include <algorithm>
 
 void dae::SceneManager::AddScene(std::shared_ptr<Scene> scene) {
-	m_scenes.emplace_back(scene);
+	m_pendingAdditions.emplace_back(scene);
 }
 
 void dae::SceneManager::RemoveScene(std::shared_ptr<Scene> scene) {
-	std::erase(m_scenes, scene);
+	m_pendingRemovals.emplace_back(scene);
 }
 
 void dae::SceneManager::SetScene(std::shared_ptr<Scene> scene) {
-	m_scenes.clear();
-	m_scenes.emplace_back(scene);
+	m_pendingSceneReplacement = scene;
 }
 
 void dae::SceneManager::FixedUpdate() {
@@ -23,6 +22,7 @@ void dae::SceneManager::FixedUpdate() {
 
 void dae::SceneManager::Update(float deltaTIme)
 {
+	ApplyPendingChanges();
 	for(auto& scene : m_scenes) {
 		scene->Update(deltaTIme);
 	}
@@ -33,4 +33,28 @@ void dae::SceneManager::Render()
 	for (const auto& scene : m_scenes) {
 		scene->Render();
 	}
+}
+
+void dae::SceneManager::ApplyPendingChanges() {
+	if (m_pendingSceneReplacement) {
+		m_scenes.clear();
+		m_scenes.emplace_back(m_pendingSceneReplacement);
+		m_pendingSceneReplacement.reset();
+		m_pendingAdditions.clear();
+		m_pendingRemovals.clear();
+		return;
+	}
+
+	// Remove pending scenes
+	for (const auto& scene : m_pendingRemovals) {
+		std::erase(m_scenes, scene);
+	}
+
+	m_pendingRemovals.clear();
+
+	// Add new scenes
+	for (const auto& scene : m_pendingAdditions) {
+		m_scenes.emplace_back(scene);
+	}
+	m_pendingAdditions.clear();
 }

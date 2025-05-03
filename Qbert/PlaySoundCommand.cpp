@@ -1,7 +1,7 @@
 #include "PlaySoundCommand.h"
 
-dae::PlaySoundCommand::PlaySoundCommand(GameObject* actor, const std::string& file, float volume) : ActorCommand(actor), m_volume(volume) {
-	ServiceLocator::GetInstance().GetSoundSystem().RegisterSound(file);
+dae::PlaySoundCommand::PlaySoundCommand(const std::string& file, float volume) : Command(), m_volume(volume) {
+	m_soundId = ServiceLocator::GetInstance().GetSoundSystem().RegisterSound(file);
 }
 
 void dae::PlaySoundCommand::Execute() {
