@@ -7,7 +7,7 @@ void dae::SceneManager::AddScene(std::shared_ptr<Scene> scene) {
 }
 
 void dae::SceneManager::RemoveScene(std::shared_ptr<Scene> scene) {
-	std::remove(m_scenes.begin(), m_scenes.end(), scene);
+	std::erase(m_scenes, scene);
 }
 
 void dae::SceneManager::SetScene(std::shared_ptr<Scene> scene) {

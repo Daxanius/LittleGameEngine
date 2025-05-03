@@ -175,6 +175,7 @@
     <ClCompile Include="MoveCommand.cpp" />
     <ClCompile Include="MoveComponent.cpp" />
     <ClCompile Include="PlaySoundCommand.cpp" />
+    <ClCompile Include="Qbert.cpp" />
     <ClCompile Include="ScoreComponent.cpp" />
   </ItemGroup>
   <ItemGroup>
@@ -185,8 +186,8 @@
     <ClInclude Include="MoveCommand.h" />
     <ClInclude Include="MoveComponent.h" />
     <ClInclude Include="PlaySoundCommand.h" />
+    <ClInclude Include="Qbert.h" />
     <ClInclude Include="ScoreComponent.h" />
-    <ClInclude Include="ScoreEventData.h" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\Minigin\Minigin.vcxproj">

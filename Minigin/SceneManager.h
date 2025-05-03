@@ -23,8 +23,6 @@ namespace dae
 		void Update(float deltaTime);
 		void Render();
 	private:
-		friend class Singleton<SceneManager>;
-		SceneManager() = default;
 		std::vector<std::shared_ptr<Scene>> m_scenes;
 	};
 }

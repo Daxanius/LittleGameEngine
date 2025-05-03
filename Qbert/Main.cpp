@@ -18,8 +18,6 @@ static void load() {
 	auto soundSystemSDL{ std::make_unique<dae::SDLSoundSystem>() };
 	auto soundSystemLogging{ std::make_unique<dae::LoggingSoundSystem>(std::move(soundSystemSDL)) };
 	dae::ServiceLocator::GetInstance().RegisterSoundSystem(std::move(soundSystemLogging));
-
-	auto& scene = dae::SceneManager::GetInstance().CreateScene("Level");
 }
 
 int main(int, char* []) {

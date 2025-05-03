@@ -6,7 +6,6 @@ namespace dae
 	class GameObject;
 	class Scene final
 	{
-		friend Scene& SceneManager::CreateScene(const std::string& name);
 	public:
 		void Add(std::shared_ptr<GameObject> object);
 		void Remove(std::shared_ptr<GameObject> object);
@@ -30,5 +29,4 @@ namespace dae
 
 		static unsigned int m_idCounter; 
 	};
-
 }
