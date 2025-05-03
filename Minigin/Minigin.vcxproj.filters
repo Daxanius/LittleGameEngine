@@ -46,6 +46,9 @@
     <Filter Include="Engine\Components">
       <UniqueIdentifier>{87fee9c1-c54c-493e-8109-05488b5d8835}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Engine\Commands">
+      <UniqueIdentifier>{685f5a76-a688-4a9a-8e3c-d34f660d7a3f}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Minigin.h">
@@ -162,6 +165,15 @@
     <ClInclude Include="Color.h">
       <Filter>Engine\Core</Filter>
     </ClInclude>
+    <ClInclude Include="LoadSceneCommand.h">
+      <Filter>Engine\Commands</Filter>
+    </ClInclude>
+    <ClInclude Include="LogCommand.h">
+      <Filter>Engine\Commands</Filter>
+    </ClInclude>
+    <ClInclude Include="PlaySoundCommand.h">
+      <Filter>Engine\Commands</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Minigin.cpp">
@@ -262,6 +274,15 @@
     </ClCompile>
     <ClCompile Include="TextureComponent.cpp">
       <Filter>Engine\Components</Filter>
+    </ClCompile>
+    <ClCompile Include="LoadSceneCommand.cpp">
+      <Filter>Engine\Commands</Filter>
+    </ClCompile>
+    <ClCompile Include="LogCommand.cpp">
+      <Filter>Engine\Commands</Filter>
+    </ClCompile>
+    <ClCompile Include="PlaySoundCommand.cpp">
+      <Filter>Engine\Commands</Filter>
     </ClCompile>
   </ItemGroup>
 </Project>

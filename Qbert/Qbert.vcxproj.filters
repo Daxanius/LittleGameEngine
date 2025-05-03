@@ -27,9 +27,6 @@
     <ClCompile Include="IncreaseScoreCommand.cpp">
       <Filter>Source\Commands</Filter>
     </ClCompile>
-    <ClCompile Include="LogCommand.cpp">
-      <Filter>Source\Commands</Filter>
-    </ClCompile>
     <ClCompile Include="MoveCommand.cpp">
       <Filter>Source\Commands</Filter>
     </ClCompile>
@@ -39,23 +36,20 @@
     <ClCompile Include="ScoreComponent.cpp">
       <Filter>Source\Components</Filter>
     </ClCompile>
-    <ClCompile Include="PlaySoundCommand.cpp">
-      <Filter>Source\Commands</Filter>
-    </ClCompile>
     <ClCompile Include="Qbert.cpp">
       <Filter>Source</Filter>
     </ClCompile>
     <ClCompile Include="SelectionMenuComponent.cpp">
       <Filter>Source\Components</Filter>
     </ClCompile>
-    <ClCompile Include="LoadSceneCommand.cpp">
-      <Filter>Source\Commands</Filter>
-    </ClCompile>
     <ClCompile Include="MenuCommand.cpp">
       <Filter>Source\Commands</Filter>
     </ClCompile>
     <ClCompile Include="SoundObserver.cpp">
       <Filter>Source\Observers</Filter>
+    </ClCompile>
+    <ClCompile Include="RhombileGridComponent.cpp">
+      <Filter>Source\Components</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -68,9 +62,6 @@
     <ClInclude Include="IncreaseScoreCommand.h">
       <Filter>Source\Commands</Filter>
     </ClInclude>
-    <ClInclude Include="LogCommand.h">
-      <Filter>Source\Commands</Filter>
-    </ClInclude>
     <ClInclude Include="MoveCommand.h">
       <Filter>Source\Commands</Filter>
     </ClInclude>
@@ -80,23 +71,20 @@
     <ClInclude Include="ScoreComponent.h">
       <Filter>Source\Components</Filter>
     </ClInclude>
-    <ClInclude Include="PlaySoundCommand.h">
-      <Filter>Source\Commands</Filter>
-    </ClInclude>
     <ClInclude Include="Qbert.h">
       <Filter>Source</Filter>
     </ClInclude>
     <ClInclude Include="SelectionMenuComponent.h">
       <Filter>Source\Components</Filter>
     </ClInclude>
-    <ClInclude Include="LoadSceneCommand.h">
-      <Filter>Source\Commands</Filter>
-    </ClInclude>
     <ClInclude Include="MenuCommand.h">
       <Filter>Source\Commands</Filter>
     </ClInclude>
     <ClInclude Include="SoundObserver.h">
       <Filter>Source\Observers</Filter>
+    </ClInclude>
+    <ClInclude Include="RhombileGridComponent.h">
+      <Filter>Source\Components</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>
