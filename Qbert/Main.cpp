@@ -13,105 +13,13 @@
 #include "SDLSoundSystem.h"
 #include "Minigin.h"
 #include "SceneManager.h"
-#include "ResourceManager.h"
-#include "TextureComponent.h"
-#include "TextComponent.h"
-#include "Scene.h"
-#include "FpsComponent.h"
-#include "RotatorComponent.h"
-#include "InputManager.h"
-#include "Gamepad.h"
-#include "Keyboard.h"
-#include "LogCommand.h"
-#include "MoveCommand.h"
-#include "PlaySoundCommand.h"
-#include "ScoreComponent.h"
-#include "Subject.h"
-#include "IncreaseScoreCommand.h"
-#include "HealthComponent.h"
-#include "DamageCommand.h"
 
 static void load() {
 	auto soundSystemSDL{ std::make_unique<dae::SDLSoundSystem>() };
 	auto soundSystemLogging{ std::make_unique<dae::LoggingSoundSystem>(std::move(soundSystemSDL)) };
 	dae::ServiceLocator::GetInstance().RegisterSoundSystem(std::move(soundSystemLogging));
 
-	auto& scene = dae::SceneManager::GetInstance().CreateScene("Demo");
-
-	// Create the background object
-	auto backgroundObject{ std::make_shared<dae::GameObject>() };
-	backgroundObject->AddComponent<dae::TextureComponent>("background.tga");
-	scene.Add(backgroundObject);
-
-	// Create the logo object
-	auto logoObject{ std::make_shared<dae::GameObject>(std::move(dae::Transform(216.f, 180.f))) };
-	logoObject->AddComponent<dae::TextureComponent>("logo.tga");
-	scene.Add(logoObject);
-
-	// Create the title object
-	auto font{ dae::ResourceManager::GetInstance().LoadFont("Lingua.otf", 36) };
-
-	auto titleObject{ std::make_shared<dae::GameObject>(std::move(dae::Transform(80.f, 20.f))) };
-	titleObject->AddComponent<dae::TextComponent>("Programming 4 Assignment", font);
-	scene.Add(titleObject);
-
-	// Create the FPS object
-	font = dae::ResourceManager::GetInstance().LoadFont("Lingua.otf", 16);
-
-	auto fpsObject{ std::make_shared<dae::GameObject>() };
-	fpsObject->AddComponent<dae::TextComponent>("FPS", font);
-	fpsObject->AddComponent<dae::FpsComponent>();
-	scene.Add(fpsObject);
-
-	const float speed{ 100.f };
-	const int playerLives{ 3 };
-
-	auto infoObjectP1{ std::make_shared<dae::GameObject>(std::move(dae::Transform(0, 60))) };
-	infoObjectP1->AddComponent<dae::TextComponent>("Press E to increase P1 score. Press F to decrease P1 lives.", font);
-
-	auto infoObjectP2{ std::make_shared<dae::GameObject>(std::move(dae::Transform(0, 80))) };
-	infoObjectP2->AddComponent<dae::TextComponent>("Press A to increase P2 score. Press B to decrease P2 lives.", font);
-
-	auto player1HealthObject{ std::make_shared<dae::GameObject>(std::move(dae::Transform(0, 100))) };
-
-	auto player1ScoreObject{ std::make_shared<dae::GameObject>(std::move(dae::Transform(0, 130))) }; \
-
-	auto player2HealthObject{ std::make_shared<dae::GameObject>(std::move(dae::Transform(0, 160))) };
-
-	auto player2ScoreObject{ std::make_shared<dae::GameObject>(std::move(dae::Transform(0, 190))) }; \
-
-	scene.Add(infoObjectP1);
-	scene.Add(infoObjectP2);
-	scene.Add(player1HealthObject);
-	scene.Add(player1ScoreObject);
-	scene.Add(player2HealthObject);
-	scene.Add(player2ScoreObject);
-
-	auto player1{ std::make_shared<dae::GameObject>() };
-	player1->AddComponent<dae::TextureComponent>("qbert_char.png");
-	player1->AddComponent<dae::MoveComponent>(speed);
-	player1->AddComponent<dae::ScoreComponent>();
-	player1->AddComponent<dae::HealthComponent>(playerLives);
-
-	// Register observers
-	//player1->GetSubject()->AddObserver(std::make_shared<dae::HealthObserver>(player1HealthTextComponent));
-	//player1->GetSubject()->AddObserver(std::make_shared<dae::ScoreObserver>(player1ScoreTextComponent));
-
-	// Add player
-	scene.Add(player1);
-
-	auto player2{ std::make_shared<dae::GameObject>() };
-	player2->AddComponent<dae::TextureComponent>("cool_char.png");
-	player2->AddComponent<dae::MoveComponent>(speed * 2);
-	player2->AddComponent<dae::ScoreComponent>();
-	player2->AddComponent<dae::HealthComponent>(playerLives);
-
-	// Register observers
-	//player2->GetSubject()->AddObserver(std::make_shared<dae::HealthObserver>(player2HealthTextComponent));
-	//player2->GetSubject()->AddObserver(std::make_shared<dae::ScoreObserver>(player2ScoreTextComponent));
-
-	// Add player
-	scene.Add(player2);
+	auto& scene = dae::SceneManager::GetInstance().CreateScene("Level");
 }
 
 int main(int, char* []) {

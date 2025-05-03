@@ -1,5 +1,19 @@
 #include "SceneManager.h"
 #include "Scene.h"
+#include <algorithm>
+
+void dae::SceneManager::AddScene(std::shared_ptr<Scene> scene) {
+	m_scenes.emplace_back(scene);
+}
+
+void dae::SceneManager::RemoveScene(std::shared_ptr<Scene> scene) {
+	std::remove(m_scenes.begin(), m_scenes.end(), scene);
+}
+
+void dae::SceneManager::SetScene(std::shared_ptr<Scene> scene) {
+	m_scenes.clear();
+	m_scenes.emplace_back(scene);
+}
 
 void dae::SceneManager::FixedUpdate() {
 	for (auto& scene : m_scenes) {
@@ -19,11 +33,4 @@ void dae::SceneManager::Render()
 	for (const auto& scene : m_scenes) {
 		scene->Render();
 	}
-}
-
-dae::Scene& dae::SceneManager::CreateScene(const std::string& name)
-{
-	const auto& scene{ std::shared_ptr<Scene>(new Scene(name)) };
-	m_scenes.push_back(scene);
-	return *scene;
 }

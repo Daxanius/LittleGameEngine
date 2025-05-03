@@ -10,7 +10,14 @@ namespace dae
 	class SceneManager final : public Singleton<SceneManager>
 	{
 	public:
-		Scene& CreateScene(const std::string& name);
+		// Adds a scene by pointer
+		void AddScene(std::shared_ptr<Scene> scene);
+
+		// Removes a scene by pointer
+		void RemoveScene(std::shared_ptr<Scene> scene);
+
+		// Sets the scene to a singular scene
+		void SetScene(std::shared_ptr<Scene> scene);
 
 		void FixedUpdate();
 		void Update(float deltaTime);
