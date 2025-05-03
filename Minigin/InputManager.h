@@ -27,6 +27,8 @@ namespace dae
 		void BindGamepadCommand(unsigned int gamepadId, const Gamepad::ButtonState& state, std::unique_ptr<Command> command);
 		void UnbindGamepadCommand(unsigned int gamepadId, const Gamepad::ButtonState& state);
 
+		void ClearAllBindings();
+
 		static constexpr int MAX_GAMEPADS = 4;
 
 		InputManager(const InputManager&) = delete;

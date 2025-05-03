@@ -1,4 +1,6 @@
 #include "InputManager.h"
+#include <SDL.h>
+#include "backends/imgui_impl_sdl2.h"
 
 dae::InputManager::InputManager() {
 	// Initialize keyboard
@@ -14,6 +16,16 @@ dae::InputManager::InputManager() {
 }
 
 bool dae::InputManager::ProcessInput() {
+	// SDL specifics
+	SDL_Event e;
+	while (SDL_PollEvent(&e)) {
+		if (e.type == SDL_QUIT) {
+			return false;
+		}
+
+		ImGui_ImplSDL2_ProcessEvent(&e);
+	}
+
 	// Update keyboard state
 	if (m_keyboard && m_keyboard->IsConnected()) {
 		m_keyboard->UpdateState();
@@ -58,4 +70,12 @@ void dae::InputManager::BindGamepadCommand(unsigned int gamepadId, const dae::Ga
 void dae::InputManager::UnbindGamepadCommand(unsigned int gamepadId, const dae::Gamepad::ButtonState& state) {
 	if (gamepadId >= dae::InputManager::MAX_GAMEPADS) return;
 	m_gamepadBindings[gamepadId].erase(state);
+}
+
+void dae::InputManager::ClearAllBindings() {
+	for (size_t gamepadId{}; gamepadId < m_gamepadBindings.size(); gamepadId++) {
+		m_gamepadBindings[gamepadId].clear();
+	}
+
+	m_keyboardBindings.clear();
 }
