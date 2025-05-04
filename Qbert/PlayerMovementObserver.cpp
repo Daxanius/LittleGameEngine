@@ -1,7 +1,8 @@
 #include "PlayerMovementObserver.h"
+#include "GridMovementComponent.h"
 #include "hash.h"
 
-dae::PlayerMovementObserver::PlayerMovementObserver(SpriteComponent* pPlayerSpriteComponent) : m_pPlayerSpriteComponent(pPlayerSpriteComponent) {
+dae::PlayerMovementObserver::PlayerMovementObserver(SpriteComponent* pPlayerSpriteComponent, RhombilleGridComponent* pRhombilleGridComponent) : m_pPlayerSpriteComponent(pPlayerSpriteComponent), m_pRhombilleGridComponent(pRhombilleGridComponent) {
 }
 
 void dae::PlayerMovementObserver::Notify(Event event) {
@@ -17,6 +18,13 @@ void dae::PlayerMovementObserver::Notify(Event event) {
 			break;
 		case make_sdbm_hash("move_down"):
 			m_pPlayerSpriteComponent->SetState(make_sdbm_hash("down"));
+			break;
+		case make_sdbm_hash("arrive"):
+			GridMovementComponent::ArriveEventData data{ std::any_cast<GridMovementComponent::ArriveEventData>(event.data) };
+			auto tile{ m_pRhombilleGridComponent->GetTile(data.row, data.col) };
+			if (tile != nullptr) {
+				tile->state = 1;
+			}
 			break;
 	}
 }

@@ -8,6 +8,11 @@ namespace dae {
 	public:
 		GridMovementComponent(GameObject& pOwner, RhombilleGridComponent* pRhombilleGrid, int row = 0, int col = 0);
 
+		struct ArriveEventData {
+			int row;
+			int col;
+		};
+
 		void FixedUpdate() override {};
 		void PostUpdate() override {};
 		void Render() override {};

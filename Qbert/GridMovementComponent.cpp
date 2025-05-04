@@ -30,6 +30,10 @@ void dae::GridMovementComponent::Update(float deltaTime) {
 
 		// Arrive
 		Event event{ make_sdbm_hash("arrive") };
+		event.data = ArriveEventData{
+			m_row,
+			m_col
+		};
 		m_subject.Notify(event);
 	}
 }

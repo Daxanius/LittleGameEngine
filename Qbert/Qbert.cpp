@@ -40,8 +40,9 @@ void dae::Qbert::CreateLevelScene() {
 
 	qbertSprite->SetState(make_sdbm_hash("right"));
 
-	auto movementObserver{ std::make_shared<PlayerMovementObserver>(qbertSprite) };
+	auto movementObserver{ std::make_shared<PlayerMovementObserver>(qbertSprite, rhombileGrid) };
 	qbertMovementComponent->GetSubject().AddObserver(std::static_pointer_cast<Observer>(movementObserver));
+	qbertMovementComponent->GetSubject().AddObserver(std::static_pointer_cast<Observer>(m_pSoundObserver));
 
 	InputManager::GetInstance().BindKeyboardCommand(
 		Keyboard::KeyState{ Keyboard::Key::Up, Keyboard::ActionType::Press },

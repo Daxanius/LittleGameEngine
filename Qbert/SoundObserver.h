@@ -12,7 +12,8 @@ namespace dae {
 		void Notify(Event event) override;
 	private:
 		SoundId m_changeSelectionSfx{};
+		SoundId m_qbertJumpSfx{};
 
-		float m_volume{ .5f };
+		float m_volume{ .2f };
 	};
 }

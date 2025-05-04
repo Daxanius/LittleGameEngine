@@ -70,7 +70,7 @@ dae::Tile* dae::RhombilleGridComponent::GetTile(int row, int col) {
 	}
 
 	auto& rowData{ m_tiles[row] };
-	if (col < 0 || col > rowData.size()) {
+	if (col < 0 || col >= rowData.size()) {
 		return nullptr;
 	}
 
