@@ -1,6 +1,7 @@
 #pragma once
 #include <BaseComponent.h>
 #include "RhombilleGridComponent.h"
+#include "Subject.h"
 
 namespace dae {
 	class GridMovementComponent : public BaseComponent {
@@ -19,6 +20,8 @@ namespace dae {
 		void MoveDown();
 		void MoveLeft();
 		void MoveRight();
+
+		Subject& GetSubject();
 	private:
 		static constexpr float JUMP_HEIGHT{ 10.f };
 
@@ -40,6 +43,8 @@ namespace dae {
 		int m_targetCol{};
 
 		glm::vec2 ToStandingPosition(int row, int col) const;
-		void StartJump(int newRow, int newCol);
+		bool StartJump(int newRow, int newCol);
+
+		Subject m_subject{};
 	};
 }

@@ -10,6 +10,7 @@
 #include "MenuCommand.h"
 #include "SpriteComponent.h"
 #include "GridMovementComponent.h"
+#include "PlayerMovementObserver.h"
 #include "MoveCommand.h"
 #include "hash.h"
 
@@ -29,11 +30,18 @@ void dae::Qbert::CreateLevelScene() {
 	auto rhombileGrid{ mapObject->AddComponent<RhombilleGridComponent>("Qbert Cubes.png", 32, 32, 7, 2.f) };
 
 	auto qbertObject{ std::make_shared<GameObject>() };
-	auto qbertSprite{ qbertObject->AddComponent<SpriteComponent>("Qbert P1 Spritesheet.png", 16, 16, 2.f) };
+	auto qbertSprite{ qbertObject->AddComponent<SpriteComponent>("Qbert P1 Spritesheet.png", 17, 17, 2.f) };
 	auto qbertMovementComponent{ qbertObject->AddComponent<GridMovementComponent>(rhombileGrid) };
 
-	qbertSprite->AddState(make_sdbm_hash("right"), SpriteComponent::State{ 1, 1, 1 });
+	qbertSprite->AddState(make_sdbm_hash("up"), SpriteComponent::State{ 0, 0, 0 });
+	qbertSprite->AddState(make_sdbm_hash("down"), SpriteComponent::State{ 3, 0, 0 });
+	qbertSprite->AddState(make_sdbm_hash("left"), SpriteComponent::State{ 1, 0, 0 });
+	qbertSprite->AddState(make_sdbm_hash("right"), SpriteComponent::State{ 2, 0, 0 });
+
 	qbertSprite->SetState(make_sdbm_hash("right"));
+
+	auto movementObserver{ std::make_shared<PlayerMovementObserver>(qbertSprite) };
+	qbertMovementComponent->GetSubject().AddObserver(std::static_pointer_cast<Observer>(movementObserver));
 
 	InputManager::GetInstance().BindKeyboardCommand(
 		Keyboard::KeyState{ Keyboard::Key::Up, Keyboard::ActionType::Press },

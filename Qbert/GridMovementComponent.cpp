@@ -1,4 +1,5 @@
 #include "GridMovementComponent.h"
+#include "hash.h"
 
 dae::GridMovementComponent::GridMovementComponent(GameObject& pOwner, RhombilleGridComponent* pRhombilleGrid, int row, int col) : BaseComponent(pOwner), m_pRhombilleGrid(pRhombilleGrid), m_row(row), m_col(col) {
 }
@@ -26,6 +27,10 @@ void dae::GridMovementComponent::Update(float deltaTime) {
 		m_isJumping = false;
 		m_row = m_targetRow;
 		m_col = m_targetCol;
+
+		// Arrive
+		Event event{ make_sdbm_hash("arrive") };
+		m_subject.Notify(event);
 	}
 }
 
@@ -38,19 +43,35 @@ int dae::GridMovementComponent::GetCol() const {
 }
 
 void dae::GridMovementComponent::MoveUp() {
-	StartJump(m_row - 1, m_col);
+	if (StartJump(m_row - 1, m_col)) {
+		Event event{ make_sdbm_hash("move_up") };
+		m_subject.Notify(event);
+	}
 }
 
 void dae::GridMovementComponent::MoveDown() {
-	StartJump(m_row + 1, m_col);
+	if (StartJump(m_row + 1, m_col)) {
+		Event event{ make_sdbm_hash("move_down") };
+		m_subject.Notify(event);
+	}
 }
 
 void dae::GridMovementComponent::MoveLeft() {
-	StartJump(m_row - 1, m_col - 1);
+	if (StartJump(m_row - 1, m_col - 1)) {
+		Event event{ make_sdbm_hash("move_left") };
+		m_subject.Notify(event);
+	}
 }
 
 void dae::GridMovementComponent::MoveRight() {
-	StartJump(m_row + 1, m_col + 1);
+	if (StartJump(m_row + 1, m_col + 1)) {
+		Event event{ make_sdbm_hash("move_right") };
+		m_subject.Notify(event);
+	}
+}
+
+dae::Subject& dae::GridMovementComponent::GetSubject() {
+	return m_subject;
 }
 
 glm::vec2 dae::GridMovementComponent::ToStandingPosition(int row, int col) const {
@@ -66,9 +87,9 @@ glm::vec2 dae::GridMovementComponent::ToStandingPosition(int row, int col) const
 	return cubePos;
 }
 
-void dae::GridMovementComponent::StartJump(int newRow, int newCol) {
+bool dae::GridMovementComponent::StartJump(int newRow, int newCol) {
 	if (m_isJumping) {
-		return;
+		return false;
 	}
 
 	m_isJumping = true;
@@ -79,4 +100,6 @@ void dae::GridMovementComponent::StartJump(int newRow, int newCol) {
 
 	m_targetRow = newRow;
 	m_targetCol = newCol;
+
+	return true;
 }

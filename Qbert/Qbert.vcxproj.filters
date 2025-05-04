@@ -51,6 +51,9 @@
     <ClCompile Include="MoveCommand.cpp">
       <Filter>Source\Commands</Filter>
     </ClCompile>
+    <ClCompile Include="PlayerMovementObserver.cpp">
+      <Filter>Source\Observers</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="DamageCommand.h">
@@ -85,6 +88,9 @@
     </ClInclude>
     <ClInclude Include="MoveCommand.h">
       <Filter>Source\Commands</Filter>
+    </ClInclude>
+    <ClInclude Include="PlayerMovementObserver.h">
+      <Filter>Source\Observers</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>
