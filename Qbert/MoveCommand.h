@@ -1,16 +1,24 @@
 #pragma once
-#include "Command.h"
-#include "MoveComponent.h"
+#include <Command.h>
+#include "GridMovementComponent.h"
 
 namespace dae {
-	class MoveCommand final : public ActorCommand {
+	class MoveCommand : public Command {
 	public:
-		MoveCommand(GameObject* actor, glm::vec2 direction);
+		enum class Direction {
+			Up,
+			Down,
+			Left,
+			Right
+		};
+
+		MoveCommand(GridMovementComponent* movementComponent, Direction direction);
 
 		void Execute() override;
 	private:
-		glm::vec2 m_direction;
+		// The grid movement component also takes care of animating the transition from one position to the other
+		GridMovementComponent* m_pGridMovementComponent;
 
-		MoveComponent* m_MoveComponent;
+		Direction m_direction;
 	};
 }

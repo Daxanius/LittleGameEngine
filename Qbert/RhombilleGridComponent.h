@@ -26,6 +26,10 @@ namespace dae {
 
 		// Grid access
 		Tile* GetTile(int row, int col);
+
+		int GetTileWidth() const;
+		int GetTileHeight() const;
+		float GetScale() const;
 	private:
 		int m_rows;
 		int m_tileWidth;

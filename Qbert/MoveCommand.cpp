@@ -1,13 +1,21 @@
 #include "MoveCommand.h"
-#include <stdexcept>
 
-dae::MoveCommand::MoveCommand(GameObject* actor, glm::vec2 direction) : ActorCommand(actor), m_direction(direction) {
-	m_MoveComponent = GetActor()->GetComponent<MoveComponent>();
-	if (m_MoveComponent == nullptr) {
-		throw std::runtime_error("Actor does not contain move component!");
-	}
+dae::MoveCommand::MoveCommand(GridMovementComponent* movementComponent, Direction direction) : m_pGridMovementComponent(movementComponent), m_direction(direction) {
 }
 
 void dae::MoveCommand::Execute() {
-	m_MoveComponent->AddDirection(m_direction); // Add our direction to the move component for this frame
+	switch (m_direction) {
+		case Direction::Up:
+			m_pGridMovementComponent->MoveUp();
+			break;
+		case Direction::Down:
+			m_pGridMovementComponent->MoveDown();
+			break;
+		case Direction::Left:
+			m_pGridMovementComponent->MoveLeft();
+			break;
+		case Direction::Right:
+			m_pGridMovementComponent->MoveRight();
+			break;
+	}
 }

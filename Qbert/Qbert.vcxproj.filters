@@ -27,12 +27,6 @@
     <ClCompile Include="IncreaseScoreCommand.cpp">
       <Filter>Source\Commands</Filter>
     </ClCompile>
-    <ClCompile Include="MoveCommand.cpp">
-      <Filter>Source\Commands</Filter>
-    </ClCompile>
-    <ClCompile Include="MoveComponent.cpp">
-      <Filter>Source\Components</Filter>
-    </ClCompile>
     <ClCompile Include="ScoreComponent.cpp">
       <Filter>Source\Components</Filter>
     </ClCompile>
@@ -51,6 +45,12 @@
     <ClCompile Include="RhombilleGridComponent.cpp">
       <Filter>Source\Components</Filter>
     </ClCompile>
+    <ClCompile Include="GridMovementComponent.cpp">
+      <Filter>Source\Components</Filter>
+    </ClCompile>
+    <ClCompile Include="MoveCommand.cpp">
+      <Filter>Source\Commands</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="DamageCommand.h">
@@ -61,12 +61,6 @@
     </ClInclude>
     <ClInclude Include="IncreaseScoreCommand.h">
       <Filter>Source\Commands</Filter>
-    </ClInclude>
-    <ClInclude Include="MoveCommand.h">
-      <Filter>Source\Commands</Filter>
-    </ClInclude>
-    <ClInclude Include="MoveComponent.h">
-      <Filter>Source\Components</Filter>
     </ClInclude>
     <ClInclude Include="ScoreComponent.h">
       <Filter>Source\Components</Filter>
@@ -85,6 +79,12 @@
     </ClInclude>
     <ClInclude Include="RhombilleGridComponent.h">
       <Filter>Source\Components</Filter>
+    </ClInclude>
+    <ClInclude Include="GridMovementComponent.h">
+      <Filter>Source\Components</Filter>
+    </ClInclude>
+    <ClInclude Include="MoveCommand.h">
+      <Filter>Source\Commands</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>

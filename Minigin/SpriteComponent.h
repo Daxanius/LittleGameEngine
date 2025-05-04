@@ -3,11 +3,12 @@
 #include "Texture2D.h"
 #include <memory>
 #include <unordered_map>
+#include "GameObject.h"
 
 namespace dae {
 	using StateId = unsigned int;
 
-	class SpriteComponent : BaseComponent {
+	class SpriteComponent : public BaseComponent {
 	public:
 		SpriteComponent(GameObject& pOwner, const std::string& texturePath, int frameWidth, int frameHeight, float scale = 1.f);
 

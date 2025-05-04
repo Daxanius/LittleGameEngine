@@ -168,12 +168,12 @@
   </ItemDefinitionGroup>
   <ItemGroup>
     <ClCompile Include="DamageCommand.cpp" />
+    <ClCompile Include="GridMovementComponent.cpp" />
     <ClCompile Include="HealthComponent.cpp" />
     <ClCompile Include="IncreaseScoreCommand.cpp" />
     <ClCompile Include="Main.cpp" />
     <ClCompile Include="MenuCommand.cpp" />
     <ClCompile Include="MoveCommand.cpp" />
-    <ClCompile Include="MoveComponent.cpp" />
     <ClCompile Include="Qbert.cpp" />
     <ClCompile Include="RhombilleGridComponent.cpp" />
     <ClCompile Include="ScoreComponent.cpp" />
@@ -182,11 +182,11 @@
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="DamageCommand.h" />
+    <ClInclude Include="GridMovementComponent.h" />
     <ClInclude Include="HealthComponent.h" />
     <ClInclude Include="IncreaseScoreCommand.h" />
     <ClInclude Include="MenuCommand.h" />
     <ClInclude Include="MoveCommand.h" />
-    <ClInclude Include="MoveComponent.h" />
     <ClInclude Include="Qbert.h" />
     <ClInclude Include="RhombilleGridComponent.h" />
     <ClInclude Include="ScoreComponent.h" />
