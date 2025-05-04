@@ -20,10 +20,26 @@ namespace dae {
 		void MoveLeft();
 		void MoveRight();
 	private:
+		static constexpr float JUMP_HEIGHT{ 10.f };
+
 		RhombilleGridComponent* m_pRhombilleGrid;
 
 		// Grid position
 		int m_row{};
 		int m_col{};
+
+		// Jump animation
+		bool m_isJumping{ false };
+		float m_jumpDuration{ 0.2f };
+		float m_elapsedJumpTime{ 0.f };
+
+		glm::vec2 m_startPos{};
+		glm::vec2 m_endPos{};
+
+		int m_targetRow{};
+		int m_targetCol{};
+
+		glm::vec2 ToStandingPosition(int row, int col) const;
+		void StartJump(int newRow, int newCol);
 	};
 }
