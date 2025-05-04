@@ -175,7 +175,7 @@
     <ClCompile Include="MoveCommand.cpp" />
     <ClCompile Include="MoveComponent.cpp" />
     <ClCompile Include="Qbert.cpp" />
-    <ClCompile Include="RhombileGridComponent.cpp" />
+    <ClCompile Include="RhombilleGridComponent.cpp" />
     <ClCompile Include="ScoreComponent.cpp" />
     <ClCompile Include="SelectionMenuComponent.cpp" />
     <ClCompile Include="SoundObserver.cpp" />
@@ -188,7 +188,7 @@
     <ClInclude Include="MoveCommand.h" />
     <ClInclude Include="MoveComponent.h" />
     <ClInclude Include="Qbert.h" />
-    <ClInclude Include="RhombileGridComponent.h" />
+    <ClInclude Include="RhombilleGridComponent.h" />
     <ClInclude Include="ScoreComponent.h" />
     <ClInclude Include="SelectionMenuComponent.h" />
     <ClInclude Include="SoundObserver.h" />

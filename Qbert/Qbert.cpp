@@ -6,6 +6,7 @@
 #include "LoadSceneCommand.h"
 #include "InputManager.h"
 #include "ResourceManager.h"
+#include "RhombilleGridComponent.h"
 #include "MenuCommand.h"
 
 dae::Qbert::Qbert() : m_pSoundObserver(std::make_shared<SoundObserver>()) {
@@ -19,6 +20,11 @@ dae::Qbert::Qbert() : m_pSoundObserver(std::make_shared<SoundObserver>()) {
 
 void dae::Qbert::CreateLevelScene() {
 	m_pLevelScene = std::make_shared<Scene>("Level");
+
+	auto mapObject{ std::make_shared<GameObject>(Transform((640 / 2) - 32, 75)) };
+	mapObject->AddComponent<RhombilleGridComponent>("Qbert Cubes.png", 32, 32, 7, 2.f);
+
+	m_pLevelScene->Add(mapObject);
 }
 
 void dae::Qbert::CreateMenuScene() {

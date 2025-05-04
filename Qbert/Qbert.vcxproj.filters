@@ -48,7 +48,7 @@
     <ClCompile Include="SoundObserver.cpp">
       <Filter>Source\Observers</Filter>
     </ClCompile>
-    <ClCompile Include="RhombileGridComponent.cpp">
+    <ClCompile Include="RhombilleGridComponent.cpp">
       <Filter>Source\Components</Filter>
     </ClCompile>
   </ItemGroup>
@@ -83,7 +83,7 @@
     <ClInclude Include="SoundObserver.h">
       <Filter>Source\Observers</Filter>
     </ClInclude>
-    <ClInclude Include="RhombileGridComponent.h">
+    <ClInclude Include="RhombilleGridComponent.h">
       <Filter>Source\Components</Filter>
     </ClInclude>
   </ItemGroup>

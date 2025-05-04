@@ -29,6 +29,8 @@ void dae::Renderer::Init(SDL_Window* window)
 		throw std::runtime_error(std::string("SDL_CreateRenderer Error: ") + SDL_GetError());
 	}
 
+	SDL_SetRenderDrawBlendMode(m_renderer, SDL_BLENDMODE_BLEND);
+
 	IMGUI_CHECKVERSION();
 	ImGui::CreateContext();
 	ImGui_ImplSDL2_InitForOpenGL(window, SDL_GL_GetCurrentContext());
@@ -84,6 +86,22 @@ void dae::Renderer::RenderTexture(const Texture2D& texture, const float x, const
 	dst.w = static_cast<int>(width);
 	dst.h = static_cast<int>(height);
 	SDL_RenderCopy(GetSDLRenderer(), texture.GetSDLTexture(), nullptr, &dst);
+}
+
+void dae::Renderer::RenderTexture(const Texture2D& texture, const float x, const float y, const float width, const float height, const int srcX, const int srcY, const int srcW, const int srcH) const {
+	SDL_Rect dst{};
+	dst.x = static_cast<int>(x);
+	dst.y = static_cast<int>(y);
+	dst.w = static_cast<int>(width);
+	dst.h = static_cast<int>(height);
+
+	SDL_Rect src{};
+	src.x = srcX;
+	src.y = srcY;
+	src.w = srcW;
+	src.h = srcH;
+
+	SDL_RenderCopy(GetSDLRenderer(), texture.GetSDLTexture(), &src, &dst);
 }
 
 SDL_Renderer* dae::Renderer::GetSDLRenderer() const { return m_renderer; }
