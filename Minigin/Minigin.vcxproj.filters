@@ -174,6 +174,9 @@
     <ClInclude Include="PlaySoundCommand.h">
       <Filter>Engine\Commands</Filter>
     </ClInclude>
+    <ClInclude Include="SpriteComponent.h">
+      <Filter>Engine\Components</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Minigin.cpp">
@@ -283,6 +286,9 @@
     </ClCompile>
     <ClCompile Include="PlaySoundCommand.cpp">
       <Filter>Engine\Commands</Filter>
+    </ClCompile>
+    <ClCompile Include="SpriteComponent.cpp">
+      <Filter>Engine\Components</Filter>
     </ClCompile>
   </ItemGroup>
 </Project>
