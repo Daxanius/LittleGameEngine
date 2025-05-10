@@ -11,11 +11,11 @@ dae::RhombilleGridComponent::RhombilleGridComponent(GameObject& pOwner, const st
 	m_tiles.reserve(rows);
 
 	// Fill the qbert grid
-	for (size_t row{}; row < rows; row++) {
+	for (int row{}; row < rows; row++) {
 		m_tiles.emplace_back();
 		m_tiles[row].reserve(row + 1);
 
-		for (size_t col{}; col <= row; col++) {
+		for (int col{}; col <= row; col++) {
 			m_tiles[row].emplace_back(Tile{});
 		}
 	}
@@ -70,7 +70,7 @@ dae::Tile* dae::RhombilleGridComponent::GetTile(int row, int col) {
 	}
 
 	auto& rowData{ m_tiles[row] };
-	if (col < 0 || col >= rowData.size()) {
+	if (col < 0 || col >= static_cast<int>(rowData.size())) {
 		return nullptr;
 	}
 

@@ -34,7 +34,7 @@ void dae::SelectionMenuComponent::PreviousOption() {
 }
 
 void dae::SelectionMenuComponent::ConfirmOption() {
-	if (m_currentOption >= 0 && m_currentOption < m_optionCommands.size()) {
+	if (m_currentOption >= 0 && m_currentOption < static_cast<int>(m_optionCommands.size())) {
 		m_optionCommands[m_currentOption]->Execute();
 
 		Event event{ make_sdbm_hash("menu_confirm") };
