@@ -3,9 +3,9 @@
 #include "Subject.h"
 
 namespace dae {
-	class HealthComponent : public BaseComponent {
+	class LivesComponent : public BaseComponent {
 	public:
-		HealthComponent(GameObject& pOwner, int maxHealth);
+		LivesComponent(GameObject& pOwner, int maxHealth);
 
 		// Inherited via BaseComponent
 		void FixedUpdate() override {};
@@ -14,17 +14,17 @@ namespace dae {
 		void Render() override {};
 
 		float GetPercentage() const;
-		int GetHealth() const;
-		int GetMaxHealth() const;
+		int GetLives() const;
+		int GetMaxLives() const;
 
-		void Damage(int amount);
-		void Heal(int amount);
+		void Kill();
+		void AddLives(int amount);
 
 		void Reset();
 	private:
-		int m_maxHealth;
-		int m_health;
+		int m_maxLives;
+		int m_lives;
 
-		Subject m_subject;
+		Subject m_subject{};
 	};
 }

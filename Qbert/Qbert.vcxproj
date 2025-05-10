@@ -167,9 +167,10 @@
     <PostBuildEvent />
   </ItemDefinitionGroup>
   <ItemGroup>
-    <ClCompile Include="DamageCommand.cpp" />
+    <ClCompile Include="KillCommand.cpp" />
+    <ClCompile Include="GridNavigationComponent.cpp" />
     <ClCompile Include="GridMovementComponent.cpp" />
-    <ClCompile Include="HealthComponent.cpp" />
+    <ClCompile Include="LivesComponent.cpp" />
     <ClCompile Include="IncreaseScoreCommand.cpp" />
     <ClCompile Include="Main.cpp" />
     <ClCompile Include="MenuCommand.cpp" />
@@ -182,9 +183,11 @@
     <ClCompile Include="SoundObserver.cpp" />
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="DamageCommand.h" />
+    <ClInclude Include="AbstractQbertState.h" />
+    <ClInclude Include="KillCommand.h" />
+    <ClInclude Include="GridNavigationComponent.h" />
     <ClInclude Include="GridMovementComponent.h" />
-    <ClInclude Include="HealthComponent.h" />
+    <ClInclude Include="LivesComponent.h" />
     <ClInclude Include="IncreaseScoreCommand.h" />
     <ClInclude Include="MenuCommand.h" />
     <ClInclude Include="MoveCommand.h" />

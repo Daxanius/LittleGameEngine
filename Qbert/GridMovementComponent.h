@@ -6,7 +6,7 @@
 namespace dae {
 	class GridMovementComponent : public BaseComponent {
 	public:
-		GridMovementComponent(GameObject& pOwner, RhombilleGridComponent* pRhombilleGrid, int row = 0, int col = 0);
+		GridMovementComponent(GameObject& pOwner, RhombilleGridComponent* pRhombilleGrid, int row = 0, int col = 0, float jumpDuration = 0.2f);
 
 		struct ArriveEventData {
 			int row;
@@ -25,6 +25,8 @@ namespace dae {
 		void MoveDown();
 		void MoveLeft();
 		void MoveRight();
+
+		bool IsJumping() const;
 
 		Subject& GetSubject();
 	private:

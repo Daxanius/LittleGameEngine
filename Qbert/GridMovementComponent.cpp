@@ -1,7 +1,8 @@
 #include "GridMovementComponent.h"
 #include "hash.h"
 
-dae::GridMovementComponent::GridMovementComponent(GameObject& pOwner, RhombilleGridComponent* pRhombilleGrid, int row, int col) : BaseComponent(pOwner), m_pRhombilleGrid(pRhombilleGrid), m_row(row), m_col(col) {
+dae::GridMovementComponent::GridMovementComponent(GameObject& pOwner, RhombilleGridComponent* pRhombilleGrid, int row, int col, float jumpDuration) 
+	: BaseComponent(pOwner), m_pRhombilleGrid(pRhombilleGrid), m_row(row), m_col(col), m_jumpDuration(jumpDuration) {
 }
 
 void dae::GridMovementComponent::Update(float deltaTime) {
@@ -72,6 +73,10 @@ void dae::GridMovementComponent::MoveRight() {
 		Event event{ make_sdbm_hash("move_right") };
 		m_subject.Notify(event);
 	}
+}
+
+bool dae::GridMovementComponent::IsJumping() const {
+    return m_isJumping;
 }
 
 dae::Subject& dae::GridMovementComponent::GetSubject() {
