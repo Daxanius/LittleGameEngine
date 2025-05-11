@@ -83,6 +83,10 @@ dae::Subject& dae::GridMovementComponent::GetSubject() {
 	return m_subject;
 }
 
+dae::RhombilleGridComponent* dae::GridMovementComponent::GetRhombilleGrid() const {
+	return m_pRhombilleGrid;
+}
+
 glm::vec2 dae::GridMovementComponent::ToStandingPosition(int row, int col) const {
 	glm::vec2 cubePos = m_pRhombilleGrid->ToWorldPosition(row, col);
 

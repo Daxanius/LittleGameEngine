@@ -54,3 +54,17 @@ bool dae::GridNavigationComponent::HasArrived() const {
 		m_pMovementComponent->GetRow() == m_targetRow &&
 		m_pMovementComponent->GetCol() == m_targetCol;
 }
+
+void dae::GridNavigationComponent::Enable() {
+	m_enabled = true;
+	m_timeSinceLastJump = m_jumpCooldown;
+}
+
+void dae::GridNavigationComponent::Disable() {
+	m_enabled = false;
+	m_timeSinceLastJump = m_jumpCooldown;
+}
+
+bool dae::GridNavigationComponent::IsEnabled() const {
+	return m_enabled;
+}

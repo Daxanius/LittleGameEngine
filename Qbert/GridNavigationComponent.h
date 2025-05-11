@@ -14,8 +14,14 @@ namespace dae {
 
 		void SetTarget(int row, int col);
 		bool HasArrived() const;
+
+		void Enable();
+		void Disable();
+		bool IsEnabled() const;
 	private:
 		GridMovementComponent* m_pMovementComponent{};
+
+		bool m_enabled;
 
 		int m_targetRow{};
 		int m_targetCol{};

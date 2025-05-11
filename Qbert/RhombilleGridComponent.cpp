@@ -77,6 +77,10 @@ dae::Tile* dae::RhombilleGridComponent::GetTile(int row, int col) {
 	return &rowData[col];
 }
 
+int dae::RhombilleGridComponent::GetRows() const {
+    return m_rows;
+}
+
 int dae::RhombilleGridComponent::GetTileWidth() const {
 	return m_tileWidth;
 }

@@ -29,6 +29,8 @@ namespace dae {
 		bool IsJumping() const;
 
 		Subject& GetSubject();
+
+		RhombilleGridComponent* GetRhombilleGrid() const;
 	private:
 		static constexpr float JUMP_HEIGHT{ 10.f };
 

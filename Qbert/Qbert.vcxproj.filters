@@ -16,6 +16,12 @@
     <Filter Include="Source\States">
       <UniqueIdentifier>{0164a6c0-db7d-4139-9c10-7bda3eb0208e}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Source\States\Game">
+      <UniqueIdentifier>{022a710a-9f8f-4942-8f4c-75386d11ec72}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source\States\Coily">
+      <UniqueIdentifier>{f4bd4674-92ca-411b-ad32-2fdb6325ea15}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Main.cpp">
@@ -63,20 +69,35 @@
     <ClCompile Include="LevelComponent.cpp">
       <Filter>Source\Components</Filter>
     </ClCompile>
-    <ClCompile Include="MenuGameState.cpp">
-      <Filter>Source\States</Filter>
-    </ClCompile>
     <ClCompile Include="ChangeGameStateCommand.cpp">
       <Filter>Source\Commands</Filter>
-    </ClCompile>
-    <ClCompile Include="SinglePlayerGameState.cpp">
-      <Filter>Source\States</Filter>
     </ClCompile>
     <ClCompile Include="RepeatingTextureComponent.cpp">
       <Filter>Source\Components</Filter>
     </ClCompile>
     <ClCompile Include="LivesObserver.cpp">
       <Filter>Source\Observers</Filter>
+    </ClCompile>
+    <ClCompile Include="CoilyComponent.cpp">
+      <Filter>Source\Components</Filter>
+    </ClCompile>
+    <ClCompile Include="PlayerComponent.cpp">
+      <Filter>Source\Components</Filter>
+    </ClCompile>
+    <ClCompile Include="MenuGameState.cpp">
+      <Filter>Source\States\Game</Filter>
+    </ClCompile>
+    <ClCompile Include="SinglePlayerGameState.cpp">
+      <Filter>Source\States\Game</Filter>
+    </ClCompile>
+    <ClCompile Include="AbstractCoilyState.cpp">
+      <Filter>Source\States\Coily</Filter>
+    </ClCompile>
+    <ClCompile Include="CoilyStateBall.cpp">
+      <Filter>Source\States\Coily</Filter>
+    </ClCompile>
+    <ClCompile Include="CoilyStateSnake.cpp">
+      <Filter>Source\States\Coily</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -119,26 +140,41 @@
     <ClInclude Include="GridNavigationComponent.h">
       <Filter>Source\Components</Filter>
     </ClInclude>
-    <ClInclude Include="AbstractGameState.h">
-      <Filter>Source\States</Filter>
-    </ClInclude>
     <ClInclude Include="LevelComponent.h">
       <Filter>Source\Components</Filter>
     </ClInclude>
-    <ClInclude Include="MenuGameState.h">
-      <Filter>Source\States</Filter>
-    </ClInclude>
     <ClInclude Include="ChangeGameStateCommand.h">
       <Filter>Source\Commands</Filter>
-    </ClInclude>
-    <ClInclude Include="SinglePlayerGameState.h">
-      <Filter>Source\States</Filter>
     </ClInclude>
     <ClInclude Include="RepeatingTextureComponent.h">
       <Filter>Source\Components</Filter>
     </ClInclude>
     <ClInclude Include="LivesObserver.h">
       <Filter>Source\Observers</Filter>
+    </ClInclude>
+    <ClInclude Include="CoilyComponent.h">
+      <Filter>Source\Components</Filter>
+    </ClInclude>
+    <ClInclude Include="PlayerComponent.h">
+      <Filter>Source\Components</Filter>
+    </ClInclude>
+    <ClInclude Include="AbstractGameState.h">
+      <Filter>Source\States\Game</Filter>
+    </ClInclude>
+    <ClInclude Include="MenuGameState.h">
+      <Filter>Source\States\Game</Filter>
+    </ClInclude>
+    <ClInclude Include="SinglePlayerGameState.h">
+      <Filter>Source\States\Game</Filter>
+    </ClInclude>
+    <ClInclude Include="AbstractCoilyState.h">
+      <Filter>Source\States\Coily</Filter>
+    </ClInclude>
+    <ClInclude Include="CoilyStateBall.h">
+      <Filter>Source\States\Coily</Filter>
+    </ClInclude>
+    <ClInclude Include="CoilyStateSnake.h">
+      <Filter>Source\States\Coily</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>

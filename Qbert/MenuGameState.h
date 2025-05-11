@@ -5,7 +5,7 @@
 #include <memory>
 
 namespace dae {
-	class MenuGameState : public AbstractGameState {
+	class MenuGameState final : public AbstractGameState {
 	public:
 		MenuGameState();
 

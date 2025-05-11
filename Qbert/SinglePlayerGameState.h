@@ -5,7 +5,7 @@
 #include <memory>
 
 namespace dae {
-	class SinglePlayerGameState : public AbstractGameState {
+	class SinglePlayerGameState final : public AbstractGameState {
 	public:
 		SinglePlayerGameState();
 
