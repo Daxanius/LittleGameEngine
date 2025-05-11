@@ -167,35 +167,43 @@
     <PostBuildEvent />
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClCompile Include="ChangeGameStateCommand.cpp" />
     <ClCompile Include="KillCommand.cpp" />
     <ClCompile Include="GridNavigationComponent.cpp" />
     <ClCompile Include="GridMovementComponent.cpp" />
+    <ClCompile Include="LevelComponent.cpp" />
     <ClCompile Include="LivesComponent.cpp" />
     <ClCompile Include="IncreaseScoreCommand.cpp" />
     <ClCompile Include="Main.cpp" />
     <ClCompile Include="MenuCommand.cpp" />
+    <ClCompile Include="MenuGameState.cpp" />
     <ClCompile Include="MoveCommand.cpp" />
     <ClCompile Include="PlayerMovementObserver.cpp" />
     <ClCompile Include="Qbert.cpp" />
     <ClCompile Include="RhombilleGridComponent.cpp" />
     <ClCompile Include="ScoreComponent.cpp" />
     <ClCompile Include="SelectionMenuComponent.cpp" />
+    <ClCompile Include="SinglePlayerGameState.cpp" />
     <ClCompile Include="SoundObserver.cpp" />
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="AbstractQbertState.h" />
+    <ClInclude Include="AbstractGameState.h" />
+    <ClInclude Include="ChangeGameStateCommand.h" />
     <ClInclude Include="KillCommand.h" />
     <ClInclude Include="GridNavigationComponent.h" />
     <ClInclude Include="GridMovementComponent.h" />
+    <ClInclude Include="LevelComponent.h" />
     <ClInclude Include="LivesComponent.h" />
     <ClInclude Include="IncreaseScoreCommand.h" />
     <ClInclude Include="MenuCommand.h" />
+    <ClInclude Include="MenuGameState.h" />
     <ClInclude Include="MoveCommand.h" />
     <ClInclude Include="PlayerMovementObserver.h" />
     <ClInclude Include="Qbert.h" />
     <ClInclude Include="RhombilleGridComponent.h" />
     <ClInclude Include="ScoreComponent.h" />
     <ClInclude Include="SelectionMenuComponent.h" />
+    <ClInclude Include="SinglePlayerGameState.h" />
     <ClInclude Include="SoundObserver.h" />
   </ItemGroup>
   <ItemGroup>

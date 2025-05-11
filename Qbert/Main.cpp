@@ -13,6 +13,7 @@
 #include "SDLSoundSystem.h"
 #include "Minigin.h"
 #include "SceneManager.h"
+#include "MenuGameState.h"
 #include "Qbert.h"
 
 static void load() {
@@ -24,8 +25,8 @@ static void load() {
 
 	dae::ServiceLocator::GetInstance().RegisterSoundSystem(std::move(soundSystem));
 
-	// Create the qbert game instance
-	dae::Qbert::GetInstance();
+	// Create the qbert game instance and set the state to be in the menu
+	dae::Qbert::GetInstance().SetState(std::make_shared<dae::MenuGameState>());
 }
 
 int main(int, char* []) {

@@ -60,6 +60,18 @@
     <ClCompile Include="GridNavigationComponent.cpp">
       <Filter>Source\Components</Filter>
     </ClCompile>
+    <ClCompile Include="LevelComponent.cpp">
+      <Filter>Source\Components</Filter>
+    </ClCompile>
+    <ClCompile Include="MenuGameState.cpp">
+      <Filter>Source\States</Filter>
+    </ClCompile>
+    <ClCompile Include="ChangeGameStateCommand.cpp">
+      <Filter>Source\Commands</Filter>
+    </ClCompile>
+    <ClCompile Include="SinglePlayerGameState.cpp">
+      <Filter>Source\States</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="KillCommand.h">
@@ -98,11 +110,23 @@
     <ClInclude Include="PlayerMovementObserver.h">
       <Filter>Source\Observers</Filter>
     </ClInclude>
-    <ClInclude Include="AbstractQbertState.h">
-      <Filter>Source</Filter>
-    </ClInclude>
     <ClInclude Include="GridNavigationComponent.h">
       <Filter>Source\Components</Filter>
+    </ClInclude>
+    <ClInclude Include="AbstractGameState.h">
+      <Filter>Source\States</Filter>
+    </ClInclude>
+    <ClInclude Include="LevelComponent.h">
+      <Filter>Source\Components</Filter>
+    </ClInclude>
+    <ClInclude Include="MenuGameState.h">
+      <Filter>Source\States</Filter>
+    </ClInclude>
+    <ClInclude Include="ChangeGameStateCommand.h">
+      <Filter>Source\Commands</Filter>
+    </ClInclude>
+    <ClInclude Include="SinglePlayerGameState.h">
+      <Filter>Source\States</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>

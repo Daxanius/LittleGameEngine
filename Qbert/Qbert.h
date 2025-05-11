@@ -2,6 +2,7 @@
 #include <memory>
 #include "Singleton.h"
 #include "SoundObserver.h"
+#include "AbstractGameState.h"
 #include "Font.h"
 
 namespace dae {
@@ -11,6 +12,11 @@ namespace dae {
 	public:
 		Qbert();
 
+		std::shared_ptr<Font> GetFont() const;
+		std::shared_ptr<SoundObserver> GetSoundObserver() const;
+
+		void SetState(std::shared_ptr<AbstractGameState> pGameState);
+
 		Qbert(const Qbert&) = delete;
 		Qbert& operator=(const Qbert&) = delete;
 		Qbert(Qbert&&) = delete;
@@ -18,10 +24,11 @@ namespace dae {
 		~Qbert() = default;
 	private:
 		void CreateLevelScene();
-		void CreateMenuScene();
 
 		std::shared_ptr<Scene> m_pLevelScene;
 		std::shared_ptr<Scene> m_pMenuScene;
+
+		std::shared_ptr<AbstractGameState> m_pGameState;
 
 		std::shared_ptr<Font> m_pFont;
 
