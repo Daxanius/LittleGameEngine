@@ -72,6 +72,12 @@
     <ClCompile Include="SinglePlayerGameState.cpp">
       <Filter>Source\States</Filter>
     </ClCompile>
+    <ClCompile Include="RepeatingTextureComponent.cpp">
+      <Filter>Source\Components</Filter>
+    </ClCompile>
+    <ClCompile Include="LivesObserver.cpp">
+      <Filter>Source\Observers</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="KillCommand.h">
@@ -127,6 +133,12 @@
     </ClInclude>
     <ClInclude Include="SinglePlayerGameState.h">
       <Filter>Source\States</Filter>
+    </ClInclude>
+    <ClInclude Include="RepeatingTextureComponent.h">
+      <Filter>Source\Components</Filter>
+    </ClInclude>
+    <ClInclude Include="LivesObserver.h">
+      <Filter>Source\Observers</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>

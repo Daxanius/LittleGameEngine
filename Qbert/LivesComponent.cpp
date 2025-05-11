@@ -2,7 +2,7 @@
 #include "Subject.h"
 #include "hash.h"
 
-dae::LivesComponent::LivesComponent(GameObject& pOwner, int maxHealth) : BaseComponent(pOwner), m_maxLives(maxHealth), m_lives(maxHealth) {
+dae::LivesComponent::LivesComponent(GameObject& pOwner, int maxLives) : BaseComponent(pOwner), m_maxLives(maxLives), m_lives(maxLives) {
 }
 
 float dae::LivesComponent::GetPercentage() const {
@@ -39,4 +39,8 @@ void dae::LivesComponent::AddLives(int amount) {
 
 void dae::LivesComponent::Reset() {
 	m_lives = m_maxLives;
+}
+
+dae::Subject& dae::LivesComponent::GetSubject() {
+	return m_subject;
 }

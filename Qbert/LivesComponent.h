@@ -5,7 +5,7 @@
 namespace dae {
 	class LivesComponent : public BaseComponent {
 	public:
-		LivesComponent(GameObject& pOwner, int maxHealth);
+		LivesComponent(GameObject& pOwner, int maxLives);
 
 		// Inherited via BaseComponent
 		void FixedUpdate() override {};
@@ -21,6 +21,8 @@ namespace dae {
 		void AddLives(int amount);
 
 		void Reset();
+
+		Subject& GetSubject();
 	private:
 		int m_maxLives;
 		int m_lives;

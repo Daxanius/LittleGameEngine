@@ -2,7 +2,8 @@
 #include "GridMovementComponent.h"
 #include "hash.h"
 
-dae::PlayerMovementObserver::PlayerMovementObserver(SpriteComponent* pPlayerSpriteComponent, RhombilleGridComponent* pRhombilleGridComponent) : m_pPlayerSpriteComponent(pPlayerSpriteComponent), m_pRhombilleGridComponent(pRhombilleGridComponent) {
+dae::PlayerMovementObserver::PlayerMovementObserver(SpriteComponent* pPlayerSpriteComponent, RhombilleGridComponent* pRhombilleGridComponent, LivesComponent* pLivesComponent) 
+	: m_pPlayerSpriteComponent(pPlayerSpriteComponent), m_pRhombilleGridComponent(pRhombilleGridComponent), m_pLivesComponent(pLivesComponent) {
 }
 
 void dae::PlayerMovementObserver::Notify(Event event) {
@@ -24,6 +25,8 @@ void dae::PlayerMovementObserver::Notify(Event event) {
 			auto tile{ m_pRhombilleGridComponent->GetTile(data.row, data.col) };
 			if (tile != nullptr) {
 				tile->state = 1;
+			} else {
+				m_pLivesComponent->Kill();
 			}
 			break;
 	}
