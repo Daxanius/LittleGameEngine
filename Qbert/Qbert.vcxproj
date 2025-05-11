@@ -168,10 +168,13 @@
   </ItemDefinitionGroup>
   <ItemGroup>
     <ClCompile Include="AbstractCoilyState.cpp" />
+    <ClCompile Include="ChangeCoilyStateCommand.cpp" />
     <ClCompile Include="ChangeGameStateCommand.cpp" />
     <ClCompile Include="CoilyComponent.cpp" />
+    <ClCompile Include="CoilyMovementObserver.cpp" />
     <ClCompile Include="CoilyStateBall.cpp" />
     <ClCompile Include="CoilyStateSnake.cpp" />
+    <ClCompile Include="EnemySpawnerComponent.cpp" />
     <ClCompile Include="KillCommand.cpp" />
     <ClCompile Include="GridNavigationComponent.cpp" />
     <ClCompile Include="GridMovementComponent.cpp" />
@@ -196,10 +199,13 @@
   <ItemGroup>
     <ClInclude Include="AbstractCoilyState.h" />
     <ClInclude Include="AbstractGameState.h" />
+    <ClInclude Include="ChangeCoilyStateCommand.h" />
     <ClInclude Include="ChangeGameStateCommand.h" />
     <ClInclude Include="CoilyComponent.h" />
+    <ClInclude Include="CoilyMovementObserver.h" />
     <ClInclude Include="CoilyStateBall.h" />
     <ClInclude Include="CoilyStateSnake.h" />
+    <ClInclude Include="EnemySpawnerComponent.h" />
     <ClInclude Include="KillCommand.h" />
     <ClInclude Include="GridNavigationComponent.h" />
     <ClInclude Include="GridMovementComponent.h" />

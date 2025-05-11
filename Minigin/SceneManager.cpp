@@ -14,6 +14,10 @@ void dae::SceneManager::SetScene(std::shared_ptr<Scene> scene) {
 	m_pendingSceneReplacement = scene;
 }
 
+std::shared_ptr<dae::Scene> dae::SceneManager::GetActiveScene() const {
+	return m_scenes.empty() ? nullptr : m_scenes.front();
+}
+
 void dae::SceneManager::FixedUpdate() {
 	for (auto& scene : m_scenes) {
 		scene->FixedUpdate();

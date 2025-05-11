@@ -19,6 +19,8 @@ namespace dae
 		// Sets the scene to a singular scene
 		void SetScene(std::shared_ptr<Scene> scene);
 
+		std::shared_ptr<Scene> GetActiveScene() const;
+
 		void FixedUpdate();
 		void Update(float deltaTime);
 		void Render();

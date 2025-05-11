@@ -4,7 +4,7 @@
 #include "GridMovementComponent.h"
 #include <random> 
 
-dae::CoilyStateBall::CoilyStateBall(CoilyComponent* pCoilyComponent) : AbstractCoilyState(pCoilyComponent) {
+dae::CoilyStateBall::CoilyStateBall(CoilyComponent* pCoilyComponent, GridMovementComponent* pTargetMovementComponent) : AbstractCoilyState(pCoilyComponent), m_pTargetMovementComponent(pTargetMovementComponent) {
 	m_pGridMovementComponent = GetCoilyComponent()->GetOwner().GetComponent<GridMovementComponent>();
 	assert(m_pGridMovementComponent != nullptr);
 

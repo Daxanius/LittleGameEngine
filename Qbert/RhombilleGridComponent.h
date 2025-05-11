@@ -27,6 +27,8 @@ namespace dae {
 		// Grid access
 		Tile* GetTile(int row, int col);
 
+		void GetRandomTile(int& row, int& col) const;
+
 		int GetRows() const;
 
 		int GetTileWidth() const;

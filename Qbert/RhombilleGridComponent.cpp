@@ -77,6 +77,13 @@ dae::Tile* dae::RhombilleGridComponent::GetTile(int row, int col) {
 	return &rowData[col];
 }
 
+void dae::RhombilleGridComponent::GetRandomTile(int& row, int& col) const {
+	int randomRow = rand() % m_rows;
+	int randomCol = rand() % (randomRow + 1);
+	row = randomRow;
+	col = randomCol;
+}
+
 int dae::RhombilleGridComponent::GetRows() const {
     return m_rows;
 }

@@ -99,6 +99,15 @@
     <ClCompile Include="CoilyStateSnake.cpp">
       <Filter>Source\States\Coily</Filter>
     </ClCompile>
+    <ClCompile Include="ChangeCoilyStateCommand.cpp">
+      <Filter>Source\Commands</Filter>
+    </ClCompile>
+    <ClCompile Include="CoilyMovementObserver.cpp">
+      <Filter>Source\Observers</Filter>
+    </ClCompile>
+    <ClCompile Include="EnemySpawnerComponent.cpp">
+      <Filter>Source\Components</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="KillCommand.h">
@@ -175,6 +184,15 @@
     </ClInclude>
     <ClInclude Include="CoilyStateSnake.h">
       <Filter>Source\States\Coily</Filter>
+    </ClInclude>
+    <ClInclude Include="ChangeCoilyStateCommand.h">
+      <Filter>Source\Commands</Filter>
+    </ClInclude>
+    <ClInclude Include="CoilyMovementObserver.h">
+      <Filter>Source\Observers</Filter>
+    </ClInclude>
+    <ClInclude Include="EnemySpawnerComponent.h">
+      <Filter>Source\Components</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>
