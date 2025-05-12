@@ -12,6 +12,9 @@
 #include "RepeatingTextureComponent.h"
 #include "LivesObserver.h"
 #include "EnemySpawnerComponent.h"
+#include "ScoreComponent.h"
+#include "TextComponent.h"
+#include "ScoreObserver.h"
 #include "Qbert.h"
 
 dae::SinglePlayerGameState::SinglePlayerGameState() : AbstractGameState(), m_pScene(std::make_shared<Scene>("Level")) {
@@ -29,6 +32,7 @@ dae::SinglePlayerGameState::SinglePlayerGameState() : AbstractGameState(), m_pSc
 
 	auto qbertObject{ std::make_shared<GameObject>() };
 	auto qbertSprite{ qbertObject->AddComponent<SpriteComponent>("Qbert P1 Spritesheet.png", 17, 17, 2.f) };
+	auto scoreComponent{ qbertObject->AddComponent<ScoreComponent>() };
 ;	m_pPlayerMovementComponent = qbertObject->AddComponent<GridMovementComponent>(rhombileGrid);
 
 	qbertSprite->AddState(make_sdbm_hash("up"), SpriteComponent::State{ 0, 0, 0 });
@@ -40,13 +44,19 @@ dae::SinglePlayerGameState::SinglePlayerGameState() : AbstractGameState(), m_pSc
 
 	mapObject->AddComponent<EnemySpawnerComponent>(m_pPlayerMovementComponent, 10.f);
 
-	auto movementObserver{ std::make_shared<PlayerMovementObserver>(qbertSprite, rhombileGrid, livesComponent) };
+	auto movementObserver{ std::make_shared<PlayerMovementObserver>(qbertSprite, rhombileGrid, livesComponent, scoreComponent) };
 	m_pPlayerMovementComponent->GetSubject().AddObserver(std::static_pointer_cast<Observer>(movementObserver));
 	m_pPlayerMovementComponent->GetSubject().AddObserver(std::static_pointer_cast<Observer>(Qbert::GetInstance().GetSoundObserver()));
+
+	auto scoreObject{ std::make_shared<GameObject>(Transform(10.f, 20.f)) };
+	auto scoreText{ scoreObject->AddComponent<TextComponent>("SCORE: 0",  Qbert::GetInstance().GetFont()) };
+
+	scoreComponent->GetSubject().AddObserver(std::static_pointer_cast<Observer>(std::make_shared<ScoreObserver>(scoreText)));
 
 	m_pScene->Add(livesObject);
 	m_pScene->Add(mapObject);
 	m_pScene->Add(qbertObject);
+	m_pScene->Add(scoreObject);
 }
 
 void dae::SinglePlayerGameState::OnEnter() {

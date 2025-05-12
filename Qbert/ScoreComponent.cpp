@@ -29,6 +29,10 @@ void dae::ScoreComponent::RemoveFromScore(int amount) {
 	m_subject.Notify(event);
 }
 
+dae::Subject& dae::ScoreComponent::GetSubject() {
+	return m_subject;
+}
+
 int dae::ScoreComponent::GetScore() const {
 	return m_score;
 }

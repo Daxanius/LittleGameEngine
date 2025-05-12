@@ -193,6 +193,7 @@
     <ClCompile Include="RepeatingTextureComponent.cpp" />
     <ClCompile Include="RhombilleGridComponent.cpp" />
     <ClCompile Include="ScoreComponent.cpp" />
+    <ClCompile Include="ScoreObserver.cpp" />
     <ClCompile Include="SelectionMenuComponent.cpp" />
     <ClCompile Include="SinglePlayerGameState.cpp" />
     <ClCompile Include="SoundObserver.cpp" />
@@ -224,6 +225,7 @@
     <ClInclude Include="RepeatingTextureComponent.h" />
     <ClInclude Include="RhombilleGridComponent.h" />
     <ClInclude Include="ScoreComponent.h" />
+    <ClInclude Include="ScoreObserver.h" />
     <ClInclude Include="SelectionMenuComponent.h" />
     <ClInclude Include="SinglePlayerGameState.h" />
     <ClInclude Include="SoundObserver.h" />

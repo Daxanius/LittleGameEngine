@@ -7,7 +7,6 @@ namespace dae {
 	public:
 		ScoreComponent(GameObject& pOwner);
 
-		// Inherited via BaseComponent
 		void FixedUpdate() override {};
 		void Update(float) override {};
 		void PostUpdate() override {};
@@ -15,6 +14,8 @@ namespace dae {
 
 		void AddToScore(int amount);
 		void RemoveFromScore(int amount);
+
+		Subject& GetSubject();
 
 		int GetScore() const;
 	private:

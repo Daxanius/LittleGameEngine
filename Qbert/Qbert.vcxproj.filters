@@ -111,6 +111,9 @@
     <ClCompile Include="CoilySnakeMovementObserver.cpp">
       <Filter>Source\Observers</Filter>
     </ClCompile>
+    <ClCompile Include="ScoreObserver.cpp">
+      <Filter>Source\Observers</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="KillCommand.h">
@@ -198,6 +201,9 @@
       <Filter>Source\Components</Filter>
     </ClInclude>
     <ClInclude Include="CoilySnakeMovementObserver.h">
+      <Filter>Source\Observers</Filter>
+    </ClInclude>
+    <ClInclude Include="ScoreObserver.h">
       <Filter>Source\Observers</Filter>
     </ClInclude>
   </ItemGroup>

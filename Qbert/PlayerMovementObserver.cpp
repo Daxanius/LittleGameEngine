@@ -2,8 +2,11 @@
 #include "GridMovementComponent.h"
 #include "hash.h"
 
-dae::PlayerMovementObserver::PlayerMovementObserver(SpriteComponent* pPlayerSpriteComponent, RhombilleGridComponent* pRhombilleGridComponent, LivesComponent* pLivesComponent) 
-	: m_pPlayerSpriteComponent(pPlayerSpriteComponent), m_pRhombilleGridComponent(pRhombilleGridComponent), m_pLivesComponent(pLivesComponent) {
+dae::PlayerMovementObserver::PlayerMovementObserver(SpriteComponent* pPlayerSpriteComponent, RhombilleGridComponent* pRhombilleGridComponent, LivesComponent* pLivesComponent, ScoreComponent* pScoreComponent)
+	: m_pPlayerSpriteComponent(pPlayerSpriteComponent),
+	m_pRhombilleGridComponent(pRhombilleGridComponent),
+	m_pLivesComponent(pLivesComponent),
+m_pScoreComponent(pScoreComponent) {
 }
 
 void dae::PlayerMovementObserver::Notify(Event event) {
@@ -24,7 +27,10 @@ void dae::PlayerMovementObserver::Notify(Event event) {
 			GridMovementComponent::ArriveEventData data{ std::any_cast<GridMovementComponent::ArriveEventData>(event.data) };
 			auto tile{ m_pRhombilleGridComponent->GetTile(data.row, data.col) };
 			if (tile != nullptr) {
-				tile->state = 1;
+				if (tile->state == 0) {
+					tile->state = 1;
+					m_pScoreComponent->AddToScore(25);
+				}
 			} else {
 				m_pLivesComponent->Kill();
 			}
