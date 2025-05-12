@@ -13,10 +13,12 @@ dae::CoilyStateBall::CoilyStateBall(CoilyComponent* pCoilyComponent, GridMovemen
 
 	m_pGridNavigationComponent = GetCoilyComponent()->GetOwner().GetComponent<GridNavigationComponent>();
 	assert(m_pGridNavigationComponent != nullptr);
+
+	m_pCoilyBallMovementObserver = std::make_shared<CoilyBallMovementObserver>(pCoilyComponent, pTargetMovementComponent);
 }
 
 void dae::CoilyStateBall::OnEnter() {
-	m_pSpriteComponent->SetState(make_sdbm_hash("ball"));
+	m_pSpriteComponent->SetState(make_sdbm_hash("ball_idle"));
 
 	int maxRow = m_pGridMovementComponent->GetRhombilleGrid()->GetRows();
 
@@ -27,6 +29,8 @@ void dae::CoilyStateBall::OnEnter() {
 
 	int randomCol = dist(gen); // Value in [0, maxRow]
 
+	m_pGridMovementComponent->GetSubject().AddObserver(m_pCoilyBallMovementObserver);
+
 	m_pGridNavigationComponent->SetTarget(maxRow, randomCol);
 	m_pGridNavigationComponent->Enable();
 }
@@ -36,4 +40,6 @@ void dae::CoilyStateBall::Update(float) {
 
 void dae::CoilyStateBall::OnExit() {
 	m_pGridNavigationComponent->Disable();
+
+	m_pGridMovementComponent->GetSubject().RemoveObserver(m_pCoilyBallMovementObserver);
 }

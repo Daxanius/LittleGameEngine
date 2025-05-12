@@ -171,7 +171,8 @@
     <ClCompile Include="ChangeCoilyStateCommand.cpp" />
     <ClCompile Include="ChangeGameStateCommand.cpp" />
     <ClCompile Include="CoilyComponent.cpp" />
-    <ClCompile Include="CoilyMovementObserver.cpp" />
+    <ClCompile Include="CoilyBallMovementObserver.cpp" />
+    <ClCompile Include="CoilySnakeMovementObserver.cpp" />
     <ClCompile Include="CoilyStateBall.cpp" />
     <ClCompile Include="CoilyStateSnake.cpp" />
     <ClCompile Include="EnemySpawnerComponent.cpp" />
@@ -202,7 +203,8 @@
     <ClInclude Include="ChangeCoilyStateCommand.h" />
     <ClInclude Include="ChangeGameStateCommand.h" />
     <ClInclude Include="CoilyComponent.h" />
-    <ClInclude Include="CoilyMovementObserver.h" />
+    <ClInclude Include="CoilyBallMovementObserver.h" />
+    <ClInclude Include="CoilySnakeMovementObserver.h" />
     <ClInclude Include="CoilyStateBall.h" />
     <ClInclude Include="CoilyStateSnake.h" />
     <ClInclude Include="EnemySpawnerComponent.h" />

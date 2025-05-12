@@ -102,11 +102,14 @@
     <ClCompile Include="ChangeCoilyStateCommand.cpp">
       <Filter>Source\Commands</Filter>
     </ClCompile>
-    <ClCompile Include="CoilyMovementObserver.cpp">
+    <ClCompile Include="CoilyBallMovementObserver.cpp">
       <Filter>Source\Observers</Filter>
     </ClCompile>
     <ClCompile Include="EnemySpawnerComponent.cpp">
       <Filter>Source\Components</Filter>
+    </ClCompile>
+    <ClCompile Include="CoilySnakeMovementObserver.cpp">
+      <Filter>Source\Observers</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -188,11 +191,14 @@
     <ClInclude Include="ChangeCoilyStateCommand.h">
       <Filter>Source\Commands</Filter>
     </ClInclude>
-    <ClInclude Include="CoilyMovementObserver.h">
+    <ClInclude Include="CoilyBallMovementObserver.h">
       <Filter>Source\Observers</Filter>
     </ClInclude>
     <ClInclude Include="EnemySpawnerComponent.h">
       <Filter>Source\Components</Filter>
+    </ClInclude>
+    <ClInclude Include="CoilySnakeMovementObserver.h">
+      <Filter>Source\Observers</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>

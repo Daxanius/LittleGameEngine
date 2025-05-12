@@ -3,6 +3,8 @@
 #include "GridMovementComponent.h"
 #include "SpriteComponent.h"
 #include "GridNavigationComponent.h"
+#include "CoilySnakeMovementObserver.h"
+#include <memory>
 
 namespace dae {
 	class CoilyStateSnake : public AbstractCoilyState {
@@ -18,5 +20,7 @@ namespace dae {
 		SpriteComponent* m_pSpriteComponent{};
 		GridNavigationComponent* m_pGridNavigationComponent{};
 		GridMovementComponent* m_pTargetMovementComponent{};
+
+		std::shared_ptr<CoilySnakeMovementObserver> m_pCoilySnakeMovementObserver{};
 	};
 }

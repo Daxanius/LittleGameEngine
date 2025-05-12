@@ -11,6 +11,7 @@
 #include "MoveCommand.h"
 #include "RepeatingTextureComponent.h"
 #include "LivesObserver.h"
+#include "EnemySpawnerComponent.h"
 #include "Qbert.h"
 
 dae::SinglePlayerGameState::SinglePlayerGameState() : AbstractGameState(), m_pScene(std::make_shared<Scene>("Level")) {
@@ -36,6 +37,8 @@ dae::SinglePlayerGameState::SinglePlayerGameState() : AbstractGameState(), m_pSc
 	qbertSprite->AddState(make_sdbm_hash("right"), SpriteComponent::State{ 2, 0, 0 });
 
 	qbertSprite->SetState(make_sdbm_hash("right"));
+
+	mapObject->AddComponent<EnemySpawnerComponent>(m_pPlayerMovementComponent, 10.f);
 
 	auto movementObserver{ std::make_shared<PlayerMovementObserver>(qbertSprite, rhombileGrid, livesComponent) };
 	m_pPlayerMovementComponent->GetSubject().AddObserver(std::static_pointer_cast<Observer>(movementObserver));

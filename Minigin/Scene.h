@@ -24,8 +24,13 @@ namespace dae
 		Scene& operator=(Scene&& other) = delete;
 
 	private: 
+		void ProcessPendingChanges();
+
 		std::string m_name;
 		std::vector <std::shared_ptr<GameObject>> m_objects{};
+
+		std::vector<std::shared_ptr<GameObject>> m_objectsToAdd{};
+		std::vector<std::shared_ptr<GameObject>> m_objectsToRemove{};
 
 		static unsigned int m_idCounter; 
 	};

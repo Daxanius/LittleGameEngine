@@ -1,13 +1,13 @@
 #include "GridNavigationComponent.h"
 
 dae::GridNavigationComponent::GridNavigationComponent(GameObject& pOwner, float jumpCooldown)
-	: BaseComponent(pOwner), m_jumpCooldown(jumpCooldown), m_timeSinceLastJump(jumpCooldown) {
+	: BaseComponent(pOwner), m_jumpCooldown(jumpCooldown), m_timeSinceLastJump(jumpCooldown), m_enabled(true) {
 	m_pMovementComponent = pOwner.GetComponent<GridMovementComponent>();
 	assert(m_pMovementComponent != nullptr);
 }
 
 void dae::GridNavigationComponent::Update(float deltaTime) {
-	if (!m_pMovementComponent) {
+	if (!m_pMovementComponent || !m_enabled) {
 		return;
 	}
 
