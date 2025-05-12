@@ -75,6 +75,22 @@ void dae::GridMovementComponent::MoveRight() {
 	}
 }
 
+void dae::GridMovementComponent::SetOffsetX(int width) {
+	if (width < 0) {
+		return;
+	}
+
+	m_offsetX = width;
+}
+
+void dae::GridMovementComponent::SetOffsetY(int height) {
+	if (height < 0) {
+		return;
+	}
+
+	m_offsetY = height;
+}
+
 bool dae::GridMovementComponent::IsJumping() const {
     return m_isJumping;
 }
@@ -90,13 +106,11 @@ dae::RhombilleGridComponent* dae::GridMovementComponent::GetRhombilleGrid() cons
 glm::vec2 dae::GridMovementComponent::ToStandingPosition(int row, int col) const {
 	glm::vec2 cubePos = m_pRhombilleGrid->ToWorldPosition(row, col);
 
-	const float spriteWidth = 16.f;
-	const float spriteHeight = 16.f;
 	const float tileWidth = m_pRhombilleGrid->GetTileWidth() * m_pRhombilleGrid->GetScale();
 	const float tileHeight = m_pRhombilleGrid->GetTileHeight() * m_pRhombilleGrid->GetScale();
 
-	cubePos.x += (tileWidth * 0.5f - spriteWidth);
-	cubePos.y -= (tileHeight * 0.5f) - spriteHeight;
+	cubePos.x += (tileWidth * 0.5f - m_offsetX);
+	cubePos.y -= (tileHeight * 0.5f) - m_offsetY;
 	return cubePos;
 }
 

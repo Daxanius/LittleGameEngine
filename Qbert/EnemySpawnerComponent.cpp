@@ -28,9 +28,12 @@ void dae::EnemySpawnerComponent::SpawnEnemy() {
 void dae::EnemySpawnerComponent::SpawnCoily() {
 	auto coilyObject{ std::make_shared<GameObject>(Transform{ 0.f, 0.f }) };
 	auto coilySprite{ coilyObject->AddComponent<SpriteComponent>("Coily Spritesheet.png", 16, 32, 2.f) };
-	coilyObject->AddComponent<GridMovementComponent>(m_pRhombilleGridComponent, 0, 0, 0.5f);
+	auto movementComponent{ coilyObject->AddComponent<GridMovementComponent>(m_pRhombilleGridComponent, 0, 0, 0.5f) };
 	coilyObject->AddComponent<GridNavigationComponent>(0.5f);
 	auto coilyComponent{ coilyObject->AddComponent<CoilyComponent>() };
+
+	movementComponent->SetOffsetX(32 + 16);
+	movementComponent->SetOffsetY(32);
 
 	coilySprite->AddState(make_sdbm_hash("ball_idle"), SpriteComponent::State{ 0, 1, 0 });
 	coilySprite->AddState(make_sdbm_hash("ball_jump"), SpriteComponent::State{ 1, 1, 0 });

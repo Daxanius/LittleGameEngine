@@ -26,6 +26,9 @@ namespace dae {
 		void MoveLeft();
 		void MoveRight();
 
+		void SetOffsetX(int width);
+		void SetOffsetY(int height);
+
 		bool IsJumping() const;
 
 		Subject& GetSubject();
@@ -50,6 +53,9 @@ namespace dae {
 
 		int m_targetRow{};
 		int m_targetCol{};
+
+		int m_offsetX{ 16 };
+		int m_offsetY{ 16 };
 
 		glm::vec2 ToStandingPosition(int row, int col) const;
 		bool StartJump(int newRow, int newCol);
