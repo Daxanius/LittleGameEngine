@@ -29,15 +29,32 @@ void dae::GridNavigationComponent::Update(float deltaTime) {
 		return;
 	}
 
-	// Choose next direction toward target
-	if (m_targetRow < curRow && m_targetCol == curCol) {
-		m_pMovementComponent->MoveUp();
-	} else if (m_targetRow > curRow && m_targetCol == curCol) {
-		m_pMovementComponent->MoveDown();
-	} else if (m_targetRow < curRow && m_targetCol < curCol) {
-		m_pMovementComponent->MoveLeft();
-	} else if (m_targetRow > curRow && m_targetCol > curCol) {
-		m_pMovementComponent->MoveRight();
+	int dRow = m_targetRow - curRow;
+	int dCol = m_targetCol - curCol;
+
+	// Determine the next move based on the difference in row and column
+	if (dRow < 0) {
+		if (dCol < 0) {
+			m_pMovementComponent->MoveUpLeft();
+		} else if (dCol > 0) {
+			m_pMovementComponent->MoveUpRight();
+		} else {
+			m_pMovementComponent->MoveUp();
+		}
+	} else if (dRow > 0) {
+		if (dCol < 0) {
+			m_pMovementComponent->MoveDownLeft();
+		} else if (dCol > 0) {
+			m_pMovementComponent->MoveDownRight();
+		} else {
+			m_pMovementComponent->MoveDown();
+		}
+	} else {
+		if (dCol < 0) {
+			m_pMovementComponent->MoveLeft();
+		} else if (dCol > 0) {
+			m_pMovementComponent->MoveRight();
+		}
 	}
 
 	m_timeSinceLastJump = 0.f;

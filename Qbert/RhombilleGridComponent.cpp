@@ -64,6 +64,26 @@ glm::vec2 dae::RhombilleGridComponent::ToWorldPosition(int row, int col) {
 	return worldPosition;
 }
 
+bool dae::RhombilleGridComponent::AreAllTilesState(int state) const {
+	for (int row{}; row < m_rows; row++) {
+		for (int col{}; col <= row; col++) {
+			if (m_tiles[row][col].state != state) {
+				return false;
+			}
+		}
+	}
+
+	return true;
+}
+
+void dae::RhombilleGridComponent::SetAllStates(int state) {
+	for (int row{}; row < m_rows; row++) {
+		for (int col{}; col <= row; col++) {
+			m_tiles[row][col].state = state;
+		}
+	}
+}
+
 dae::Tile* dae::RhombilleGridComponent::GetTile(int row, int col) {
 	if (row < 0 || row >= m_rows) {
 		return nullptr;

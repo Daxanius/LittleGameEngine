@@ -21,10 +21,19 @@ namespace dae {
 		int GetRow() const;
 		int GetCol() const;
 
+		int GetTargetRow() const;
+		int GetTargetCol() const;
+
 		void MoveUp();
 		void MoveDown();
 		void MoveLeft();
 		void MoveRight();
+
+		// "Diagonal" movement
+		void MoveUpLeft();
+		void MoveUpRight();
+		void MoveDownLeft();
+		void MoveDownRight();
 
 		void SetOffsetX(int width);
 		void SetOffsetY(int height);

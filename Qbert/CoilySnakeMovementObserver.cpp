@@ -9,18 +9,22 @@ dae::CoilySnakeMovementObserver::CoilySnakeMovementObserver(CoilyComponent* pCoi
 
 void dae::CoilySnakeMovementObserver::Notify(Event event) {
 	switch (event.id) {
+		case (make_sdbm_hash("move_up_right")):
 		case (make_sdbm_hash("move_up")):
 			m_pSpriteComponent->SetState(make_sdbm_hash("jump_up"));
 			m_lastDirection = Direction::Up;
 			break;
+		case (make_sdbm_hash("move_down_left")):
 		case (make_sdbm_hash("move_down")):
 			m_pSpriteComponent->SetState(make_sdbm_hash("jump_down"));
 			m_lastDirection = Direction::Down;
 			break;
+		case (make_sdbm_hash("move_up_left")):
 		case (make_sdbm_hash("move_left")):
 			m_pSpriteComponent->SetState(make_sdbm_hash("jump_left"));
 			m_lastDirection = Direction::Left;
 			break;
+		case (make_sdbm_hash("move_down_right")):
 		case (make_sdbm_hash("move_right")):
 			m_pSpriteComponent->SetState(make_sdbm_hash("jump_right"));
 			m_lastDirection = Direction::Right;

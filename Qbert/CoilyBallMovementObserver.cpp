@@ -16,6 +16,10 @@ void dae::CoilyBallMovementObserver::Notify(Event event) {
 		case (make_sdbm_hash("move_down")):
 		case (make_sdbm_hash("move_left")):
 		case (make_sdbm_hash("move_right")):
+		case (make_sdbm_hash("move_up_right")):
+		case (make_sdbm_hash("move_up_left")):
+		case (make_sdbm_hash("move_down_right")):
+		case (make_sdbm_hash("move_down_left")):
 			m_pSpriteComponent->SetState(make_sdbm_hash("ball_jump"));
 			break;
 
@@ -23,7 +27,7 @@ void dae::CoilyBallMovementObserver::Notify(Event event) {
 			m_pSpriteComponent->SetState(make_sdbm_hash("ball_idle"));
 			GridMovementComponent::ArriveEventData data{ std::any_cast<GridMovementComponent::ArriveEventData>(event.data) };
 
-			if (m_pTargetMovementComponent->GetRhombilleGrid()->GetRows() -1 == data.row) {
+			if (data.row >= m_pTargetMovementComponent->GetRhombilleGrid()->GetRows() -2) {
 				m_pCoilyComponent->SetState(std::make_shared<CoilyStateSnake>(m_pCoilyComponent, m_pTargetMovementComponent));
 			}
 

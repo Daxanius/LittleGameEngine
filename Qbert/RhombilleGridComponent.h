@@ -24,6 +24,10 @@ namespace dae {
 
 		glm::vec2 ToWorldPosition(int row, int col);
 
+		bool AreAllTilesState(int state) const;
+
+		void SetAllStates(int state);
+
 		// Grid access
 		Tile* GetTile(int row, int col);
 

@@ -3,9 +3,9 @@
 #include "TextComponent.h"
 
 namespace dae {
-	class ScoreObserver : public Observer {
+	class LevelObserver : public Observer {
 	public:
-		ScoreObserver(TextComponent* pScoreText);
+		LevelObserver(TextComponent* pScoreText);
 
 		void Notify(Event event) override;
 

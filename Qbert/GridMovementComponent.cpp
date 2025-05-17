@@ -47,6 +47,14 @@ int dae::GridMovementComponent::GetCol() const {
 	return m_col;
 }
 
+int dae::GridMovementComponent::GetTargetRow() const {
+	return m_targetRow;
+}
+
+int dae::GridMovementComponent::GetTargetCol() const {
+	return m_targetCol;
+}
+
 void dae::GridMovementComponent::MoveUp() {
 	if (StartJump(m_row - 1, m_col)) {
 		Event event{ make_sdbm_hash("move_up") };
@@ -71,6 +79,34 @@ void dae::GridMovementComponent::MoveLeft() {
 void dae::GridMovementComponent::MoveRight() {
 	if (StartJump(m_row + 1, m_col + 1)) {
 		Event event{ make_sdbm_hash("move_right") };
+		m_subject.Notify(event);
+	}
+}
+
+void dae::GridMovementComponent::MoveUpLeft() {
+	if (StartJump(m_row - 1, m_col - 1)) {
+		Event event{ make_sdbm_hash("move_up_left") };
+		m_subject.Notify(event);
+	}
+}
+
+void dae::GridMovementComponent::MoveUpRight() {
+	if (StartJump(m_row - 1, m_col)) {
+		Event event{ make_sdbm_hash("move_up_right") };
+		m_subject.Notify(event);
+	}
+}
+
+void dae::GridMovementComponent::MoveDownLeft() {
+	if (StartJump(m_row + 1, m_col)) {
+		Event event{ make_sdbm_hash("move_down_left") };
+		m_subject.Notify(event);
+	}
+}
+
+void dae::GridMovementComponent::MoveDownRight() {
+	if (StartJump(m_row + 1, m_col + 1)) {
+		Event event{ make_sdbm_hash("move_down_right") };
 		m_subject.Notify(event);
 	}
 }

@@ -23,7 +23,10 @@ void dae::CoilyStateSnake::OnEnter() {
 }
 
 void dae::CoilyStateSnake::Update(float) {
-	m_pGridNavigationComponent->SetTarget(m_pTargetMovementComponent->GetRow(), m_pTargetMovementComponent->GetCol());
+	m_pGridNavigationComponent->SetTarget(
+		m_pTargetMovementComponent->IsJumping() ? m_pTargetMovementComponent->GetTargetRow() : m_pTargetMovementComponent->GetRow() -1,
+		m_pTargetMovementComponent->IsJumping() ? m_pTargetMovementComponent->GetTargetCol() : m_pTargetMovementComponent->GetCol()
+	);
 }
 
 void dae::CoilyStateSnake::OnExit() {

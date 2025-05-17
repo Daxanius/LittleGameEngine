@@ -14,12 +14,14 @@
 #include "EnemySpawnerComponent.h"
 #include "ScoreComponent.h"
 #include "TextComponent.h"
-#include "ScoreObserver.h"
+#include "LevelObserver.h"
+#include "LevelComponent.h"
 #include "Qbert.h"
 
 dae::SinglePlayerGameState::SinglePlayerGameState() : AbstractGameState(), m_pScene(std::make_shared<Scene>("Level")) {
 	auto mapObject{ std::make_shared<GameObject>(Transform((640 / 2) - 32, 75)) };
 	auto rhombileGrid{ mapObject->AddComponent<RhombilleGridComponent>("Qbert Cubes.png", 32, 32, 7, 2.f) };
+	auto levelComponent{ mapObject->AddComponent<LevelComponent>() };
 
 	auto livesObject{ std::make_shared<GameObject>(Transform{ 10.f, 100.f }) };
 	auto livesComponent{ livesObject->AddComponent<LivesComponent>(3) };
@@ -44,14 +46,16 @@ dae::SinglePlayerGameState::SinglePlayerGameState() : AbstractGameState(), m_pSc
 
 	mapObject->AddComponent<EnemySpawnerComponent>(m_pPlayerMovementComponent, 10.f);
 
-	auto movementObserver{ std::make_shared<PlayerMovementObserver>(qbertSprite, rhombileGrid, livesComponent, scoreComponent) };
+	auto movementObserver{ std::make_shared<PlayerMovementObserver>(qbertSprite, rhombileGrid, livesComponent, scoreComponent, levelComponent) };
 	m_pPlayerMovementComponent->GetSubject().AddObserver(std::static_pointer_cast<Observer>(movementObserver));
 	m_pPlayerMovementComponent->GetSubject().AddObserver(std::static_pointer_cast<Observer>(Qbert::GetInstance().GetSoundObserver()));
 
 	auto scoreObject{ std::make_shared<GameObject>(Transform(10.f, 20.f)) };
 	auto scoreText{ scoreObject->AddComponent<TextComponent>("SCORE: 0",  Qbert::GetInstance().GetFont()) };
 
-	scoreComponent->GetSubject().AddObserver(std::static_pointer_cast<Observer>(std::make_shared<ScoreObserver>(scoreText)));
+	auto levelObserver{ std::make_shared<LevelObserver>(scoreText) };
+	scoreComponent->GetSubject().AddObserver(std::static_pointer_cast<Observer>(levelObserver));
+	levelComponent->GetSubject().AddObserver(std::static_pointer_cast<Observer>(levelObserver));
 
 	m_pScene->Add(livesObject);
 	m_pScene->Add(mapObject);

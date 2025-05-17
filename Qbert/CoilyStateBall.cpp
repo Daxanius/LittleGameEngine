@@ -20,14 +20,14 @@ dae::CoilyStateBall::CoilyStateBall(CoilyComponent* pCoilyComponent, GridMovemen
 void dae::CoilyStateBall::OnEnter() {
 	m_pSpriteComponent->SetState(make_sdbm_hash("ball_idle"));
 
-	int maxRow = m_pGridMovementComponent->GetRhombilleGrid()->GetRows();
+	int maxRow = m_pGridMovementComponent->GetRhombilleGrid()->GetRows() -2;
 
 	// Random engine - static to avoid re-seeding every time
 	static std::random_device rd;
 	static std::mt19937 gen(rd());
 	std::uniform_int_distribution<> dist(0, maxRow);
 
-	int randomCol = dist(gen); // Value in [0, maxRow]
+	int randomCol = dist(gen);
 
 	m_pGridMovementComponent->GetSubject().AddObserver(m_pCoilyBallMovementObserver);
 
