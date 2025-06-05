@@ -117,6 +117,9 @@
     <ClCompile Include="AnimationObserver.cpp">
       <Filter>Source\Observers</Filter>
     </ClCompile>
+    <ClCompile Include="ChangeToComponent.cpp">
+      <Filter>Source\Components</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="KillCommand.h">
@@ -211,6 +214,9 @@
     </ClInclude>
     <ClInclude Include="AnimationObserver.h">
       <Filter>Source\Observers</Filter>
+    </ClInclude>
+    <ClInclude Include="ChangeToComponent.h">
+      <Filter>Source\Components</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>

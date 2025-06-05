@@ -171,6 +171,7 @@
     <ClCompile Include="AnimationObserver.cpp" />
     <ClCompile Include="ChangeCoilyStateCommand.cpp" />
     <ClCompile Include="ChangeGameStateCommand.cpp" />
+    <ClCompile Include="ChangeToComponent.cpp" />
     <ClCompile Include="CoilyComponent.cpp" />
     <ClCompile Include="CoilyBallMovementObserver.cpp" />
     <ClCompile Include="CoilySnakeMovementObserver.cpp" />
@@ -205,6 +206,7 @@
     <ClInclude Include="AnimationObserver.h" />
     <ClInclude Include="ChangeCoilyStateCommand.h" />
     <ClInclude Include="ChangeGameStateCommand.h" />
+    <ClInclude Include="ChangeToComponent.h" />
     <ClInclude Include="CoilyComponent.h" />
     <ClInclude Include="CoilyBallMovementObserver.h" />
     <ClInclude Include="CoilySnakeMovementObserver.h" />

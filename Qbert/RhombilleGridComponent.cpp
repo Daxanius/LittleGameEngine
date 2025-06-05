@@ -26,7 +26,7 @@ void dae::RhombilleGridComponent::Render() {
 		int tilesInRow{ static_cast<int>(m_tiles[row].size()) };
 
 		for (int col = 0; col < tilesInRow; ++col) {
-			auto worldPosition{ ToWorldPosition(row, col) };
+			const auto worldPosition{ ToWorldPosition(row, col) };
 			Tile tile{ m_tiles[row][col] };
 
 			Renderer::GetInstance().RenderTexture(

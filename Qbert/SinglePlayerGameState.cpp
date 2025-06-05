@@ -7,10 +7,12 @@
 #include "PlayerMovementObserver.h"
 #include "LivesComponent.h"
 #include "SoundObserver.h"
+#include "ResourceManager.h"
 #include "InputManager.h"
 #include "MoveCommand.h"
 #include "RepeatingTextureComponent.h"
 #include "RhombilleGridAnimationComponent.h"
+#include "ChangeToComponent.h"
 #include "LivesObserver.h"
 #include "EnemySpawnerComponent.h"
 #include "ScoreComponent.h"
@@ -33,6 +35,12 @@ dae::SinglePlayerGameState::SinglePlayerGameState() : AbstractGameState(), m_pSc
 
 	// Add the lives observer which will update the repeating texture component
 	pLivesComponent->GetSubject().AddObserver(std::static_pointer_cast<Observer>(std::make_shared<LivesObserver>(pRepeatingTexturecomponent)));
+	
+	auto nextTextObject(std::make_shared<GameObject>(Transform(10.f, 66.f)));
+	nextTextObject->AddComponent<TextComponent>("CHANGE TO", dae::ResourceManager::GetInstance().LoadFont("Minecraft.ttf", 16));
+
+	auto nextObject{ std::make_shared<GameObject>(Transform(120.f, 60.f) )};
+	nextObject->AddComponent<ChangeToComponent>(pLevelComponent, "Color Icons Spritesheet.png", 14, 12, 2.f);
 
 	auto qbertObject{ std::make_shared<GameObject>() };
 	auto pQbertSpriteComponent{ qbertObject->AddComponent<SpriteComponent>("Qbert P1 Spritesheet.png", 17, 17, 2.f) };
@@ -61,6 +69,8 @@ dae::SinglePlayerGameState::SinglePlayerGameState() : AbstractGameState(), m_pSc
 
 	m_pScene->Add(livesObject);
 	m_pScene->Add(mapObject);
+	m_pScene->Add(nextTextObject);
+	m_pScene->Add(nextObject);
 	m_pScene->Add(qbertObject);
 	m_pScene->Add(scoreObject);
 }
