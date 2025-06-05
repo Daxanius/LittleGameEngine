@@ -1,6 +1,7 @@
 #pragma once
 #include <BaseComponent.h>
 #include "Subject.h"
+#include "RhombilleGridComponent.h"
 
 namespace dae {
 	class LevelComponent : public BaseComponent {
@@ -15,6 +16,8 @@ namespace dae {
 		// Pause an unpause are used for animations
 		void PauseLevel();
 		void UnpauseLevel();
+
+		void ResetLevel();
 
 		bool LevelPaused() const;
 
@@ -34,5 +37,7 @@ namespace dae {
 		bool m_Paused{};
 
 		Subject m_Subject{};
+
+		RhombilleGridComponent* m_pRhombilleGrid{};
 	};
 }

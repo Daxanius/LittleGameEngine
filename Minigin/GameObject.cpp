@@ -55,13 +55,15 @@ dae::GameObject* dae::GameObject::GetParent() {
 
 void dae::GameObject::FixedUpdate() {
 	for (auto& component : m_components) {
-		component->FixedUpdate();
+		if (component->IsEnabled()) {
+			component->FixedUpdate();
+		}
 	}
 }
 
 void dae::GameObject::Update(float deltaTime){
 	for (auto& component : m_components) {
-		if (!component->IsDestroyed()) {
+		if (!component->IsDestroyed() && component->IsEnabled()) {
 			component->Update(deltaTime);
 		}
 	}
@@ -70,13 +72,17 @@ void dae::GameObject::Update(float deltaTime){
 
 	// Run the post-update for all components
 	for (auto& component : m_components) {
-		component->PostUpdate();
+		if (component->IsEnabled()) {
+			component->PostUpdate();
+		}
 	}
 }
 
 void dae::GameObject::Render() const {
 	for (const auto& component : m_components) {
-		component->Render();
+		if (component->IsEnabled()) {
+			component->Render();
+		}
 	}
 }
 
@@ -102,6 +108,18 @@ bool dae::GameObject::IsChild(GameObject* pObj) const {
 	}
 
 	return false;
+}
+
+bool dae::GameObject::IsEnabled() const {
+	return m_enabled;
+}
+
+void dae::GameObject::Disable() {
+	m_enabled = false;
+}
+
+void dae::GameObject::Enable() {
+	m_enabled = true;
 }
 
 std::vector<dae::GameObject*>& dae::GameObject::GetChildren() {

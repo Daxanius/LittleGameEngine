@@ -10,6 +10,7 @@
 #include "InputManager.h"
 #include "MoveCommand.h"
 #include "RepeatingTextureComponent.h"
+#include "RhombilleGridAnimationComponent.h"
 #include "LivesObserver.h"
 #include "EnemySpawnerComponent.h"
 #include "ScoreComponent.h"
@@ -22,6 +23,7 @@ dae::SinglePlayerGameState::SinglePlayerGameState() : AbstractGameState(), m_pSc
 	auto mapObject{ std::make_shared<GameObject>(Transform((640 / 2) - 32, 75)) };
 	auto pRhombileGridComponent{ mapObject->AddComponent<RhombilleGridComponent>("Qbert Cubes.png", 32, 32, 7, 2.f) };
 	auto pLevelComponent{ mapObject->AddComponent<LevelComponent>() };
+	auto pGridAnimationComponent{ mapObject->AddComponent<RhombilleGridAnimationComponent>(2.f, 4) };
 
 	auto livesObject{ std::make_shared<GameObject>(Transform{ 10.f, 100.f }) };
 	auto pLivesComponent{ livesObject->AddComponent<LivesComponent>(3) };
@@ -46,7 +48,7 @@ dae::SinglePlayerGameState::SinglePlayerGameState() : AbstractGameState(), m_pSc
 
 	mapObject->AddComponent<EnemySpawnerComponent>(m_pPlayerMovementComponent, pLevelComponent, 10.f);
 
-	auto movementObserver{ std::make_shared<PlayerMovementObserver>(pQbertSpriteComponent, pRhombileGridComponent, pLivesComponent, pScoreComponent, pLevelComponent) };
+	auto movementObserver{ std::make_shared<PlayerMovementObserver>(pQbertSpriteComponent, pRhombileGridComponent, pLivesComponent, pScoreComponent, pLevelComponent, pGridAnimationComponent) };
 	m_pPlayerMovementComponent->GetSubject().AddObserver(std::static_pointer_cast<Observer>(movementObserver));
 	m_pPlayerMovementComponent->GetSubject().AddObserver(std::static_pointer_cast<Observer>(Qbert::GetInstance().GetSoundObserver()));
 

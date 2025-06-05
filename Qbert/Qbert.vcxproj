@@ -168,6 +168,7 @@
   </ItemDefinitionGroup>
   <ItemGroup>
     <ClCompile Include="AbstractCoilyState.cpp" />
+    <ClCompile Include="AnimationObserver.cpp" />
     <ClCompile Include="ChangeCoilyStateCommand.cpp" />
     <ClCompile Include="ChangeGameStateCommand.cpp" />
     <ClCompile Include="CoilyComponent.cpp" />
@@ -187,10 +188,10 @@
     <ClCompile Include="MenuCommand.cpp" />
     <ClCompile Include="MenuGameState.cpp" />
     <ClCompile Include="MoveCommand.cpp" />
-    <ClCompile Include="PlayerComponent.cpp" />
     <ClCompile Include="PlayerMovementObserver.cpp" />
     <ClCompile Include="Qbert.cpp" />
     <ClCompile Include="RepeatingTextureComponent.cpp" />
+    <ClCompile Include="RhombilleGridAnimationComponent.cpp" />
     <ClCompile Include="RhombilleGridComponent.cpp" />
     <ClCompile Include="ScoreComponent.cpp" />
     <ClCompile Include="LevelObserver.cpp" />
@@ -201,6 +202,7 @@
   <ItemGroup>
     <ClInclude Include="AbstractCoilyState.h" />
     <ClInclude Include="AbstractGameState.h" />
+    <ClInclude Include="AnimationObserver.h" />
     <ClInclude Include="ChangeCoilyStateCommand.h" />
     <ClInclude Include="ChangeGameStateCommand.h" />
     <ClInclude Include="CoilyComponent.h" />
@@ -219,10 +221,10 @@
     <ClInclude Include="MenuCommand.h" />
     <ClInclude Include="MenuGameState.h" />
     <ClInclude Include="MoveCommand.h" />
-    <ClInclude Include="PlayerComponent.h" />
     <ClInclude Include="PlayerMovementObserver.h" />
     <ClInclude Include="Qbert.h" />
     <ClInclude Include="RepeatingTextureComponent.h" />
+    <ClInclude Include="RhombilleGridAnimationComponent.h" />
     <ClInclude Include="RhombilleGridComponent.h" />
     <ClInclude Include="ScoreComponent.h" />
     <ClInclude Include="LevelObserver.h" />

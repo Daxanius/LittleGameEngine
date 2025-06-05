@@ -81,9 +81,6 @@
     <ClCompile Include="CoilyComponent.cpp">
       <Filter>Source\Components</Filter>
     </ClCompile>
-    <ClCompile Include="PlayerComponent.cpp">
-      <Filter>Source\Components</Filter>
-    </ClCompile>
     <ClCompile Include="MenuGameState.cpp">
       <Filter>Source\States\Game</Filter>
     </ClCompile>
@@ -112,6 +109,12 @@
       <Filter>Source\Observers</Filter>
     </ClCompile>
     <ClCompile Include="LevelObserver.cpp">
+      <Filter>Source\Observers</Filter>
+    </ClCompile>
+    <ClCompile Include="RhombilleGridAnimationComponent.cpp">
+      <Filter>Source\Components</Filter>
+    </ClCompile>
+    <ClCompile Include="AnimationObserver.cpp">
       <Filter>Source\Observers</Filter>
     </ClCompile>
   </ItemGroup>
@@ -170,9 +173,6 @@
     <ClInclude Include="CoilyComponent.h">
       <Filter>Source\Components</Filter>
     </ClInclude>
-    <ClInclude Include="PlayerComponent.h">
-      <Filter>Source\Components</Filter>
-    </ClInclude>
     <ClInclude Include="AbstractGameState.h">
       <Filter>Source\States\Game</Filter>
     </ClInclude>
@@ -204,6 +204,12 @@
       <Filter>Source\Observers</Filter>
     </ClInclude>
     <ClInclude Include="LevelObserver.h">
+      <Filter>Source\Observers</Filter>
+    </ClInclude>
+    <ClInclude Include="RhombilleGridAnimationComponent.h">
+      <Filter>Source\Components</Filter>
+    </ClInclude>
+    <ClInclude Include="AnimationObserver.h">
       <Filter>Source\Observers</Filter>
     </ClInclude>
   </ItemGroup>

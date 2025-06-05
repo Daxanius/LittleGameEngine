@@ -6,7 +6,7 @@ dae::RhombilleGridComponent::RhombilleGridComponent(GameObject& pOwner, const st
 	: BaseComponent(pOwner), m_tileWidth(tileWidth), m_tileHeight(tileHeight), m_rows(rows), m_scale(scale), m_variant() {
 	m_pTexture = ResourceManager::GetInstance().LoadTexture(texturePath);
 
-	m_variant = 1;
+	m_variant = 0;
 
 	m_tiles.reserve(rows);
 
@@ -44,9 +44,7 @@ void dae::RhombilleGridComponent::Render() {
 }
 
 void dae::RhombilleGridComponent::SetVariant(int variant) {
-	if (m_variant > 0) {
-		m_variant = variant;
-	}
+	m_variant = variant;
 }
 
 int dae::RhombilleGridComponent::GetVariant() const {

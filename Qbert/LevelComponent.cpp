@@ -2,6 +2,7 @@
 #include "hash.h"
 
 dae::LevelComponent::LevelComponent(GameObject& pOwner) : BaseComponent(pOwner) {
+	m_pRhombilleGrid = GetOwner().GetComponent<RhombilleGridComponent>();
 }
 
 void dae::LevelComponent::NextRound() {
@@ -39,6 +40,10 @@ void dae::LevelComponent::PauseLevel() {
 
 void dae::LevelComponent::UnpauseLevel() {
 	m_Paused = false;
+}
+
+void dae::LevelComponent::ResetLevel() {
+	m_pRhombilleGrid->SetAllStates(0);
 }
 
 bool dae::LevelComponent::LevelPaused() const {

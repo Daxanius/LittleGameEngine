@@ -17,6 +17,10 @@ namespace dae {
 
 		GameObject& GetOwner();
 
+		void Enable();
+		void Disable();
+		bool IsEnabled() const;
+
 		void Destroy();
 		[[nodiscard]] bool IsDestroyed() const;
 	protected:
@@ -25,5 +29,6 @@ namespace dae {
 	private:
 		GameObject* m_pOwner;
 		bool m_destroyed{ false };
+		bool m_enabled{ true };
 	};
 }

@@ -31,7 +31,9 @@ void dae::Scene::FixedUpdate() {
 	ProcessPendingChanges();
 
 	for (auto& object : m_objects) {
-		object->FixedUpdate();
+		if (object->IsEnabled()) {
+			object->FixedUpdate();
+		}
 	}
 }
 
@@ -39,13 +41,17 @@ void Scene::Update(float deltaTime) {
 	ProcessPendingChanges();
 
 	for(auto& object : m_objects) {
-		object->Update(deltaTime);
+		if (object->IsEnabled()) {
+			object->Update(deltaTime);
+		}
 	}
 }
 
 void Scene::Render() const {
 	for (const auto& object : m_objects) {
-		object->Render();
+		if (object->IsEnabled()) {
+			object->Render();
+		}
 	}
 }
 

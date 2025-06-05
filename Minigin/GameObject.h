@@ -37,6 +37,9 @@ namespace dae
 		const Transform& GetWorldTransform();
 
 		bool IsChild(GameObject* pObj) const;
+		bool IsEnabled() const;
+		void Disable();
+		void Enable();
 
 		std::vector<GameObject*>& GetChildren();
 
@@ -82,6 +85,7 @@ namespace dae
 		Transform m_localTransform{};
 		Transform m_worldTransform{};
 		bool m_transformDirty{ true };
+		bool m_enabled{ true };
 
 		// GameObjects won't have that many components, thus having a single vector of BaseComponents is fine.
 		std::vector<std::unique_ptr<BaseComponent>> m_components;
