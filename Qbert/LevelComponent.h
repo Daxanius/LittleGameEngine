@@ -1,6 +1,5 @@
 #pragma once
 #include <BaseComponent.h>
-#include "GridMovementComponent.h"
 #include "Subject.h"
 
 namespace dae {
@@ -12,6 +11,12 @@ namespace dae {
 
 		int GetRound() const;
 		int GetLevel() const;
+
+		// Pause an unpause are used for animations
+		void PauseLevel();
+		void UnpauseLevel();
+
+		bool LevelPaused() const;
 
 		Subject& GetSubject();
 
@@ -25,6 +30,8 @@ namespace dae {
 		// Keeping track of them rounds and levels
 		int m_Round{};
 		int m_Level{};
+
+		bool m_Paused{};
 
 		Subject m_Subject{};
 	};

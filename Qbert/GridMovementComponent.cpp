@@ -1,11 +1,15 @@
 #include "GridMovementComponent.h"
 #include "hash.h"
 
-dae::GridMovementComponent::GridMovementComponent(GameObject& pOwner, RhombilleGridComponent* pRhombilleGrid, int row, int col, float jumpDuration) 
-	: BaseComponent(pOwner), m_pRhombilleGrid(pRhombilleGrid), m_row(row), m_col(col), m_jumpDuration(jumpDuration) {
+dae::GridMovementComponent::GridMovementComponent(GameObject& pOwner, RhombilleGridComponent* pRhombilleGrid, LevelComponent* pLevelComponent, int row, int col, float jumpDuration) 
+	: BaseComponent(pOwner), m_pRhombilleGrid(pRhombilleGrid), m_pLevelComponent(pLevelComponent), m_row(row), m_col(col), m_jumpDuration(jumpDuration) {
 }
 
 void dae::GridMovementComponent::Update(float deltaTime) {
+	if (m_pLevelComponent->LevelPaused()) {
+		return;
+	}
+
 	// If not jumping, just snap to position (e.g. at start)
 	if (!m_isJumping) {
 		glm::vec2 standingPosition{ ToStandingPosition(m_row, m_col) };
@@ -56,6 +60,10 @@ int dae::GridMovementComponent::GetTargetCol() const {
 }
 
 void dae::GridMovementComponent::MoveUp() {
+	if (m_pLevelComponent->LevelPaused()) {
+		return;
+	}
+
 	if (StartJump(m_row - 1, m_col)) {
 		Event event{ make_sdbm_hash("move_up") };
 		m_subject.Notify(event);
@@ -63,6 +71,10 @@ void dae::GridMovementComponent::MoveUp() {
 }
 
 void dae::GridMovementComponent::MoveDown() {
+	if (m_pLevelComponent->LevelPaused()) {
+		return;
+	}
+
 	if (StartJump(m_row + 1, m_col)) {
 		Event event{ make_sdbm_hash("move_down") };
 		m_subject.Notify(event);
@@ -70,6 +82,10 @@ void dae::GridMovementComponent::MoveDown() {
 }
 
 void dae::GridMovementComponent::MoveLeft() {
+	if (m_pLevelComponent->LevelPaused()) {
+		return;
+	}
+
 	if (StartJump(m_row - 1, m_col - 1)) {
 		Event event{ make_sdbm_hash("move_left") };
 		m_subject.Notify(event);
@@ -77,6 +93,10 @@ void dae::GridMovementComponent::MoveLeft() {
 }
 
 void dae::GridMovementComponent::MoveRight() {
+	if (m_pLevelComponent->LevelPaused()) {
+		return;
+	}
+
 	if (StartJump(m_row + 1, m_col + 1)) {
 		Event event{ make_sdbm_hash("move_right") };
 		m_subject.Notify(event);
@@ -84,6 +104,10 @@ void dae::GridMovementComponent::MoveRight() {
 }
 
 void dae::GridMovementComponent::MoveUpLeft() {
+	if (m_pLevelComponent->LevelPaused()) {
+		return;
+	}
+
 	if (StartJump(m_row - 1, m_col - 1)) {
 		Event event{ make_sdbm_hash("move_up_left") };
 		m_subject.Notify(event);
@@ -91,6 +115,10 @@ void dae::GridMovementComponent::MoveUpLeft() {
 }
 
 void dae::GridMovementComponent::MoveUpRight() {
+	if (m_pLevelComponent->LevelPaused()) {
+		return;
+	}
+
 	if (StartJump(m_row - 1, m_col)) {
 		Event event{ make_sdbm_hash("move_up_right") };
 		m_subject.Notify(event);
@@ -98,6 +126,10 @@ void dae::GridMovementComponent::MoveUpRight() {
 }
 
 void dae::GridMovementComponent::MoveDownLeft() {
+	if (m_pLevelComponent->LevelPaused()) {
+		return;
+	}
+
 	if (StartJump(m_row + 1, m_col)) {
 		Event event{ make_sdbm_hash("move_down_left") };
 		m_subject.Notify(event);
@@ -105,6 +137,10 @@ void dae::GridMovementComponent::MoveDownLeft() {
 }
 
 void dae::GridMovementComponent::MoveDownRight() {
+	if (m_pLevelComponent->LevelPaused()) {
+		return;
+	}
+
 	if (StartJump(m_row + 1, m_col + 1)) {
 		Event event{ make_sdbm_hash("move_down_right") };
 		m_subject.Notify(event);

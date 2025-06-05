@@ -41,6 +41,7 @@ void dae::PlayerMovementObserver::Notify(Event event) {
 				}
 			} else {
 				m_pLivesComponent->Kill();
+				m_pLevelComponent->PauseLevel();
 			}
 			break;
 	}

@@ -33,6 +33,18 @@ int dae::LevelComponent::GetLevel() const {
 	return m_Level;
 }
 
+void dae::LevelComponent::PauseLevel() {
+	m_Paused = true;
+}
+
+void dae::LevelComponent::UnpauseLevel() {
+	m_Paused = false;
+}
+
+bool dae::LevelComponent::LevelPaused() const {
+	return m_Paused;
+}
+
 dae::Subject& dae::LevelComponent::GetSubject() {
 	return m_Subject;
 }

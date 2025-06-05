@@ -8,8 +8,8 @@
 #include "GridNavigationComponent.h"
 #include "Scene.h"
 
-dae::EnemySpawnerComponent::EnemySpawnerComponent(GameObject& pOwner, GridMovementComponent* pTargetComponent, float spawnInterval) 
-	: BaseComponent(pOwner), m_pTargetComponent(pTargetComponent), m_spawnInterval(spawnInterval), m_timeUntilSpawn(m_spawnInterval) {
+dae::EnemySpawnerComponent::EnemySpawnerComponent(GameObject& pOwner, GridMovementComponent* pTargetComponent, LevelComponent* pLevelComponent, float spawnInterval) 
+	: BaseComponent(pOwner), m_pTargetComponent(pTargetComponent), m_pLevelComponent(pLevelComponent), m_spawnInterval(spawnInterval), m_timeUntilSpawn(m_spawnInterval) {
 	m_pRhombilleGridComponent = GetOwner().GetComponent<RhombilleGridComponent>();
 }
 
@@ -28,7 +28,7 @@ void dae::EnemySpawnerComponent::SpawnEnemy() {
 void dae::EnemySpawnerComponent::SpawnCoily() {
 	auto coilyObject{ std::make_shared<GameObject>(Transform{ 0.f, 0.f }) };
 	auto coilySprite{ coilyObject->AddComponent<SpriteComponent>("Coily Spritesheet.png", 16, 32, 2.f) };
-	auto movementComponent{ coilyObject->AddComponent<GridMovementComponent>(m_pRhombilleGridComponent, 0, 0, 0.5f) };
+	auto movementComponent{ coilyObject->AddComponent<GridMovementComponent>(m_pRhombilleGridComponent, m_pLevelComponent, 0, 0, 0.5f) };
 	coilyObject->AddComponent<GridNavigationComponent>(0.5f);
 	auto coilyComponent{ coilyObject->AddComponent<CoilyComponent>() };
 

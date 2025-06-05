@@ -1,12 +1,13 @@
 #pragma once
 #include <BaseComponent.h>
 #include "RhombilleGridComponent.h"
+#include "LevelComponent.h"
 #include "Subject.h"
 
 namespace dae {
 	class GridMovementComponent : public BaseComponent {
 	public:
-		GridMovementComponent(GameObject& pOwner, RhombilleGridComponent* pRhombilleGrid, int row = 0, int col = 0, float jumpDuration = 0.2f);
+		GridMovementComponent(GameObject& pOwner, RhombilleGridComponent* pRhombilleGrid, LevelComponent* pLevelComponent, int row = 0, int col = 0, float jumpDuration = 0.2f);
 
 		struct ArriveEventData {
 			int row;
@@ -47,6 +48,7 @@ namespace dae {
 		static constexpr float JUMP_HEIGHT{ 10.f };
 
 		RhombilleGridComponent* m_pRhombilleGrid;
+		LevelComponent* m_pLevelComponent;
 
 		// Grid position
 		int m_row{};
