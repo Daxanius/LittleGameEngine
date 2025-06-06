@@ -19,7 +19,7 @@ namespace dae {
 		void PauseLevel();
 		void UnpauseLevel();
 
-		void ResetLevel();
+		void ResetLevel(bool resetState = false);
 
 		bool LevelPaused() const;
 		bool InResetAnimation() const;
@@ -48,6 +48,7 @@ namespace dae {
 		bool m_Paused{};
 
 		bool m_InResetAnimation{};
+		bool m_ShouldResetState{};
 
 		Subject m_Subject{};
 

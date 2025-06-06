@@ -43,8 +43,9 @@ void dae::LevelComponent::UnpauseLevel() {
 	m_Paused = false;
 }
 
-void dae::LevelComponent::ResetLevel() {
+void dae::LevelComponent::ResetLevel(bool resetState) {
 	m_InResetAnimation = true;
+	m_ShouldResetState = resetState;
 	m_resetTimeLeft = m_resetTime;
 
 	for (auto player : m_Players) {
@@ -79,7 +80,10 @@ void dae::LevelComponent::Update(float deltaTime) {
 
 	if (m_resetTimeLeft <= 0.f) {
 		m_InResetAnimation = false;
-		m_pRhombilleGrid->SetAllStates(0);
+
+		if (m_ShouldResetState) {
+			m_pRhombilleGrid->SetAllStates(0);
+		}
 
 		for (auto player : m_Players) {
 			player->GetOwner().Enable();

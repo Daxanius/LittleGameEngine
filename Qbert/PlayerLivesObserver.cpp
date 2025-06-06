@@ -1,8 +1,8 @@
 #include "PlayerLivesObserver.h"
 #include "hash.h"
 
-dae::PlayerLivesObserver::PlayerLivesObserver(RepeatingTextureComponent* pLivesTextureComponent, GameObject* pTextBalloonGameObject, LevelComponent* pLevelComponent) 
-	: m_pLivesTextureComponent(pLivesTextureComponent), m_pTextBalloonGameObject(pTextBalloonGameObject), m_pLevelComponent(pLevelComponent) {
+dae::PlayerLivesObserver::PlayerLivesObserver(RepeatingTextureComponent* pLivesTextureComponent, PlayerComponent* pPlayerComponent, LevelComponent* pLevelComponent) 
+	: m_pLivesTextureComponent(pLivesTextureComponent), m_pPlayerComponent(pPlayerComponent), m_pLevelComponent(pLevelComponent) {
 }
 
 void dae::PlayerLivesObserver::Notify(Event event) {
@@ -11,7 +11,7 @@ void dae::PlayerLivesObserver::Notify(Event event) {
 		{
 			int lives = std::any_cast<int>(event.data);
 			m_pLivesTextureComponent->SetRows(lives);
-			m_pTextBalloonGameObject->Enable();
+			m_pPlayerComponent->Kill();
 			m_pLevelComponent->ResetLevel();
 			break;
 		}

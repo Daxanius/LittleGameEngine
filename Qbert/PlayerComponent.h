@@ -2,6 +2,7 @@
 #include <BaseComponent.h>
 #include "GameObject.h"
 #include "GridMovementComponent.h"
+#include "SpriteComponent.h"
 #include "LivesComponent.h"
 #include <memory>
 
@@ -28,9 +29,10 @@ namespace dae {
 		void Render() override {};
 	private:
 		GridMovementComponent* m_pGridMovementComponent{};
+		SpriteComponent* m_pSpriteComponent{};
 		LivesComponent* m_pLivesComponent{};
 		GameObject* m_pTextBalloonGo{};
 
-		bool m_died;
+		bool m_died{};
 	};
 }

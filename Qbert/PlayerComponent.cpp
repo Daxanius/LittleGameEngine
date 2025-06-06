@@ -1,8 +1,10 @@
 #include "PlayerComponent.h"
+#include "hash.h"
 
 dae::PlayerComponent::PlayerComponent(GameObject& pOwner) : BaseComponent(pOwner) {
 	m_pGridMovementComponent = GetComponent<GridMovementComponent>();
 	m_pLivesComponent = GetComponent<LivesComponent>();
+	m_pSpriteComponent = GetComponent<SpriteComponent>();
 	m_pTextBalloonGo =	GetOwner().GetChildren().front(); // First child is the text balloon
 }
 
@@ -29,6 +31,7 @@ void dae::PlayerComponent::Reset() {
 		m_pGridMovementComponent->GoToPrevPosition();
 	} else {
 		m_pGridMovementComponent->ResetPosition();
+		m_pSpriteComponent->SetState(make_sdbm_hash("right"));
 	}
 }
 
