@@ -15,6 +15,11 @@ namespace dae {
 		// std::any already provides "empty" state, meaning it can be optional
 		std::any data;
 
+		template<typename DataType>
+		[[nodiscard]] DataType GetValue() {
+			return std::any_cast<DataType>(data);
+		};
+
 		explicit Event(EventId id) : id(id) {};
 	};
 }

@@ -78,13 +78,21 @@ dae::SinglePlayerGameState::SinglePlayerGameState() : AbstractGameState(), m_pSc
 	auto scoreObject{ std::make_shared<GameObject>(Transform(10.f, 20.f)) };
 	auto pScoreTextComponent{ scoreObject->AddComponent<TextComponent>("SCORE: 0",  Qbert::GetInstance().GetFont()) };
 
-	auto levelObserver{ std::make_shared<LevelObserver>(pScoreTextComponent) };
+	auto roundObject{ std::make_shared<GameObject>(Transform(420.f, 50.f)) };
+	auto pRoundTextComponent{ roundObject->AddComponent<TextComponent>("ROUND: 1",  Qbert::GetInstance().GetFont()) };
+
+	auto levelObject{ std::make_shared<GameObject>(Transform(420.f, 75.f)) };
+	auto pLevelTextComponent{ levelObject->AddComponent<TextComponent>("LEVEL: 1",  Qbert::GetInstance().GetFont()) };
+
+	auto levelObserver{ std::make_shared<LevelObserver>(pScoreTextComponent, pRoundTextComponent, pLevelTextComponent) };
 	pScoreComponent->GetSubject().AddObserver(std::static_pointer_cast<Observer>(levelObserver));
 	pLevelComponent->GetSubject().AddObserver(std::static_pointer_cast<Observer>(levelObserver));
 
 	m_pScene->Add(livesObject);
 	m_pScene->Add(mapObject);
 	m_pScene->Add(nextTextObject);
+	m_pScene->Add(roundObject);
+	m_pScene->Add(levelObject);
 	m_pScene->Add(nextObject);
 	m_pScene->Add(qbertObject);
 	m_pScene->Add(textBalloonObject);
