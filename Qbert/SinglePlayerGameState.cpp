@@ -56,8 +56,6 @@ dae::SinglePlayerGameState::SinglePlayerGameState() : AbstractGameState(), m_pSc
 
 	pRepeatingTexturecomponent->SetRows(pLivesComponent->GetLives()); // Set starting value
 
-	pLevelComponent->RegisterPlayer(pPlayerComponent);
-
 	// Add the lives observer which will update the repeating texture component
 	pLivesComponent->GetSubject().AddObserver(std::static_pointer_cast<Observer>(std::make_shared<PlayerLivesObserver>(pRepeatingTexturecomponent, textBalloonObject.get(), pLevelComponent)));
 
@@ -68,7 +66,10 @@ dae::SinglePlayerGameState::SinglePlayerGameState() : AbstractGameState(), m_pSc
 
 	pQbertSpriteComponent->SetState(make_sdbm_hash("right"));
 
-	mapObject->AddComponent<EnemySpawnerComponent>(m_pPlayerMovementComponent, pLevelComponent, 10.f);
+	auto pEnemySpawner{ mapObject->AddComponent<EnemySpawnerComponent>(m_pPlayerMovementComponent, pLevelComponent, 10.f) };
+
+	pLevelComponent->RegisterPlayer(pPlayerComponent);
+	pLevelComponent->RegisterSpawner(pEnemySpawner);
 
 	auto movementObserver{ std::make_shared<PlayerMovementObserver>(pQbertSpriteComponent, pRhombileGridComponent, pLivesComponent, pScoreComponent, pLevelComponent, pGridAnimationComponent) };
 	m_pPlayerMovementComponent->GetSubject().AddObserver(std::static_pointer_cast<Observer>(movementObserver));

@@ -3,6 +3,7 @@
 #include "Subject.h"
 #include "RhombilleGridComponent.h"
 #include "PlayerComponent.h"
+#include "EnemySpawnerComponent.h"
 
 namespace dae {
 	class LevelComponent : public BaseComponent {
@@ -24,6 +25,7 @@ namespace dae {
 		bool InResetAnimation() const;
 
 		void RegisterPlayer(PlayerComponent* pPlayer);
+		void RegisterSpawner(EnemySpawnerComponent* pSpawner);
 
 		Subject& GetSubject();
 
@@ -50,6 +52,7 @@ namespace dae {
 		Subject m_Subject{};
 
 		RhombilleGridComponent* m_pRhombilleGrid{};
+		EnemySpawnerComponent* m_pEnemySpawner{};
 
 		std::vector<PlayerComponent*> m_Players;
 	};

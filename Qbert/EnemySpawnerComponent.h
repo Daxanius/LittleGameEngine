@@ -2,12 +2,15 @@
 #include "BaseComponent.h"
 #include "RhombilleGridComponent.h"
 #include "GridMovementComponent.h"
-#include "LevelComponent.h"
 
 namespace dae {
+	class LevelComponent;
+
 	class EnemySpawnerComponent : public BaseComponent {
 	public:
 		EnemySpawnerComponent(GameObject& pOwner, GridMovementComponent* pTargetComponent, LevelComponent* pLevelComponent, float spawnInterval);
+
+		void KillAllEnemies();
 
 		void FixedUpdate() override {};
 		void Update(float deltaTime) override;
@@ -19,11 +22,13 @@ namespace dae {
 
 		void SpawnEnemy();
 
-		void SpawnCoily();
+		GameObject* SpawnCoily();
 
 		RhombilleGridComponent* m_pRhombilleGridComponent{};
 		GridMovementComponent* m_pTargetComponent{};
 		LevelComponent* m_pLevelComponent{};
+
+		std::vector<GameObject*> m_spawnedEnemies{};
 	};
 }
 

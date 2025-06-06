@@ -76,6 +76,9 @@ namespace dae
 
 			return it != m_components.end();
 		}
+
+		void Destroy();
+		[[nodiscard]] bool IsDestroyed() const;
 	private:
 		void MarkTransformDirty();
 		void UpdateWorldTransform();
@@ -85,6 +88,7 @@ namespace dae
 		Transform m_localTransform{};
 		Transform m_worldTransform{};
 		bool m_transformDirty{ true };
+		bool m_destroyed{ false };
 		bool m_enabled{ true };
 
 		// GameObjects won't have that many components, thus having a single vector of BaseComponents is fine.

@@ -152,3 +152,14 @@ void dae::GameObject::RemoveDestroyedComponents() {
 		return component->IsDestroyed();
 	});
 }
+
+void dae::GameObject::Destroy() {
+	m_destroyed = true;
+	for(auto& component : m_components) {
+		component->Destroy(); // Of course, destroy all components relating to the game object
+	}
+}
+
+bool dae::GameObject::IsDestroyed() const {
+	return m_destroyed;
+}

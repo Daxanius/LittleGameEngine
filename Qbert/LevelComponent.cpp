@@ -64,6 +64,10 @@ void dae::LevelComponent::RegisterPlayer(PlayerComponent* pPlayer) {
 	m_Players.emplace_back(pPlayer);
 }
 
+void dae::LevelComponent::RegisterSpawner(EnemySpawnerComponent* pSpawner) {
+	m_pEnemySpawner = pSpawner;
+}
+
 dae::Subject& dae::LevelComponent::GetSubject() {
 	return m_Subject;
 }
@@ -80,6 +84,10 @@ void dae::LevelComponent::Update(float deltaTime) {
 		for (auto player : m_Players) {
 			player->GetOwner().Enable();
 			player->Reset(); // Reset the player component
+		}
+
+		if (m_pEnemySpawner != nullptr) {
+			m_pEnemySpawner->KillAllEnemies();
 		}
 	}
 

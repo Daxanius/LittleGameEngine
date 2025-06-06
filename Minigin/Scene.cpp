@@ -45,6 +45,8 @@ void Scene::Update(float deltaTime) {
 			object->Update(deltaTime);
 		}
 	}
+
+	RemoveDestroyedObjects();
 }
 
 void Scene::Render() const {
@@ -65,4 +67,12 @@ void dae::Scene::ProcessPendingChanges() {
 		m_objects.erase(std::remove(m_objects.begin(), m_objects.end(), objToRemove), m_objects.end());
 	}
 	m_objectsToRemove.clear();
+}
+
+void dae::Scene::RemoveDestroyedObjects() {
+	for (const auto& object : m_objects) {
+		if (object->IsDestroyed()) {
+			Remove(object); // Add the object to the removal queue to be removed from the scene
+		}
+	}
 }
