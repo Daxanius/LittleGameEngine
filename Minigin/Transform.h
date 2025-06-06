@@ -8,9 +8,11 @@ namespace dae
 	public:
 		Transform();
 		Transform(float x, float y, float z = 0.f);
+		Transform(const glm::vec2& position);
+		Transform(const glm::vec3& position);
 
 		void SetPosition(float x, float y, float z);
-		void SetPosition(glm::vec3 position);
+		void SetPosition(const glm::vec3& position);
 
 		const glm::vec3& GetPosition() const { return m_position; };
 

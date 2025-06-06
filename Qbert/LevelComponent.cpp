@@ -1,7 +1,8 @@
 #include "LevelComponent.h"
+#include "PlayerComponent.h"
 #include "hash.h"
 
-dae::LevelComponent::LevelComponent(GameObject& pOwner) : BaseComponent(pOwner) {
+dae::LevelComponent::LevelComponent(GameObject& pOwner, float resetTime) : BaseComponent(pOwner), m_resetTime(resetTime) {
 	m_pRhombilleGrid = GetOwner().GetComponent<RhombilleGridComponent>();
 }
 
@@ -43,13 +44,48 @@ void dae::LevelComponent::UnpauseLevel() {
 }
 
 void dae::LevelComponent::ResetLevel() {
-	m_pRhombilleGrid->SetAllStates(0);
+	m_InResetAnimation = true;
+	m_resetTimeLeft = m_resetTime;
+
+	for (auto player : m_Players) {
+		player->Disable();
+	}
 }
 
 bool dae::LevelComponent::LevelPaused() const {
-	return m_Paused;
+	return m_Paused || m_InResetAnimation;
+}
+
+bool dae::LevelComponent::InResetAnimation() const {
+	return m_InResetAnimation;
+}
+
+void dae::LevelComponent::RegisterPlayer(PlayerComponent* pPlayer) {
+	m_Players.emplace_back(pPlayer);
 }
 
 dae::Subject& dae::LevelComponent::GetSubject() {
 	return m_Subject;
+}
+
+void dae::LevelComponent::Update(float deltaTime) {
+	if (!m_InResetAnimation) {
+		return;
+	}
+
+	if (m_resetTimeLeft <= 0.f) {
+		m_InResetAnimation = false;
+		m_pRhombilleGrid->SetAllStates(0);
+
+		for (auto player : m_Players) {
+			player->GetOwner().Enable();
+			player->Reset(); // Reset the player component
+		}
+	}
+
+	m_resetTimeLeft -= deltaTime;
+}
+
+const std::vector<dae::PlayerComponent*>& dae::LevelComponent::GetPlayers() const {
+	return m_Players;
 }

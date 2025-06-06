@@ -12,6 +12,7 @@
 #include "MoveCommand.h"
 #include "RepeatingTextureComponent.h"
 #include "RhombilleGridAnimationComponent.h"
+#include "PlayerComponent.h"
 #include "ChangeToComponent.h"
 #include "PlayerLivesObserver.h"
 #include "EnemySpawnerComponent.h"
@@ -25,14 +26,8 @@
 dae::SinglePlayerGameState::SinglePlayerGameState() : AbstractGameState(), m_pScene(std::make_shared<Scene>("Level")) {
 	auto mapObject{ std::make_shared<GameObject>(Transform((640 / 2) - 32, 75)) };
 	auto pRhombileGridComponent{ mapObject->AddComponent<RhombilleGridComponent>("Qbert Cubes.png", 32, 32, 7, 2.f) };
-	auto pLevelComponent{ mapObject->AddComponent<LevelComponent>() };
+	auto pLevelComponent{ mapObject->AddComponent<LevelComponent>(2.f) };
 	auto pGridAnimationComponent{ mapObject->AddComponent<RhombilleGridAnimationComponent>(2.f, 4) };
-
-	auto livesObject{ std::make_shared<GameObject>(Transform{ 10.f, 100.f }) };
-	auto pLivesComponent{ livesObject->AddComponent<LivesComponent>(3) };
-	auto pRepeatingTexturecomponent{ livesObject->AddComponent<RepeatingTextureComponent>("Heart.png", 15, 14, 0, 0, 10.f, 2.f)};
-	pRepeatingTexturecomponent->SetCols(1); // We only need 1 column value
-	pRepeatingTexturecomponent->SetRows(pLivesComponent->GetLives()); // Set starting value
 
 	auto nextTextObject(std::make_shared<GameObject>(Transform(10.f, 66.f)));
 	nextTextObject->AddComponent<TextComponent>("CHANGE TO", dae::ResourceManager::GetInstance().LoadFont("Minecraft.ttf", 16));
@@ -41,9 +36,10 @@ dae::SinglePlayerGameState::SinglePlayerGameState() : AbstractGameState(), m_pSc
 	nextObject->AddComponent<ChangeToComponent>(pLevelComponent, "Color Icons Spritesheet.png", 14, 12, 2.f);
 
 	auto qbertObject{ std::make_shared<GameObject>() };
+	m_pPlayerMovementComponent = qbertObject->AddComponent<GridMovementComponent>(pRhombileGridComponent, pLevelComponent);
+	auto pLivesComponent{ qbertObject->AddComponent<LivesComponent>(3) };
 	auto pQbertSpriteComponent{ qbertObject->AddComponent<SpriteComponent>("Qbert P1 Spritesheet.png", 17, 17, 2.f) };
 	auto pScoreComponent{ qbertObject->AddComponent<ScoreComponent>() };
-	m_pPlayerMovementComponent = qbertObject->AddComponent<GridMovementComponent>(pRhombileGridComponent, pLevelComponent);
 
 	auto textBalloonObject{ std::make_shared<GameObject>() };
 	textBalloonObject->AddComponent<TextureComponent>("Qbert Curses.png", 1.f);
@@ -51,8 +47,19 @@ dae::SinglePlayerGameState::SinglePlayerGameState() : AbstractGameState(), m_pSc
 	textBalloonObject->SetLocalTransform(Transform(0.f, -30.f));
 	textBalloonObject->Disable();
 
+	auto pPlayerComponent{ qbertObject->AddComponent<PlayerComponent>() };
+
+	// Create a lives display for the player
+	auto livesObject{ std::make_shared<GameObject>(Transform{ 10.f, 100.f }) };
+	auto pRepeatingTexturecomponent{ livesObject->AddComponent<RepeatingTextureComponent>("Heart.png", 15, 14, 0, 0, 10.f, 2.f)};
+	pRepeatingTexturecomponent->SetCols(1); // We only need 1 column value
+
+	pRepeatingTexturecomponent->SetRows(pLivesComponent->GetLives()); // Set starting value
+
+	pLevelComponent->RegisterPlayer(pPlayerComponent);
+
 	// Add the lives observer which will update the repeating texture component
-	pLivesComponent->GetSubject().AddObserver(std::static_pointer_cast<Observer>(std::make_shared<PlayerLivesObserver>(pRepeatingTexturecomponent, textBalloonObject.get())));
+	pLivesComponent->GetSubject().AddObserver(std::static_pointer_cast<Observer>(std::make_shared<PlayerLivesObserver>(pRepeatingTexturecomponent, textBalloonObject.get(), pLevelComponent)));
 
 	pQbertSpriteComponent->AddState(make_sdbm_hash("up"), SpriteComponent::State{ 0, 0, 0 });
 	pQbertSpriteComponent->AddState(make_sdbm_hash("down"), SpriteComponent::State{ 3, 0, 0 });

@@ -1,4 +1,5 @@
 #include "GridMovementComponent.h"
+#include "LevelComponent.h"
 #include "hash.h"
 
 dae::GridMovementComponent::GridMovementComponent(GameObject& pOwner, RhombilleGridComponent* pRhombilleGrid, LevelComponent* pLevelComponent, int row, int col, float jumpDuration) 
@@ -27,9 +28,12 @@ void dae::GridMovementComponent::Update(float deltaTime) {
 	float arc = -4 * JUMP_HEIGHT * (t - 0.5f) * (t - 0.5f) + JUMP_HEIGHT;
 	pos.y -= arc;
 
-	GetOwner().SetLocalTransform(Transform{ pos.x, pos.y });
+	GetOwner().SetLocalTransform(pos);
 	if (t >= 1.f) {
 		m_isJumping = false;
+
+		m_prevRow = m_row;
+		m_prevCol = m_col;
 		m_row = m_targetRow;
 		m_col = m_targetCol;
 
@@ -51,12 +55,40 @@ int dae::GridMovementComponent::GetCol() const {
 	return m_col;
 }
 
+int dae::GridMovementComponent::GetPrevRow() const {
+	return m_prevRow;
+}
+
+int dae::GridMovementComponent::GetPrevCol() const {
+	return m_prevCol;
+}
+
 int dae::GridMovementComponent::GetTargetRow() const {
 	return m_targetRow;
 }
 
 int dae::GridMovementComponent::GetTargetCol() const {
 	return m_targetCol;
+}
+
+void dae::GridMovementComponent::GoToPrevPosition() {
+	m_isJumping = false;
+	m_row = m_prevRow;
+	m_col = m_prevCol;
+
+	auto pos = ToStandingPosition(m_row, m_col);
+	GetOwner().SetLocalTransform(pos);
+}
+
+void dae::GridMovementComponent::ResetPosition() {
+	m_isJumping = false;
+	m_row = 0;
+	m_col = 0;
+	m_prevRow = 0;
+	m_prevCol = 0;
+
+	auto pos = ToStandingPosition(m_row, m_col);
+	GetOwner().SetLocalTransform(pos);
 }
 
 void dae::GridMovementComponent::MoveUp() {

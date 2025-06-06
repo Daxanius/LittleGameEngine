@@ -2,11 +2,12 @@
 #include <BaseComponent.h>
 #include "Subject.h"
 #include "RhombilleGridComponent.h"
+#include "PlayerComponent.h"
 
 namespace dae {
 	class LevelComponent : public BaseComponent {
 	public:
-		LevelComponent(GameObject& pOwner);
+		LevelComponent(GameObject& pOwner, float resetTime);
 
 		void NextRound();
 
@@ -20,24 +21,36 @@ namespace dae {
 		void ResetLevel();
 
 		bool LevelPaused() const;
+		bool InResetAnimation() const;
+
+		void RegisterPlayer(PlayerComponent* pPlayer);
 
 		Subject& GetSubject();
 
 		void FixedUpdate() override {};
-		void Update(float) override {};
+		void Update(float deltaTime) override;
 		void PostUpdate() override {};
 		void Render() override {};
 
+		const std::vector<PlayerComponent*>& GetPlayers() const;
+
 		static constexpr int ROUNDS_PER_LEVEL{ 4 };
 	private:
+		float m_resetTime{};
+		float m_resetTimeLeft{};
+
 		// Keeping track of them rounds and levels
 		int m_Round{};
 		int m_Level{};
 
 		bool m_Paused{};
 
+		bool m_InResetAnimation{};
+
 		Subject m_Subject{};
 
 		RhombilleGridComponent* m_pRhombilleGrid{};
+
+		std::vector<PlayerComponent*> m_Players;
 	};
 }

@@ -63,7 +63,7 @@ namespace dae
 		ComponentType* AddComponent(Args&&... args) {
 			std::unique_ptr<ComponentType> component{ std::make_unique<ComponentType>(*this, std::forward<Args>(args)...) };
 			ComponentType* rComponent{ component.get() }; // Get a non-owning pointer
-			m_components.push_back(std::move(component));
+			m_components.emplace_back(std::move(component));
 			return rComponent; // Return a pointer to the component that was created
 		}
 

@@ -1,10 +1,11 @@
 #pragma once
 #include <BaseComponent.h>
 #include "RhombilleGridComponent.h"
-#include "LevelComponent.h"
 #include "Subject.h"
 
 namespace dae {
+	class LevelComponent;
+
 	class GridMovementComponent : public BaseComponent {
 	public:
 		GridMovementComponent(GameObject& pOwner, RhombilleGridComponent* pRhombilleGrid, LevelComponent* pLevelComponent, int row = 0, int col = 0, float jumpDuration = 0.2f);
@@ -22,8 +23,14 @@ namespace dae {
 		int GetRow() const;
 		int GetCol() const;
 
+		int GetPrevRow() const;
+		int GetPrevCol() const;
+
 		int GetTargetRow() const;
 		int GetTargetCol() const;
+
+		void GoToPrevPosition();
+		void ResetPosition();
 
 		void MoveUp();
 		void MoveDown();
@@ -53,6 +60,10 @@ namespace dae {
 		// Grid position
 		int m_row{};
 		int m_col{};
+
+		// Previous grid position
+		int m_prevRow{};
+		int m_prevCol{};
 
 		// Jump animation
 		bool m_isJumping{ false };
