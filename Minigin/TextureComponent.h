@@ -6,7 +6,7 @@
 namespace dae {
 	class TextureComponent final : public BaseComponent {
 	public:
-		TextureComponent(GameObject& pOwner, const std::string& filename);
+		TextureComponent(GameObject& pOwner, const std::string& filename, float scale = 1.f);
 
 		void FixedUpdate() override {};
 		void Update(float) override {};
@@ -14,5 +14,7 @@ namespace dae {
 		void PostUpdate() override {};
 	private:
 		std::shared_ptr<Texture2D> m_pTexture;
+
+		float m_scale;
 	};
 }

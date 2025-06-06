@@ -184,7 +184,8 @@
     <ClCompile Include="LevelComponent.cpp" />
     <ClCompile Include="LivesComponent.cpp" />
     <ClCompile Include="IncreaseScoreCommand.cpp" />
-    <ClCompile Include="LivesObserver.cpp" />
+    <ClCompile Include="PlayerComponent.cpp" />
+    <ClCompile Include="PlayerLivesObserver.cpp" />
     <ClCompile Include="Main.cpp" />
     <ClCompile Include="MenuCommand.cpp" />
     <ClCompile Include="MenuGameState.cpp" />
@@ -219,7 +220,8 @@
     <ClInclude Include="LevelComponent.h" />
     <ClInclude Include="LivesComponent.h" />
     <ClInclude Include="IncreaseScoreCommand.h" />
-    <ClInclude Include="LivesObserver.h" />
+    <ClInclude Include="PlayerComponent.h" />
+    <ClInclude Include="PlayerLivesObserver.h" />
     <ClInclude Include="MenuCommand.h" />
     <ClInclude Include="MenuGameState.h" />
     <ClInclude Include="MoveCommand.h" />

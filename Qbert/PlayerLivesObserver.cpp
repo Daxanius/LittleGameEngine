@@ -1,15 +1,16 @@
-#include "LivesObserver.h"
+#include "PlayerLivesObserver.h"
 #include "hash.h"
 
-dae::LivesObserver::LivesObserver(RepeatingTextureComponent* pLivesTextureComponent) : m_pLivesTextureComponent(pLivesTextureComponent) {
+dae::PlayerLivesObserver::PlayerLivesObserver(RepeatingTextureComponent* pLivesTextureComponent, GameObject* pTextBalloonGameObject) : m_pLivesTextureComponent(pLivesTextureComponent), m_pTextBalloonGameObject(pTextBalloonGameObject) {
 }
 
-void dae::LivesObserver::Notify(Event event) {
+void dae::PlayerLivesObserver::Notify(Event event) {
 	switch (event.id) {
 		case (make_sdbm_hash("killed")):
 		{
 			int lives = std::any_cast<int>(event.data);
 			m_pLivesTextureComponent->SetRows(lives);
+			m_pTextBalloonGameObject->Enable();
 			break;
 		}
 

@@ -75,7 +75,7 @@
     <ClCompile Include="RepeatingTextureComponent.cpp">
       <Filter>Source\Components</Filter>
     </ClCompile>
-    <ClCompile Include="LivesObserver.cpp">
+    <ClCompile Include="PlayerLivesObserver.cpp">
       <Filter>Source\Observers</Filter>
     </ClCompile>
     <ClCompile Include="CoilyComponent.cpp">
@@ -118,6 +118,9 @@
       <Filter>Source\Observers</Filter>
     </ClCompile>
     <ClCompile Include="ChangeToComponent.cpp">
+      <Filter>Source\Components</Filter>
+    </ClCompile>
+    <ClCompile Include="PlayerComponent.cpp">
       <Filter>Source\Components</Filter>
     </ClCompile>
   </ItemGroup>
@@ -170,7 +173,7 @@
     <ClInclude Include="RepeatingTextureComponent.h">
       <Filter>Source\Components</Filter>
     </ClInclude>
-    <ClInclude Include="LivesObserver.h">
+    <ClInclude Include="PlayerLivesObserver.h">
       <Filter>Source\Observers</Filter>
     </ClInclude>
     <ClInclude Include="CoilyComponent.h">
@@ -216,6 +219,9 @@
       <Filter>Source\Observers</Filter>
     </ClInclude>
     <ClInclude Include="ChangeToComponent.h">
+      <Filter>Source\Components</Filter>
+    </ClInclude>
+    <ClInclude Include="PlayerComponent.h">
       <Filter>Source\Components</Filter>
     </ClInclude>
   </ItemGroup>

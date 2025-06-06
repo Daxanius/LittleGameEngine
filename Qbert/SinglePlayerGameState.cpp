@@ -13,8 +13,9 @@
 #include "RepeatingTextureComponent.h"
 #include "RhombilleGridAnimationComponent.h"
 #include "ChangeToComponent.h"
-#include "LivesObserver.h"
+#include "PlayerLivesObserver.h"
 #include "EnemySpawnerComponent.h"
+#include "TextureComponent.h"
 #include "ScoreComponent.h"
 #include "TextComponent.h"
 #include "LevelObserver.h"
@@ -33,9 +34,6 @@ dae::SinglePlayerGameState::SinglePlayerGameState() : AbstractGameState(), m_pSc
 	pRepeatingTexturecomponent->SetCols(1); // We only need 1 column value
 	pRepeatingTexturecomponent->SetRows(pLivesComponent->GetLives()); // Set starting value
 
-	// Add the lives observer which will update the repeating texture component
-	pLivesComponent->GetSubject().AddObserver(std::static_pointer_cast<Observer>(std::make_shared<LivesObserver>(pRepeatingTexturecomponent)));
-	
 	auto nextTextObject(std::make_shared<GameObject>(Transform(10.f, 66.f)));
 	nextTextObject->AddComponent<TextComponent>("CHANGE TO", dae::ResourceManager::GetInstance().LoadFont("Minecraft.ttf", 16));
 
@@ -45,7 +43,16 @@ dae::SinglePlayerGameState::SinglePlayerGameState() : AbstractGameState(), m_pSc
 	auto qbertObject{ std::make_shared<GameObject>() };
 	auto pQbertSpriteComponent{ qbertObject->AddComponent<SpriteComponent>("Qbert P1 Spritesheet.png", 17, 17, 2.f) };
 	auto pScoreComponent{ qbertObject->AddComponent<ScoreComponent>() };
-;	m_pPlayerMovementComponent = qbertObject->AddComponent<GridMovementComponent>(pRhombileGridComponent, pLevelComponent);
+	m_pPlayerMovementComponent = qbertObject->AddComponent<GridMovementComponent>(pRhombileGridComponent, pLevelComponent);
+
+	auto textBalloonObject{ std::make_shared<GameObject>() };
+	textBalloonObject->AddComponent<TextureComponent>("Qbert Curses.png", 1.f);
+	textBalloonObject->SetParent(qbertObject.get(), false);
+	textBalloonObject->SetLocalTransform(Transform(0.f, -30.f));
+	textBalloonObject->Disable();
+
+	// Add the lives observer which will update the repeating texture component
+	pLivesComponent->GetSubject().AddObserver(std::static_pointer_cast<Observer>(std::make_shared<PlayerLivesObserver>(pRepeatingTexturecomponent, textBalloonObject.get())));
 
 	pQbertSpriteComponent->AddState(make_sdbm_hash("up"), SpriteComponent::State{ 0, 0, 0 });
 	pQbertSpriteComponent->AddState(make_sdbm_hash("down"), SpriteComponent::State{ 3, 0, 0 });
@@ -72,6 +79,7 @@ dae::SinglePlayerGameState::SinglePlayerGameState() : AbstractGameState(), m_pSc
 	m_pScene->Add(nextTextObject);
 	m_pScene->Add(nextObject);
 	m_pScene->Add(qbertObject);
+	m_pScene->Add(textBalloonObject);
 	m_pScene->Add(scoreObject);
 }
 
