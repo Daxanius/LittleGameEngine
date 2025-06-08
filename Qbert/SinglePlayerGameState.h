@@ -12,7 +12,11 @@ namespace dae {
 		void OnEnter() override;
 
 	private:
+		void MakePauseScene();
+		void MakeGameScene();
+
 		std::shared_ptr<Scene> m_pScene;
+		std::shared_ptr<Scene> m_pPauseScene;
 
 		GridMovementComponent* m_pPlayerMovementComponent{};
 	};

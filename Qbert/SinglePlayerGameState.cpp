@@ -12,6 +12,7 @@
 #include "MoveCommand.h"
 #include "RepeatingTextureComponent.h"
 #include "RhombilleGridAnimationComponent.h"
+#include "PauseCommand.h"
 #include "PlayerComponent.h"
 #include "ChangeToComponent.h"
 #include "PlayerLivesObserver.h"
@@ -23,7 +24,21 @@
 #include "LevelComponent.h"
 #include "Qbert.h"
 
-dae::SinglePlayerGameState::SinglePlayerGameState() : AbstractGameState(), m_pScene(std::make_shared<Scene>("Level")) {
+dae::SinglePlayerGameState::SinglePlayerGameState() 
+	: AbstractGameState(), m_pScene(std::make_shared<Scene>("Level")), m_pPauseScene(std::make_shared<Scene>("Pause")) {
+	MakePauseScene();
+	MakeGameScene();
+}
+
+void dae::SinglePlayerGameState::MakePauseScene() {
+	auto backgroundImageObject{ std::make_shared<GameObject>() };
+	backgroundImageObject->AddComponent<TextureComponent>("Pause Screen.png");
+
+	m_pPauseScene->Add(backgroundImageObject);
+}
+
+void dae::SinglePlayerGameState::MakeGameScene() {
+	
 	auto mapObject{ std::make_shared<GameObject>(Transform((640 / 2) - 32, 75)) };
 	auto pRhombileGridComponent{ mapObject->AddComponent<RhombilleGridComponent>("Qbert Cubes.png", 32, 32, 7, 2.f) };
 	auto pLevelComponent{ mapObject->AddComponent<LevelComponent>(2.f) };
@@ -122,5 +137,12 @@ void dae::SinglePlayerGameState::OnEnter() {
 		std::move(std::make_unique<MoveCommand>(m_pPlayerMovementComponent, MoveCommand::Direction::Right))
 	);
 
+	InputManager::GetInstance().BindKeyboardCommand(
+		Keyboard::KeyState{ Keyboard::Key::Escape, Keyboard::ActionType::Press },
+		std::move(std::make_unique<PauseCommand>(m_pPauseScene, m_pScene))
+	);
+
 	SceneManager::GetInstance().SetScene(m_pScene);
 }
+
+

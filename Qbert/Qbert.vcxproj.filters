@@ -126,6 +126,9 @@
     <ClCompile Include="PlayerComponent.cpp">
       <Filter>Source\Components</Filter>
     </ClCompile>
+    <ClCompile Include="PauseCommand.cpp">
+      <Filter>Source\Commands</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="KillCommand.h">
@@ -229,6 +232,9 @@
     </ClInclude>
     <ClInclude Include="json.hpp">
       <Filter>ThirdParty</Filter>
+    </ClInclude>
+    <ClInclude Include="PauseCommand.h">
+      <Filter>Source\Commands</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>
