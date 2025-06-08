@@ -14,6 +14,7 @@
 #include "Minigin.h"
 #include "SceneManager.h"
 #include "MenuGameState.h"
+#include "json.hpp"
 #include "Qbert.h"
 
 static void load() {

@@ -214,6 +214,7 @@
     <ClInclude Include="CoilyStateBall.h" />
     <ClInclude Include="CoilyStateSnake.h" />
     <ClInclude Include="EnemySpawnerComponent.h" />
+    <ClInclude Include="json.hpp" />
     <ClInclude Include="KillCommand.h" />
     <ClInclude Include="GridNavigationComponent.h" />
     <ClInclude Include="GridMovementComponent.h" />

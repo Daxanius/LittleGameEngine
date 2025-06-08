@@ -22,6 +22,9 @@
     <Filter Include="Source\States\Coily">
       <UniqueIdentifier>{f4bd4674-92ca-411b-ad32-2fdb6325ea15}</UniqueIdentifier>
     </Filter>
+    <Filter Include="ThirdParty">
+      <UniqueIdentifier>{fe87db45-2dc0-4cd9-bb63-e70fb7134810}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Main.cpp">
@@ -223,6 +226,9 @@
     </ClInclude>
     <ClInclude Include="PlayerComponent.h">
       <Filter>Source\Components</Filter>
+    </ClInclude>
+    <ClInclude Include="json.hpp">
+      <Filter>ThirdParty</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>
