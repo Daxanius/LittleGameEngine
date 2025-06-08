@@ -32,6 +32,7 @@ namespace dae {
 		Tile* GetTile(int row, int col);
 
 		void GetRandomTile(int& row, int& col) const;
+		int GetRandomCol(int row) const;
 
 		int GetRows() const;
 

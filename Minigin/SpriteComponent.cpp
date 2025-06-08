@@ -38,11 +38,11 @@ void dae::SpriteComponent::Render() {
 		worldPosition.y,
 		m_frameWidth * m_scale,
 		m_frameHeight * m_scale,
-		m_frameWidth * m_frame + m_frameWidth * state.offset,
-		0,
+		m_frameWidth * m_frame + m_frameWidth * state.col,
+		m_frameHeight * state.row,
 		m_frameWidth,
 		m_frameHeight
-		);
+	);
 }
 
 void dae::SpriteComponent::AddState(StateId stateId, State state) {

@@ -6,6 +6,8 @@
 #include "CoilyStateBall.h"
 #include "SceneManager.h"
 #include "GridNavigationComponent.h"
+#include "SlickAndSlamObserver.h"
+#include "UggAndWrongwayObserver.h"
 #include "LevelComponent.h"
 #include "Scene.h"
 
@@ -33,7 +35,20 @@ void dae::EnemySpawnerComponent::Update(float deltaTime) {
 }
 
 void dae::EnemySpawnerComponent::SpawnEnemy() {
-	m_spawnedEnemies.emplace_back(SpawnCoily());
+	int enemyType{ rand() % 3 };
+
+	switch (enemyType) {
+		case 0:
+			m_spawnedEnemies.emplace_back(SpawnCoily());
+			break;
+		case 1:
+			m_spawnedEnemies.emplace_back(SpawnUggOrWrongWay());
+			break;
+		case 2:
+			m_spawnedEnemies.emplace_back(SpawnSlickOrSlam());
+			break;
+
+	}
 }
 
 dae::GameObject* dae::EnemySpawnerComponent::SpawnCoily() {
@@ -46,16 +61,16 @@ dae::GameObject* dae::EnemySpawnerComponent::SpawnCoily() {
 	movementComponent->SetOffsetX(32 + 16);
 	movementComponent->SetOffsetY(32);
 
-	coilySprite->AddState(make_sdbm_hash("ball_idle"), SpriteComponent::State{ 0, 1, 0 });
-	coilySprite->AddState(make_sdbm_hash("ball_jump"), SpriteComponent::State{ 1, 1, 0 });
-	coilySprite->AddState(make_sdbm_hash("idle_up"), SpriteComponent::State{ 2, 1, 0 });
-	coilySprite->AddState(make_sdbm_hash("jump_up"), SpriteComponent::State{ 3, 1, 0 });
-	coilySprite->AddState(make_sdbm_hash("idle_left"), SpriteComponent::State{ 4, 1, 0 });
-	coilySprite->AddState(make_sdbm_hash("jump_left"), SpriteComponent::State{ 5, 1, 0 });
-	coilySprite->AddState(make_sdbm_hash("idle_right"), SpriteComponent::State{ 6, 1, 0 });
-	coilySprite->AddState(make_sdbm_hash("jump_right"), SpriteComponent::State{ 7, 1, 0 });
-	coilySprite->AddState(make_sdbm_hash("idle_down"), SpriteComponent::State{ 8, 1, 0 });
-	coilySprite->AddState(make_sdbm_hash("jump_down"), SpriteComponent::State{ 9, 1, 0 });
+	coilySprite->AddState(make_sdbm_hash("ball_idle"), SpriteComponent::State{ 0, 0, 1, 0 });
+	coilySprite->AddState(make_sdbm_hash("ball_jump"), SpriteComponent::State{ 1, 0, 1, 0 });
+	coilySprite->AddState(make_sdbm_hash("idle_up"), SpriteComponent::State{ 2, 0, 1, 0 });
+	coilySprite->AddState(make_sdbm_hash("jump_up"), SpriteComponent::State{ 3, 0, 1, 0 });
+	coilySprite->AddState(make_sdbm_hash("idle_left"), SpriteComponent::State{ 4, 0, 1, 0 });
+	coilySprite->AddState(make_sdbm_hash("jump_left"), SpriteComponent::State{ 5, 0, 1, 0 });
+	coilySprite->AddState(make_sdbm_hash("idle_right"), SpriteComponent::State{ 6, 0, 1, 0 });
+	coilySprite->AddState(make_sdbm_hash("jump_right"), SpriteComponent::State{ 7, 0, 1, 0 });
+	coilySprite->AddState(make_sdbm_hash("idle_down"), SpriteComponent::State{ 8, 0, 1, 0 });
+	coilySprite->AddState(make_sdbm_hash("jump_down"), SpriteComponent::State{ 9, 0, 1, 0 });
 
 
 	coilyComponent->SetState(std::make_shared<CoilyStateBall>(coilyComponent, m_pTargetComponent));
@@ -63,4 +78,63 @@ dae::GameObject* dae::EnemySpawnerComponent::SpawnCoily() {
 	SceneManager::GetInstance().GetActiveScene()->Add(coilyObject);
 
 	return coilyObject.get();
+}
+
+dae::GameObject* dae::EnemySpawnerComponent::SpawnUggOrWrongWay() {
+	auto enemyObject{ std::make_shared<GameObject>(Transform{ 0.f, 0.f }) };
+
+	// Spawn position
+	int row{ m_pRhombilleGridComponent->GetRows() -1 };
+	int col{ (rand() % 2) * row};
+
+	auto pSpriteComponent{ enemyObject->AddComponent<SpriteComponent>("Ugg Wrongway Spritesheet.png", 16, 16, 2.f) };
+	auto pMovementComponent{ enemyObject->AddComponent<GridMovementComponent>(m_pRhombilleGridComponent, m_pLevelComponent, row, col, 0.5f) };
+	auto pNavigationComponent{ enemyObject->AddComponent<GridNavigationComponent>(0.5f) };
+
+	pNavigationComponent->SetTarget(1, rand() % 2);
+
+	pMovementComponent->SetOffsetX(16);
+	pMovementComponent->SetOffsetY(16);
+
+	int variant{ rand() % 2 };
+
+	pSpriteComponent->AddState(make_sdbm_hash("roll1"), SpriteComponent::State{ 0, variant, 1, 0 });
+	pSpriteComponent->AddState(make_sdbm_hash("roll2"), SpriteComponent::State{ 1, variant, 1, 0 });
+	pSpriteComponent->AddState(make_sdbm_hash("roll3"), SpriteComponent::State{ 2, variant, 1, 0 });
+	pSpriteComponent->AddState(make_sdbm_hash("roll4"), SpriteComponent::State{ 3, variant, 1, 0 });
+
+	pSpriteComponent->SetState(make_sdbm_hash("roll1"));
+
+	pMovementComponent->GetSubject().AddObserver(std::make_shared<UggAndWrongwayObserver>(pSpriteComponent));
+
+	SceneManager::GetInstance().GetActiveScene()->Add(enemyObject);
+	return enemyObject.get();
+}
+
+dae::GameObject* dae::EnemySpawnerComponent::SpawnSlickOrSlam() {
+	auto enemyObject{ std::make_shared<GameObject>(Transform{ 0.f, 0.f }) };
+
+	auto pSpriteComponent{ enemyObject->AddComponent<SpriteComponent>("Slick Sam Spritesheet.png", 12, 16, 2.f) };
+	auto pMovementComponent{ enemyObject->AddComponent<GridMovementComponent>(m_pRhombilleGridComponent, m_pLevelComponent, 0, 0, 0.5f) };
+	auto pNavigationComponent{ enemyObject->AddComponent<GridNavigationComponent>(0.5f) };
+
+	int row{ m_pRhombilleGridComponent->GetRows() -1 };
+	int col{ m_pRhombilleGridComponent->GetRandomCol(row) };
+
+	pNavigationComponent->SetTarget(row, col);
+
+	pMovementComponent->SetOffsetX(12);
+	pMovementComponent->SetOffsetY(16);
+
+	int variant{ rand() % 2 };
+
+	pSpriteComponent->AddState(make_sdbm_hash("left"), SpriteComponent::State{ 0, variant, 1, 0 });
+	pSpriteComponent->AddState(make_sdbm_hash("right"), SpriteComponent::State{ 1, variant, 1, 0 });
+
+	pSpriteComponent->SetState(make_sdbm_hash("left"));
+
+	pMovementComponent->GetSubject().AddObserver(std::make_shared<SlickAndSlamObserver>(pSpriteComponent));
+
+	SceneManager::GetInstance().GetActiveScene()->Add(enemyObject);
+	return enemyObject.get();
 }

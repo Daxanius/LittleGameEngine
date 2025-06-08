@@ -13,7 +13,8 @@ namespace dae {
 		SpriteComponent(GameObject& pOwner, const std::string& texturePath, int frameWidth, int frameHeight, float scale = 1.f);
 
 		struct State {
-			int offset;
+			int col;
+			int row;
 			int frames;
 			int fps;
 		};

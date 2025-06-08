@@ -129,6 +129,18 @@
     <ClCompile Include="PauseCommand.cpp">
       <Filter>Source\Commands</Filter>
     </ClCompile>
+    <ClCompile Include="SlickAndSlamComponent.cpp">
+      <Filter>Source\Components</Filter>
+    </ClCompile>
+    <ClCompile Include="UggAndWrongwayComponent.cpp">
+      <Filter>Source\Components</Filter>
+    </ClCompile>
+    <ClCompile Include="SlickAndSlamObserver.cpp">
+      <Filter>Source\Observers</Filter>
+    </ClCompile>
+    <ClCompile Include="UggAndWrongwayObserver.cpp">
+      <Filter>Source\Observers</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="KillCommand.h">
@@ -235,6 +247,18 @@
     </ClInclude>
     <ClInclude Include="PauseCommand.h">
       <Filter>Source\Commands</Filter>
+    </ClInclude>
+    <ClInclude Include="SlickAndSlamComponent.h">
+      <Filter>Source\Components</Filter>
+    </ClInclude>
+    <ClInclude Include="UggAndWrongwayComponent.h">
+      <Filter>Source\Components</Filter>
+    </ClInclude>
+    <ClInclude Include="SlickAndSlamObserver.h">
+      <Filter>Source\Observers</Filter>
+    </ClInclude>
+    <ClInclude Include="UggAndWrongwayObserver.h">
+      <Filter>Source\Observers</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>

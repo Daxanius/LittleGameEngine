@@ -46,6 +46,8 @@ namespace dae {
 		void SetOffsetX(int width);
 		void SetOffsetY(int height);
 
+		void SetPosition(int row, int col);
+
 		bool IsJumping() const;
 
 		Subject& GetSubject();

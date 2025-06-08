@@ -23,6 +23,8 @@ namespace dae {
 		void SpawnEnemy();
 
 		GameObject* SpawnCoily();
+		GameObject* SpawnUggOrWrongWay();
+		GameObject* SpawnSlickOrSlam();
 
 		RhombilleGridComponent* m_pRhombilleGridComponent{};
 		GridMovementComponent* m_pTargetComponent{};

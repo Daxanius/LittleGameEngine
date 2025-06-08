@@ -200,7 +200,11 @@
     <ClCompile Include="LevelObserver.cpp" />
     <ClCompile Include="SelectionMenuComponent.cpp" />
     <ClCompile Include="SinglePlayerGameState.cpp" />
+    <ClCompile Include="SlickAndSlamComponent.cpp" />
+    <ClCompile Include="SlickAndSlamObserver.cpp" />
     <ClCompile Include="SoundObserver.cpp" />
+    <ClCompile Include="UggAndWrongwayComponent.cpp" />
+    <ClCompile Include="UggAndWrongwayObserver.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="AbstractCoilyState.h" />
@@ -237,7 +241,11 @@
     <ClInclude Include="LevelObserver.h" />
     <ClInclude Include="SelectionMenuComponent.h" />
     <ClInclude Include="SinglePlayerGameState.h" />
+    <ClInclude Include="SlickAndSlamComponent.h" />
+    <ClInclude Include="SlickAndSlamObserver.h" />
     <ClInclude Include="SoundObserver.h" />
+    <ClInclude Include="UggAndWrongwayComponent.h" />
+    <ClInclude Include="UggAndWrongwayObserver.h" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\Minigin\Minigin.vcxproj">

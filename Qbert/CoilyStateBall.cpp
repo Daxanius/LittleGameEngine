@@ -22,12 +22,7 @@ void dae::CoilyStateBall::OnEnter() {
 
 	int maxRow = m_pGridMovementComponent->GetRhombilleGrid()->GetRows() -2;
 
-	// Random engine - static to avoid re-seeding every time
-	static std::random_device rd;
-	static std::mt19937 gen(rd());
-	std::uniform_int_distribution<> dist(0, maxRow);
-
-	int randomCol = dist(gen);
+	int randomCol = m_pGridMovementComponent->GetRhombilleGrid()->GetRandomCol(maxRow);
 
 	m_pGridMovementComponent->GetSubject().AddObserver(m_pCoilyBallMovementObserver);
 
