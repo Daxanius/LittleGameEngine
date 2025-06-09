@@ -12,7 +12,7 @@ namespace dae {
 	public:
 		PlayerMovementObserver(SpriteComponent* pPlayerSpriteComponent, RhombilleGridComponent* pRhombilleGridComponent, LivesComponent* pLivesComponent, ScoreComponent* pScoreComponent, LevelComponent* pLevelComponent, RhombilleGridAnimationComponent* pRhombilleGridAnimationComponent);
 
-		void Notify(Event event) override;
+		void Notify(const Event& event) override;
 	private:
 		SpriteComponent* m_pPlayerSpriteComponent;
 		RhombilleGridComponent* m_pRhombilleGridComponent;

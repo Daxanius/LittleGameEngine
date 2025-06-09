@@ -15,7 +15,7 @@ namespace dae {
 			LevelComponent* pLevelComponent
 		);
 		
-		void Notify(Event event) override;
+		void Notify(const Event& event) override;
 
 	private:
 		RepeatingTextureComponent* m_pLivesTextureComponent;

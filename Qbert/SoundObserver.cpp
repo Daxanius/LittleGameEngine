@@ -7,7 +7,7 @@ dae::SoundObserver::SoundObserver() {
 	m_qbertJumpSfx = soundSystem.RegisterSound("../Data/Sounds/QBert Jump.wav");
 }
 
-void dae::SoundObserver::Notify(Event event) {
+void dae::SoundObserver::Notify(const Event& event) {
 	switch (event.id) {
 		case make_sdbm_hash("menu_previous"):
 		case make_sdbm_hash("menu_next"):

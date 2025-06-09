@@ -14,7 +14,7 @@ void dae::ScoreComponent::AddToScore(int amount) {
 
 	Event event{ make_sdbm_hash("score_increased") };
 	event.data = std::pair<int, int>(amount, m_score);
-	m_subject.Notify(event);
+	m_subject.Notify(std::move(event));
 }
 
 void dae::ScoreComponent::RemoveFromScore(int amount) {
@@ -26,7 +26,7 @@ void dae::ScoreComponent::RemoveFromScore(int amount) {
 
 	Event event{ make_sdbm_hash("score_decreased") };
 	event.data = std::pair<int, int>(amount, m_score);
-	m_subject.Notify(event);
+	m_subject.Notify(std::move(event));
 }
 
 dae::Subject& dae::ScoreComponent::GetSubject() {

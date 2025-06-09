@@ -5,7 +5,7 @@ dae::LevelObserver::LevelObserver(TextComponent* pScoreText, TextComponent* pRou
 	: m_pScoreText(pScoreText), m_pRoundText(pRoundText), m_pLevelText(pLevelText) {
 }
 
-void dae::LevelObserver::Notify(Event event) {
+void dae::LevelObserver::Notify(const Event& event) {
 	switch (event.id) {
 		case make_sdbm_hash("score_increased"):
 		{

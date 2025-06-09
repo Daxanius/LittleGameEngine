@@ -12,7 +12,7 @@ dae::PlayerMovementObserver::PlayerMovementObserver(SpriteComponent* pPlayerSpri
 {
 }
 
-void dae::PlayerMovementObserver::Notify(Event event) {
+void dae::PlayerMovementObserver::Notify(const Event& event) {
 	switch (event.id) {
 		case make_sdbm_hash("move_left"):
 			m_pPlayerSpriteComponent->SetState(make_sdbm_hash("left"));

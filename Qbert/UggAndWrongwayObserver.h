@@ -8,7 +8,7 @@ namespace dae {
 	public:
 		UggAndWrongwayObserver(SpriteComponent* pSpriteComponent);
 
-		void Notify(Event event) override;
+		void Notify(const Event& event) override;
 
 	private:
 		SpriteComponent* m_pSpriteComponent{};

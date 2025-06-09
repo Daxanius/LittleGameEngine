@@ -5,7 +5,7 @@ dae::PlayerLivesObserver::PlayerLivesObserver(RepeatingTextureComponent* pLivesT
 	: m_pLivesTextureComponent(pLivesTextureComponent), m_pPlayerComponent(pPlayerComponent), m_pLevelComponent(pLevelComponent) {
 }
 
-void dae::PlayerLivesObserver::Notify(Event event) {
+void dae::PlayerLivesObserver::Notify(const Event& event) {
 	switch (event.id) {
 		case (make_sdbm_hash("killed")):
 		{

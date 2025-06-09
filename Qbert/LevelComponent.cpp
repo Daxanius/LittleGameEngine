@@ -17,14 +17,14 @@ void dae::LevelComponent::NextRound() {
 		m_Round = 0;
 		Event nextLevelEvent{ make_sdbm_hash("next_level") };
 		nextLevelEvent.data = m_Level;
-		m_Subject.Notify(nextLevelEvent);
+		m_Subject.Notify(std::move(nextLevelEvent));
 		return;
 	}
 
 	// Otherwise notify subjects the next round has been triggered
 	Event nextRoundEvent{ make_sdbm_hash("next_round") };
 	nextRoundEvent.data = m_Round;
-	m_Subject.Notify(nextRoundEvent);
+	m_Subject.Notify(std::move(nextRoundEvent));
 }
 
 int dae::LevelComponent::GetRound() const {

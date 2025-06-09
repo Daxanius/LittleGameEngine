@@ -9,7 +9,7 @@ namespace dae {
 	public:
 		CoilySnakeMovementObserver(CoilyComponent* pCoilyComponent, GridMovementComponent* pTargetMovementComponent);
 
-		void Notify(Event event) override;
+		void Notify(const Event& event) override;
 
 	private:
 		enum class Direction {

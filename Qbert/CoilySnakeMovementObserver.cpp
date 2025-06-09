@@ -7,7 +7,7 @@ dae::CoilySnakeMovementObserver::CoilySnakeMovementObserver(CoilyComponent* pCoi
 	assert(m_pSpriteComponent != nullptr);
 }
 
-void dae::CoilySnakeMovementObserver::Notify(Event event) {
+void dae::CoilySnakeMovementObserver::Notify(const Event& event) {
 	switch (event.id) {
 		case (make_sdbm_hash("move_up_right")):
 		case (make_sdbm_hash("move_up")):

@@ -24,13 +24,13 @@ void dae::SelectionMenuComponent::AddOption(Option&& option) {
 void dae::SelectionMenuComponent::NextOption() {
 	m_currentOption = (m_currentOption + 1) % static_cast<int>(m_optionCommands.size());
 	Event event{ make_sdbm_hash("menu_next") };
-	m_subject.Notify(event);
+	m_subject.Notify(std::move(event));
 }
 
 void dae::SelectionMenuComponent::PreviousOption() {
 	m_currentOption = m_currentOption - 1 < 0 ? static_cast<int>(m_optionCommands.size()) - 1 : m_currentOption - 1;
 	Event event{ make_sdbm_hash("menu_previous") };
-	m_subject.Notify(event);
+	m_subject.Notify(std::move(event));
 }
 
 void dae::SelectionMenuComponent::ConfirmOption() {
@@ -38,7 +38,7 @@ void dae::SelectionMenuComponent::ConfirmOption() {
 		m_optionCommands[m_currentOption]->Execute();
 
 		Event event{ make_sdbm_hash("menu_confirm") };
-		m_subject.Notify(event);
+		m_subject.Notify(std::move(event));
 	}
 }
 

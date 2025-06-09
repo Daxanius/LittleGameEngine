@@ -7,7 +7,7 @@ dae::UggAndWrongwayObserver::UggAndWrongwayObserver(SpriteComponent* pSpriteComp
 
 }
 
-void dae::UggAndWrongwayObserver::Notify(Event event) {
+void dae::UggAndWrongwayObserver::Notify(const Event& event) {
 	switch (event.id) {
 		case (make_sdbm_hash("move_up_right")):
 		case (make_sdbm_hash("move_up")):

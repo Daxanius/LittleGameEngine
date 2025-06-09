@@ -22,7 +22,7 @@ void dae::LivesComponent::Kill() {
 
 	Event event{ make_sdbm_hash("killed") };
 	event.data = m_lives;
-	m_subject.Notify(event);
+	m_subject.Notify(std::move(event));
 }
 
 void dae::LivesComponent::AddLives(int amount) {
@@ -34,7 +34,7 @@ void dae::LivesComponent::AddLives(int amount) {
 
 	Event event{ make_sdbm_hash("lives_added") };
 	event.data = std::pair<int, int>(amount, m_lives);
-	m_subject.Notify(event);
+	m_subject.Notify(std::move(event));
 }
 
 void dae::LivesComponent::Reset() {

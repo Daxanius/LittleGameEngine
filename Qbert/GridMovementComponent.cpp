@@ -44,7 +44,7 @@ void dae::GridMovementComponent::Update(float deltaTime) {
 			m_col
 		};
 		m_HasArrived = true;
-		m_subject.Notify(event);
+		m_subject.Notify(std::move(event));
 	}
 }
 
@@ -102,7 +102,7 @@ void dae::GridMovementComponent::MoveUp() {
 
 	if (StartJump(m_row - 1, m_col)) {
 		Event event{ make_sdbm_hash("move_up") };
-		m_subject.Notify(event);
+		m_subject.Notify(std::move(event));
 	}
 }
 
@@ -113,7 +113,7 @@ void dae::GridMovementComponent::MoveDown() {
 
 	if (StartJump(m_row + 1, m_col)) {
 		Event event{ make_sdbm_hash("move_down") };
-		m_subject.Notify(event);
+		m_subject.Notify(std::move(event));
 	}
 }
 
@@ -124,7 +124,7 @@ void dae::GridMovementComponent::MoveLeft() {
 
 	if (StartJump(m_row - 1, m_col - 1)) {
 		Event event{ make_sdbm_hash("move_left") };
-		m_subject.Notify(event);
+		m_subject.Notify(std::move(event));
 	}
 }
 
@@ -135,7 +135,7 @@ void dae::GridMovementComponent::MoveRight() {
 
 	if (StartJump(m_row + 1, m_col + 1)) {
 		Event event{ make_sdbm_hash("move_right") };
-		m_subject.Notify(event);
+		m_subject.Notify(std::move(event));
 	}
 }
 
@@ -146,7 +146,7 @@ void dae::GridMovementComponent::MoveUpLeft() {
 
 	if (StartJump(m_row - 1, m_col - 1)) {
 		Event event{ make_sdbm_hash("move_up_left") };
-		m_subject.Notify(event);
+		m_subject.Notify(std::move(event));
 	}
 }
 
@@ -157,7 +157,7 @@ void dae::GridMovementComponent::MoveUpRight() {
 
 	if (StartJump(m_row - 1, m_col)) {
 		Event event{ make_sdbm_hash("move_up_right") };
-		m_subject.Notify(event);
+		m_subject.Notify(std::move(event));
 	}
 }
 
@@ -168,7 +168,7 @@ void dae::GridMovementComponent::MoveDownLeft() {
 
 	if (StartJump(m_row + 1, m_col)) {
 		Event event{ make_sdbm_hash("move_down_left") };
-		m_subject.Notify(event);
+		m_subject.Notify(std::move(event));
 	}
 }
 
@@ -179,7 +179,7 @@ void dae::GridMovementComponent::MoveDownRight() {
 
 	if (StartJump(m_row + 1, m_col + 1)) {
 		Event event{ make_sdbm_hash("move_down_right") };
-		m_subject.Notify(event);
+		m_subject.Notify(std::move(event));
 	}
 }
 

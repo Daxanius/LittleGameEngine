@@ -10,7 +10,7 @@ void dae::Subject::RemoveObserver(std::shared_ptr<Observer> observer) {
 	});
 }
 
-void dae::Subject::Notify(Event event) {
+void dae::Subject::Notify(Event&& event) {
 	for (auto& observer : m_observers) {
 		observer->Notify(event);
 	}

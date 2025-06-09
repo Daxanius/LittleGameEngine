@@ -6,7 +6,7 @@ dae::SlickAndSlamObserver::SlickAndSlamObserver(SpriteComponent* pSpriteComponen
 {
 }
 
-void dae::SlickAndSlamObserver::Notify(Event event) {
+void dae::SlickAndSlamObserver::Notify(const Event& event) {
 	switch (event.id) {
 		case (make_sdbm_hash("move_up_right")):
 		case (make_sdbm_hash("move_up")):

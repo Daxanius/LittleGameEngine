@@ -9,7 +9,7 @@ namespace dae {
 	public:
 		SoundObserver();
 
-		void Notify(Event event) override;
+		void Notify(const Event& event) override;
 	private:
 		SoundId m_changeSelectionSfx{};
 		SoundId m_qbertJumpSfx{};

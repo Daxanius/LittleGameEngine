@@ -7,7 +7,7 @@ namespace dae {
 	public:
 		LevelObserver(TextComponent* pScoreText, TextComponent* pRoundText, TextComponent* pLevelText);
 
-		void Notify(Event event) override;
+		void Notify(const Event& event) override;
 
 	private:
 		TextComponent* m_pScoreText{ nullptr };
