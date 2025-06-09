@@ -26,6 +26,13 @@ namespace dae {
 
 		void AddState(StateId stateId, State state);
 		void SetState(StateId stateId);
+
+		SpriteComponent(const SpriteComponent&) = delete;
+		SpriteComponent& operator=(const SpriteComponent&) = delete;
+		SpriteComponent(SpriteComponent&&) = delete;
+		SpriteComponent& operator=(SpriteComponent&&) = delete;
+		~SpriteComponent() = default;
+
 	private:
 		float m_elapsedTime{};
 		float m_scale{};

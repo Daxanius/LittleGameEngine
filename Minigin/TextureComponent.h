@@ -12,6 +12,12 @@ namespace dae {
 		void Update(float) override {};
 		void Render() override;
 		void PostUpdate() override {};
+
+		TextureComponent(const TextureComponent&) = delete;
+		TextureComponent& operator=(const TextureComponent&) = delete;
+		TextureComponent(TextureComponent&&) = delete;
+		TextureComponent& operator=(TextureComponent&&) = delete;
+		~TextureComponent() = default;
 	private:
 		std::shared_ptr<Texture2D> m_pTexture;
 

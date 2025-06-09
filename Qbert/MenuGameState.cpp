@@ -12,10 +12,11 @@
 #include "MenuCommand.h"
 #include "Qbert.h"
 #include "SinglePlayerGameState.h"
+#include "SinglePlayerIntroGameState.h"
 #include "Scene.h"
 #include <memory>
 
-dae::MenuGameState::MenuGameState() : AbstractGameState(), m_pScene(std::make_shared<Scene>("Menu")), m_pSinglePlayerState(std::make_shared<SinglePlayerGameState>()) {
+dae::MenuGameState::MenuGameState() : AbstractGameState(), m_pScene(std::make_shared<Scene>("Menu")), m_pSinglePlayerState(std::make_shared<SinglePlayerIntroGameState>()) {
 	auto titleObject{ std::make_unique<GameObject>(Transform((640 / 2) - (474 / 2), 50)) };
 	titleObject->AddComponent<TextureComponent>("Game Title.png");
 

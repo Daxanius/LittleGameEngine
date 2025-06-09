@@ -13,6 +13,13 @@ namespace dae {
 
 		void PostUpdate() override {};
 		void Render() override {};
+
+
+		RotatorComponent(const RotatorComponent&) = delete;
+		RotatorComponent& operator=(const RotatorComponent&) = delete;
+		RotatorComponent(RotatorComponent&&) = delete;
+		RotatorComponent& operator=(RotatorComponent&&) = delete;
+		~RotatorComponent() = default;
 	private:
 		float m_progress{};
 		float m_speed{};

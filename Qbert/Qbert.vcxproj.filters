@@ -141,6 +141,9 @@
     <ClCompile Include="UggAndWrongwayObserver.cpp">
       <Filter>Source\Observers</Filter>
     </ClCompile>
+    <ClCompile Include="SinglePlayerIntroGameState.cpp">
+      <Filter>Source\States\Game</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="KillCommand.h">
@@ -259,6 +262,9 @@
     </ClInclude>
     <ClInclude Include="UggAndWrongwayObserver.h">
       <Filter>Source\Observers</Filter>
+    </ClInclude>
+    <ClInclude Include="SinglePlayerIntroGameState.h">
+      <Filter>Source\States\Game</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>

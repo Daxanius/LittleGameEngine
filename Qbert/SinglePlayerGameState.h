@@ -1,6 +1,7 @@
 #pragma once
 #include "AbstractGameState.h"
 #include "GridMovementComponent.h"
+#include "ScoreComponent.h"
 #include "Scene.h"
 #include <memory>
 
@@ -11,6 +12,11 @@ namespace dae {
 
 		void OnEnter() override;
 
+		SinglePlayerGameState(const SinglePlayerGameState&) = delete;
+		SinglePlayerGameState& operator=(const SinglePlayerGameState&) = delete;
+		SinglePlayerGameState(SinglePlayerGameState&&) = delete;
+		SinglePlayerGameState& operator=(SinglePlayerGameState&&) = delete;
+		~SinglePlayerGameState() = default;
 	private:
 		void MakePauseScene();
 		void MakeGameScene();
@@ -21,6 +27,7 @@ namespace dae {
 		std::shared_ptr<Scene> m_pGameOverScene;
 
 		GridMovementComponent* m_pPlayerMovementComponent{};
+		ScoreComponent* m_pScoreComponent{};
 	};
 }
 

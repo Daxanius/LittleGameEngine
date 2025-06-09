@@ -1,6 +1,6 @@
+#include "TextComponent.h"
 #include <stdexcept>
 #include <SDL_ttf.h>
-#include "TextComponent.h"
 #include "Renderer.h"
 #include "Font.h"
 #include "Texture2D.h"
@@ -38,6 +38,8 @@ void dae::TextComponent::Render() {
 
 // This implementation uses the "dirty flag" pattern
 void dae::TextComponent::SetText(const std::string& text) {
-	m_Text = text;
-	m_needsUpdate = true;
+	if (m_Text != text) {
+		m_Text = text;
+		m_needsUpdate = true;
+	}
 }

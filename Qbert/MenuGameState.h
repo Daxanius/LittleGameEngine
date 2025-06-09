@@ -11,6 +11,12 @@ namespace dae {
 
 		void OnEnter() override;
 
+
+		MenuGameState(const MenuGameState&) = delete;
+		MenuGameState& operator=(const MenuGameState&) = delete;
+		MenuGameState(MenuGameState&&) = delete;
+		MenuGameState& operator=(MenuGameState&&) = delete;
+		~MenuGameState() = default;
 	private:
 		std::shared_ptr<Scene> m_pScene;
 

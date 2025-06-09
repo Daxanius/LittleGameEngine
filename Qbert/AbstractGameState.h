@@ -7,6 +7,12 @@ namespace dae {
 	public:
 		virtual void OnEnter() = 0;
 
+
+		AbstractGameState(const AbstractGameState&) = delete;
+		AbstractGameState& operator=(const AbstractGameState&) = delete;
+		AbstractGameState(AbstractGameState&&) = delete;
+		AbstractGameState& operator=(AbstractGameState&&) = delete;
+		~AbstractGameState() = default;
 	protected:
 		AbstractGameState() = default;
 	};

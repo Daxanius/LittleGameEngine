@@ -3,7 +3,7 @@
 #include "Subject.h"
 
 namespace dae {
-	class TimerComponent : public BaseComponent {
+	class TimerComponent final : public BaseComponent {
 	public:
 		TimerComponent(GameObject& pOwner);
 
@@ -20,6 +20,14 @@ namespace dae {
 		void Update(float deltaTime) override;
 		void PostUpdate() override {};
 		void Render() override {};
+
+
+		TimerComponent(const TimerComponent&) = delete;
+		TimerComponent& operator=(const TimerComponent&) = delete;
+		TimerComponent(TimerComponent&&) = delete;
+		TimerComponent& operator=(TimerComponent&&) = delete;
+		~TimerComponent() = default;
+
 	private:
 		float m_timeLeft{};
 		bool m_isPaused{ true };

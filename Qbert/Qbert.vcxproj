@@ -200,6 +200,7 @@
     <ClCompile Include="LevelObserver.cpp" />
     <ClCompile Include="SelectionMenuComponent.cpp" />
     <ClCompile Include="SinglePlayerGameState.cpp" />
+    <ClCompile Include="SinglePlayerIntroGameState.cpp" />
     <ClCompile Include="SlickAndSlamComponent.cpp" />
     <ClCompile Include="SlickAndSlamObserver.cpp" />
     <ClCompile Include="SoundObserver.cpp" />
@@ -241,6 +242,7 @@
     <ClInclude Include="LevelObserver.h" />
     <ClInclude Include="SelectionMenuComponent.h" />
     <ClInclude Include="SinglePlayerGameState.h" />
+    <ClInclude Include="SinglePlayerIntroGameState.h" />
     <ClInclude Include="SlickAndSlamComponent.h" />
     <ClInclude Include="SlickAndSlamObserver.h" />
     <ClInclude Include="SoundObserver.h" />

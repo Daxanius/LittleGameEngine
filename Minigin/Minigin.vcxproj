@@ -213,6 +213,7 @@
     <ClInclude Include="LoggingSoundSystem.h" />
     <ClInclude Include="NullSoundSystem.h" />
     <ClInclude Include="AbstractSoundSystem.h" />
+    <ClInclude Include="ParagraphComponent.h" />
     <ClInclude Include="PlaySoundCommand.h" />
     <ClInclude Include="RotatorComponent.h" />
     <ClInclude Include="SDLSoundSystem.h" />
@@ -265,6 +266,7 @@
     <ClCompile Include="LoggingSoundSystem.cpp" />
     <ClCompile Include="Minigin.cpp" />
     <ClCompile Include="NullSoundSystem.cpp" />
+    <ClCompile Include="ParagraphComponent.cpp" />
     <ClCompile Include="PlaySoundCommand.cpp" />
     <ClCompile Include="RotatorComponent.cpp" />
     <ClCompile Include="SDLSoundSystem.cpp" />
