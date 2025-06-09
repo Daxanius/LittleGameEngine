@@ -4,11 +4,16 @@
 #include "LevelComponent.h"
 #include "PlayerComponent.h"
 #include "GameObject.h"
+#include "Scene.h"
 
 namespace dae {
 	class PlayerLivesObserver : public Observer {
 	public:
-		PlayerLivesObserver(RepeatingTextureComponent* pLivesTextureComponent, PlayerComponent* pPlayerComponent, LevelComponent* pLevelComponent);
+		PlayerLivesObserver(
+			RepeatingTextureComponent* pLivesTextureComponent, 
+			PlayerComponent* pPlayerComponent, 
+			LevelComponent* pLevelComponent
+		);
 		
 		void Notify(Event event) override;
 

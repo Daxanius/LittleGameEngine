@@ -14,7 +14,7 @@ namespace dae {
 
 		void FixedUpdate() override {};
 		void Update(float deltaTime) override;
-		void PostUpdate() override {};
+		void PostUpdate() override;
 		void Render() override {};
 	private:
 		float m_spawnInterval;

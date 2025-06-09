@@ -12,7 +12,9 @@ namespace dae {
 	public:
 		Qbert();
 
-		std::shared_ptr<Font> GetFont() const;
+		std::shared_ptr<Font> GetFontLarge() const;
+		std::shared_ptr<Font> GetFontMedium() const;
+		std::shared_ptr<Font> GetFontSmall() const;
 		std::shared_ptr<SoundObserver> GetSoundObserver() const;
 
 		void SetState(std::shared_ptr<AbstractGameState> pGameState);
@@ -23,14 +25,11 @@ namespace dae {
 		Qbert& operator=(Qbert&&) = delete;
 		~Qbert() = default;
 	private:
-		void CreateLevelScene();
-
-		std::shared_ptr<Scene> m_pLevelScene;
-		std::shared_ptr<Scene> m_pMenuScene;
-
 		std::shared_ptr<AbstractGameState> m_pGameState;
 
-		std::shared_ptr<Font> m_pFont;
+		std::shared_ptr<Font> m_pFontLarge;
+		std::shared_ptr<Font> m_pFontMedium;
+		std::shared_ptr<Font> m_pFontSmall;
 
 		std::shared_ptr<SoundObserver> m_pSoundObserver;
 	};

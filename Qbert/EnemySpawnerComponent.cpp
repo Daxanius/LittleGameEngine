@@ -34,6 +34,15 @@ void dae::EnemySpawnerComponent::Update(float deltaTime) {
 	}
 }
 
+void dae::EnemySpawnerComponent::PostUpdate() {
+	// Remove any potentially destroyed enemies from the list of spawned game enemies
+	m_spawnedEnemies.erase(
+		std::remove_if(m_spawnedEnemies.begin(), m_spawnedEnemies.end(),
+			[](const GameObject* enemy) {
+				return enemy->IsDestroyed();
+			}), m_spawnedEnemies.end());
+}
+
 void dae::EnemySpawnerComponent::SpawnEnemy() {
 	int enemyType{ rand() % 3 };
 
@@ -47,12 +56,11 @@ void dae::EnemySpawnerComponent::SpawnEnemy() {
 		case 2:
 			m_spawnedEnemies.emplace_back(SpawnSlickOrSlam());
 			break;
-
 	}
 }
 
 dae::GameObject* dae::EnemySpawnerComponent::SpawnCoily() {
-	auto coilyObject{ std::make_shared<GameObject>(Transform{ 0.f, 0.f }) };
+	auto coilyObject{ std::make_unique<GameObject>(Transform{ 0.f, 0.f }) };
 	auto coilySprite{ coilyObject->AddComponent<SpriteComponent>("Coily Spritesheet.png", 16, 32, 2.f) };
 	auto movementComponent{ coilyObject->AddComponent<GridMovementComponent>(m_pRhombilleGridComponent, m_pLevelComponent, 0, 0, 0.5f) };
 	coilyObject->AddComponent<GridNavigationComponent>(0.5f);
@@ -75,13 +83,13 @@ dae::GameObject* dae::EnemySpawnerComponent::SpawnCoily() {
 
 	coilyComponent->SetState(std::make_shared<CoilyStateBall>(coilyComponent, m_pTargetComponent));
 
-	SceneManager::GetInstance().GetActiveScene()->Add(coilyObject);
-
-	return coilyObject.get();
+	auto eObj{ coilyObject.get() };
+	SceneManager::GetInstance().GetActiveScene()->Add(std::move(coilyObject));
+	return eObj;
 }
 
 dae::GameObject* dae::EnemySpawnerComponent::SpawnUggOrWrongWay() {
-	auto enemyObject{ std::make_shared<GameObject>(Transform{ 0.f, 0.f }) };
+	auto enemyObject{ std::make_unique<GameObject>(Transform{ 0.f, 0.f }) };
 
 	// Spawn position
 	int row{ m_pRhombilleGridComponent->GetRows() -1 };
@@ -107,12 +115,13 @@ dae::GameObject* dae::EnemySpawnerComponent::SpawnUggOrWrongWay() {
 
 	pMovementComponent->GetSubject().AddObserver(std::make_shared<UggAndWrongwayObserver>(pSpriteComponent));
 
-	SceneManager::GetInstance().GetActiveScene()->Add(enemyObject);
-	return enemyObject.get();
+	auto eObj{ enemyObject.get() };
+	SceneManager::GetInstance().GetActiveScene()->Add(std::move(enemyObject));
+	return eObj;
 }
 
 dae::GameObject* dae::EnemySpawnerComponent::SpawnSlickOrSlam() {
-	auto enemyObject{ std::make_shared<GameObject>(Transform{ 0.f, 0.f }) };
+	auto enemyObject{ std::make_unique<GameObject>(Transform{ 0.f, 0.f }) };
 
 	auto pSpriteComponent{ enemyObject->AddComponent<SpriteComponent>("Slick Sam Spritesheet.png", 12, 16, 2.f) };
 	auto pMovementComponent{ enemyObject->AddComponent<GridMovementComponent>(m_pRhombilleGridComponent, m_pLevelComponent, 0, 0, 0.5f) };
@@ -135,6 +144,7 @@ dae::GameObject* dae::EnemySpawnerComponent::SpawnSlickOrSlam() {
 
 	pMovementComponent->GetSubject().AddObserver(std::make_shared<SlickAndSlamObserver>(pSpriteComponent));
 
-	SceneManager::GetInstance().GetActiveScene()->Add(enemyObject);
-	return enemyObject.get();
+	auto eObj{ enemyObject.get() };
+	SceneManager::GetInstance().GetActiveScene()->Add(std::move(enemyObject));
+	return eObj;
 }

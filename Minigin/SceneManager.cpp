@@ -58,6 +58,7 @@ void dae::SceneManager::ApplyPendingChanges() {
 
 	// Add new scenes
 	for (const auto& scene : m_pendingAdditions) {
+		scene->OnEnter();
 		m_scenes.emplace_back(scene);
 	}
 	m_pendingAdditions.clear();

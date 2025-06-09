@@ -14,9 +14,11 @@ namespace dae {
 	private:
 		void MakePauseScene();
 		void MakeGameScene();
+		void MakeGameOverScene();
 
 		std::shared_ptr<Scene> m_pScene;
 		std::shared_ptr<Scene> m_pPauseScene;
+		std::shared_ptr<Scene> m_pGameOverScene;
 
 		GridMovementComponent* m_pPlayerMovementComponent{};
 	};

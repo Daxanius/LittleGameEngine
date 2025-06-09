@@ -1,5 +1,6 @@
 #pragma once
 #include <BaseComponent.h>
+#include "PlayerComponent.h"
 
 namespace dae {
 	class UggAndWrongwayComponent final : public BaseComponent {

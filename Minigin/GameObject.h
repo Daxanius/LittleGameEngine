@@ -30,6 +30,7 @@ namespace dae
 
 		void FixedUpdate();
 		void Update(float deltaTime);
+		void PostUpdate();
 		void Render() const;
 
 		void SetLocalTransform(const Transform& transform);

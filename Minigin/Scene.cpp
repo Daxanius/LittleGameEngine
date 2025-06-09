@@ -11,42 +11,42 @@ Scene::Scene(const std::string& name) : m_name(name) {}
 
 Scene::~Scene() = default;
 
-void Scene::Add(std::shared_ptr<GameObject> object) {
-	m_objectsToAdd.push_back(std::move(object));
-}
-
-void Scene::Remove(std::shared_ptr<GameObject> object) {
-	m_objectsToRemove.push_back(std::move(object));
+void Scene::Add(std::unique_ptr<GameObject>&& object) {
+	m_objectsToAdd.emplace_back(std::move(object));
 }
 
 void Scene::RemoveAll() {
-	m_objectsToRemove.insert(
-		m_objectsToRemove.end(),
-		m_objects.begin(),
-		m_objects.end()
-	);
+	m_objects.clear();
+}
+
+void dae::Scene::OnEnter() {
+		ProcessPendingChanges();
 }
 
 void dae::Scene::FixedUpdate() {
-	ProcessPendingChanges();
-
 	for (auto& object : m_objects) {
 		if (object->IsEnabled()) {
 			object->FixedUpdate();
 		}
 	}
+
+	ProcessPendingChanges();
 }
 
 void Scene::Update(float deltaTime) {
-	ProcessPendingChanges();
-
 	for(auto& object : m_objects) {
 		if (object->IsEnabled()) {
 			object->Update(deltaTime);
 		}
 	}
 
-	RemoveDestroyedObjects();
+	ProcessPendingChanges();
+
+	// PostUpdate should be called regardless
+	// of when the object is enabled or disabled
+	for(auto& object : m_objects) {
+			object->PostUpdate();
+	}
 }
 
 void Scene::Render() const {
@@ -63,16 +63,10 @@ void dae::Scene::ProcessPendingChanges() {
 	}
 	m_objectsToAdd.clear();
 
-	for (auto& objToRemove : m_objectsToRemove) {
-		m_objects.erase(std::remove(m_objects.begin(), m_objects.end(), objToRemove), m_objects.end());
-	}
-	m_objectsToRemove.clear();
-}
-
-void dae::Scene::RemoveDestroyedObjects() {
-	for (const auto& object : m_objects) {
-		if (object->IsDestroyed()) {
-			Remove(object); // Add the object to the removal queue to be removed from the scene
-		}
-	}
+	// Remove destroyed objects
+	m_objects.erase(
+		std::remove_if(m_objects.begin(), m_objects.end(),
+			[](const std::unique_ptr<GameObject>& obj) {
+				return obj->IsDestroyed();
+			}), m_objects.end());
 }

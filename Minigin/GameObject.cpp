@@ -61,7 +61,7 @@ void dae::GameObject::FixedUpdate() {
 	}
 }
 
-void dae::GameObject::Update(float deltaTime){
+void dae::GameObject::Update(float deltaTime) {
 	for (auto& component : m_components) {
 		if (!component->IsDestroyed() && component->IsEnabled()) {
 			component->Update(deltaTime);
@@ -69,12 +69,12 @@ void dae::GameObject::Update(float deltaTime){
 	}
 
 	RemoveDestroyedComponents();
+}
 
+void dae::GameObject::PostUpdate() {
 	// Run the post-update for all components
 	for (auto& component : m_components) {
-		if (component->IsEnabled()) {
-			component->PostUpdate();
-		}
+		component->PostUpdate();
 	}
 }
 
