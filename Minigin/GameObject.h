@@ -39,10 +39,43 @@ namespace dae
 
 		bool IsChild(GameObject* pObj) const;
 		bool IsEnabled() const;
-		void Disable();
-		void Enable();
+		void Disable(bool disableChildren = true);
+		void Enable(bool enableChildren = true);
 
 		std::vector<GameObject*>& GetChildren();
+
+		// Searches a component within the objects' children
+		// returns the first component it found
+		template<typename ComponentType>
+		requires std::derived_from<ComponentType, BaseComponent>
+		[[nodiscard]] ComponentType* GetComponentInChildren() const {
+			for (const auto child : m_pChildren) {
+				ComponentType* component{ child->GetComponent<ComponentType>() };
+				if (component != nullptr) {
+					return component;
+				}
+			}
+
+			return nullptr;
+		}
+
+		// Searches for components within all of the objects' children
+		// returns a vector of all the components it found
+		template<typename ComponentType>
+		requires std::derived_from<ComponentType, BaseComponent>
+		[[nodiscard]] std::vector<ComponentType*> GetComponentsInChildren() const {
+			std::vector<ComponentType*> components{};
+			components.reserve(m_pChildren.size());
+			
+			for (const auto child : m_pChildren) {
+				ComponentType* component{ child->GetComponent<ComponentType>() };
+				if (component != nullptr) {
+					components.emplace_back(component);
+				}
+			}
+
+			return components;
+		}
 
 		// The component returned is owned by the GameObject, there is no need to free the pointer.
 		// However, you do have to check if the component has been removed in PostUpdate.

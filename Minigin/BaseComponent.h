@@ -21,6 +21,19 @@ namespace dae {
 		void Disable();
 		bool IsEnabled() const;
 
+		// Gets the component from a child object
+		template<typename ComponentType>
+		requires std::derived_from<ComponentType, BaseComponent>
+		[[nodiscard]] inline ComponentType* GetComponentInChildren() const {
+			return m_pOwner->GetComponentInChildren<ComponentType>();
+		}
+
+		template<typename ComponentType>
+		requires std::derived_from<ComponentType, BaseComponent>
+		[[nodiscard]] inline std::vector<ComponentType*> GetComponentsInChildren() const {
+			return m_pOwner->GetComponentsInChildren<ComponentType>();
+		}
+
 		// Gets the component from the object
 		template<typename ComponentType>
 		requires std::derived_from<ComponentType, BaseComponent>

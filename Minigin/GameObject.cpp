@@ -114,12 +114,24 @@ bool dae::GameObject::IsEnabled() const {
 	return m_enabled;
 }
 
-void dae::GameObject::Disable() {
+void dae::GameObject::Disable(bool disableChildren) {
 	m_enabled = false;
+
+	if (disableChildren) {
+		for (auto child : m_pChildren) {
+			child->Disable(true);
+		}
+	}
 }
 
-void dae::GameObject::Enable() {
+void dae::GameObject::Enable(bool enableChildren) {
 	m_enabled = true;
+
+	if (enableChildren) {
+		for (auto child : m_pChildren) {
+			child->Enable(true);
+		}
+	}
 }
 
 std::vector<dae::GameObject*>& dae::GameObject::GetChildren() {

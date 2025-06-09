@@ -49,7 +49,7 @@ void dae::LevelComponent::ResetLevel(bool resetState) {
 	m_resetTimeLeft = m_resetTime;
 
 	for (auto player : m_Players) {
-		player->Disable();
+		player->GetOwner().Disable();
 	}
 }
 
