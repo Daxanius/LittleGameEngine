@@ -16,9 +16,11 @@ namespace dae {
 		};
 
 		void FixedUpdate() override {};
-		void PostUpdate() override {};
-		void Render() override {};
 		void Update(float) override;
+		void PostUpdate() override;
+		void Render() override {};
+
+		bool HasArrived() const;
 
 		int GetRow() const;
 		int GetCol() const;
@@ -54,6 +56,9 @@ namespace dae {
 
 		RhombilleGridComponent* GetRhombilleGrid() const;
 	private:
+		glm::vec2 ToStandingPosition(int row, int col) const;
+		bool StartJump(int newRow, int newCol);
+
 		static constexpr float JUMP_HEIGHT{ 10.f };
 
 		RhombilleGridComponent* m_pRhombilleGrid;
@@ -81,8 +86,7 @@ namespace dae {
 		int m_offsetX{ 16 };
 		int m_offsetY{ 16 };
 
-		glm::vec2 ToStandingPosition(int row, int col) const;
-		bool StartJump(int newRow, int newCol);
+		bool m_HasArrived{ false };
 
 		Subject m_subject{};
 	};

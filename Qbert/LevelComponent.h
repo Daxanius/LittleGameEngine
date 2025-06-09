@@ -29,6 +29,9 @@ namespace dae {
 
 		Subject& GetSubject();
 
+		RhombilleGridComponent& GetRhombilleGrid();
+		EnemySpawnerComponent& GetEnemySpawner();
+
 		void FixedUpdate() override {};
 		void Update(float deltaTime) override;
 		void PostUpdate() override {};

@@ -73,6 +73,14 @@ dae::Subject& dae::LevelComponent::GetSubject() {
 	return m_Subject;
 }
 
+dae::RhombilleGridComponent& dae::LevelComponent::GetRhombilleGrid() {
+	return *m_pRhombilleGrid;
+}
+
+dae::EnemySpawnerComponent& dae::LevelComponent::GetEnemySpawner() {
+	return *m_pEnemySpawner;
+}
+
 void dae::LevelComponent::Update(float deltaTime) {
 	if (!m_InResetAnimation) {
 		return;

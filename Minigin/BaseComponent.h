@@ -24,15 +24,15 @@ namespace dae {
 		// Gets the component from the object
 		template<typename ComponentType>
 		requires std::derived_from<ComponentType, BaseComponent>
-		[[nodiscard]] ComponentType* GetComponent() const {
+		[[nodiscard]] inline ComponentType* GetComponent() const {
 			return m_pOwner->GetComponent<ComponentType>();
 		}
 
 		// Adds a component to the object
 		template<typename ComponentType, typename... Args>
 		requires std::derived_from<ComponentType, BaseComponent>
-		ComponentType* AddComponent(Args&&... args) {
-			return m_pOwner->AddComponent<ComponentType>(args);
+		inline ComponentType* AddComponent(Args&&... args) {
+			return m_pOwner->AddComponent<ComponentType>(std::forward<Args>(args));
 		}
 
 		// Checks if the object has a component

@@ -8,6 +8,8 @@
 #include "GridNavigationComponent.h"
 #include "SlickAndSlamObserver.h"
 #include "UggAndWrongwayObserver.h"
+#include "SlickAndSlamComponent.h"
+#include "UggAndWrongwayComponent.h"
 #include "LevelComponent.h"
 #include "Scene.h"
 
@@ -64,7 +66,7 @@ dae::GameObject* dae::EnemySpawnerComponent::SpawnCoily() {
 	auto coilySprite{ coilyObject->AddComponent<SpriteComponent>("Coily Spritesheet.png", 16, 32, 2.f) };
 	auto movementComponent{ coilyObject->AddComponent<GridMovementComponent>(m_pRhombilleGridComponent, m_pLevelComponent, 0, 0, 0.5f) };
 	coilyObject->AddComponent<GridNavigationComponent>(0.5f);
-	auto coilyComponent{ coilyObject->AddComponent<CoilyComponent>() };
+	auto coilyComponent{ coilyObject->AddComponent<CoilyComponent>(m_pTargetComponent, m_pLevelComponent) };
 
 	movementComponent->SetOffsetX(32 + 16);
 	movementComponent->SetOffsetY(32);
@@ -98,8 +100,9 @@ dae::GameObject* dae::EnemySpawnerComponent::SpawnUggOrWrongWay() {
 	auto pSpriteComponent{ enemyObject->AddComponent<SpriteComponent>("Ugg Wrongway Spritesheet.png", 16, 16, 2.f) };
 	auto pMovementComponent{ enemyObject->AddComponent<GridMovementComponent>(m_pRhombilleGridComponent, m_pLevelComponent, row, col, 0.5f) };
 	auto pNavigationComponent{ enemyObject->AddComponent<GridNavigationComponent>(0.5f) };
+	enemyObject->AddComponent<UggAndWrongwayComponent>(m_pTargetComponent, m_pLevelComponent);
 
-	pNavigationComponent->SetTarget(1, rand() % 2);
+	pNavigationComponent->SetTarget(0, 0);
 
 	pMovementComponent->SetOffsetX(16);
 	pMovementComponent->SetOffsetY(16);
@@ -126,8 +129,9 @@ dae::GameObject* dae::EnemySpawnerComponent::SpawnSlickOrSlam() {
 	auto pSpriteComponent{ enemyObject->AddComponent<SpriteComponent>("Slick Sam Spritesheet.png", 12, 16, 2.f) };
 	auto pMovementComponent{ enemyObject->AddComponent<GridMovementComponent>(m_pRhombilleGridComponent, m_pLevelComponent, 0, 0, 0.5f) };
 	auto pNavigationComponent{ enemyObject->AddComponent<GridNavigationComponent>(0.5f) };
+	enemyObject->AddComponent<SlickAndSlamComponent>(m_pTargetComponent, m_pLevelComponent);
 
-	int row{ m_pRhombilleGridComponent->GetRows() -1 };
+	int row{ m_pRhombilleGridComponent->GetRows() };
 	int col{ m_pRhombilleGridComponent->GetRandomCol(row) };
 
 	pNavigationComponent->SetTarget(row, col);

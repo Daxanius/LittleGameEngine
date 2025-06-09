@@ -43,8 +43,13 @@ void dae::GridMovementComponent::Update(float deltaTime) {
 			m_row,
 			m_col
 		};
+		m_HasArrived = true;
 		m_subject.Notify(event);
 	}
+}
+
+void dae::GridMovementComponent::PostUpdate() {
+	m_HasArrived = false;
 }
 
 int dae::GridMovementComponent::GetRow() const {
@@ -69,6 +74,10 @@ int dae::GridMovementComponent::GetTargetRow() const {
 
 int dae::GridMovementComponent::GetTargetCol() const {
 	return m_targetCol;
+}
+
+bool dae::GridMovementComponent::HasArrived() const {
+	return m_HasArrived;
 }
 
 void dae::GridMovementComponent::GoToPrevPosition() {

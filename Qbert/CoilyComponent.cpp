@@ -1,6 +1,8 @@
 #include "CoilyComponent.h"
 
-dae::CoilyComponent::CoilyComponent(GameObject& pOwner) : BaseComponent(pOwner) {
+dae::CoilyComponent::CoilyComponent(GameObject& pOwner, GridMovementComponent* pPlayerMovementComponent, LevelComponent* pLevelComponent) 
+	: BaseComponent(pOwner), m_pPlayerMovementComponent(pPlayerMovementComponent), m_pLevelComponent(pLevelComponent) {
+	m_pOwnMovementComponent = GetComponent<GridMovementComponent>();
 }
 
 void dae::CoilyComponent::SetState(std::shared_ptr<AbstractCoilyState> pState) {
@@ -14,5 +16,24 @@ void dae::CoilyComponent::SetState(std::shared_ptr<AbstractCoilyState> pState) {
 }
 
 void dae::CoilyComponent::Update(float deltaTime) {
+	if (m_pLevelComponent->LevelPaused()) {
+		return;
+	}
+
 	m_pCurrentState->Update(deltaTime);
+	
+	int ownRow{ m_pOwnMovementComponent->GetRow() };
+	int ownCol{ m_pOwnMovementComponent->GetCol() };
+
+	int playerRow{ m_pPlayerMovementComponent->GetRow() };
+	int playerCol{ m_pPlayerMovementComponent->GetCol() };
+
+	if (!m_pOwnMovementComponent->IsJumping() && 
+			!m_pPlayerMovementComponent->IsJumping() && 
+			ownRow == playerRow && 
+			ownCol == playerCol
+			) {
+		m_pPlayerMovementComponent->GetComponent<LivesComponent>()->Kill();
+		return;
+	}
 }
