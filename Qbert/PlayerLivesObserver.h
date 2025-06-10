@@ -4,6 +4,7 @@
 #include "LevelComponent.h"
 #include "PlayerComponent.h"
 #include "GameObject.h"
+#include "Command.h"
 #include "Scene.h"
 
 namespace dae {

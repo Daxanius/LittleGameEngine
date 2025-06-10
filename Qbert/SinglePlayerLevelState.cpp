@@ -13,7 +13,9 @@
 #include "MoveCommand.h"
 #include "RepeatingTextureComponent.h"
 #include "RhombilleGridAnimationComponent.h"
+#include "SinglePlayerScoreDisplayState.h"
 #include "PauseCommand.h"
+#include "ChangeGameStateCommand.h"
 #include "PlayerComponent.h"
 #include "ChangeToComponent.h"
 #include "TimerComponent.h"
@@ -29,10 +31,8 @@
 #include "Qbert.h"
 
 dae::SinglePlayerGameState::SinglePlayerGameState() 
-	: AbstractGameState(), m_pScene(std::make_shared<Scene>("Level")), m_pPauseScene(std::make_shared<Scene>("Pause")),
-	m_pGameOverScene(std::make_shared<Scene>("GameOver")), m_pLevelDisplayScene(std::make_shared<Scene>("LevelDisplay")), m_Level(0), m_Score(0) {
+	: AbstractGameState(), m_pScene(std::make_shared<Scene>("Level")), m_pPauseScene(std::make_shared<Scene>("PauseMenu")), m_pLevelDisplayScene(std::make_shared<Scene>("LevelDisplay")), m_Level(0), m_Score(0) {
 	MakePauseScene();
-	MakeGameOverScene();
 	MakeGameScene();
 	MakeLevelDisplayScene();
 }
@@ -51,6 +51,10 @@ void dae::SinglePlayerGameState::MakeGameScene() {
 	auto pLevelComponent{ mapObject->AddComponent<LevelComponent>(2.f) };
 	auto pGridAnimationComponent{ mapObject->AddComponent<RhombilleGridAnimationComponent>(2.f, 4) };
 
+	auto scoreDisplayState = std::make_shared<SinglePlayerScoreDisplayState>();
+	std::shared_ptr<AbstractGameState> abstractState = std::static_pointer_cast<AbstractGameState>(scoreDisplayState);
+	pLevelComponent->AddGameOverCommand(std::make_unique<ChangeGameStateCommand>(abstractState));
+
 	auto nextTextObject(std::make_unique<GameObject>(Transform(10.f, 66.f)));
 	nextTextObject->AddComponent<TextComponent>("CHANGE TO", dae::ResourceManager::GetInstance().LoadFont("Minecraft.ttf", 16));
 
@@ -61,7 +65,7 @@ void dae::SinglePlayerGameState::MakeGameScene() {
 	m_pPlayerMovementComponent = qbertObject->AddComponent<GridMovementComponent>(pRhombileGridComponent, pLevelComponent);
 	auto pLivesComponent{ qbertObject->AddComponent<LivesComponent>(3) };
 	auto pQbertSpriteComponent{ qbertObject->AddComponent<SpriteComponent>("Qbert P1 Spritesheet.png", 17, 17, 2.f) };
-	auto pScoreComponent = qbertObject->AddComponent<ScoreComponent>();
+	auto pScoreComponent = qbertObject->AddComponent<ScoreComponent>(m_Score);
 
 	auto textBalloonObject{ std::make_unique<GameObject>() };
 	textBalloonObject->AddComponent<TextureComponent>("Qbert Curses.png", 1.f);
@@ -98,13 +102,13 @@ void dae::SinglePlayerGameState::MakeGameScene() {
 	m_pPlayerMovementComponent->GetSubject().AddObserver(std::static_pointer_cast<Observer>(Qbert::GetInstance().GetSoundObserver()));
 
 	auto scoreObject{ std::make_unique<GameObject>(Transform(10.f, 20.f)) };
-	auto pScoreTextComponent{ scoreObject->AddComponent<TextComponent>("SCORE: 0",  Qbert::GetInstance().GetFontLarge()) };
+	auto pScoreTextComponent{ scoreObject->AddComponent<TextComponent>("SCORE: 0", Qbert::GetInstance().GetFontLarge()) };
 
 	auto roundObject{ std::make_unique<GameObject>(Transform(420.f, 50.f)) };
-	auto pRoundTextComponent{ roundObject->AddComponent<TextComponent>("ROUND: 1",  Qbert::GetInstance().GetFontLarge()) };
+	auto pRoundTextComponent{ roundObject->AddComponent<TextComponent>("ROUND: 1", Qbert::GetInstance().GetFontLarge()) };
 
 	auto levelObject{ std::make_unique<GameObject>(Transform(420.f, 75.f)) };
-	auto pLevelTextComponent{ levelObject->AddComponent<TextComponent>("LEVEL: 1",  Qbert::GetInstance().GetFontLarge()) };
+	auto pLevelTextComponent{ levelObject->AddComponent<TextComponent>("LEVEL: 1", Qbert::GetInstance().GetFontLarge()) };
 
 	auto levelObserver{ std::make_shared<LevelObserver>(pScoreTextComponent, pRoundTextComponent, pLevelTextComponent) };
 	pScoreComponent->GetSubject().AddObserver(std::static_pointer_cast<Observer>(levelObserver));
@@ -119,13 +123,6 @@ void dae::SinglePlayerGameState::MakeGameScene() {
 	m_pScene->Add(std::move(qbertObject));
 	m_pScene->Add(std::move(textBalloonObject));
 	m_pScene->Add(std::move(scoreObject));
-}
-
-void dae::SinglePlayerGameState::MakeGameOverScene() {
-	auto gameOverTextObject{ std::make_unique<GameObject>(Transform((640 / 2) - 32, 75)) };
-	gameOverTextObject->AddComponent<TextComponent>("GAME OVER!", Qbert::GetInstance().GetFontLarge());
-
-
 }
 
 void dae::SinglePlayerGameState::MakeLevelDisplayScene() {

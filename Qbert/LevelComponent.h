@@ -4,6 +4,7 @@
 #include "RhombilleGridComponent.h"
 #include "PlayerComponent.h"
 #include "EnemySpawnerComponent.h"
+#include "Command.h"
 
 namespace dae {
 	class LevelComponent : public BaseComponent {
@@ -26,6 +27,8 @@ namespace dae {
 
 		void RegisterPlayer(PlayerComponent* pPlayer);
 		void RegisterSpawner(EnemySpawnerComponent* pSpawner);
+
+		void AddGameOverCommand(std::unique_ptr<Command>&& pCommand);
 
 		Subject& GetSubject();
 
@@ -59,5 +62,6 @@ namespace dae {
 		EnemySpawnerComponent* m_pEnemySpawner{};
 
 		std::vector<PlayerComponent*> m_Players;
+		std::vector<std::unique_ptr<Command>> m_gameOverCommands;
 	};
 }

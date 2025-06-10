@@ -13,6 +13,7 @@ void dae::PlayerLivesObserver::Notify(const Event& event) {
 			m_pLivesTextureComponent->SetRows(lives);
 			m_pPlayerComponent->Kill();
 			m_pLevelComponent->ResetLevel();
+
 			break;
 		}
 

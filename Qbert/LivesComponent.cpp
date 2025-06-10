@@ -19,10 +19,7 @@ int dae::LivesComponent::GetMaxLives() const {
 
 void dae::LivesComponent::Kill() {
 	m_lives = std::max(0, m_lives - 1);
-
-	Event event{ make_sdbm_hash("killed") };
-	event.data = m_lives;
-	m_subject.Notify(std::move(event));
+	m_subject.Notify("killed", m_lives);
 }
 
 void dae::LivesComponent::AddLives(int amount) {

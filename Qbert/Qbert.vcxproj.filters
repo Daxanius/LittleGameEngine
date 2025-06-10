@@ -144,6 +144,9 @@
     <ClCompile Include="SinglePlayerIntroGameState.cpp">
       <Filter>Source\States\Game</Filter>
     </ClCompile>
+    <ClCompile Include="SinglePlayerScoreDisplayState.cpp">
+      <Filter>Source\States\Game</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="KillCommand.h">
@@ -264,6 +267,9 @@
       <Filter>Source\Observers</Filter>
     </ClInclude>
     <ClInclude Include="SinglePlayerIntroGameState.h">
+      <Filter>Source\States\Game</Filter>
+    </ClInclude>
+    <ClInclude Include="SinglePlayerScoreDisplayState.h">
       <Filter>Source\States\Game</Filter>
     </ClInclude>
   </ItemGroup>

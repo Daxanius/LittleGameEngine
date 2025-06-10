@@ -69,6 +69,10 @@ void dae::LevelComponent::RegisterSpawner(EnemySpawnerComponent* pSpawner) {
 	m_pEnemySpawner = pSpawner;
 }
 
+void dae::LevelComponent::AddGameOverCommand(std::unique_ptr<Command>&& pCommand) {
+	m_gameOverCommands.emplace_back(std::forward<std::unique_ptr<Command>>(pCommand));
+}
+
 dae::Subject& dae::LevelComponent::GetSubject() {
 	return m_Subject;
 }
@@ -96,6 +100,12 @@ void dae::LevelComponent::Update(float deltaTime) {
 		for (auto player : m_Players) {
 			player->GetOwner().Enable();
 			player->Reset(); // Reset the player component
+
+			if (player->GetLivesComponent()->GetLives() <= 0) {
+				for (auto& command : m_gameOverCommands) {
+					command->Execute();
+				}
+			}
 		}
 
 		if (m_pEnemySpawner != nullptr) {
