@@ -11,7 +11,7 @@
 #include "ResourceManager.h"
 #include "MenuCommand.h"
 #include "Qbert.h"
-#include "SinglePlayerGameState.h"
+#include "SinglePlayerLevelState.h"
 #include "SinglePlayerIntroGameState.h"
 #include "Scene.h"
 #include <memory>

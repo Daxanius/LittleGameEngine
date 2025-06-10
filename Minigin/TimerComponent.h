@@ -1,6 +1,7 @@
 #pragma once
 #include "BaseComponent.h"
 #include "Subject.h"
+#include "Command.h"
 
 namespace dae {
 	class TimerComponent final : public BaseComponent {
@@ -21,6 +22,7 @@ namespace dae {
 		void PostUpdate() override {};
 		void Render() override {};
 
+		void AddCommand(std::unique_ptr<Command>&& command);
 
 		TimerComponent(const TimerComponent&) = delete;
 		TimerComponent& operator=(const TimerComponent&) = delete;
@@ -33,5 +35,7 @@ namespace dae {
 		bool m_isPaused{ true };
 
 		Subject m_Subject{};
+
+		std::vector<std::unique_ptr<Command>> m_commands;
 	};
 }

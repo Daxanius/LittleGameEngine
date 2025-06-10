@@ -87,7 +87,7 @@
     <ClCompile Include="MenuGameState.cpp">
       <Filter>Source\States\Game</Filter>
     </ClCompile>
-    <ClCompile Include="SinglePlayerGameState.cpp">
+    <ClCompile Include="SinglePlayerLevelState.cpp">
       <Filter>Source\States\Game</Filter>
     </ClCompile>
     <ClCompile Include="AbstractCoilyState.cpp">
@@ -206,7 +206,7 @@
     <ClInclude Include="MenuGameState.h">
       <Filter>Source\States\Game</Filter>
     </ClInclude>
-    <ClInclude Include="SinglePlayerGameState.h">
+    <ClInclude Include="SinglePlayerLevelState.h">
       <Filter>Source\States\Game</Filter>
     </ClInclude>
     <ClInclude Include="AbstractCoilyState.h">

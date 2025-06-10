@@ -23,7 +23,7 @@
 #include "TextComponent.h"
 #include "LevelObserver.h"
 #include "LevelComponent.h"
-#include "SinglePlayerGameState.h"
+#include "SinglePlayerLevelState.h"
 #include "ChangeGameStateCommand.h"
 #include "Qbert.h"
 

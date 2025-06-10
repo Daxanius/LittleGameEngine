@@ -21,13 +21,17 @@ namespace dae {
 		void MakePauseScene();
 		void MakeGameScene();
 		void MakeGameOverScene();
+		void MakeLevelDisplayScene();
 
 		std::shared_ptr<Scene> m_pScene;
 		std::shared_ptr<Scene> m_pPauseScene;
 		std::shared_ptr<Scene> m_pGameOverScene;
+		std::shared_ptr<Scene> m_pLevelDisplayScene;
 
 		GridMovementComponent* m_pPlayerMovementComponent{};
-		ScoreComponent* m_pScoreComponent{};
+
+		int m_Score;
+		int m_Level;
 	};
 }
 
