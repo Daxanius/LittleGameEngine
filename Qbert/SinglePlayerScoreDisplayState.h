@@ -1,6 +1,7 @@
 #pragma once
 #include "AbstractGameState.h"
 #include "GridMovementComponent.h"
+#include "TextInputComponent.h"
 #include "ScoreComponent.h"
 #include "Scene.h"
 #include <memory>
@@ -19,5 +20,7 @@ namespace dae {
 		~SinglePlayerScoreDisplayState() = default;
 	private:
 		std::shared_ptr<Scene> m_pScene;
+
+		TextInputComponent* m_pTextInputComponent{};
 	};
 }

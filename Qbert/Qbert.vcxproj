@@ -205,6 +205,8 @@
     <ClCompile Include="SlickAndSlamComponent.cpp" />
     <ClCompile Include="SlickAndSlamObserver.cpp" />
     <ClCompile Include="SoundObserver.cpp" />
+    <ClCompile Include="TextInputCommand.cpp" />
+    <ClCompile Include="TextInputComponent.cpp" />
     <ClCompile Include="UggAndWrongwayComponent.cpp" />
     <ClCompile Include="UggAndWrongwayObserver.cpp" />
   </ItemGroup>
@@ -248,6 +250,8 @@
     <ClInclude Include="SlickAndSlamComponent.h" />
     <ClInclude Include="SlickAndSlamObserver.h" />
     <ClInclude Include="SoundObserver.h" />
+    <ClInclude Include="TextInputCommand.h" />
+    <ClInclude Include="TextInputComponent.h" />
     <ClInclude Include="UggAndWrongwayComponent.h" />
     <ClInclude Include="UggAndWrongwayObserver.h" />
   </ItemGroup>

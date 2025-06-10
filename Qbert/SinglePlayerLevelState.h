@@ -28,8 +28,8 @@ namespace dae {
 
 		GridMovementComponent* m_pPlayerMovementComponent{};
 
-		int m_Score;
-		int m_Level;
+		int m_score;
+		int m_level;
 	};
 }
 

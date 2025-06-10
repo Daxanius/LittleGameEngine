@@ -31,7 +31,7 @@
 #include "Qbert.h"
 
 dae::SinglePlayerGameState::SinglePlayerGameState() 
-	: AbstractGameState(), m_pScene(std::make_shared<Scene>("Level")), m_pPauseScene(std::make_shared<Scene>("PauseMenu")), m_pLevelDisplayScene(std::make_shared<Scene>("LevelDisplay")), m_Level(0), m_Score(0) {
+	: AbstractGameState(), m_pScene(std::make_shared<Scene>("Level")), m_pPauseScene(std::make_shared<Scene>("PauseMenu")), m_pLevelDisplayScene(std::make_shared<Scene>("LevelDisplay")), m_level(0), m_score(0) {
 	MakePauseScene();
 	MakeGameScene();
 	MakeLevelDisplayScene();
@@ -65,7 +65,7 @@ void dae::SinglePlayerGameState::MakeGameScene() {
 	m_pPlayerMovementComponent = qbertObject->AddComponent<GridMovementComponent>(pRhombileGridComponent, pLevelComponent);
 	auto pLivesComponent{ qbertObject->AddComponent<LivesComponent>(3) };
 	auto pQbertSpriteComponent{ qbertObject->AddComponent<SpriteComponent>("Qbert P1 Spritesheet.png", 17, 17, 2.f) };
-	auto pScoreComponent = qbertObject->AddComponent<ScoreComponent>(m_Score);
+	auto pScoreComponent = qbertObject->AddComponent<ScoreComponent>(m_score);
 
 	auto textBalloonObject{ std::make_unique<GameObject>() };
 	textBalloonObject->AddComponent<TextureComponent>("Qbert Curses.png", 1.f);
@@ -128,7 +128,7 @@ void dae::SinglePlayerGameState::MakeGameScene() {
 void dae::SinglePlayerGameState::MakeLevelDisplayScene() {
 	auto levelDisplayObject{ std::make_unique<GameObject>(Transform((640 / 2) - 240, 50)) };
 
-	switch (m_Level) {
+	switch (m_level) {
 		case 0:
 			levelDisplayObject->AddComponent<TextureComponent>("Level 01 Title.png");
 			break;

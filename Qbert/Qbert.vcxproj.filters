@@ -147,6 +147,12 @@
     <ClCompile Include="SinglePlayerScoreDisplayState.cpp">
       <Filter>Source\States\Game</Filter>
     </ClCompile>
+    <ClCompile Include="TextInputComponent.cpp">
+      <Filter>Source\Components</Filter>
+    </ClCompile>
+    <ClCompile Include="TextInputCommand.cpp">
+      <Filter>Source\Commands</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="KillCommand.h">
@@ -271,6 +277,12 @@
     </ClInclude>
     <ClInclude Include="SinglePlayerScoreDisplayState.h">
       <Filter>Source\States\Game</Filter>
+    </ClInclude>
+    <ClInclude Include="TextInputComponent.h">
+      <Filter>Source\Components</Filter>
+    </ClInclude>
+    <ClInclude Include="TextInputCommand.h">
+      <Filter>Source\Commands</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>
