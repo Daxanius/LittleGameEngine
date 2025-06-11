@@ -29,7 +29,7 @@ namespace dae {
 		TextInputComponent& operator=(TextInputComponent&&) = delete;
 		~TextInputComponent() = default;
 	private:
-		static constexpr std::string_view AVAILABLE_CHARACTERS = "_ABCDEFHHIJKLMNOPQRSTUVWXYZ";
+		static constexpr std::string_view AVAILABLE_CHARACTERS = "_ABCDEFGHIJKLMNOPQRSTUVWXYZ";
 
 		std::shared_ptr<Font> m_font;
 
