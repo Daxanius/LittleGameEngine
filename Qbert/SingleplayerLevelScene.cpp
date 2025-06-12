@@ -18,12 +18,14 @@
 #include "TimerComponent.h"
 #include "PlayerLivesObserver.h"
 #include "EnemySpawnerComponent.h"
+#include "PauseScene.h"
 #include "ParagraphComponent.h"
 #include "TextureComponent.h"
 #include "ScoreComponent.h"
 #include "TextComponent.h"
 #include "LevelObserver.h"
 #include "LevelComponent.h"
+#include "SceneManager.h"
 #include <iostream>
 #include "Qbert.h"
 
@@ -111,6 +113,9 @@ void dae::SingleplayerLevelScene::OnSetup() {
 
 void dae::SingleplayerLevelScene::OnEnter() {
 	InputManager::GetInstance().ClearAllBindings();
+
+	std::unique_ptr<Scene> pauseScene{ std::make_unique<PauseScene>("SingleplayerLevel")};
+	SceneManager::GetInstance().AddScene(std::move(pauseScene));
 
 	InputManager::GetInstance().BindKeyboardCommand(
 		Keyboard::KeyState{ Keyboard::Key::Up, Keyboard::ActionType::Press },
