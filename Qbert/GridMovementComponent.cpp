@@ -7,7 +7,7 @@ dae::GridMovementComponent::GridMovementComponent(GameObject& pOwner, RhombilleG
 }
 
 void dae::GridMovementComponent::Update(float deltaTime) {
-	if (m_pLevelComponent->LevelPaused() || m_FreeMove) {
+	if (m_pLevelComponent->LevelPaused()) {
 		return;
 	}
 
@@ -226,14 +226,6 @@ void dae::GridMovementComponent::CancelJump() {
 
 	m_elapsedJumpTime = 0.f;
 	m_endPos = ToStandingPosition(m_targetRow, m_targetCol);
-}
-
-bool dae::GridMovementComponent::IsFreeMove() const {
-	return m_FreeMove;
-}
-
-void dae::GridMovementComponent::SetFreeMove(bool freeMove) {
-	m_FreeMove = freeMove;
 }
 
 bool dae::GridMovementComponent::IsJumping() const {

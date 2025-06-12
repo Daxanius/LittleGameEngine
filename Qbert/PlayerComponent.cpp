@@ -56,11 +56,9 @@ void dae::PlayerComponent::SetInvulnerable(bool value) {
 
 void dae::PlayerComponent::EnableFreeMovement() {
 	m_pGridMovementComponent->Disable();
-	m_pGridMovementComponent->SetFreeMove(true);
 	m_pGridMovementComponent->CancelJump();
 }
 
 void dae::PlayerComponent::DisableFreeMovement() {
 	m_pGridMovementComponent->Enable();
-	m_pGridMovementComponent->SetFreeMove(false);
 }

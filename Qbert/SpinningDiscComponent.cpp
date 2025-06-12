@@ -48,8 +48,7 @@ bool dae::SpinningDiscComponent::TransportPlayer(PlayerComponent* pPlayerCompone
 	m_pCurrentPlayer = pPlayerComponent;
 	m_pCurrentPlayer->EnableFreeMovement();
 	m_pCurrentPlayer->SetInvulnerable(true);
-	m_pCurrentPlayer->GetOwner().SetParent(&GetOwner(), false);
-	m_pCurrentPlayer->GetOwner().SetLocalTransform(Transform(0.f, 0.f));
+	m_pCurrentPlayer->GetOwner().SetParent(&GetOwner(), true);
 	m_elapsedTime = 0.f;
 
 	m_startPosition = GetOwner().GetWorldTransform().GetPosition();
