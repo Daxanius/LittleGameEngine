@@ -20,6 +20,7 @@ namespace dae {
 		~SingleplayerLevelScene() = default;
 	private:
 		GridMovementComponent* m_pPlayerMovementComponent{};
+		ScoreComponent* m_pScoreComponent{};
 		Level m_levelInfo{};
 
 		int m_score;

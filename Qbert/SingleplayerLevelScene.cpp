@@ -60,9 +60,9 @@ void dae::SingleplayerLevelScene::OnSetup() {
 	m_pPlayerMovementComponent = qbertObject->AddComponent<GridMovementComponent>(pRhombileGridComponent, pLevelComponent);
 	auto pLivesComponent{ qbertObject->AddComponent<LivesComponent>(3) };
 	auto pQbertSpriteComponent{ qbertObject->AddComponent<SpriteComponent>("Qbert P1 Spritesheet.png", 17, 17, 2.f) };
-	auto pScoreComponent = qbertObject->AddComponent<ScoreComponent>(m_score);
+	m_pScoreComponent = qbertObject->AddComponent<ScoreComponent>(m_score);
 
-	pLevelComponent->AddNextLevelCommand(std::make_unique<NextLevelCommand>(pScoreComponent, m_level + 1));
+	pLevelComponent->AddNextLevelCommand(std::make_unique<NextLevelCommand>(m_pScoreComponent, m_level + 1));
 
 	auto textBalloonObject{ std::make_unique<GameObject>() };
 	textBalloonObject->AddComponent<TextureComponent>("Qbert Curses.png", 1.f);
@@ -94,7 +94,7 @@ void dae::SingleplayerLevelScene::OnSetup() {
 	pLevelComponent->RegisterPlayer(pPlayerComponent);
 	pLevelComponent->RegisterSpawner(pEnemySpawner);
 
-	auto movementObserver{ std::make_shared<PlayerMovementObserver>(pQbertSpriteComponent, pRhombileGridComponent, pLivesComponent, pScoreComponent, pLevelComponent, pGridAnimationComponent) };
+	auto movementObserver{ std::make_shared<PlayerMovementObserver>(pQbertSpriteComponent, pRhombileGridComponent, pLivesComponent, m_pScoreComponent, pLevelComponent, pGridAnimationComponent) };
 	m_pPlayerMovementComponent->GetSubject().AddObserver(std::static_pointer_cast<Observer>(movementObserver));
 	m_pPlayerMovementComponent->GetSubject().AddObserver(std::static_pointer_cast<Observer>(Qbert::GetInstance().GetSoundObserver()));
 
@@ -108,7 +108,7 @@ void dae::SingleplayerLevelScene::OnSetup() {
 	auto pLevelTextComponent{ levelObject->AddComponent<TextComponent>("LEVEL:1", Qbert::GetInstance().GetFontLarge()) };
 
 	auto levelObserver{ std::make_shared<LevelObserver>(pScoreTextComponent, pRoundTextComponent, pLevelTextComponent) };
-	pScoreComponent->GetSubject().AddObserver(std::static_pointer_cast<Observer>(levelObserver));
+	m_pScoreComponent->GetSubject().AddObserver(std::static_pointer_cast<Observer>(levelObserver));
 	pLevelComponent->GetSubject().AddObserver(std::static_pointer_cast<Observer>(levelObserver));
 
 	Add(std::move(livesObject));
@@ -127,6 +127,11 @@ void dae::SingleplayerLevelScene::OnEnter() {
 
 	std::unique_ptr<Scene> pauseScene{ std::make_unique<PauseScene>("SingleplayerLevel")};
 	SceneManager::GetInstance().AddScene(std::move(pauseScene));
+
+	InputManager::GetInstance().BindKeyboardCommand(
+		Keyboard::KeyState{ Keyboard::Key::F1, Keyboard::ActionType::Press },
+		std::move(std::make_unique<NextLevelCommand>(m_pScoreComponent, m_level + 1))
+	);
 
 	InputManager::GetInstance().BindKeyboardCommand(
 		Keyboard::KeyState{ Keyboard::Key::Up, Keyboard::ActionType::Press },
