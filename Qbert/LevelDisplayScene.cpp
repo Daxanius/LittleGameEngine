@@ -26,7 +26,7 @@ void dae::LevelDisplayScene::OnSetup() {
 	m_pTimerComponent = levelDisplayObject->AddComponent<TimerComponent>();
 	m_pTimerComponent->AddCommand(std::make_unique<ChangeSceneCommand>("SingleplayerLevel"));
 
-	auto gamemodeTextObject{ std::make_unique<GameObject>(Transform((640 / 2) - 60, 350)) };
+	auto gamemodeTextObject{ std::make_unique<GameObject>(Transform((640 / 2) - 100, 350)) };
 	gamemodeTextObject->AddComponent<TextComponent>("Solo Mode", Qbert::GetInstance().GetFontLarge());
 
 	Add(std::move(levelDisplayObject));

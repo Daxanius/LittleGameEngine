@@ -50,9 +50,9 @@ void dae::SingleplayerLevelScene::OnSetup() {
 	pLevelComponent->AddGameOverCommand(std::make_unique<ChangeSceneCommand>("SingleplayerScoreDisplay"));
 
 	auto nextTextObject(std::make_unique<GameObject>(Transform(10.f, 66.f)));
-	nextTextObject->AddComponent<TextComponent>("CHANGE TO", dae::ResourceManager::GetInstance().LoadFont("Minecraft.ttf", 16));
+	nextTextObject->AddComponent<TextComponent>("CHANGE TO", Qbert::GetInstance().GetFontSmall());
 
-	auto nextObject{ std::make_unique<GameObject>(Transform(120.f, 60.f) )};
+	auto nextObject{ std::make_unique<GameObject>(Transform(140.f, 60.f) )};
 	nextObject->AddComponent<ChangeToComponent>(pLevelComponent, "Color Icons Spritesheet.png", 14, 12, 2.f);
 
 	auto qbertObject{ std::make_unique<GameObject>() };
@@ -96,13 +96,13 @@ void dae::SingleplayerLevelScene::OnSetup() {
 	m_pPlayerMovementComponent->GetSubject().AddObserver(std::static_pointer_cast<Observer>(Qbert::GetInstance().GetSoundObserver()));
 
 	auto scoreObject{ std::make_unique<GameObject>(Transform(10.f, 20.f)) };
-	auto pScoreTextComponent{ scoreObject->AddComponent<TextComponent>("SCORE: 0", Qbert::GetInstance().GetFontLarge()) };
+	auto pScoreTextComponent{ scoreObject->AddComponent<TextComponent>("SCORE:0", Qbert::GetInstance().GetFontLarge()) };
 
 	auto roundObject{ std::make_unique<GameObject>(Transform(420.f, 50.f)) };
-	auto pRoundTextComponent{ roundObject->AddComponent<TextComponent>("ROUND: 1", Qbert::GetInstance().GetFontLarge()) };
+	auto pRoundTextComponent{ roundObject->AddComponent<TextComponent>("ROUND:1", Qbert::GetInstance().GetFontLarge()) };
 
 	auto levelObject{ std::make_unique<GameObject>(Transform(420.f, 75.f)) };
-	auto pLevelTextComponent{ levelObject->AddComponent<TextComponent>("LEVEL: 1", Qbert::GetInstance().GetFontLarge()) };
+	auto pLevelTextComponent{ levelObject->AddComponent<TextComponent>("LEVEL:1", Qbert::GetInstance().GetFontLarge()) };
 
 	auto levelObserver{ std::make_shared<LevelObserver>(pScoreTextComponent, pRoundTextComponent, pLevelTextComponent) };
 	pScoreComponent->GetSubject().AddObserver(std::static_pointer_cast<Observer>(levelObserver));

@@ -165,6 +165,9 @@
     <ClCompile Include="Score.cpp">
       <Filter>Source\Model</Filter>
     </ClCompile>
+    <ClCompile Include="ScoreboardScene.cpp">
+      <Filter>Source\Scenes</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="KillCommand.h">
@@ -301,6 +304,9 @@
     </ClInclude>
     <ClInclude Include="Score.h">
       <Filter>Source\Model</Filter>
+    </ClInclude>
+    <ClInclude Include="ScoreboardScene.h">
+      <Filter>Source\Scenes</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>

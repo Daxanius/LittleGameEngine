@@ -32,34 +32,34 @@ dae::SingleplayerIntroScene::SingleplayerIntroScene()
 
 void dae::SingleplayerIntroScene::OnSetup() {
 	auto instructionsTitleObject{ std::make_unique<GameObject>(Transform((640 / 2) - 220, 50)) };
-	instructionsTitleObject->AddComponent<TextComponent>("INSTRUCTIONS - SOLO MODE", Qbert::GetInstance().GetFontLarge());
+	instructionsTitleObject->AddComponent<TextComponent>("INSTRUCTIONS - SOLO MODE", Qbert::GetInstance().GetFontMedium());
 
-	auto descriptionObject{ std::make_unique<GameObject>(Transform((640 / 2) - 200, 120)) };
+	auto descriptionObject{ std::make_unique<GameObject>(Transform((640 / 2) - 240, 120)) };
 	descriptionObject->AddComponent<ParagraphComponent>(
 			"Turn all the cubes of the pyramid in the same color!\n"
 			"Step on them to make them change, but be careful\n"
 			"to not fall or get hit by enemies while doing so.",
-			Qbert::GetInstance().GetFontSmall()
+			Qbert::GetInstance().GetFontVerySmall()
 	);
 
 	auto wasdObject{ std::make_unique<GameObject>(Transform(50, 250)) };
 	wasdObject->AddComponent<TextureComponent>("P1 Controls.png", 0.6f);
 
-	auto orObject{ std::make_unique<GameObject>(Transform(280, 300)) };
+	auto orObject{ std::make_unique<GameObject>(Transform(260, 300)) };
 	orObject->AddComponent<TextComponent>("OR", Qbert::GetInstance().GetFontSmall());
 
-	auto controlsObject{ std::make_unique<GameObject>(Transform(350, 260)) };
+	auto controlsObject{ std::make_unique<GameObject>(Transform(320, 260)) };
 	controlsObject->AddComponent<ParagraphComponent>(
 		"Move up/right -> DPAD UP\n"
 		"Move up/left -> DPAD LEFT\n"
 		"Move down/left -> DPAD DOWN\n"
 		"Move down/right -> DPAD RIGHT\n"
 		"Pause game -> START",
-		Qbert::GetInstance().GetFontSmall()
+		Qbert::GetInstance().GetFontVerySmall()
 	);
 
-	auto moveOnPromptObject{ std::make_unique<GameObject>(Transform((640 / 2) - 180, 440)) };
-	moveOnPromptObject->AddComponent<TextComponent>("Press ENTER or START to begin the 1st level", Qbert::GetInstance().GetFontSmall());
+	auto moveOnPromptObject{ std::make_unique<GameObject>(Transform((640 / 2) - 200, 440)) };
+	moveOnPromptObject->AddComponent<TextComponent>("Press ENTER or START to begin the 1st level", Qbert::GetInstance().GetFontVerySmall());
 
 	Add(std::move(instructionsTitleObject));
 	Add(std::move(descriptionObject));

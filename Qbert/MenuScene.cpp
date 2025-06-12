@@ -23,7 +23,7 @@ void dae::MenuScene::OnSetup() {
 	auto titleObject{ std::make_unique<GameObject>(Transform((640 / 2) - (474 / 2), 50)) };
 	titleObject->AddComponent<TextureComponent>("Game Title.png");
 
-	auto menuObject{ std::make_unique<GameObject>(Transform(640 / 2 - 85, 270)) };
+	auto menuObject{ std::make_unique<GameObject>(Transform(640 / 2 - 120, 270)) };
 	m_pSelectionMenuComponent = menuObject->AddComponent<SelectionMenuComponent>(Qbert::GetInstance().GetFontLarge(), Color{252, 203, 43}, 12, ResourceManager::GetInstance().LoadTexture("Selection Arrow.png"));
 
 	SelectionMenuComponent::Option optionSolo{ "Solo Mode", std::make_unique<ChangeSceneCommand>("SingleplayerIntro")};
@@ -33,8 +33,11 @@ void dae::MenuScene::OnSetup() {
 	m_pSelectionMenuComponent->AddOption(std::move(optionCoop));
 
 	SelectionMenuComponent::Option optionVersus{ "Versus Mode", std::make_unique<ChangeSceneCommand>("SingleplayerIntro") };
-
 	m_pSelectionMenuComponent->AddOption(std::move(optionVersus));
+
+	SelectionMenuComponent::Option optionScoreboard{ "Scoreboard", std::make_unique<ChangeSceneCommand>("Scoreboard") };
+	m_pSelectionMenuComponent->AddOption(std::move(optionScoreboard));
+
 	m_pSelectionMenuComponent->GetSubject().AddObserver(std::static_pointer_cast<Observer>(Qbert::GetInstance().GetSoundObserver()));
 
 	Add(std::move(titleObject));

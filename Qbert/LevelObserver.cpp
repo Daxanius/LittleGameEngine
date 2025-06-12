@@ -10,19 +10,19 @@ void dae::LevelObserver::Notify(const Event& event) {
 		case make_sdbm_hash("score_increased"):
 		{
 			auto score{ event.GetValue<std::pair<int, int>>() };
-			m_pScoreText->SetText("SCORE: " + std::to_string(score.second));
+			m_pScoreText->SetText("SCORE:" + std::to_string(score.second));
 			break;
 		}
 		case make_sdbm_hash("next_round"):
 		{
 			int round{ event.GetValue<int>() };
-			m_pRoundText->SetText("ROUND: " + std::to_string(round+1));
+			m_pRoundText->SetText("ROUND:" + std::to_string(round+1));
 			break;
 		}
 		case make_sdbm_hash("next_level"):
 		{
 			int level{ event.GetValue<int>() };
-			m_pLevelText->SetText("LEVEL: " + std::to_string(level+1));
+			m_pLevelText->SetText("LEVEL:" + std::to_string(level+1));
 			break;
 		}
 	}

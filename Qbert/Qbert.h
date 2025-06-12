@@ -18,6 +18,7 @@ namespace dae {
 		std::shared_ptr<Font> GetFontLarge() const;
 		std::shared_ptr<Font> GetFontMedium() const;
 		std::shared_ptr<Font> GetFontSmall() const;
+		std::shared_ptr<Font> GetFontVerySmall() const;
 		std::shared_ptr<SoundObserver> GetSoundObserver() const;
 
 		const std::vector<Level>& GetLevelInfo() const;
@@ -34,6 +35,7 @@ namespace dae {
 		std::shared_ptr<Font> m_pFontLarge;
 		std::shared_ptr<Font> m_pFontMedium;
 		std::shared_ptr<Font> m_pFontSmall;
+		std::shared_ptr<Font> m_pFontVerySmall;
 
 		std::shared_ptr<SoundObserver> m_pSoundObserver;
 

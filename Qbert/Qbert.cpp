@@ -14,15 +14,17 @@
 #include "SingleplayerLevelScene.h"
 #include "SingleplayerIntroScene.h"
 #include "SingleplayerScoreDisplayScene.h"
+#include "ScoreboardScene.h"
 #include "LevelDisplayScene.h"
 #include "PauseScene.h"
 #include "MenuScene.h"
 #include "hash.h"
 
 dae::Qbert::Qbert() : m_pSoundObserver(std::make_shared<SoundObserver>()) {
-	m_pFontLarge = dae::ResourceManager::GetInstance().LoadFont("Minecraft.ttf", 30);
-	m_pFontMedium = dae::ResourceManager::GetInstance().LoadFont("Minecraft.ttf", 22);
-	m_pFontSmall = dae::ResourceManager::GetInstance().LoadFont("Minecraft.ttf", 16);
+	m_pFontLarge = dae::ResourceManager::GetInstance().LoadFont("Zig.ttf", 30);
+	m_pFontMedium = dae::ResourceManager::GetInstance().LoadFont("Zig.ttf", 22);
+	m_pFontSmall = dae::ResourceManager::GetInstance().LoadFont("Zig.ttf", 16);
+	m_pFontVerySmall = dae::ResourceManager::GetInstance().LoadFont("Zig.ttf", 12);
 
 	m_levelInfo = Level::FromFile("../Data/Levels.json");
 	m_scoreInfo = Score::FromFile("../Data/Scores.json");
@@ -44,6 +46,9 @@ void dae::Qbert::Start() {
 	std::unique_ptr<Scene> levelDisplayScene{ std::make_unique<LevelDisplayScene>() };
 	SceneManager::GetInstance().AddScene(std::move(levelDisplayScene));
 
+	std::unique_ptr<Scene> scoreboardScene{ std::make_unique<ScoreboardScene>(10) };
+	SceneManager::GetInstance().AddScene(std::move(scoreboardScene));
+
 	SceneManager::GetInstance().SetScene("Menu");
 }
 
@@ -57,6 +62,10 @@ std::shared_ptr<dae::Font> dae::Qbert::GetFontMedium() const {
 
 std::shared_ptr<dae::Font> dae::Qbert::GetFontSmall() const {
 	return m_pFontSmall;
+}
+
+std::shared_ptr<dae::Font> dae::Qbert::GetFontVerySmall() const {
+	return m_pFontVerySmall;
 }
 
 std::shared_ptr<dae::SoundObserver> dae::Qbert::GetSoundObserver() const {
