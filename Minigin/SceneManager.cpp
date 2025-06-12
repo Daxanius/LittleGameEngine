@@ -1,65 +1,65 @@
 #include "SceneManager.h"
-#include "Scene.h"
 #include <algorithm>
+#include <iostream>
 
-void dae::SceneManager::AddScene(std::shared_ptr<Scene> scene) {
-	m_pendingAdditions.emplace_back(scene);
+void dae::SceneManager::AddScene(std::unique_ptr<Scene> scene) {
+	scene->Setup();
+	m_scenes[scene->GetName()] = std::move(scene);
 }
 
-void dae::SceneManager::RemoveScene(std::shared_ptr<Scene> scene) {
-	m_pendingRemovals.emplace_back(scene);
+void dae::SceneManager::RemoveScene(const std::string& name) {
+	 m_scenes.erase(name);
 }
 
-void dae::SceneManager::SetScene(std::shared_ptr<Scene> scene) {
-	m_pendingSceneReplacement = scene;
-}
+void dae::SceneManager::SetScene(const std::string& name) {
+	m_nextScene = name;
 
-std::shared_ptr<dae::Scene> dae::SceneManager::GetActiveScene() const {
-	return m_scenes.empty() ? nullptr : m_scenes.front();
-}
-
-void dae::SceneManager::FixedUpdate() {
-	for (auto& scene : m_scenes) {
-		scene->FixedUpdate();
+	// If there's no active scene yet, set it immediately
+	if (m_activeScene == nullptr) {
+		auto it = m_scenes.find(name);
+		if (it != m_scenes.end()) {
+			m_activeScene = it->second.get();
+			m_nextScene.reset();
+			m_activeScene->Enter();
+		} else {
+			std::cerr << "Scene \"" << name << "\" not found.\n";
+			m_nextScene.reset();
+		}
 	}
 }
 
-void dae::SceneManager::Update(float deltaTIme)
+dae::Scene* dae::SceneManager::GetActiveScene() const {
+	return m_activeScene;
+}
+
+void dae::SceneManager::FixedUpdate() {
+	if (m_activeScene != nullptr) {
+		m_activeScene->FixedUpdate();
+	}
+}
+
+void dae::SceneManager::Update(float deltaTime)
 {
-	ApplyPendingChanges();
-	for(auto& scene : m_scenes) {
-		scene->Update(deltaTIme);
+	if (m_activeScene != nullptr) {
+		m_activeScene->Update(deltaTime);
+	}
+
+	if (m_nextScene.has_value()) {
+		auto it = m_scenes.find(m_nextScene.value());
+		if (it != m_scenes.end()) {
+			m_activeScene = it->second.get();
+			m_nextScene.reset();
+			m_activeScene->Enter();
+		} else {
+			std::cerr << "Scene \"" << m_nextScene.value() << "\" not found.\n";
+			m_nextScene.reset();
+		}
 	}
 }
 
 void dae::SceneManager::Render()
 {
-	for (const auto& scene : m_scenes) {
-		scene->Render();
+	if (m_activeScene != nullptr) {
+		m_activeScene->Render();
 	}
-}
-
-void dae::SceneManager::ApplyPendingChanges() {
-	if (m_pendingSceneReplacement) {
-		m_scenes.clear();
-		m_scenes.emplace_back(m_pendingSceneReplacement);
-		m_pendingSceneReplacement.reset();
-		m_pendingAdditions.clear();
-		m_pendingRemovals.clear();
-		return;
-	}
-
-	// Remove pending scenes
-	for (const auto& scene : m_pendingRemovals) {
-		std::erase(m_scenes, scene);
-	}
-
-	m_pendingRemovals.clear();
-
-	// Add new scenes
-	for (const auto& scene : m_pendingAdditions) {
-		scene->OnEnter();
-		m_scenes.emplace_back(scene);
-	}
-	m_pendingAdditions.clear();
 }

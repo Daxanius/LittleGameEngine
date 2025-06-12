@@ -165,7 +165,7 @@
     <ClInclude Include="Color.h">
       <Filter>Engine\Core</Filter>
     </ClInclude>
-    <ClInclude Include="LoadSceneCommand.h">
+    <ClInclude Include="ChangeSceneCommand.h">
       <Filter>Engine\Commands</Filter>
     </ClInclude>
     <ClInclude Include="LogCommand.h">
@@ -284,7 +284,7 @@
     <ClCompile Include="TextureComponent.cpp">
       <Filter>Engine\Components</Filter>
     </ClCompile>
-    <ClCompile Include="LoadSceneCommand.cpp">
+    <ClCompile Include="ChangeSceneCommand.cpp">
       <Filter>Engine\Commands</Filter>
     </ClCompile>
     <ClCompile Include="LogCommand.cpp">

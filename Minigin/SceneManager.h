@@ -2,37 +2,37 @@
 #include <vector>
 #include <string>
 #include <memory>
+#include <unordered_map>
+#include <optional>
 #include "Singleton.h"
 #include "GameObject.h"
+#include "Scene.h"
 
 namespace dae
 {
-	class Scene;
 	class SceneManager final : public Singleton<SceneManager>
 	{
 	public:
 		// Adds a scene by pointer
-		void AddScene(std::shared_ptr<Scene> scene);
+		void AddScene(std::unique_ptr<Scene> scene);
 
-		// Removes a scene by pointer
-		void RemoveScene(std::shared_ptr<Scene> scene);
+		// Removes a scene
+		void RemoveScene(const std::string& name);
 
 		// Sets the scene to a singular scene
-		void SetScene(std::shared_ptr<Scene> scene);
+		void SetScene(const std::string& name);
 
-		std::shared_ptr<Scene> GetActiveScene() const;
+		Scene* GetActiveScene() const;
 
 		void FixedUpdate();
 		void Update(float deltaTime);
 		void Render();
 	private:
-		void ApplyPendingChanges();
+		std::unordered_map<std::string, std::unique_ptr<Scene>> m_scenes;
 
-		std::vector<std::shared_ptr<Scene>> m_scenes;
+		// There is no reason to run more than a single scene at a time
+		Scene* m_activeScene{};
 
-		std::shared_ptr<Scene> m_pendingSceneReplacement;
-
-		std::vector<std::shared_ptr<Scene>> m_pendingAdditions;
-		std::vector<std::shared_ptr<Scene>> m_pendingRemovals;
+		std::optional<std::string> m_nextScene;
 	};
 }

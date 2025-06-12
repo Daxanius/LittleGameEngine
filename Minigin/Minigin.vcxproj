@@ -208,7 +208,7 @@
     <ClInclude Include="..\3rdParty\ImGui\imstb_truetype.h" />
     <ClInclude Include="Color.h" />
     <ClInclude Include="FpsComponent.h" />
-    <ClInclude Include="LoadSceneCommand.h" />
+    <ClInclude Include="ChangeSceneCommand.h" />
     <ClInclude Include="LogCommand.h" />
     <ClInclude Include="LoggingSoundSystem.h" />
     <ClInclude Include="NullSoundSystem.h" />
@@ -261,7 +261,7 @@
     <ClCompile Include="InputManager.cpp" />
     <ClCompile Include="Keyboard.cpp" />
     <ClCompile Include="KeyboardSDL.cpp" />
-    <ClCompile Include="LoadSceneCommand.cpp" />
+    <ClCompile Include="ChangeSceneCommand.cpp" />
     <ClCompile Include="LogCommand.cpp" />
     <ClCompile Include="LoggingSoundSystem.cpp" />
     <ClCompile Include="Minigin.cpp" />

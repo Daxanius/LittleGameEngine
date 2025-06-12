@@ -19,8 +19,19 @@ void Scene::RemoveAll() {
 	m_objects.clear();
 }
 
-void dae::Scene::OnEnter() {
-		ProcessPendingChanges();
+void dae::Scene::Setup() {
+	m_objects.clear();
+	m_objectsToAdd.clear();
+	OnSetup();
+}
+
+void dae::Scene::Enter() {
+	ProcessPendingChanges();
+	OnEnter();
+}
+
+const std::string& dae::Scene::GetName() const {
+	return m_name;
 }
 
 void dae::Scene::FixedUpdate() {

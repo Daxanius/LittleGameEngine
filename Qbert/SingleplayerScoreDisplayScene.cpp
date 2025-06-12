@@ -1,22 +1,25 @@
-#include "SinglePlayerScoreDisplayState.h"
+#include "SingleplayerScoreDisplayScene.h"
 #include "TextComponent.h"
 #include "TextInputCommand.h"
 #include "InputManager.h"
 #include "Qbert.h"
 
-dae::SinglePlayerScoreDisplayState::SinglePlayerScoreDisplayState() 
-	: m_pScene(std::make_unique<Scene>("ScoreDisplay")) {
+dae::SingleplayerScoreDisplayScene::SingleplayerScoreDisplayScene() 
+	: Scene("SingleplayerScoreDisplay") {
+}
+
+void dae::SingleplayerScoreDisplayScene::OnSetup() {
 	auto gameOverTextGameObject{ std::make_unique<GameObject>(Transform((640 / 2) - 85, 40)) };
 	gameOverTextGameObject->AddComponent<TextComponent>("GAME OVER!", Qbert::GetInstance().GetFontLarge());
 
 	auto scoreInputGameObject{ std::make_unique<GameObject>(Transform((640 / 2) - 40, 120)) };
 	m_pTextInputComponent = scoreInputGameObject->AddComponent<TextInputComponent>(4, Qbert::GetInstance().GetFontLarge(), 20);
 
-	m_pScene->Add(std::move(gameOverTextGameObject));
-	m_pScene->Add(std::move(scoreInputGameObject));
+	Add(std::move(gameOverTextGameObject));
+	Add(std::move(scoreInputGameObject));
 }
 
-void dae::SinglePlayerScoreDisplayState::OnEnter() {
+void dae::SingleplayerScoreDisplayScene::OnEnter() {
 	InputManager::GetInstance().ClearAllBindings();
 
 	InputManager::GetInstance().BindKeyboardCommand(
@@ -38,6 +41,4 @@ void dae::SinglePlayerScoreDisplayState::OnEnter() {
 		Keyboard::KeyState{ Keyboard::Key::Right, Keyboard::ActionType::Press },
 		std::move(std::make_unique<TextInputCommand>(m_pTextInputComponent, TextInputCommand::InputCommand::Right))
 	);
-
-	SceneManager::GetInstance().SetScene(m_pScene);
 }

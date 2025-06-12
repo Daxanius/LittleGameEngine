@@ -16,14 +16,14 @@
     <Filter Include="Source\States">
       <UniqueIdentifier>{0164a6c0-db7d-4139-9c10-7bda3eb0208e}</UniqueIdentifier>
     </Filter>
-    <Filter Include="Source\States\Game">
-      <UniqueIdentifier>{022a710a-9f8f-4942-8f4c-75386d11ec72}</UniqueIdentifier>
-    </Filter>
     <Filter Include="Source\States\Coily">
       <UniqueIdentifier>{f4bd4674-92ca-411b-ad32-2fdb6325ea15}</UniqueIdentifier>
     </Filter>
     <Filter Include="ThirdParty">
       <UniqueIdentifier>{fe87db45-2dc0-4cd9-bb63-e70fb7134810}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source\Scenes">
+      <UniqueIdentifier>{5735d099-6ef0-46c3-8079-ae98b9d47919}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
   <ItemGroup>
@@ -72,9 +72,6 @@
     <ClCompile Include="LevelComponent.cpp">
       <Filter>Source\Components</Filter>
     </ClCompile>
-    <ClCompile Include="ChangeGameStateCommand.cpp">
-      <Filter>Source\Commands</Filter>
-    </ClCompile>
     <ClCompile Include="RepeatingTextureComponent.cpp">
       <Filter>Source\Components</Filter>
     </ClCompile>
@@ -83,12 +80,6 @@
     </ClCompile>
     <ClCompile Include="CoilyComponent.cpp">
       <Filter>Source\Components</Filter>
-    </ClCompile>
-    <ClCompile Include="MenuGameState.cpp">
-      <Filter>Source\States\Game</Filter>
-    </ClCompile>
-    <ClCompile Include="SinglePlayerLevelState.cpp">
-      <Filter>Source\States\Game</Filter>
     </ClCompile>
     <ClCompile Include="AbstractCoilyState.cpp">
       <Filter>Source\States\Coily</Filter>
@@ -126,9 +117,6 @@
     <ClCompile Include="PlayerComponent.cpp">
       <Filter>Source\Components</Filter>
     </ClCompile>
-    <ClCompile Include="PauseCommand.cpp">
-      <Filter>Source\Commands</Filter>
-    </ClCompile>
     <ClCompile Include="SlickAndSlamComponent.cpp">
       <Filter>Source\Components</Filter>
     </ClCompile>
@@ -141,12 +129,6 @@
     <ClCompile Include="UggAndWrongwayObserver.cpp">
       <Filter>Source\Observers</Filter>
     </ClCompile>
-    <ClCompile Include="SinglePlayerIntroGameState.cpp">
-      <Filter>Source\States\Game</Filter>
-    </ClCompile>
-    <ClCompile Include="SinglePlayerScoreDisplayState.cpp">
-      <Filter>Source\States\Game</Filter>
-    </ClCompile>
     <ClCompile Include="TextInputComponent.cpp">
       <Filter>Source\Components</Filter>
     </ClCompile>
@@ -155,6 +137,24 @@
     </ClCompile>
     <ClCompile Include="SpinningDiscComponent.cpp">
       <Filter>Source\Components</Filter>
+    </ClCompile>
+    <ClCompile Include="MenuScene.cpp">
+      <Filter>Source\Scenes</Filter>
+    </ClCompile>
+    <ClCompile Include="SingleplayerIntroScene.cpp">
+      <Filter>Source\Scenes</Filter>
+    </ClCompile>
+    <ClCompile Include="SingleplayerLevelScene.cpp">
+      <Filter>Source\Scenes</Filter>
+    </ClCompile>
+    <ClCompile Include="SingleplayerScoreDisplayScene.cpp">
+      <Filter>Source\Scenes</Filter>
+    </ClCompile>
+    <ClCompile Include="PauseScene.cpp">
+      <Filter>Source\Scenes</Filter>
+    </ClCompile>
+    <ClCompile Include="LevelDisplayScene.cpp">
+      <Filter>Source\Scenes</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -200,9 +200,6 @@
     <ClInclude Include="LevelComponent.h">
       <Filter>Source\Components</Filter>
     </ClInclude>
-    <ClInclude Include="ChangeGameStateCommand.h">
-      <Filter>Source\Commands</Filter>
-    </ClInclude>
     <ClInclude Include="RepeatingTextureComponent.h">
       <Filter>Source\Components</Filter>
     </ClInclude>
@@ -211,15 +208,6 @@
     </ClInclude>
     <ClInclude Include="CoilyComponent.h">
       <Filter>Source\Components</Filter>
-    </ClInclude>
-    <ClInclude Include="AbstractGameState.h">
-      <Filter>Source\States\Game</Filter>
-    </ClInclude>
-    <ClInclude Include="MenuGameState.h">
-      <Filter>Source\States\Game</Filter>
-    </ClInclude>
-    <ClInclude Include="SinglePlayerLevelState.h">
-      <Filter>Source\States\Game</Filter>
     </ClInclude>
     <ClInclude Include="AbstractCoilyState.h">
       <Filter>Source\States\Coily</Filter>
@@ -260,9 +248,6 @@
     <ClInclude Include="json.hpp">
       <Filter>ThirdParty</Filter>
     </ClInclude>
-    <ClInclude Include="PauseCommand.h">
-      <Filter>Source\Commands</Filter>
-    </ClInclude>
     <ClInclude Include="SlickAndSlamComponent.h">
       <Filter>Source\Components</Filter>
     </ClInclude>
@@ -275,12 +260,6 @@
     <ClInclude Include="UggAndWrongwayObserver.h">
       <Filter>Source\Observers</Filter>
     </ClInclude>
-    <ClInclude Include="SinglePlayerIntroGameState.h">
-      <Filter>Source\States\Game</Filter>
-    </ClInclude>
-    <ClInclude Include="SinglePlayerScoreDisplayState.h">
-      <Filter>Source\States\Game</Filter>
-    </ClInclude>
     <ClInclude Include="TextInputComponent.h">
       <Filter>Source\Components</Filter>
     </ClInclude>
@@ -289,6 +268,24 @@
     </ClInclude>
     <ClInclude Include="SpinningDiscComponent.h">
       <Filter>Source\Components</Filter>
+    </ClInclude>
+    <ClInclude Include="MenuScene.h">
+      <Filter>Source\Scenes</Filter>
+    </ClInclude>
+    <ClInclude Include="SingleplayerIntroScene.h">
+      <Filter>Source\Scenes</Filter>
+    </ClInclude>
+    <ClInclude Include="SingleplayerLevelScene.h">
+      <Filter>Source\Scenes</Filter>
+    </ClInclude>
+    <ClInclude Include="SingleplayerScoreDisplayScene.h">
+      <Filter>Source\Scenes</Filter>
+    </ClInclude>
+    <ClInclude Include="PauseScene.h">
+      <Filter>Source\Scenes</Filter>
+    </ClInclude>
+    <ClInclude Include="LevelDisplayScene.h">
+      <Filter>Source\Scenes</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>

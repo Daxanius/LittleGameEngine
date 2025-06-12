@@ -1,4 +1,4 @@
-#include "SinglePlayerIntroGameState.h"
+#include "SingleplayerIntroScene.h"
 #include "Transform.h"
 #include "RhombilleGridComponent.h"
 #include "SpriteComponent.h"
@@ -12,7 +12,6 @@
 #include "MoveCommand.h"
 #include "RepeatingTextureComponent.h"
 #include "RhombilleGridAnimationComponent.h"
-#include "PauseCommand.h"
 #include "PlayerComponent.h"
 #include "ChangeToComponent.h"
 #include "PlayerLivesObserver.h"
@@ -23,13 +22,16 @@
 #include "TextComponent.h"
 #include "LevelObserver.h"
 #include "LevelComponent.h"
-#include "SinglePlayerLevelState.h"
-#include "ChangeGameStateCommand.h"
+#include "SinglePlayerLevelScene.h"
+#include "ChangeSceneCommand.h"
 #include "Qbert.h"
 
-dae::SinglePlayerIntroGameState::SinglePlayerIntroGameState()
-	: AbstractGameState(), m_pTutorialScene(std::make_shared<Scene>("Tutorial")), m_pSinglePlayerState(std::make_shared<SinglePlayerGameState>()) {
-		auto instructionsTitleObject{ std::make_unique<GameObject>(Transform((640 / 2) - 220, 50)) };
+dae::SingleplayerIntroScene::SingleplayerIntroScene()
+	: Scene("SingleplayerIntro") {
+}
+
+void dae::SingleplayerIntroScene::OnSetup() {
+	auto instructionsTitleObject{ std::make_unique<GameObject>(Transform((640 / 2) - 220, 50)) };
 	instructionsTitleObject->AddComponent<TextComponent>("INSTRUCTIONS - SOLO MODE", Qbert::GetInstance().GetFontLarge());
 
 	auto descriptionObject{ std::make_unique<GameObject>(Transform((640 / 2) - 200, 120)) };
@@ -59,27 +61,25 @@ dae::SinglePlayerIntroGameState::SinglePlayerIntroGameState()
 	auto moveOnPromptObject{ std::make_unique<GameObject>(Transform((640 / 2) - 180, 440)) };
 	moveOnPromptObject->AddComponent<TextComponent>("Press ENTER or START to begin the 1st level", Qbert::GetInstance().GetFontSmall());
 
-	m_pTutorialScene->Add(std::move(instructionsTitleObject));
-	m_pTutorialScene->Add(std::move(descriptionObject));
-	m_pTutorialScene->Add(std::move(wasdObject));
-	m_pTutorialScene->Add(std::move(orObject));
-	m_pTutorialScene->Add(std::move(controlsObject));
-	m_pTutorialScene->Add(std::move(moveOnPromptObject));
+	Add(std::move(instructionsTitleObject));
+	Add(std::move(descriptionObject));
+	Add(std::move(wasdObject));
+	Add(std::move(orObject));
+	Add(std::move(controlsObject));
+	Add(std::move(moveOnPromptObject));
 }
 
-void dae::SinglePlayerIntroGameState::OnEnter() {
+void dae::SingleplayerIntroScene::OnEnter() {
 	InputManager::GetInstance().ClearAllBindings();
 
 	InputManager::GetInstance().BindKeyboardCommand(
 		Keyboard::KeyState{ Keyboard::Key::Enter, Keyboard::ActionType::Release },
-		std::move(std::make_unique<ChangeGameStateCommand>(m_pSinglePlayerState))
+		std::move(std::make_unique<ChangeSceneCommand>("LevelDisplay"))
 	);
 
 	InputManager::GetInstance().BindGamepadCommand(
 		0,
 		Gamepad::ButtonState{ Gamepad::Button::Start, Gamepad::ActionType::Release },
-		std::move(std::make_unique<ChangeGameStateCommand>(m_pSinglePlayerState))
+		std::move(std::make_unique<ChangeSceneCommand>("LevelDisplay"))
 	);
-
-	SceneManager::GetInstance().SetScene(m_pTutorialScene);
 }
