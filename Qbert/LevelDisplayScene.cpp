@@ -3,26 +3,25 @@
 #include "ChangeSceneCommand.h"
 #include "TimerComponent.h"
 #include "TextComponent.h"
+#include "Level.h"
 #include "Qbert.h"
+#include <iostream>
 
-dae::LevelDisplayScene::LevelDisplayScene()
-	: Scene("LevelDisplay") {
+dae::LevelDisplayScene::LevelDisplayScene(int level)
+	: Scene("LevelDisplay"), m_level(level) {
 }
 
 void dae::LevelDisplayScene::OnSetup() {
-	auto levelDisplayObject{ std::make_unique<GameObject>(Transform((640 / 2) - 240, 50)) };
-
-	switch (m_level) {
-		case 0:
-			levelDisplayObject->AddComponent<TextureComponent>("Level 01 Title.png");
-			break;
-		case 1:
-			levelDisplayObject->AddComponent<TextureComponent>("Level 02 Title.png");
-			break;
-		case 2:
-			levelDisplayObject->AddComponent<TextureComponent>("Level 03 Title.png");
-			break;
+	const auto& levels{ Qbert::GetInstance().GetLevelInfo() };
+	if (m_level >= levels.size()) {
+		std::cout << "Level does not exist, idiot" << std::endl;
+		return;
 	}
+
+	Level levelInfo{ levels[m_level] };
+
+	auto levelDisplayObject{ std::make_unique<GameObject>(Transform((640 / 2) - 240, 50)) };
+	levelDisplayObject->AddComponent<TextureComponent>(levelInfo.icon);
 
 	m_pTimerComponent = levelDisplayObject->AddComponent<TimerComponent>();
 	m_pTimerComponent->AddCommand(std::make_unique<ChangeSceneCommand>("SingleplayerLevel"));

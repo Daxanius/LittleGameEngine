@@ -2,12 +2,13 @@
 #include "GridMovementComponent.h"
 #include "ScoreComponent.h"
 #include "Scene.h"
+#include "Level.h"
 #include <memory>
 
 namespace dae {
 	class SingleplayerLevelScene final : public Scene {
 	public:
-		SingleplayerLevelScene();
+		SingleplayerLevelScene(int level = 0, int score = 0);
 
 		void OnSetup() override;
 		void OnEnter() override;
@@ -19,6 +20,7 @@ namespace dae {
 		~SingleplayerLevelScene() = default;
 	private:
 		GridMovementComponent* m_pPlayerMovementComponent{};
+		Level m_levelInfo{};
 
 		int m_score;
 		int m_level;

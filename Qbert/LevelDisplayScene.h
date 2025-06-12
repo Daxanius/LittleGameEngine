@@ -5,7 +5,7 @@
 namespace dae {
 	class LevelDisplayScene : public Scene {
 	public:
-		LevelDisplayScene();
+		LevelDisplayScene(int level = 0);
 
 		void OnSetup() override;
 		void OnEnter() override;

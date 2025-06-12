@@ -1,6 +1,7 @@
 #pragma once
 #include <BaseComponent.h>
 #include "Subject.h"
+#include "Level.h"
 #include <vector>
 
 namespace dae {
@@ -12,7 +13,7 @@ namespace dae {
 
 	class LevelComponent : public BaseComponent {
 	public:
-		LevelComponent(GameObject& pOwner, float resetTime);
+		LevelComponent(GameObject& pOwner, float resetTime, const Level& levelInfo);
 
 		void NextRound();
 
@@ -49,6 +50,7 @@ namespace dae {
 		static constexpr int ROUNDS_PER_LEVEL{ 4 };
 	private:
 		void SpawnSpinningDiscs();
+		void DestroySpinningDiscs();
 
 		float m_resetTime{};
 		float m_resetTimeLeft{};
@@ -60,14 +62,16 @@ namespace dae {
 
 		bool m_Paused{};
 
-		bool m_InResetAnimation{};
-		bool m_ShouldResetState{};
-		bool m_HasSpawnedDiscs{};
+		bool m_inResetAnimation{};
+		bool m_shouldResetState{};
+		bool m_hasUpdated{};
 
 		Subject m_Subject{};
 
 		RhombilleGridComponent* m_pRhombilleGrid{};
 		EnemySpawnerComponent* m_pEnemySpawner{};
+
+		Level m_levelInfo;
 
 		std::vector<PlayerComponent*> m_Players;
 		std::vector<SpinningDiscComponent*> m_spinningDiscs;

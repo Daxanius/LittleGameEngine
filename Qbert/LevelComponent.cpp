@@ -9,7 +9,8 @@
 #include "Scene.h"
 #include "SceneManager.h"
 
-dae::LevelComponent::LevelComponent(GameObject& pOwner, float resetTime) : BaseComponent(pOwner), m_resetTime(resetTime) {
+dae::LevelComponent::LevelComponent(GameObject& pOwner, float resetTime, const Level& levelInfo) 
+	: BaseComponent(pOwner), m_resetTime(resetTime), m_levelInfo(levelInfo) {
 	m_pRhombilleGrid = GetOwner().GetComponent<RhombilleGridComponent>();
 }
 
@@ -19,11 +20,13 @@ void dae::LevelComponent::NextRound() {
 
 	// If it's larger or equal to the rounds per level,
 	// reset it, go to the next level, and notify the subject
-	if (m_Round >= ROUNDS_PER_LEVEL) {
+	if (m_Round >= m_levelInfo.rounds.size()) {
 		m_Round = 0;
 		m_Subject.Notify("next_level");
 		return;
 	}
+
+	m_hasUpdated = false;
 
 	// Otherwise notify subjects the next round has been triggered
 	m_Subject.Notify("next_round", m_Round);
@@ -64,8 +67,8 @@ bool dae::LevelComponent::CheckSpinningDiscs() {
 }
 
 void dae::LevelComponent::ResetLevel(bool resetState) {
-	m_InResetAnimation = true;
-	m_ShouldResetState = resetState;
+	m_inResetAnimation = true;
+	m_shouldResetState = resetState;
 	m_resetTimeLeft = m_resetTime;
 
 	for (auto player : m_Players) {
@@ -74,11 +77,11 @@ void dae::LevelComponent::ResetLevel(bool resetState) {
 }
 
 bool dae::LevelComponent::LevelPaused() const {
-	return m_Paused || m_InResetAnimation;
+	return m_Paused || m_inResetAnimation;
 }
 
 bool dae::LevelComponent::InResetAnimation() const {
-	return m_InResetAnimation;
+	return m_inResetAnimation;
 }
 
 void dae::LevelComponent::RegisterPlayer(PlayerComponent* pPlayer) {
@@ -106,19 +109,22 @@ dae::EnemySpawnerComponent& dae::LevelComponent::GetEnemySpawner() {
 }
 
 void dae::LevelComponent::Update(float deltaTime) {
-	if (!m_HasSpawnedDiscs) {
+	if (!m_hasUpdated) {
+		DestroySpinningDiscs();
+		m_totalSpinningDiscs = m_levelInfo.rounds[m_Round].discs;
+
 		SpawnSpinningDiscs();
-		m_HasSpawnedDiscs = true;
+		m_hasUpdated = true;
 	}
 
-	if (!m_InResetAnimation) {
+	if (!m_inResetAnimation) {
 		return;
 	}
 
 	if (m_resetTimeLeft <= 0.f) {
-		m_InResetAnimation = false;
+		m_inResetAnimation = false;
 
-		if (m_ShouldResetState) {
+		if (m_shouldResetState) {
 			m_pRhombilleGrid->SetAllStates(0);
 		}
 
@@ -168,4 +174,12 @@ void dae::LevelComponent::SpawnSpinningDiscs() {
 
 		SceneManager::GetInstance().GetActiveScene()->Add(std::move(discObject));
 	}
+}
+
+void dae::LevelComponent::DestroySpinningDiscs() {
+	for (auto disc : m_spinningDiscs) {
+		disc->Destroy();
+	}
+
+	m_spinningDiscs.clear();
 }

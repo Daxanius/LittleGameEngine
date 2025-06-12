@@ -29,14 +29,22 @@
 #include <iostream>
 #include "Qbert.h"
 
-dae::SingleplayerLevelScene::SingleplayerLevelScene() 
-	: Scene("SingleplayerLevel"), m_level(0), m_score(0) {
+dae::SingleplayerLevelScene::SingleplayerLevelScene(int level, int score) 
+	: Scene("SingleplayerLevel"), m_level(level), m_score(score) {
 }
 
 void dae::SingleplayerLevelScene::OnSetup() {
+	const auto& levels{ Qbert::GetInstance().GetLevelInfo() };
+	if (m_level >= levels.size()) {
+		std::cout << "Level does not exist, idiot" << std::endl;
+		return;
+	}
+
+	m_levelInfo = levels[m_level];
+
 	auto mapObject{ std::make_unique<GameObject>(Transform((640 / 2) - 32, 75)) };
 	auto pRhombileGridComponent{ mapObject->AddComponent<RhombilleGridComponent>("Qbert Cubes.png", 32, 32, 7, 2.f) };
-	auto pLevelComponent{ mapObject->AddComponent<LevelComponent>(2.f) };
+	auto pLevelComponent{ mapObject->AddComponent<LevelComponent>(2.f, m_levelInfo) };
 	auto pGridAnimationComponent{ mapObject->AddComponent<RhombilleGridAnimationComponent>(2.f, 4) };
 
 	pLevelComponent->AddGameOverCommand(std::make_unique<ChangeSceneCommand>("SingleplayerScoreDisplay"));

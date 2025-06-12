@@ -13,7 +13,7 @@ void dae::SingleplayerScoreDisplayScene::OnSetup() {
 	gameOverTextGameObject->AddComponent<TextComponent>("GAME OVER!", Qbert::GetInstance().GetFontLarge());
 
 	auto scoreInputGameObject{ std::make_unique<GameObject>(Transform((640 / 2) - 40, 120)) };
-	m_pTextInputComponent = scoreInputGameObject->AddComponent<TextInputComponent>(4, Qbert::GetInstance().GetFontLarge(), 20);
+	m_pTextInputComponent = scoreInputGameObject->AddComponent<TextInputComponent>(3, Qbert::GetInstance().GetFontLarge(), 30);
 
 	Add(std::move(gameOverTextGameObject));
 	Add(std::move(scoreInputGameObject));
