@@ -197,6 +197,7 @@
     <ClCompile Include="RepeatingTextureComponent.cpp" />
     <ClCompile Include="RhombilleGridAnimationComponent.cpp" />
     <ClCompile Include="RhombilleGridComponent.cpp" />
+    <ClCompile Include="Score.cpp" />
     <ClCompile Include="ScoreComponent.cpp" />
     <ClCompile Include="LevelObserver.cpp" />
     <ClCompile Include="SelectionMenuComponent.cpp" />
@@ -243,6 +244,7 @@
     <ClInclude Include="RepeatingTextureComponent.h" />
     <ClInclude Include="RhombilleGridAnimationComponent.h" />
     <ClInclude Include="RhombilleGridComponent.h" />
+    <ClInclude Include="Score.h" />
     <ClInclude Include="ScoreComponent.h" />
     <ClInclude Include="LevelObserver.h" />
     <ClInclude Include="SelectionMenuComponent.h" />

@@ -25,6 +25,7 @@ dae::Qbert::Qbert() : m_pSoundObserver(std::make_shared<SoundObserver>()) {
 	m_pFontSmall = dae::ResourceManager::GetInstance().LoadFont("Minecraft.ttf", 16);
 
 	m_levelInfo = Level::FromFile("../Data/Levels.json");
+	m_scoreInfo = Score::FromFile("../Data/Scores.json");
 }
 
 void dae::Qbert::Start() {
@@ -64,4 +65,13 @@ std::shared_ptr<dae::SoundObserver> dae::Qbert::GetSoundObserver() const {
 
 const std::vector<dae::Level>& dae::Qbert::GetLevelInfo() const {
 	return m_levelInfo;
+}
+
+const std::vector<dae::Score>& dae::Qbert::GetScoreInfo() const {
+	return m_scoreInfo;
+}
+
+void dae::Qbert::AddScore(const Score& score) {
+	m_scoreInfo.emplace_back(score);
+	Score::ToFile(m_scoreInfo, "../Data/Scores.json");
 }

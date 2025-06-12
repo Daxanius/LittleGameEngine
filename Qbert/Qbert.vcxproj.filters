@@ -162,6 +162,9 @@
     <ClCompile Include="Level.cpp">
       <Filter>Source\Model</Filter>
     </ClCompile>
+    <ClCompile Include="Score.cpp">
+      <Filter>Source\Model</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="KillCommand.h">
@@ -294,6 +297,9 @@
       <Filter>Source\Scenes</Filter>
     </ClInclude>
     <ClInclude Include="Level.h">
+      <Filter>Source\Model</Filter>
+    </ClInclude>
+    <ClInclude Include="Score.h">
       <Filter>Source\Model</Filter>
     </ClInclude>
   </ItemGroup>

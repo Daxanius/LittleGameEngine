@@ -4,7 +4,7 @@
 #include "json.hpp"
 
 namespace dae {
-using json = nlohmann::json;
+	using json = nlohmann::json;
 
 	struct Enemy {
 			std::string type;

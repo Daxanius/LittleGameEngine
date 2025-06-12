@@ -1,43 +1,43 @@
 #include "Level.h"
 #include <fstream>
 
-dae::Enemy dae::Enemy::FromJson(const json& j) {
+dae::Enemy dae::Enemy::FromJson(const json& json) {
     return Enemy{
-        j.at("type").get<std::string>(),
-        j.at("count").get<int>()
+        json.at("type").get<std::string>(),
+        json.at("count").get<int>()
     };
 }
 
-dae::Round dae::Round::FromJson(const json& j) {
-    Round round;
-    round.discs = j.at("discs").get<int>();
+dae::Round dae::Round::FromJson(const json& json) {
+	Round round{};
+  round.discs = json.at("discs").get<int>();
 
-    for (const auto& enemyJson : j.at("enemies")) {
-        round.enemies.emplace_back(Enemy::FromJson(enemyJson));
-    }
+  for (const auto& enemyJson : json.at("enemies")) {
+      round.enemies.emplace_back(Enemy::FromJson(enemyJson));
+  }
 
-    return round;
+  return round;
 }
 
-dae::Level dae::Level::FromJson(const json& j) {
-    Level level;
-    level.icon = j.at("icon").get<std::string>();
+dae::Level dae::Level::FromJson(const json& json) {
+	Level level{};
+  level.icon = json.at("icon").get<std::string>();
 
-    for (const auto& roundJson : j.at("rounds")) {
-        level.rounds.emplace_back(Round::FromJson(roundJson));
-    }
+  for (const auto& roundJson : json.at("rounds")) {
+      level.rounds.emplace_back(Round::FromJson(roundJson));
+  }
 
-    return level;
+  return level;
 }
 
 
 std::vector<dae::Level> dae::Level::FromFile(const std::string& path) {
     std::ifstream file(path);
-    json j;
-    file >> j;
+    json json;
+    file >> json;
 
     std::vector<Level> levels;
-    for (const auto& levelJson : j) {
+    for (const auto& levelJson : json) {
         levels.emplace_back(Level::FromJson(levelJson));
     }
     return levels;

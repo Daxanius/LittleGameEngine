@@ -3,6 +3,7 @@
 #include "Singleton.h"
 #include "SoundObserver.h"
 #include "Level.h"
+#include "Score.h"
 #include "Font.h"
 
 namespace dae {
@@ -20,6 +21,9 @@ namespace dae {
 		std::shared_ptr<SoundObserver> GetSoundObserver() const;
 
 		const std::vector<Level>& GetLevelInfo() const;
+		const std::vector<Score>& GetScoreInfo() const;
+
+		void AddScore(const Score& score);
 
 		Qbert(const Qbert&) = delete;
 		Qbert& operator=(const Qbert&) = delete;
@@ -34,5 +38,6 @@ namespace dae {
 		std::shared_ptr<SoundObserver> m_pSoundObserver;
 
 		std::vector<Level> m_levelInfo;
+		std::vector<Score> m_scoreInfo;
 	};
 }
