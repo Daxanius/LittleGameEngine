@@ -1,5 +1,6 @@
 #pragma once
 #include <Scene.h>
+#include "TimerComponent.h"
 
 namespace dae {
 	class LevelDisplayScene : public Scene {
@@ -11,6 +12,8 @@ namespace dae {
 
 	private:
 		int m_level{};
+
+		TimerComponent* m_pTimerComponent{};
 	};
 }
 

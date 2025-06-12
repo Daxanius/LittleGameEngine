@@ -17,7 +17,12 @@ void dae::PauseScene::OnEnter() {
 	InputManager::GetInstance().ClearAllBindings();
 
 	InputManager::GetInstance().BindKeyboardCommand(
-		Keyboard::KeyState{ Keyboard::Key::Escape, Keyboard::ActionType::Press },
+		Keyboard::KeyState{ Keyboard::Key::Tab, Keyboard::ActionType::Press },
 		std::move(std::make_unique<ChangeSceneCommand>(m_resumeScene))
+	);
+
+	InputManager::GetInstance().BindKeyboardCommand(
+		Keyboard::KeyState{ Keyboard::Key::Escape, Keyboard::ActionType::Press },
+		std::move(std::make_unique<ChangeSceneCommand>("Menu"))
 	);
 }
