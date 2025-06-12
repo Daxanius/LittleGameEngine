@@ -68,7 +68,6 @@ void dae::LevelComponent::ResetLevel(bool resetState) {
 	m_ShouldResetState = resetState;
 	m_resetTimeLeft = m_resetTime;
 
-	SpawnSpinningDiscs();
 	for (auto player : m_Players) {
 		player->GetOwner().Disable();
 	}
@@ -107,6 +106,11 @@ dae::EnemySpawnerComponent& dae::LevelComponent::GetEnemySpawner() {
 }
 
 void dae::LevelComponent::Update(float deltaTime) {
+	if (!m_HasSpawnedDiscs) {
+		SpawnSpinningDiscs();
+		m_HasSpawnedDiscs = true;
+	}
+
 	if (!m_InResetAnimation) {
 		return;
 	}

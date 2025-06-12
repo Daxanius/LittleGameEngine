@@ -25,6 +25,9 @@
     <Filter Include="Source\Scenes">
       <UniqueIdentifier>{5735d099-6ef0-46c3-8079-ae98b9d47919}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Source\Model">
+      <UniqueIdentifier>{b1361601-cd7f-4813-88a8-a2f10d82dbb5}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Main.cpp">
@@ -156,6 +159,9 @@
     <ClCompile Include="LevelDisplayScene.cpp">
       <Filter>Source\Scenes</Filter>
     </ClCompile>
+    <ClCompile Include="Level.cpp">
+      <Filter>Source\Model</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="KillCommand.h">
@@ -286,6 +292,9 @@
     </ClInclude>
     <ClInclude Include="LevelDisplayScene.h">
       <Filter>Source\Scenes</Filter>
+    </ClInclude>
+    <ClInclude Include="Level.h">
+      <Filter>Source\Model</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>

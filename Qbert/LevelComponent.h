@@ -62,6 +62,7 @@ namespace dae {
 
 		bool m_InResetAnimation{};
 		bool m_ShouldResetState{};
+		bool m_HasSpawnedDiscs{};
 
 		Subject m_Subject{};
 

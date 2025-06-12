@@ -1,0 +1,64 @@
+[
+    {
+        "icon": "Level 01 Title.png",
+        "rounds": [
+            {
+                "discs": 2,
+                "enemies": [
+                    {
+                        "type": "Coily",
+                        "count": 1
+                    },
+                    {
+                        "type": "EnemyType2",
+                        "count": 3
+                    }
+                ]
+            },
+            {
+                "discs": 2,
+                "enemies": [
+                    {
+                        "type": "Coily",
+                        "count": 1
+                    },
+                    {
+                        "type": "EnemyType2",
+                        "count": 3
+                    }
+                ]
+            }
+        ]
+    },
+    {
+        "icon": "Level 02 Title.png",
+        "rounds": [
+            {
+                "discs": 2,
+                "enemies": [
+                    {
+                        "type": "Coily",
+                        "count": 1
+                    },
+                    {
+                        "type": "EnemyType2",
+                        "count": 3
+                    }
+                ]
+            },
+            {
+                "discs": 2,
+                "enemies": [
+                    {
+                        "type": "Coily",
+                        "count": 1
+                    },
+                    {
+                        "type": "EnemyType2",
+                        "count": 3
+                    }
+                ]
+            }
+        ]
+    }
+]

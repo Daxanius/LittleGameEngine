@@ -2,6 +2,7 @@
 #include <memory>
 #include "Singleton.h"
 #include "SoundObserver.h"
+#include "Level.h"
 #include "Font.h"
 
 namespace dae {
@@ -18,6 +19,8 @@ namespace dae {
 		std::shared_ptr<Font> GetFontSmall() const;
 		std::shared_ptr<SoundObserver> GetSoundObserver() const;
 
+		const std::vector<Level>& GetLevelInfo() const;
+
 		Qbert(const Qbert&) = delete;
 		Qbert& operator=(const Qbert&) = delete;
 		Qbert(Qbert&&) = delete;
@@ -29,5 +32,7 @@ namespace dae {
 		std::shared_ptr<Font> m_pFontSmall;
 
 		std::shared_ptr<SoundObserver> m_pSoundObserver;
+
+		std::vector<Level> m_levelInfo;
 	};
 }

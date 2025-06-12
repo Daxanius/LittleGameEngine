@@ -180,6 +180,7 @@
     <ClCompile Include="KillCommand.cpp" />
     <ClCompile Include="GridNavigationComponent.cpp" />
     <ClCompile Include="GridMovementComponent.cpp" />
+    <ClCompile Include="Level.cpp" />
     <ClCompile Include="LevelComponent.cpp" />
     <ClCompile Include="LevelDisplayScene.cpp" />
     <ClCompile Include="LivesComponent.cpp" />
@@ -226,6 +227,7 @@
     <ClInclude Include="KillCommand.h" />
     <ClInclude Include="GridNavigationComponent.h" />
     <ClInclude Include="GridMovementComponent.h" />
+    <ClInclude Include="Level.h" />
     <ClInclude Include="LevelComponent.h" />
     <ClInclude Include="LevelDisplayScene.h" />
     <ClInclude Include="LivesComponent.h" />

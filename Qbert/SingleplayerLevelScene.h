@@ -24,5 +24,3 @@ namespace dae {
 		int m_level;
 	};
 }
-
-
