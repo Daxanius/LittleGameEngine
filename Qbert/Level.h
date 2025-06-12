@@ -9,12 +9,14 @@ namespace dae {
 	struct Enemy {
 			std::string type;
 			int count;
+			float delay;
 
 			static Enemy FromJson(const json& json);
 	};
 
 	struct Round {
 			int discs;
+			int variant;
 			std::vector<Enemy> enemies;
 
 			static Round FromJson(const json& json);
@@ -22,6 +24,7 @@ namespace dae {
 
 	struct Level {
 			std::string icon;
+			std::string tileBehavior;
 			std::vector<Round> rounds;
 
 			static Level FromJson(const json& json);
