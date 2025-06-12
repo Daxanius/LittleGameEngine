@@ -152,7 +152,7 @@ const std::vector<dae::PlayerComponent*>& dae::LevelComponent::GetPlayers() cons
 }
 
 void dae::LevelComponent::SpawnSpinningDiscs() {
-	for (size_t discIndex{ m_spinningDiscs.size() }; discIndex < m_totalSpinningDiscs; discIndex++) {
+	for (size_t discIndex{ m_spinningDiscs.size() }; discIndex < static_cast<size_t>(m_totalSpinningDiscs); discIndex++) {
 		auto discObject{ std::make_unique<GameObject>() };
 		auto pSpriteComponent{ discObject->AddComponent<SpriteComponent>("Disk Spritesheet.png", 16, 10, 2.f) };
 		m_spinningDiscs.emplace_back(discObject->AddComponent<SpinningDiscComponent>(m_pRhombilleGrid, 3, 4));
