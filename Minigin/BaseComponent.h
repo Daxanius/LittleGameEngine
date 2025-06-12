@@ -15,7 +15,7 @@ namespace dae {
 		virtual void PostUpdate()  = 0; // Used to remove components if they have been deleted
 		virtual void Render() = 0;
 
-		GameObject& GetOwner();
+		GameObject& GetOwner() const;
 
 		void Enable();
 		void Disable();

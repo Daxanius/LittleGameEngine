@@ -1,4 +1,5 @@
 #include "CoilyComponent.h"
+#include "LivesComponent.h"
 
 dae::CoilyComponent::CoilyComponent(GameObject& pOwner, GridMovementComponent* pPlayerMovementComponent, LevelComponent* pLevelComponent) 
 	: BaseComponent(pOwner), m_pPlayerMovementComponent(pPlayerMovementComponent), m_pLevelComponent(pLevelComponent) {

@@ -7,7 +7,7 @@ dae::GridMovementComponent::GridMovementComponent(GameObject& pOwner, RhombilleG
 }
 
 void dae::GridMovementComponent::Update(float deltaTime) {
-	if (m_pLevelComponent->LevelPaused()) {
+	if (m_pLevelComponent->LevelPaused() || m_FreeMove) {
 		return;
 	}
 
@@ -183,6 +183,17 @@ void dae::GridMovementComponent::MoveDownRight() {
 	}
 }
 
+void dae::GridMovementComponent::MoveToPosition(int row, int col) {
+	if (m_pLevelComponent->LevelPaused()) {
+		return;
+	}
+
+	if (StartJump(row, col)) {
+		Event event{ make_sdbm_hash("move_anywhere") };
+		m_subject.Notify(std::move(event));
+	}
+}
+
 void dae::GridMovementComponent::SetOffsetX(int width) {
 	if (width < 0) {
 		return;
@@ -205,13 +216,28 @@ void dae::GridMovementComponent::SetPosition(int row, int col) {
 	m_prevCol = col;
 	m_row = row;
 	m_col = col;
+}
 
-	glm::vec2 standingPosition{ ToStandingPosition(m_row, m_col) };
-	GetOwner().SetLocalTransform(Transform{ standingPosition.x, standingPosition.y });
+void dae::GridMovementComponent::CancelJump() {
+	m_isJumping = false;
+
+	m_targetRow = m_row;
+	m_targetCol = m_col;
+
+	m_elapsedJumpTime = 0.f;
+	m_endPos = ToStandingPosition(m_targetRow, m_targetCol);
+}
+
+bool dae::GridMovementComponent::IsFreeMove() const {
+	return m_FreeMove;
+}
+
+void dae::GridMovementComponent::SetFreeMove(bool freeMove) {
+	m_FreeMove = freeMove;
 }
 
 bool dae::GridMovementComponent::IsJumping() const {
-    return m_isJumping;
+	return m_isJumping;
 }
 
 dae::Subject& dae::GridMovementComponent::GetSubject() {
@@ -241,7 +267,7 @@ bool dae::GridMovementComponent::StartJump(int newRow, int newCol) {
 	m_isJumping = true;
 	m_elapsedJumpTime = 0.f;
 
-	m_startPos = ToStandingPosition(m_row, m_col);
+	m_startPos = GetOwner().GetWorldTransform().GetPosition();
 	m_endPos = ToStandingPosition(newRow, newCol);
 
 	m_targetRow = newRow;

@@ -17,7 +17,19 @@ int dae::LivesComponent::GetMaxLives() const {
 	return m_maxLives;
 }
 
+bool dae::LivesComponent::IsInvulnerable() const {
+	return m_invulnerable;
+}
+
+void dae::LivesComponent::SetInvulnerable(bool value) {
+	m_invulnerable = value;
+}
+
 void dae::LivesComponent::Kill() {
+	if (m_invulnerable) {
+		return;
+	}
+
 	m_lives = std::max(0, m_lives - 1);
 	m_subject.Notify("killed", m_lives);
 }

@@ -1,12 +1,15 @@
 #pragma once
 #include <BaseComponent.h>
 #include "Subject.h"
-#include "RhombilleGridComponent.h"
-#include "PlayerComponent.h"
-#include "EnemySpawnerComponent.h"
-#include "Command.h"
+#include <vector>
 
 namespace dae {
+	class PlayerComponent;
+	class SpinningDiscComponent;
+	class Command;
+	class RhombilleGridComponent;
+	class EnemySpawnerComponent;
+
 	class LevelComponent : public BaseComponent {
 	public:
 		LevelComponent(GameObject& pOwner, float resetTime);
@@ -14,11 +17,12 @@ namespace dae {
 		void NextRound();
 
 		int GetRound() const;
-		int GetLevel() const;
 
 		// Pause an unpause are used for animations
 		void PauseLevel();
 		void UnpauseLevel();
+
+		bool CheckSpinningDiscs();
 
 		void ResetLevel(bool resetState = false);
 
@@ -37,19 +41,22 @@ namespace dae {
 
 		void FixedUpdate() override {};
 		void Update(float deltaTime) override;
-		void PostUpdate() override {};
+		void PostUpdate() override;
 		void Render() override {};
 
 		const std::vector<PlayerComponent*>& GetPlayers() const;
 
 		static constexpr int ROUNDS_PER_LEVEL{ 4 };
 	private:
+		void SpawnSpinningDiscs();
+
 		float m_resetTime{};
 		float m_resetTimeLeft{};
 
-		// Keeping track of them rounds and levels
+		int m_totalSpinningDiscs{ 1 };
+
+		// Keeping track of them rounds
 		int m_Round{};
-		int m_Level{};
 
 		bool m_Paused{};
 
@@ -62,6 +69,7 @@ namespace dae {
 		EnemySpawnerComponent* m_pEnemySpawner{};
 
 		std::vector<PlayerComponent*> m_Players;
+		std::vector<SpinningDiscComponent*> m_spinningDiscs;
 		std::vector<std::unique_ptr<Command>> m_gameOverCommands;
 	};
 }

@@ -11,7 +11,7 @@ bool dae::BaseComponent::IsDestroyed() const {
 	return m_destroyed;
 }
 
-dae::GameObject& dae::BaseComponent::GetOwner() {
+dae::GameObject& dae::BaseComponent::GetOwner() const {
 	return *m_pOwner;
 }
 

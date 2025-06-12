@@ -5,7 +5,7 @@ dae::Transform::Transform() {
 	SetPosition(0.f, 0.f, 0.f);
 }
 
-dae::Transform::Transform(const float x, const float y,  const float z) {
+dae::Transform::Transform(const float x, const float y, const float z) {
 	SetPosition(x, y, z);
 }
 

@@ -153,6 +153,9 @@
     <ClCompile Include="TextInputCommand.cpp">
       <Filter>Source\Commands</Filter>
     </ClCompile>
+    <ClCompile Include="SpinningDiscComponent.cpp">
+      <Filter>Source\Components</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="KillCommand.h">
@@ -283,6 +286,9 @@
     </ClInclude>
     <ClInclude Include="TextInputCommand.h">
       <Filter>Source\Commands</Filter>
+    </ClInclude>
+    <ClInclude Include="SpinningDiscComponent.h">
+      <Filter>Source\Components</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>

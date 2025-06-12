@@ -23,6 +23,12 @@ namespace dae {
 		
 		bool HasDied() const;
 
+		bool IsInvulnerable() const;
+		void SetInvulnerable(bool value);
+
+		void EnableFreeMovement();
+		void DisableFreeMovement();
+
 		void FixedUpdate() override {};
 		void Update(float) override {};
 		void PostUpdate() override {};

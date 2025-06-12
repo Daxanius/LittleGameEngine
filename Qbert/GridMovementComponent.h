@@ -45,10 +45,17 @@ namespace dae {
 		void MoveDownLeft();
 		void MoveDownRight();
 
+		// Absolute movement, used by the spinning disc
+		void MoveToPosition(int row, int col);
+
 		void SetOffsetX(int width);
 		void SetOffsetY(int height);
 
 		void SetPosition(int row, int col);
+		void CancelJump();
+
+		bool IsFreeMove() const;
+		void SetFreeMove(bool freeMove);
 
 		bool IsJumping() const;
 
@@ -87,6 +94,7 @@ namespace dae {
 		int m_offsetY{ 16 };
 
 		bool m_HasArrived{ false };
+		bool m_FreeMove{ false };
 
 		Subject m_subject{};
 	};

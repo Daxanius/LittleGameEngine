@@ -20,12 +20,17 @@ namespace dae {
 		void Kill();
 		void AddLives(int amount);
 
+		bool IsInvulnerable() const;
+		void SetInvulnerable(bool value);
+
 		void Reset();
 
 		Subject& GetSubject();
 	private:
 		int m_maxLives;
 		int m_lives;
+
+		bool m_invulnerable{};
 
 		Subject m_subject{};
 	};

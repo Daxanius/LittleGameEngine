@@ -40,13 +40,13 @@ void Scene::Update(float deltaTime) {
 		}
 	}
 
-	ProcessPendingChanges();
-
 	// PostUpdate should be called regardless
 	// of when the object is enabled or disabled
 	for(auto& object : m_objects) {
 			object->PostUpdate();
 	}
+
+	ProcessPendingChanges();
 }
 
 void Scene::Render() const {

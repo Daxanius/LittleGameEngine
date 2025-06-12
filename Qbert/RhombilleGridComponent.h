@@ -23,6 +23,7 @@ namespace dae {
 		int GetVariant() const;
 
 		glm::vec2 ToWorldPosition(int row, int col);
+		std::pair<int, int> ToGridCoords(const glm::vec2& worldPos) const;
 
 		bool AreAllTilesState(int state) const;
 

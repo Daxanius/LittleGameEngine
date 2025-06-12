@@ -42,7 +42,9 @@ void dae::PlayerMovementObserver::Notify(const Event& event) {
 					}
 				}
 			} else {
-				m_pLivesComponent->Kill();
+				if (!m_pLevelComponent->CheckSpinningDiscs()) {
+					m_pLivesComponent->Kill();
+				}
 			}
 			break;
 	}

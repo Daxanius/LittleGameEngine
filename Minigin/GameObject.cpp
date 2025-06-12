@@ -28,8 +28,6 @@ void dae::GameObject::SetParent(GameObject* pParent, bool keepWorldTransform) {
 		if (keepWorldTransform) {
 			SetLocalTransform(GetWorldTransform() - pParent->GetWorldTransform());
 		}
-
-		MarkTransformDirty();
 	}
 
 	// Notify existing parent child got stolen lol
@@ -67,8 +65,6 @@ void dae::GameObject::Update(float deltaTime) {
 			component->Update(deltaTime);
 		}
 	}
-
-	RemoveDestroyedComponents();
 }
 
 void dae::GameObject::PostUpdate() {
@@ -76,6 +72,8 @@ void dae::GameObject::PostUpdate() {
 	for (auto& component : m_components) {
 		component->PostUpdate();
 	}
+
+	RemoveDestroyedComponents();
 }
 
 void dae::GameObject::Render() const {

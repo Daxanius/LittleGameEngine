@@ -26,6 +26,8 @@ dae::LivesComponent* dae::PlayerComponent::GetLivesComponent() {
 
 void dae::PlayerComponent::Reset() {
 	HideTextBalloon();
+	DisableFreeMovement();
+	SetInvulnerable(false);
 
 	if (m_died) {
 		m_pGridMovementComponent->GoToPrevPosition();
@@ -42,4 +44,23 @@ void dae::PlayerComponent::Kill() {
 
 bool dae::PlayerComponent::HasDied() const {
 	return m_died;
+}
+
+bool dae::PlayerComponent::IsInvulnerable() const {
+	return m_pLivesComponent->IsInvulnerable();
+}
+
+void dae::PlayerComponent::SetInvulnerable(bool value) {
+	m_pLivesComponent->SetInvulnerable(value);
+}
+
+void dae::PlayerComponent::EnableFreeMovement() {
+	m_pGridMovementComponent->Disable();
+	m_pGridMovementComponent->SetFreeMove(true);
+	m_pGridMovementComponent->CancelJump();
+}
+
+void dae::PlayerComponent::DisableFreeMovement() {
+	m_pGridMovementComponent->Enable();
+	m_pGridMovementComponent->SetFreeMove(false);
 }

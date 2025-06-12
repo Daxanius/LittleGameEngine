@@ -62,6 +62,23 @@ glm::vec2 dae::RhombilleGridComponent::ToWorldPosition(int row, int col) {
 	return worldPosition;
 }
 
+std::pair<int, int> dae::RhombilleGridComponent::ToGridCoords(const glm::vec2& worldPos) const {
+	const auto& gridWorldPosition{ GetOwner().GetLocalTransform().GetPosition() };
+
+	const float dx = worldPos.x - gridWorldPosition.x;
+	const float dy = worldPos.y - gridWorldPosition.y;
+
+	// Recover row from y
+	const float rowF = dy / (m_tileHeight * 0.75f * m_scale);
+	const int row = static_cast<int>(std::round(rowF));
+
+	// Plug row back into x equation to solve for col
+	const float colF = (dx / (m_tileWidth * m_scale)) + (row * 0.5f);
+	const int col = static_cast<int>(std::round(colF));
+
+	return { row, col };
+}
+
 bool dae::RhombilleGridComponent::AreAllTilesState(int state) const {
 	for (int row{}; row < m_rows; row++) {
 		for (int col{}; col <= row; col++) {
