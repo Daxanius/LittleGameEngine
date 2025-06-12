@@ -25,6 +25,7 @@ namespace dae {
 	struct Level {
 			std::string icon;
 			std::string tileBehavior;
+			int requiredTileState;
 			std::vector<Round> rounds;
 
 			static Level FromJson(const json& json);

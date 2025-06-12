@@ -8,6 +8,7 @@
 #include "Command.h"
 #include "Scene.h"
 #include "SceneManager.h"
+#include <iostream>
 
 dae::LevelComponent::LevelComponent(GameObject& pOwner, float resetTime, const Level& levelInfo) 
 	: BaseComponent(pOwner), m_resetTime(resetTime), m_levelInfo(levelInfo) {
@@ -103,6 +104,43 @@ void dae::LevelComponent::AddGameOverCommand(std::unique_ptr<Command>&& pCommand
 
 void dae::LevelComponent::AddNextLevelCommand(std::unique_ptr<Command>&& pCommand) {
 	m_nextLevelCommands.emplace_back(std::forward<std::unique_ptr<Command>>(pCommand));
+}
+
+bool dae::LevelComponent::FlickTile(Tile* tile) const {
+	if (m_levelInfo.tileBehavior == "default") {
+		if (tile->state == 0) {
+			tile->state = 1;
+			return true;
+		}
+
+		return false;
+	}
+
+	if (m_levelInfo.tileBehavior == "increment") {
+		if (tile->state < 2) {
+			tile->state += 1;
+		}
+
+		return true;
+	}
+
+	if (m_levelInfo.tileBehavior == "revert") {
+		if (tile->state == 0) {
+			tile->state = 1;
+			return true;
+		} else {
+			tile->state = 0;
+		}
+
+		return false;
+	}
+
+	std::cerr << "Unknown tile behaviour: " << m_levelInfo.tileBehavior << std::endl;
+	return false;
+}
+
+int dae::LevelComponent::GetRequiredTileState() const {
+	return m_levelInfo.requiredTileState;
 }
 
 dae::Subject& dae::LevelComponent::GetSubject() {

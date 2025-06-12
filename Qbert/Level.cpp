@@ -25,6 +25,7 @@ dae::Level dae::Level::FromJson(const json& json) {
 	Level level{};
   level.icon = json.at("icon").get<std::string>();
 	level.tileBehavior = json.at("tile_behavior").get<std::string>();
+	level.requiredTileState = json.at("required_tile_state").get<int>();
 
   for (const auto& roundJson : json.at("rounds")) {
       level.rounds.emplace_back(Round::FromJson(roundJson));

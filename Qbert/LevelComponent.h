@@ -2,13 +2,13 @@
 #include <BaseComponent.h>
 #include "Subject.h"
 #include "Level.h"
+#include "RhombilleGridComponent.h"
 #include <vector>
 
 namespace dae {
 	class PlayerComponent;
 	class SpinningDiscComponent;
 	class Command;
-	class RhombilleGridComponent;
 	class EnemySpawnerComponent;
 
 	class LevelComponent : public BaseComponent {
@@ -36,6 +36,10 @@ namespace dae {
 
 		void AddGameOverCommand(std::unique_ptr<Command>&& pCommand);
 		void AddNextLevelCommand(std::unique_ptr<Command>&& pCommand);
+
+		bool FlickTile(Tile* tile) const;
+
+		int GetRequiredTileState() const;
 
 		Subject& GetSubject();
 

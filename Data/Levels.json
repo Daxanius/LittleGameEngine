@@ -2,6 +2,7 @@
     {
         "icon": "Level 01 Title.png",
         "tile_behavior": "default",
+        "required_tile_state": 1,
         "rounds": [
             {
                 "discs": 2,
@@ -61,7 +62,8 @@
     },
     {
         "icon": "Level 02 Title.png",
-        "tile_behavior": "double",
+        "tile_behavior": "increment",
+        "required_tile_state": 2,
         "rounds": [
             {
                 "discs": 3,
@@ -147,6 +149,7 @@
     {
         "icon": "Level 03 Title.png",
         "tile_behavior": "revert",
+        "required_tile_state": 1,
         "rounds": [
             {
                 "discs": 4,

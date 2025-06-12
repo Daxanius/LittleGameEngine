@@ -30,16 +30,15 @@ void dae::PlayerMovementObserver::Notify(const Event& event) {
 			GridMovementComponent::ArriveEventData data{ std::any_cast<GridMovementComponent::ArriveEventData>(event.data) };
 			auto tile{ m_pRhombilleGridComponent->GetTile(data.row, data.col) };
 			if (tile != nullptr) {
-				if (tile->state == 0) {
-					tile->state = 1;
+				if (m_pLevelComponent->FlickTile(tile)) {
 					m_pScoreComponent->AddToScore(25);
+				}
 
-					if (m_pRhombilleGridComponent->AreAllTilesState(1)) {
-						// m_pRhombilleGridComponent->SetVariant(m_pLevelComponent->GetRound());
-						if (m_pLevelComponent->NextRound()) {
-							m_pRhombilleGridComponent->SetAllStates(0);
-							m_pRhombileGridAnimationComponent->PlayAnimation();
-						}
+				if (m_pRhombilleGridComponent->AreAllTilesState(m_pLevelComponent->GetRequiredTileState())) {
+					// m_pRhombilleGridComponent->SetVariant(m_pLevelComponent->GetRound());
+					if (m_pLevelComponent->NextRound()) {
+						m_pRhombilleGridComponent->SetAllStates(0);
+						m_pRhombileGridAnimationComponent->PlayAnimation();
 					}
 				}
 			} else {
