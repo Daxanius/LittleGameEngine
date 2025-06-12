@@ -35,10 +35,11 @@ void dae::PlayerMovementObserver::Notify(const Event& event) {
 					m_pScoreComponent->AddToScore(25);
 
 					if (m_pRhombilleGridComponent->AreAllTilesState(1)) {
-						m_pLevelComponent->NextRound();
 						// m_pRhombilleGridComponent->SetVariant(m_pLevelComponent->GetRound());
-						m_pRhombilleGridComponent->SetAllStates(0);
-						m_pRhombileGridAnimationComponent->PlayAnimation();
+						if (m_pLevelComponent->NextRound()) {
+							m_pRhombilleGridComponent->SetAllStates(0);
+							m_pRhombileGridAnimationComponent->PlayAnimation();
+						}
 					}
 				}
 			} else {

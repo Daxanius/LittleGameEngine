@@ -37,11 +37,8 @@ void dae::Qbert::Start() {
 	std::unique_ptr<Scene> introScene{ std::make_unique<SingleplayerIntroScene>() };
 	SceneManager::GetInstance().AddScene(std::move(introScene));
 
-	std::unique_ptr<Scene> levelScene{ std::make_unique<SingleplayerLevelScene>() };
-	SceneManager::GetInstance().AddScene(std::move(levelScene));
-
-	std::unique_ptr<Scene> levenScene{ std::make_unique<SingleplayerScoreDisplayScene>() };
-	SceneManager::GetInstance().AddScene(std::move(levenScene));
+	std::unique_ptr<Scene> scoreDisplayScene{ std::make_unique<SingleplayerScoreDisplayScene>() };
+	SceneManager::GetInstance().AddScene(std::move(scoreDisplayScene));
 
 	std::unique_ptr<Scene> levelDisplayScene{ std::make_unique<LevelDisplayScene>() };
 	SceneManager::GetInstance().AddScene(std::move(levelDisplayScene));

@@ -22,6 +22,7 @@
 #include "ParagraphComponent.h"
 #include "TextureComponent.h"
 #include "ScoreComponent.h"
+#include "NextLevelCommand.h"
 #include "TextComponent.h"
 #include "LevelObserver.h"
 #include "LevelComponent.h"
@@ -60,6 +61,8 @@ void dae::SingleplayerLevelScene::OnSetup() {
 	auto pLivesComponent{ qbertObject->AddComponent<LivesComponent>(3) };
 	auto pQbertSpriteComponent{ qbertObject->AddComponent<SpriteComponent>("Qbert P1 Spritesheet.png", 17, 17, 2.f) };
 	auto pScoreComponent = qbertObject->AddComponent<ScoreComponent>(m_score);
+
+	pLevelComponent->AddNextLevelCommand(std::make_unique<NextLevelCommand>(pScoreComponent, m_level + 1));
 
 	auto textBalloonObject{ std::make_unique<GameObject>() };
 	textBalloonObject->AddComponent<TextureComponent>("Qbert Curses.png", 1.f);

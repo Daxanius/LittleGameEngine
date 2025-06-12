@@ -19,11 +19,5 @@ void dae::LevelObserver::Notify(const Event& event) {
 			m_pRoundText->SetText("ROUND:" + std::to_string(round+1));
 			break;
 		}
-		case make_sdbm_hash("next_level"):
-		{
-			int level{ event.GetValue<int>() };
-			m_pLevelText->SetText("LEVEL:" + std::to_string(level+1));
-			break;
-		}
 	}
 }

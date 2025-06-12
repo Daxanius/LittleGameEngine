@@ -14,7 +14,7 @@ dae::LevelComponent::LevelComponent(GameObject& pOwner, float resetTime, const L
 	m_pRhombilleGrid = GetOwner().GetComponent<RhombilleGridComponent>();
 }
 
-void dae::LevelComponent::NextRound() {
+bool dae::LevelComponent::NextRound() {
 	// Go to the next round
 	m_Round++;
 
@@ -23,13 +23,18 @@ void dae::LevelComponent::NextRound() {
 	if (m_Round >= m_levelInfo.rounds.size()) {
 		m_Round = 0;
 		m_Subject.Notify("next_level");
-		return;
+
+		for (auto& command : m_nextLevelCommands) {
+			command->Execute();
+		}
+		return false;
 	}
 
 	m_hasUpdated = false;
 
 	// Otherwise notify subjects the next round has been triggered
 	m_Subject.Notify("next_round", m_Round);
+	return true;
 }
 
 int dae::LevelComponent::GetRound() const {
@@ -94,6 +99,10 @@ void dae::LevelComponent::RegisterSpawner(EnemySpawnerComponent* pSpawner) {
 
 void dae::LevelComponent::AddGameOverCommand(std::unique_ptr<Command>&& pCommand) {
 	m_gameOverCommands.emplace_back(std::forward<std::unique_ptr<Command>>(pCommand));
+}
+
+void dae::LevelComponent::AddNextLevelCommand(std::unique_ptr<Command>&& pCommand) {
+	m_nextLevelCommands.emplace_back(std::forward<std::unique_ptr<Command>>(pCommand));
 }
 
 dae::Subject& dae::LevelComponent::GetSubject() {

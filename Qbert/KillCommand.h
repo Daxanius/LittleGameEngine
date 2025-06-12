@@ -3,7 +3,7 @@
 #include "LivesComponent.h"
 
 namespace dae {
-	class KillCommand : public ActorCommand {
+	class KillCommand final : public ActorCommand {
 	public:
 		KillCommand(GameObject* actor, int amount);
 

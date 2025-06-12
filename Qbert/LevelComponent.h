@@ -15,7 +15,8 @@ namespace dae {
 	public:
 		LevelComponent(GameObject& pOwner, float resetTime, const Level& levelInfo);
 
-		void NextRound();
+		// Returns false if we leveled up
+		bool NextRound();
 
 		int GetRound() const;
 
@@ -34,6 +35,7 @@ namespace dae {
 		void RegisterSpawner(EnemySpawnerComponent* pSpawner);
 
 		void AddGameOverCommand(std::unique_ptr<Command>&& pCommand);
+		void AddNextLevelCommand(std::unique_ptr<Command>&& pCommand);
 
 		Subject& GetSubject();
 
@@ -76,5 +78,6 @@ namespace dae {
 		std::vector<PlayerComponent*> m_Players;
 		std::vector<SpinningDiscComponent*> m_spinningDiscs;
 		std::vector<std::unique_ptr<Command>> m_gameOverCommands;
+		std::vector<std::unique_ptr<Command>> m_nextLevelCommands;
 	};
 }

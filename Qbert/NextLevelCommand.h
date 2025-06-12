@@ -3,15 +3,15 @@
 #include "ScoreComponent.h"
 
 namespace dae {
-	class IncreaseScoreCommand final : public ActorCommand {
+	class NextLevelCommand final : public Command {
 	public:
-		IncreaseScoreCommand(GameObject* actor, int amount);
+		NextLevelCommand(ScoreComponent* pScoreComponent, int level);
 
+		// Inherited via Command
 		void Execute() override;
 	private:
-		int m_amount;
-
 		ScoreComponent* m_pScoreComponent;
+
+		int m_level;
 	};
 }
-

@@ -14,7 +14,7 @@ namespace dae
 	{
 	public:
 		// Adds a scene by pointer
-		void AddScene(std::unique_ptr<Scene> scene);
+		void AddScene(std::unique_ptr<Scene>&& scene);
 
 		// Removes a scene
 		void RemoveScene(const std::string& name);
@@ -28,11 +28,16 @@ namespace dae
 		void Update(float deltaTime);
 		void Render();
 	private:
+		void ProcessUpdates();
+
 		std::unordered_map<std::string, std::unique_ptr<Scene>> m_scenes;
 
 		// There is no reason to run more than a single scene at a time
 		Scene* m_activeScene{};
 
 		std::optional<std::string> m_nextScene;
+
+		std::vector<std::unique_ptr<Scene>> m_scenesToAdd;
+		std::vector<std::string> m_scenesToRemove;
 	};
 }

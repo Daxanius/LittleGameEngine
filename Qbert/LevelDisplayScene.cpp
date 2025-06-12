@@ -3,15 +3,22 @@
 #include "ChangeSceneCommand.h"
 #include "TimerComponent.h"
 #include "TextComponent.h"
+#include "SingleplayerLevelScene.h"
+#include "SceneManager.h"
 #include "Level.h"
 #include "Qbert.h"
 #include <iostream>
+#include <memory>
 
-dae::LevelDisplayScene::LevelDisplayScene(int level)
-	: Scene("LevelDisplay"), m_level(level) {
+dae::LevelDisplayScene::LevelDisplayScene(int level, int score)
+	: Scene("LevelDisplay"), m_level(level), m_score(score) {
 }
 
 void dae::LevelDisplayScene::OnSetup() {
+	// Basically reload the level scene at a new level with a new score
+	auto levelScene{ std::make_unique<SingleplayerLevelScene>(m_level, m_score) };
+	SceneManager::GetInstance().AddScene(std::move(levelScene));
+
 	const auto& levels{ Qbert::GetInstance().GetLevelInfo() };
 	if (m_level >= levels.size()) {
 		std::cout << "Level does not exist, idiot" << std::endl;

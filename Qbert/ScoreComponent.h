@@ -5,7 +5,7 @@
 namespace dae {
 	class ScoreComponent : public BaseComponent {
 	public:
-		ScoreComponent(GameObject& pOwner, int& pScore);
+		ScoreComponent(GameObject& pOwner, int pScore);
 
 		void FixedUpdate() override {};
 		void Update(float) override {};
@@ -19,7 +19,7 @@ namespace dae {
 
 		int GetScore() const;
 	private:
-		int& m_pScore;
+		int m_pScore;
 
 		Subject m_subject;
 	};

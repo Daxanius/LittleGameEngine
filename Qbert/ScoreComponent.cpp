@@ -2,7 +2,7 @@
 #include "Subject.h"
 #include "hash.h"
 
-dae::ScoreComponent::ScoreComponent(GameObject& pOwner, int& pScore) : BaseComponent(pOwner), m_pScore(pScore), m_subject() {
+dae::ScoreComponent::ScoreComponent(GameObject& pOwner, int pScore) : BaseComponent(pOwner), m_pScore(pScore), m_subject() {
 }
 
 void dae::ScoreComponent::AddToScore(int amount) {

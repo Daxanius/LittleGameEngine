@@ -5,7 +5,7 @@
 #include <memory>
 
 namespace dae {
-	class ChangeCoilyStateCommand : public Command {
+	class ChangeCoilyStateCommand final : public Command {
 	public:
 		ChangeCoilyStateCommand(std::shared_ptr<AbstractCoilyState> pState, CoilyComponent* pCoilyComponent);
 

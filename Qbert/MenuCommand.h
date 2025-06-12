@@ -4,7 +4,7 @@
 
 
 namespace dae {
-	class MenuCommand : public Command {
+	class MenuCommand final : public Command {
 	public:
 		enum Action {
 			Previous,

@@ -3,7 +3,7 @@
 #include "GridMovementComponent.h"
 
 namespace dae {
-	class MoveCommand : public Command {
+	class MoveCommand final : public Command {
 	public:
 		enum class Direction {
 			Up,
