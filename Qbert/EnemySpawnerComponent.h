@@ -9,7 +9,7 @@ namespace dae {
 
 	class EnemySpawnerComponent : public BaseComponent {
 	public:
-		EnemySpawnerComponent(GameObject& pOwner, GridMovementComponent* pTargetComponent, LevelComponent* pLevelComponent);
+		EnemySpawnerComponent(GameObject& pOwner, LevelComponent* pLevelComponent);
 
 		void KillAllEnemies();
 
@@ -31,7 +31,6 @@ namespace dae {
 		GameObject* SpawnSlickOrSlam();
 
 		RhombilleGridComponent* m_pRhombilleGridComponent{};
-		GridMovementComponent* m_pTargetComponent{};
 		LevelComponent* m_pLevelComponent{};
 
 		Level m_levelInfo{};

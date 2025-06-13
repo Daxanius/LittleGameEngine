@@ -4,8 +4,8 @@
 #include "RhombilleGridComponent.h"
 #include "SpriteComponent.h"
 
-dae::CoilyBallMovementObserver::CoilyBallMovementObserver(CoilyComponent* pCoilyComponent, GridMovementComponent* pTargetMovementComponent)
-	: m_pCoilyComponent(pCoilyComponent), m_pTargetMovementComponent(pTargetMovementComponent) {
+dae::CoilyBallMovementObserver::CoilyBallMovementObserver(CoilyComponent* pCoilyComponent)
+	: m_pCoilyComponent(pCoilyComponent) {
 	m_pSpriteComponent = m_pCoilyComponent->GetOwner().GetComponent<SpriteComponent>();
 	assert(m_pSpriteComponent != nullptr);
 }
@@ -25,12 +25,6 @@ void dae::CoilyBallMovementObserver::Notify(const Event& event) {
 
 		case (make_sdbm_hash("arrive")):
 			m_pSpriteComponent->SetState(make_sdbm_hash("ball_idle"));
-			GridMovementComponent::ArriveEventData data{ std::any_cast<GridMovementComponent::ArriveEventData>(event.data) };
-
-			if (data.row >= m_pTargetMovementComponent->GetRhombilleGrid()->GetRows() -2) {
-				m_pCoilyComponent->SetState(std::make_shared<CoilyStateSnake>(m_pCoilyComponent, m_pTargetMovementComponent));
-			}
-
 			break;
 	}
 }

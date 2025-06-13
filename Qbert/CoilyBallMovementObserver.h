@@ -7,13 +7,12 @@
 namespace dae {
 	class CoilyBallMovementObserver : public Observer {
 	public:
-		CoilyBallMovementObserver(CoilyComponent* pCoilyComponent, GridMovementComponent* pTargetMovementComponent);
+		CoilyBallMovementObserver(CoilyComponent* pCoilyComponent);
 
 		void Notify(const Event& event) override;
 
 	private:
 		CoilyComponent* m_pCoilyComponent{};
-		GridMovementComponent* m_pTargetMovementComponent{};
 		SpriteComponent* m_pSpriteComponent{};
 	};
 }

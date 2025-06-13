@@ -7,7 +7,7 @@
 namespace dae {
 	class CoilySnakeMovementObserver : public Observer {
 	public:
-		CoilySnakeMovementObserver(CoilyComponent* pCoilyComponent, GridMovementComponent* pTargetMovementComponent);
+		CoilySnakeMovementObserver(CoilyComponent* pCoilyComponent);
 
 		void Notify(const Event& event) override;
 
@@ -20,7 +20,6 @@ namespace dae {
 		};
 
 		CoilyComponent* m_pCoilyComponent{};
-		GridMovementComponent* m_pTargetMovementComponent{};
 		SpriteComponent* m_pSpriteComponent{};
 
 		Direction m_lastDirection{ Direction::Up };

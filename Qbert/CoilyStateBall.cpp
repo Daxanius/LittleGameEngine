@@ -2,9 +2,10 @@
 #include "CoilyComponent.h"
 #include "hash.h"
 #include "GridMovementComponent.h"
+#include "CoilyStateSnake.h"
 #include <random> 
 
-dae::CoilyStateBall::CoilyStateBall(CoilyComponent* pCoilyComponent, GridMovementComponent* pTargetMovementComponent) : AbstractCoilyState(pCoilyComponent), m_pTargetMovementComponent(pTargetMovementComponent) {
+dae::CoilyStateBall::CoilyStateBall(CoilyComponent* pCoilyComponent) : AbstractCoilyState(pCoilyComponent) {
 	m_pGridMovementComponent = GetCoilyComponent()->GetOwner().GetComponent<GridMovementComponent>();
 	assert(m_pGridMovementComponent != nullptr);
 
@@ -14,7 +15,7 @@ dae::CoilyStateBall::CoilyStateBall(CoilyComponent* pCoilyComponent, GridMovemen
 	m_pGridNavigationComponent = GetCoilyComponent()->GetOwner().GetComponent<GridNavigationComponent>();
 	assert(m_pGridNavigationComponent != nullptr);
 
-	m_pCoilyBallMovementObserver = std::make_shared<CoilyBallMovementObserver>(pCoilyComponent, pTargetMovementComponent);
+	m_pCoilyBallMovementObserver = std::make_shared<CoilyBallMovementObserver>(pCoilyComponent);
 }
 
 void dae::CoilyStateBall::OnEnter() {
@@ -31,6 +32,11 @@ void dae::CoilyStateBall::OnEnter() {
 }
 
 void dae::CoilyStateBall::Update(float) {
+	int ownRow{ m_pGridMovementComponent->GetRow() };
+
+	if (ownRow >= GetCoilyComponent()->GetLevel()->GetRhombilleGrid()->GetRows() - 2) {
+		GetCoilyComponent()->SetState(std::make_shared<CoilyStateSnake>(GetCoilyComponent()));
+	}
 }
 
 void dae::CoilyStateBall::OnExit() {

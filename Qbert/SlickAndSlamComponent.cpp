@@ -1,7 +1,8 @@
 #include "SlickAndSlamComponent.h"
+#include "PlayerComponent.h"
 
-dae::SlickAndSlamComponent::SlickAndSlamComponent(GameObject& pOwner, GridMovementComponent* pPlayerMovementComponent, LevelComponent* pLevelComponent)
- : BaseComponent(pOwner), m_pPlayerMovementComponent(pPlayerMovementComponent), m_pLevelComponent(pLevelComponent) {
+dae::SlickAndSlamComponent::SlickAndSlamComponent(GameObject& pOwner, LevelComponent* pLevelComponent)
+ : BaseComponent(pOwner), m_pLevelComponent(pLevelComponent) {
 	m_pOwnMovementComponent = GetComponent<GridMovementComponent>();
 	m_pNavigationComponent = GetComponent<GridNavigationComponent>();
 }
@@ -14,22 +15,27 @@ void dae::SlickAndSlamComponent::Update(float) {
 	int ownRow{ m_pOwnMovementComponent->GetRow() };
 	int ownCol{ m_pOwnMovementComponent->GetCol() };
 
-	int playerRow{ m_pPlayerMovementComponent->GetRow() };
-	int playerCol{ m_pPlayerMovementComponent->GetCol() };
-
-	if (!m_pOwnMovementComponent->IsJumping() && 
-			!m_pPlayerMovementComponent->IsJumping() && 
-			ownRow == playerRow && 
-			ownCol == playerCol
-			) {
-		GetOwner().Destroy();
+	if (m_pOwnMovementComponent->IsJumping()) {
 		return;
+	}
+
+	for (auto player : m_pLevelComponent->GetPlayers()) {
+		if (player->GetMovementComponent()->IsJumping()) {
+			continue;
+		}
+
+		int playerRow{ player->GetMovementComponent()->GetRow() };
+		int playerCol{ player->GetMovementComponent()->GetCol() };
+
+		if (ownRow == playerRow && ownCol == playerCol) {
+			GetOwner().Destroy();
+		}
 	}
 
 	if (m_pOwnMovementComponent->HasArrived()) {
 		auto tile{ m_pLevelComponent->GetRhombilleGrid()->GetTile(ownRow, ownCol) };
 		if (tile != nullptr) {
-			tile->state = tile->state - 1 >= 0 ? tile->state - 1 : 0; // Revert the state of the tile
+			tile->state = std::max(tile->state -1, 0); // Revert the state of the tile
 		}
 	}
 

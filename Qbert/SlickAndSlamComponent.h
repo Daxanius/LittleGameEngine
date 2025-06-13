@@ -7,7 +7,7 @@
 namespace dae {
 	class SlickAndSlamComponent final : public BaseComponent {
 	public:
-		SlickAndSlamComponent(GameObject& pOwner, GridMovementComponent* pPlayerMovementComponent, LevelComponent* pLevelComponent);
+		SlickAndSlamComponent(GameObject& pOwner, LevelComponent* pLevelComponent);
 
 		void FixedUpdate() override {};
 		void Update(float deltaTime) override;
@@ -16,7 +16,6 @@ namespace dae {
 
 	private:
 		GridMovementComponent* m_pOwnMovementComponent{};
-		GridMovementComponent* m_pPlayerMovementComponent{};
 		GridNavigationComponent* m_pNavigationComponent{};
 		LevelComponent* m_pLevelComponent{};
 	};

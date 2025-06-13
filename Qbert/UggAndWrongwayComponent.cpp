@@ -1,8 +1,9 @@
 #include "UggAndWrongwayComponent.h"
 #include "LivesComponent.h"
+#include "PlayerComponent.h"
 
-dae::UggAndWrongwayComponent::UggAndWrongwayComponent(GameObject& pOwner, GridMovementComponent* pPlayerMovementComponent, LevelComponent* pLevelComponent, bool isUgg) 
- : BaseComponent(pOwner), m_pPlayerMovementComponent(pPlayerMovementComponent), m_pLevelComponent(pLevelComponent), m_isUgg(isUgg) {
+dae::UggAndWrongwayComponent::UggAndWrongwayComponent(GameObject& pOwner, LevelComponent* pLevelComponent, bool isUgg) 
+ : BaseComponent(pOwner), m_pLevelComponent(pLevelComponent), m_isUgg(isUgg) {
 	m_pOwnMovementComponent = GetComponent<GridMovementComponent>();
 	m_pNavigationComponent = GetComponent<GridNavigationComponent>();
 }
@@ -12,14 +13,22 @@ void dae::UggAndWrongwayComponent::Update(float) {
 
 	int ownRow = m_pOwnMovementComponent->GetRow();
 	int ownCol = m_pOwnMovementComponent->GetCol();
-	int playerRow = m_pPlayerMovementComponent->GetRow();
-	int playerCol = m_pPlayerMovementComponent->GetCol();
 
-	if (!m_pOwnMovementComponent->IsJumping() &&
-		!m_pPlayerMovementComponent->IsJumping() &&
-		ownRow == playerRow && ownCol == playerCol) {
-		m_pPlayerMovementComponent->GetComponent<LivesComponent>()->Kill();
+	if (m_pOwnMovementComponent->IsJumping()) {
 		return;
+	}
+
+	for (auto player : m_pLevelComponent->GetPlayers()) {
+		if (player->GetMovementComponent()->IsJumping()) {
+			continue;
+		}
+
+		int playerRow{ player->GetMovementComponent()->GetRow() };
+		int playerCol{ player->GetMovementComponent()->GetCol() };
+
+		if (ownRow == playerRow && ownCol == playerCol) {
+			player->Kill();
+		}
 	}
 
 	if (m_pNavigationComponent && m_pNavigationComponent->HasArrived()) {

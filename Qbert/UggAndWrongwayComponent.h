@@ -7,7 +7,7 @@
 namespace dae {
 	class UggAndWrongwayComponent final : public BaseComponent {
 	public:
-		UggAndWrongwayComponent(GameObject& pOwner, GridMovementComponent* pPlayerMovementComponent, LevelComponent* pLevelComponent, bool isUgg);
+		UggAndWrongwayComponent(GameObject& pOwner, LevelComponent* pLevelComponent, bool isUgg);
 
 		void FixedUpdate() override {};
 		void Update(float deltaTime) override;
@@ -15,7 +15,6 @@ namespace dae {
 		void Render() override {};
 	private:
 		GridMovementComponent* m_pOwnMovementComponent{};
-		GridMovementComponent* m_pPlayerMovementComponent{};
 		GridNavigationComponent* m_pNavigationComponent{};
 		LevelComponent* m_pLevelComponent{};
 

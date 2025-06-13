@@ -9,7 +9,7 @@
 namespace dae {
 	class CoilyStateSnake : public AbstractCoilyState {
 	public:
-		CoilyStateSnake(CoilyComponent* pCoilyComponent, GridMovementComponent* pTargetMovement);
+		CoilyStateSnake(CoilyComponent* pCoilyComponent);
 
 		void OnEnter() override;
 		void Update(float deltaTime) override;
@@ -19,7 +19,6 @@ namespace dae {
 		GridMovementComponent* m_pGridMovementComponent{};
 		SpriteComponent* m_pSpriteComponent{};
 		GridNavigationComponent* m_pGridNavigationComponent{};
-		GridMovementComponent* m_pTargetMovementComponent{};
 
 		std::shared_ptr<CoilySnakeMovementObserver> m_pCoilySnakeMovementObserver{};
 	};

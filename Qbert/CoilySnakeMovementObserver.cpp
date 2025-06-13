@@ -1,9 +1,9 @@
 #include "CoilySnakeMovementObserver.h"
 #include "hash.h"
 
-dae::CoilySnakeMovementObserver::CoilySnakeMovementObserver(CoilyComponent* pCoilyComponent, GridMovementComponent* pTargetMovementComponent) 
-: m_pCoilyComponent(pCoilyComponent), m_pTargetMovementComponent(pTargetMovementComponent) {
-	m_pSpriteComponent = m_pCoilyComponent->GetOwner().GetComponent<SpriteComponent>();
+dae::CoilySnakeMovementObserver::CoilySnakeMovementObserver(CoilyComponent* pCoilyComponent) 
+: m_pCoilyComponent(pCoilyComponent) {
+	m_pSpriteComponent = m_pCoilyComponent->GetComponent<SpriteComponent>();
 	assert(m_pSpriteComponent != nullptr);
 }
 

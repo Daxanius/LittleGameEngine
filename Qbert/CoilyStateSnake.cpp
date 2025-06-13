@@ -1,8 +1,9 @@
 #include "CoilyStateSnake.h"
 #include "CoilyComponent.h"
+#include "PlayerComponent.h"
 #include "hash.h"
 
-dae::CoilyStateSnake::CoilyStateSnake(CoilyComponent* pCoilyComponent, GridMovementComponent* pTargetMovement) : AbstractCoilyState(pCoilyComponent), m_pTargetMovementComponent(pTargetMovement) {
+dae::CoilyStateSnake::CoilyStateSnake(CoilyComponent* pCoilyComponent) : AbstractCoilyState(pCoilyComponent) {
 	m_pGridMovementComponent = GetCoilyComponent()->GetOwner().GetComponent<GridMovementComponent>();
 	assert(m_pGridMovementComponent != nullptr);
 
@@ -12,21 +13,51 @@ dae::CoilyStateSnake::CoilyStateSnake(CoilyComponent* pCoilyComponent, GridMovem
 	m_pGridNavigationComponent = GetCoilyComponent()->GetOwner().GetComponent<GridNavigationComponent>();
 	assert(m_pGridNavigationComponent != nullptr);
 
-	m_pCoilySnakeMovementObserver = std::make_shared<CoilySnakeMovementObserver>(pCoilyComponent, pTargetMovement);
+	m_pCoilySnakeMovementObserver = std::make_shared<CoilySnakeMovementObserver>(pCoilyComponent);
 }
 
 void dae::CoilyStateSnake::OnEnter() {
 	m_pSpriteComponent->SetState(make_sdbm_hash("idle_up"));
-	m_pGridNavigationComponent->SetTarget(m_pTargetMovementComponent->GetRow(), m_pTargetMovementComponent->GetCol());
 	m_pGridMovementComponent->GetSubject().AddObserver(m_pCoilySnakeMovementObserver);
 	m_pGridNavigationComponent->Enable();
 }
 
 void dae::CoilyStateSnake::Update(float) {
-	m_pGridNavigationComponent->SetTarget(
-		m_pTargetMovementComponent->IsJumping() ? m_pTargetMovementComponent->GetTargetRow() : m_pTargetMovementComponent->GetRow() -1,
-		m_pTargetMovementComponent->IsJumping() ? m_pTargetMovementComponent->GetTargetCol() : m_pTargetMovementComponent->GetCol()
-	);
+	const auto& players = GetCoilyComponent()->GetLevel()->GetPlayers();
+
+	int ownRow = m_pGridMovementComponent->GetRow();
+	int ownCol = m_pGridMovementComponent->GetCol();
+
+	float minDistance = std::numeric_limits<float>::max();
+	int targetRow = ownRow;
+	int targetCol = ownCol;
+
+	for (auto player : players) {
+		const auto playerMovementComponent = player->GetMovementComponent();
+
+		int playerRow = playerMovementComponent->GetRow();
+		int playerCol = playerMovementComponent->GetCol();
+
+		// If the player is jumping, target their destination
+		if (playerMovementComponent->IsJumping()) {
+			playerRow = playerMovementComponent->GetTargetRow();
+			playerCol = playerMovementComponent->GetTargetCol();
+		}
+
+		// Compute squared distance to target nearest player
+		int dRow = ownRow - playerRow;
+		int dCol = ownCol - playerCol;
+		float distanceSquared = static_cast<float>(dRow * dRow + dCol * dCol);
+
+		if (distanceSquared < minDistance) {
+			minDistance = distanceSquared;
+			targetRow = playerRow;
+			targetCol = playerCol;
+		}
+	}
+
+	// Target the closest player
+	m_pGridNavigationComponent->SetTarget(targetRow, targetCol);
 }
 
 void dae::CoilyStateSnake::OnExit() {

@@ -10,9 +10,11 @@
 namespace dae {  
 	class CoilyComponent : public BaseComponent {
 	public:  
-		CoilyComponent(GameObject& pOwner, GridMovementComponent* pPlayerMovementComponent, LevelComponent* pLevelComponent);
+		CoilyComponent(GameObject& pOwner, LevelComponent* pLevelComponent);
 
 		void SetState(std::shared_ptr<AbstractCoilyState> pState);
+
+		LevelComponent* GetLevel() const;
 
 		void FixedUpdate() override {};
 		void Update(float deltaTime) override;  
@@ -22,7 +24,6 @@ namespace dae {
 		std::shared_ptr<AbstractCoilyState> m_pCurrentState;
 
 		GridMovementComponent* m_pOwnMovementComponent{};
-		GridMovementComponent* m_pPlayerMovementComponent{};
 		LevelComponent* m_pLevelComponent{};
 	};
 }

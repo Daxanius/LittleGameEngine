@@ -9,7 +9,7 @@
 namespace dae {
 	class CoilyStateBall final : public AbstractCoilyState {
 	public:
-		CoilyStateBall(CoilyComponent* pCoilyComponent, GridMovementComponent* pTargetMovementComponent);
+		CoilyStateBall(CoilyComponent* pCoilyComponent);
 
 		void OnEnter() override;
 		void Update(float deltaTime) override;
@@ -17,7 +17,6 @@ namespace dae {
 
 	private:
 		GridMovementComponent* m_pGridMovementComponent{};
-		GridMovementComponent* m_pTargetMovementComponent{};
 		SpriteComponent* m_pSpriteComponent{};
 		GridNavigationComponent* m_pGridNavigationComponent{};
 

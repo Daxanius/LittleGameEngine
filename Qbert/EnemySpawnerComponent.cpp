@@ -14,8 +14,8 @@
 #include "Scene.h"
 #include <iostream>
 
-dae::EnemySpawnerComponent::EnemySpawnerComponent(GameObject& pOwner, GridMovementComponent* pTargetComponent, LevelComponent* pLevelComponent) 
-	: BaseComponent(pOwner), m_pTargetComponent(pTargetComponent), m_pLevelComponent(pLevelComponent) {
+dae::EnemySpawnerComponent::EnemySpawnerComponent(GameObject& pOwner, LevelComponent* pLevelComponent) 
+	: BaseComponent(pOwner), m_pLevelComponent(pLevelComponent) {
 	m_pRhombilleGridComponent = GetOwner().GetComponent<RhombilleGridComponent>();
 	m_levelInfo = m_pLevelComponent->GetLevelInfo();
 }
@@ -85,7 +85,7 @@ dae::GameObject* dae::EnemySpawnerComponent::SpawnCoily() {
 	auto coilySprite{ coilyObject->AddComponent<SpriteComponent>("Coily Spritesheet.png", 16, 32, 2.f) };
 	auto movementComponent{ coilyObject->AddComponent<GridMovementComponent>(m_pRhombilleGridComponent, m_pLevelComponent, 0, 0, 0.5f) };
 	coilyObject->AddComponent<GridNavigationComponent>(0.5f);
-	auto coilyComponent{ coilyObject->AddComponent<CoilyComponent>(m_pTargetComponent, m_pLevelComponent) };
+	auto coilyComponent{ coilyObject->AddComponent<CoilyComponent>(m_pLevelComponent) };
 
 	movementComponent->SetOffsetX(32 + 16);
 	movementComponent->SetOffsetY(32);
@@ -101,8 +101,7 @@ dae::GameObject* dae::EnemySpawnerComponent::SpawnCoily() {
 	coilySprite->AddState(make_sdbm_hash("idle_down"), SpriteComponent::State{ 8, 0, 1, 0 });
 	coilySprite->AddState(make_sdbm_hash("jump_down"), SpriteComponent::State{ 9, 0, 1, 0 });
 
-
-	coilyComponent->SetState(std::make_shared<CoilyStateBall>(coilyComponent, m_pTargetComponent));
+	coilyComponent->SetState(std::make_shared<CoilyStateBall>(coilyComponent));
 
 	auto eObj{ coilyObject.get() };
 	SceneManager::GetInstance().GetActiveScene()->Add(std::move(coilyObject));
@@ -120,11 +119,10 @@ dae::GameObject* dae::EnemySpawnerComponent::SpawnUggOrWrongWay() {
 	auto pSpriteComponent{ enemyObject->AddComponent<SpriteComponent>("Ugg Wrongway Spritesheet.png", 16, 16, 2.f) };
 	auto pMovementComponent{ enemyObject->AddComponent<GridMovementComponent>(m_pRhombilleGridComponent, m_pLevelComponent, row, col, 0.5f) };
 	enemyObject->AddComponent<GridNavigationComponent>(0.5f);
-	enemyObject->AddComponent<UggAndWrongwayComponent>(m_pTargetComponent, m_pLevelComponent, variant == 0);
+	enemyObject->AddComponent<UggAndWrongwayComponent>(m_pLevelComponent, variant == 0);
 
 	pMovementComponent->SetOffsetX(16);
 	pMovementComponent->SetOffsetY(16);
-
 
 	pSpriteComponent->AddState(make_sdbm_hash("roll1"), SpriteComponent::State{ 0, variant, 1, 0 });
 	pSpriteComponent->AddState(make_sdbm_hash("roll2"), SpriteComponent::State{ 1, variant, 1, 0 });
@@ -146,7 +144,7 @@ dae::GameObject* dae::EnemySpawnerComponent::SpawnSlickOrSlam() {
 	auto pSpriteComponent{ enemyObject->AddComponent<SpriteComponent>("Slick Sam Spritesheet.png", 12, 16, 2.f) };
 	auto pMovementComponent{ enemyObject->AddComponent<GridMovementComponent>(m_pRhombilleGridComponent, m_pLevelComponent, 0, 0, 0.5f) };
 	auto pNavigationComponent{ enemyObject->AddComponent<GridNavigationComponent>(0.5f) };
-	enemyObject->AddComponent<SlickAndSlamComponent>(m_pTargetComponent, m_pLevelComponent);
+	enemyObject->AddComponent<SlickAndSlamComponent>(m_pLevelComponent);
 
 	int row{ m_pRhombilleGridComponent->GetRows() };
 	int col{ m_pRhombilleGridComponent->GetRandomCol(row) };
