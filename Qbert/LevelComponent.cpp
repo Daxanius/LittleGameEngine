@@ -42,6 +42,10 @@ int dae::LevelComponent::GetRound() const {
 	return m_Round;
 }
 
+int dae::LevelComponent::GetTileVariant() const {
+	return m_levelInfo.rounds[m_Round].variant;
+}
+
 void dae::LevelComponent::PauseLevel() {
 	m_Paused = true;
 }

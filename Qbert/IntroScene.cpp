@@ -28,5 +28,5 @@ void dae::IntroScrene::OnSetup() {
 }
 
 void dae::IntroScrene::OnEnter() {
-	m_pTimerComponent->Start(2.f);
+	m_pTimerComponent->Start(1.5f);
 }

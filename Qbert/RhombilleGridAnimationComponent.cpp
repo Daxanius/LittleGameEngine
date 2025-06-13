@@ -17,7 +17,7 @@ void dae::RhombilleGridAnimationComponent::Update(float deltaTime) {
 		m_playing = false;
 		m_pLevelComponent->UnpauseLevel();
 		m_pRhombilleGridComponent->SetAllStates(0);
-		m_pRhombilleGridComponent->SetVariant(m_pLevelComponent->GetRound());
+		m_pRhombilleGridComponent->SetVariant(m_pLevelComponent->GetTileVariant());
 		m_currentTimeLeft = 0.f;
 
 		m_Subject.Notify(dae::Event{ make_sdbm_hash("grid_animation_done") });

@@ -19,6 +19,7 @@ namespace dae {
 		bool NextRound();
 
 		int GetRound() const;
+		int GetTileVariant() const;
 
 		// Pause an unpause are used for animations
 		void PauseLevel();
