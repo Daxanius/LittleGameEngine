@@ -31,7 +31,7 @@ void dae::UggAndWrongwayComponent::Update(float) {
 		int playerCol{ player->GetMovementComponent()->GetCol() };
 
 		if (ownRow == playerRow && ownCol == playerCol) {
-			player->Kill();
+			player->Kill(false);
 		}
 	}
 

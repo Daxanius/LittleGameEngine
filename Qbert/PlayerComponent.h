@@ -25,7 +25,7 @@ namespace dae {
 
 		void Reset();
 
-		void Kill();
+		void Kill(bool shouldGoBack);
 		
 		bool HasDied() const;
 
@@ -47,6 +47,7 @@ namespace dae {
 		GameObject* m_pTextBalloonGo{};
 
 		bool m_died{};
+		bool m_shouldGoBack{};
 
 		std::vector<std::unique_ptr<Command>> m_gameOverCommands;
 	};

@@ -55,7 +55,7 @@ void dae::CoilyComponent::Update(float deltaTime) {
 		int playerCol{ player->GetMovementComponent()->GetCol() };
 
 		if (ownRow == playerRow && ownCol == playerCol) {
-			player->Kill();
+			player->Kill(false);
 		}
 	}
 }

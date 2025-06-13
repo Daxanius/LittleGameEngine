@@ -41,7 +41,7 @@ void dae::PlayerMovementObserver::Notify(const Event& event) {
 				}
 			} else {
 				if (!m_pLevelComponent->CheckSpinningDiscs()) {
-					m_pPlayerComponent->Kill();
+					m_pPlayerComponent->Kill(true);
 				}
 			}
 			break;

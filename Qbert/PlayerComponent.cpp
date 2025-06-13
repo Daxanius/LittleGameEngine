@@ -43,7 +43,9 @@ void dae::PlayerComponent::Reset() {
 	SetInvulnerable(false);
 
 	if (m_died) {
-		m_pGridMovementComponent->GoToPrevPosition();
+		if (m_shouldGoBack) {
+			m_pGridMovementComponent->GoToPrevPosition();
+		}
 		m_died = false;
 	} else {
 		m_pGridMovementComponent->ResetPosition();
@@ -51,7 +53,7 @@ void dae::PlayerComponent::Reset() {
 	}
 }
 
-void dae::PlayerComponent::Kill() {
+void dae::PlayerComponent::Kill(bool shouldGoBack) {
 	if (m_pLivesComponent->IsInvulnerable()) {
 		m_died = false;
 		return;
@@ -59,6 +61,7 @@ void dae::PlayerComponent::Kill() {
 
 	ShowTextBalloon();
 	m_died = true;
+	m_shouldGoBack = shouldGoBack;
 	m_pLivesComponent->Kill();
 
 	if (m_pLivesComponent->GetLives() <= 0) {
