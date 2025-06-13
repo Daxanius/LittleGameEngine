@@ -15,10 +15,6 @@ dae::LevelDisplayScene::LevelDisplayScene(int level, int score)
 }
 
 void dae::LevelDisplayScene::OnSetup() {
-	// Basically reload the level scene at a new level with a new score
-	auto levelScene{ std::make_unique<SingleplayerLevelScene>(m_level, m_score) };
-	SceneManager::GetInstance().AddScene(std::move(levelScene));
-
 	const auto& levels{ Qbert::GetInstance().GetLevelInfo() };
 	if (m_level >= static_cast<int>(levels.size())) {
 		std::cout << "Level does not exist, idiot" << std::endl;
@@ -41,5 +37,9 @@ void dae::LevelDisplayScene::OnSetup() {
 }
 
 void dae::LevelDisplayScene::OnEnter() {
+	// Basically reload the level scene at a new level with a new score
+	auto levelScene{ std::make_unique<SingleplayerLevelScene>(m_level, m_score) };
+	SceneManager::GetInstance().AddScene(std::move(levelScene));
+
 	m_pTimerComponent->Start(2.f);
 }

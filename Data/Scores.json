@@ -18,5 +18,9 @@
     {
         "name": "RIP",
         "score": 2500
+    },
+    {
+        "name": "DBB",
+        "score": 175
     }
 ]
