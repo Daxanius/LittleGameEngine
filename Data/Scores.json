@@ -4,10 +4,6 @@
         "score": 500
     },
     {
-        "name": "DCC",
-        "score": 0
-    },
-    {
         "name": "BOB",
         "score": 2350
     },
@@ -20,11 +16,11 @@
         "score": 2500
     },
     {
-        "name": "DBB",
-        "score": 175
-    },
-    {
         "name": "JEF",
         "score": 675
+    },
+    {
+        "name": "DAX",
+        "score": 11725
     }
 ]

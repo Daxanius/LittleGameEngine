@@ -37,8 +37,20 @@ void dae::SingleplayerScoreDisplayScene::OnEnter() {
 		std::move(std::make_unique<TextInputCommand>(m_pTextInputComponent, TextInputCommand::InputCommand::Up))
 	);
 
+	InputManager::GetInstance().BindGamepadCommand(
+		0,
+		Gamepad::ButtonState{ Gamepad::Button::Up, Gamepad::ActionType::Press },
+		std::move(std::make_unique<TextInputCommand>(m_pTextInputComponent, TextInputCommand::InputCommand::Up))
+	);
+
 	InputManager::GetInstance().BindKeyboardCommand(
 		Keyboard::KeyState{ Keyboard::Key::Down, Keyboard::ActionType::Press },
+		std::move(std::make_unique<TextInputCommand>(m_pTextInputComponent, TextInputCommand::InputCommand::Down))
+	);
+
+	InputManager::GetInstance().BindGamepadCommand(
+		0,
+		Gamepad::ButtonState{ Gamepad::Button::Down, Gamepad::ActionType::Press },
 		std::move(std::make_unique<TextInputCommand>(m_pTextInputComponent, TextInputCommand::InputCommand::Down))
 	);
 
@@ -47,13 +59,31 @@ void dae::SingleplayerScoreDisplayScene::OnEnter() {
 		std::move(std::make_unique<TextInputCommand>(m_pTextInputComponent, TextInputCommand::InputCommand::Left))
 	);
 
+		InputManager::GetInstance().BindGamepadCommand(
+		0,
+		Gamepad::ButtonState{ Gamepad::Button::Left, Gamepad::ActionType::Press },
+		std::move(std::make_unique<TextInputCommand>(m_pTextInputComponent, TextInputCommand::InputCommand::Left))
+	);
+
 	InputManager::GetInstance().BindKeyboardCommand(
 		Keyboard::KeyState{ Keyboard::Key::Right, Keyboard::ActionType::Press },
 		std::move(std::make_unique<TextInputCommand>(m_pTextInputComponent, TextInputCommand::InputCommand::Right))
 	);
 
+	InputManager::GetInstance().BindGamepadCommand(
+		0,
+		Gamepad::ButtonState{ Gamepad::Button::Right, Gamepad::ActionType::Press },
+		std::move(std::make_unique<TextInputCommand>(m_pTextInputComponent, TextInputCommand::InputCommand::Right))
+	);
+
 	InputManager::GetInstance().BindKeyboardCommand(
 		Keyboard::KeyState{ Keyboard::Key::Enter, Keyboard::ActionType::Release },
+		std::move(std::make_unique<EnterScoreCommand>(m_score, m_pTextInputComponent))
+	);
+
+	InputManager::GetInstance().BindGamepadCommand(
+		0,
+		Gamepad::ButtonState{ Gamepad::Button::Start, Gamepad::ActionType::Release },
 		std::move(std::make_unique<EnterScoreCommand>(m_score, m_pTextInputComponent))
 	);
 }

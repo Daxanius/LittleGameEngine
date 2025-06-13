@@ -54,17 +54,41 @@ void dae::MenuScene::OnEnter() {
 	InputManager::GetInstance().ClearAllBindings();
 
 	InputManager::GetInstance().BindKeyboardCommand(
-		Keyboard::KeyState{ Keyboard::Key::Up, Keyboard::ActionType::Release },
+		Keyboard::KeyState{ Keyboard::Key::Up, Keyboard::ActionType::Press },
+		std::move(std::make_unique<MenuCommand>(m_pSelectionMenuComponent, MenuCommand::Action::Previous))
+	);
+
+	InputManager::GetInstance().BindGamepadCommand(
+		0,
+		Gamepad::ButtonState{ Gamepad::Button::Up, Gamepad::ActionType::Press },
 		std::move(std::make_unique<MenuCommand>(m_pSelectionMenuComponent, MenuCommand::Action::Previous))
 	);
 
 	InputManager::GetInstance().BindKeyboardCommand(
-		Keyboard::KeyState{ Keyboard::Key::Down, Keyboard::ActionType::Release },
+		Keyboard::KeyState{ Keyboard::Key::Down, Keyboard::ActionType::Press },
+		std::move(std::make_unique<MenuCommand>(m_pSelectionMenuComponent, MenuCommand::Action::Next))
+	);
+
+	InputManager::GetInstance().BindGamepadCommand(
+		0,
+		Gamepad::ButtonState{ Gamepad::Button::Down, Gamepad::ActionType::Press },
 		std::move(std::make_unique<MenuCommand>(m_pSelectionMenuComponent, MenuCommand::Action::Next))
 	);
 
 	InputManager::GetInstance().BindKeyboardCommand(
-		Keyboard::KeyState{ Keyboard::Key::Enter, Keyboard::ActionType::Release },
+		Keyboard::KeyState{ Keyboard::Key::Enter, Keyboard::ActionType::Press },
+		std::move(std::make_unique<MenuCommand>(m_pSelectionMenuComponent, MenuCommand::Action::Confirm))
+	);
+
+	InputManager::GetInstance().BindGamepadCommand(
+		0,
+		Gamepad::ButtonState{ Gamepad::Button::A, Gamepad::ActionType::Press },
+		std::move(std::make_unique<MenuCommand>(m_pSelectionMenuComponent, MenuCommand::Action::Confirm))
+	);
+
+	InputManager::GetInstance().BindGamepadCommand(
+		0,
+		Gamepad::ButtonState{ Gamepad::Button::Start, Gamepad::ActionType::Press },
 		std::move(std::make_unique<MenuCommand>(m_pSelectionMenuComponent, MenuCommand::Action::Confirm))
 	);
 }

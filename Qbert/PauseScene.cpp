@@ -21,8 +21,20 @@ void dae::PauseScene::OnEnter() {
 		std::move(std::make_unique<ChangeSceneCommand>(m_resumeScene))
 	);
 
+	InputManager::GetInstance().BindGamepadCommand(
+		0,
+		Gamepad::ButtonState{ Gamepad::Button::Start, Gamepad::ActionType::Press },
+		std::move(std::make_unique<ChangeSceneCommand>(m_resumeScene))
+	);
+
 	InputManager::GetInstance().BindKeyboardCommand(
 		Keyboard::KeyState{ Keyboard::Key::Escape, Keyboard::ActionType::Press },
+		std::move(std::make_unique<ChangeSceneCommand>("Menu"))
+	);
+
+	InputManager::GetInstance().BindGamepadCommand(
+		0,
+		Gamepad::ButtonState{ Gamepad::Button::Y, Gamepad::ActionType::Release },
 		std::move(std::make_unique<ChangeSceneCommand>("Menu"))
 	);
 }

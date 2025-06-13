@@ -145,8 +145,20 @@ void dae::SingleplayerLevelScene::OnEnter() {
 		std::move(std::make_unique<MoveCommand>(m_pPlayerMovementComponent, MoveCommand::Direction::Up))
 	);
 
+	InputManager::GetInstance().BindGamepadCommand(
+		0,
+		Gamepad::ButtonState{ Gamepad::Button::Up, Gamepad::ActionType::Press },
+		std::move(std::make_unique<MoveCommand>(m_pPlayerMovementComponent, MoveCommand::Direction::Up))
+	);
+
 	InputManager::GetInstance().BindKeyboardCommand(
 		Keyboard::KeyState{ Keyboard::Key::Down, Keyboard::ActionType::Press },
+		std::move(std::make_unique<MoveCommand>(m_pPlayerMovementComponent, MoveCommand::Direction::Down))
+	);
+
+	InputManager::GetInstance().BindGamepadCommand(
+		0,
+		Gamepad::ButtonState{ Gamepad::Button::Down, Gamepad::ActionType::Press },
 		std::move(std::make_unique<MoveCommand>(m_pPlayerMovementComponent, MoveCommand::Direction::Down))
 	);
 
@@ -155,13 +167,31 @@ void dae::SingleplayerLevelScene::OnEnter() {
 		std::move(std::make_unique<MoveCommand>(m_pPlayerMovementComponent, MoveCommand::Direction::Left))
 	);
 
+	InputManager::GetInstance().BindGamepadCommand(
+		0,
+		Gamepad::ButtonState{ Gamepad::Button::Left, Gamepad::ActionType::Press },
+		std::move(std::make_unique<MoveCommand>(m_pPlayerMovementComponent, MoveCommand::Direction::Left))
+	);
+
 	InputManager::GetInstance().BindKeyboardCommand(
 		Keyboard::KeyState{ Keyboard::Key::Right, Keyboard::ActionType::Press },
 		std::move(std::make_unique<MoveCommand>(m_pPlayerMovementComponent, MoveCommand::Direction::Right))
 	);
 
+	InputManager::GetInstance().BindGamepadCommand(
+		0,
+		Gamepad::ButtonState{ Gamepad::Button::Right, Gamepad::ActionType::Press },
+		std::move(std::make_unique<MoveCommand>(m_pPlayerMovementComponent, MoveCommand::Direction::Right))
+	);
+
 	InputManager::GetInstance().BindKeyboardCommand(
 		Keyboard::KeyState{ Keyboard::Key::Escape, Keyboard::ActionType::Press },
+		std::move(std::make_unique<ChangeSceneCommand>("Pause"))
+	);
+
+	InputManager::GetInstance().BindGamepadCommand(
+		0,
+		Gamepad::ButtonState{ Gamepad::Button::Start, Gamepad::ActionType::Press },
 		std::move(std::make_unique<ChangeSceneCommand>("Pause"))
 	);
 }

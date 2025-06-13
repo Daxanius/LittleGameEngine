@@ -30,12 +30,24 @@ void dae::ScoreboardScene::OnEnter() {
 	InputManager::GetInstance().ClearAllBindings();
 
 	InputManager::GetInstance().BindKeyboardCommand(
-		Keyboard::KeyState{ Keyboard::Key::Escape, Keyboard::ActionType::Release },
+		Keyboard::KeyState{ Keyboard::Key::Escape, Keyboard::ActionType::Press },
 		std::move(std::make_unique<ChangeSceneCommand>("Menu"))
 	);
 
 	InputManager::GetInstance().BindKeyboardCommand(
-		Keyboard::KeyState{ Keyboard::Key::Enter, Keyboard::ActionType::Release },
+		Keyboard::KeyState{ Keyboard::Key::Enter, Keyboard::ActionType::Press },
+		std::move(std::make_unique<ChangeSceneCommand>("Menu"))
+	);
+
+	InputManager::GetInstance().BindGamepadCommand(
+		0,
+		Gamepad::ButtonState{ Gamepad::Button::Start, Gamepad::ActionType::Press },
+		std::move(std::make_unique<ChangeSceneCommand>("Menu"))
+	);
+
+	InputManager::GetInstance().BindGamepadCommand(
+		0,
+		Gamepad::ButtonState{ Gamepad::Button::B, Gamepad::ActionType::Press },
 		std::move(std::make_unique<ChangeSceneCommand>("Menu"))
 	);
 

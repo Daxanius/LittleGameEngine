@@ -73,13 +73,13 @@ void dae::SingleplayerIntroScene::OnEnter() {
 	InputManager::GetInstance().ClearAllBindings();
 
 	InputManager::GetInstance().BindKeyboardCommand(
-		Keyboard::KeyState{ Keyboard::Key::Enter, Keyboard::ActionType::Release },
+		Keyboard::KeyState{ Keyboard::Key::Enter, Keyboard::ActionType::Press },
 		std::move(std::make_unique<ChangeSceneCommand>("LevelDisplay"))
 	);
 
 	InputManager::GetInstance().BindGamepadCommand(
 		0,
-		Gamepad::ButtonState{ Gamepad::Button::Start, Gamepad::ActionType::Release },
+		Gamepad::ButtonState{ Gamepad::Button::Start, Gamepad::ActionType::Press },
 		std::move(std::make_unique<ChangeSceneCommand>("LevelDisplay"))
 	);
 }
