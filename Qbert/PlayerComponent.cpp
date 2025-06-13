@@ -51,6 +51,10 @@ void dae::PlayerComponent::Reset() {
 }
 
 void dae::PlayerComponent::Kill() {
+	if (m_pLivesComponent->IsInvulnerable()) {
+		return;
+	}
+
 	ShowTextBalloon();
 	m_died = true;
 	m_pLivesComponent->Kill();
