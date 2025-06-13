@@ -12,6 +12,7 @@
 #include "MenuCommand.h"
 #include "Qbert.h"
 #include "SinglePlayerLevelScene.h"
+#include "LevelDisplayScene.h"
 #include "Scene.h"
 #include <memory>
 
@@ -45,6 +46,10 @@ void dae::MenuScene::OnSetup() {
 }
 
 void dae::MenuScene::OnEnter() {
+	// Reset level display scene
+	auto levelScene{ std::make_unique<LevelDisplayScene>() };
+	SceneManager::GetInstance().AddScene(std::move(levelScene));
+
 	// Rebind the input system for the new scene
 	InputManager::GetInstance().ClearAllBindings();
 
