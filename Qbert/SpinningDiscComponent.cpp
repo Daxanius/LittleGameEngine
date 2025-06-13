@@ -21,6 +21,7 @@ void dae::SpinningDiscComponent::Update(float deltaTime) {
 		m_pCurrentPlayer->GetMovementComponent()->MoveToPosition(0, 0);
 		m_pCurrentPlayer = nullptr;
 		GetOwner().Destroy(); // Destroy the disc game object
+		m_subject.Notify("disc_land");
 		return;
 	}
 
@@ -54,9 +55,14 @@ bool dae::SpinningDiscComponent::TransportPlayer(PlayerComponent* pPlayerCompone
 
 	m_startPosition = GetOwner().GetWorldTransform().GetPosition();
 	m_goalPosition = m_pRhombileGridComponent->ToWorldPosition(0, 0);
+	m_subject.Notify("disc_lift");
 	return true;
 }
 
 bool dae::SpinningDiscComponent::IsTransportingPlayer() const {
 	return m_pCurrentPlayer != nullptr;
+}
+
+dae::Subject& dae::SpinningDiscComponent::GetSubject() {
+	return m_subject;
 }

@@ -3,6 +3,7 @@
 #include "RhombilleGridComponent.h"
 #include "SpriteComponent.h"
 #include "PlayerComponent.h"
+#include "Subject.h"
 
 namespace dae {
 	class SpinningDiscComponent : public BaseComponent {
@@ -20,6 +21,8 @@ namespace dae {
 		bool TransportPlayer(PlayerComponent* pPlayerComponent);
 
 		bool IsTransportingPlayer() const;
+
+		Subject& GetSubject();
 	private:
 		glm::vec2 m_startPosition{};
 		glm::vec2 m_goalPosition{};
@@ -33,6 +36,8 @@ namespace dae {
 		PlayerComponent* m_pCurrentPlayer{ nullptr };
 		SpriteComponent* m_pSpriteComponent;
 		RhombilleGridComponent* m_pRhombileGridComponent;
+
+		Subject m_subject{};
 	};
 }
 

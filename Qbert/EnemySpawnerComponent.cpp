@@ -10,6 +10,7 @@
 #include "UggAndWrongwayObserver.h"
 #include "SlickAndSlamComponent.h"
 #include "UggAndWrongwayComponent.h"
+#include "Qbert.h"
 #include "LevelComponent.h"
 #include "Scene.h"
 #include <iostream>
@@ -86,6 +87,7 @@ dae::GameObject* dae::EnemySpawnerComponent::SpawnCoily() {
 	auto movementComponent{ coilyObject->AddComponent<GridMovementComponent>(m_pRhombilleGridComponent, m_pLevelComponent, 0, 0, 0.5f) };
 	coilyObject->AddComponent<GridNavigationComponent>(0.5f);
 	auto coilyComponent{ coilyObject->AddComponent<CoilyComponent>(m_pLevelComponent) };
+	coilyComponent->GetSubject().AddObserver(Qbert::GetInstance().GetSoundObserver());
 
 	movementComponent->SetOffsetX(16);
 	movementComponent->SetOffsetY(-16);
@@ -119,7 +121,8 @@ dae::GameObject* dae::EnemySpawnerComponent::SpawnUggOrWrongWay() {
 	auto pSpriteComponent{ enemyObject->AddComponent<SpriteComponent>("Ugg Wrongway Spritesheet.png", 16, 16, 2.f) };
 	auto pMovementComponent{ enemyObject->AddComponent<GridMovementComponent>(m_pRhombilleGridComponent, m_pLevelComponent, row, col, 0.5f) };
 	enemyObject->AddComponent<GridNavigationComponent>(0.5f);
-	enemyObject->AddComponent<UggAndWrongwayComponent>(m_pLevelComponent, variant == 0);
+	auto uggAndWrongwayComponent{ enemyObject->AddComponent<UggAndWrongwayComponent>(m_pLevelComponent, variant == 0) };
+	uggAndWrongwayComponent->GetSubject().AddObserver(Qbert::GetInstance().GetSoundObserver());
 
 	pMovementComponent->SetOffsetX(16);
 	pMovementComponent->SetOffsetY(16);
@@ -144,7 +147,8 @@ dae::GameObject* dae::EnemySpawnerComponent::SpawnSlickOrSlam() {
 	auto pSpriteComponent{ enemyObject->AddComponent<SpriteComponent>("Slick Sam Spritesheet.png", 12, 16, 2.f) };
 	auto pMovementComponent{ enemyObject->AddComponent<GridMovementComponent>(m_pRhombilleGridComponent, m_pLevelComponent, 0, 0, 0.5f) };
 	auto pNavigationComponent{ enemyObject->AddComponent<GridNavigationComponent>(0.5f) };
-	enemyObject->AddComponent<SlickAndSlamComponent>(m_pLevelComponent);
+	auto sickAndSamComponent{ enemyObject->AddComponent<SlickAndSlamComponent>(m_pLevelComponent) };
+	sickAndSamComponent->GetSubject().AddObserver(Qbert::GetInstance().GetSoundObserver());
 
 	int row{ m_pRhombilleGridComponent->GetRows() };
 	int col{ m_pRhombilleGridComponent->GetRandomCol(row) };

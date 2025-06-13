@@ -5,6 +5,7 @@
 #include "GridMovementComponent.h"
 #include "GridNavigationComponent.h"
 #include "LevelComponent.h"
+#include "Subject.h"
 #include <memory>
 
 namespace dae {  
@@ -20,10 +21,14 @@ namespace dae {
 		void Update(float deltaTime) override;  
 		void PostUpdate() override {};
 		void Render() override {};
+
+		Subject& GetSubject();
 	private: 
 		std::shared_ptr<AbstractCoilyState> m_pCurrentState;
 
 		GridMovementComponent* m_pOwnMovementComponent{};
 		LevelComponent* m_pLevelComponent{};
+
+		Subject m_subject{};
 	};
 }

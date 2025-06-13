@@ -3,6 +3,7 @@
 #include "GridMovementComponent.h"
 #include "GridNavigationComponent.h"
 #include "LevelComponent.h"
+#include "Subject.h"
 
 namespace dae {
 	class UggAndWrongwayComponent final : public BaseComponent {
@@ -13,11 +14,15 @@ namespace dae {
 		void Update(float deltaTime) override;
 		void PostUpdate() override {};
 		void Render() override {};
+
+		Subject& GetSubject();
 	private:
 		GridMovementComponent* m_pOwnMovementComponent{};
 		GridNavigationComponent* m_pNavigationComponent{};
 		LevelComponent* m_pLevelComponent{};
 
 		bool m_isUgg{};
+
+		Subject m_subject{};
 	};
 }

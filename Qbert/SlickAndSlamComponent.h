@@ -3,6 +3,7 @@
 #include "GridMovementComponent.h"
 #include "GridNavigationComponent.h"
 #include "LevelComponent.h"
+#include "Subject.h"
 
 namespace dae {
 	class SlickAndSlamComponent final : public BaseComponent {
@@ -14,10 +15,13 @@ namespace dae {
 		void PostUpdate() override {};
 		void Render() override {};
 
+		Subject& GetSubject();
 	private:
 		GridMovementComponent* m_pOwnMovementComponent{};
 		GridNavigationComponent* m_pNavigationComponent{};
 		LevelComponent* m_pLevelComponent{};
+
+		Subject m_subject{};
 	};
 }
 

@@ -88,6 +88,7 @@ void dae::SingleplayerLevelScene::OnSetup() {
 
 	// Add the lives observer which will update the repeating texture component
 	pLivesComponent->GetSubject().AddObserver(std::static_pointer_cast<Observer>(std::make_shared<PlayerLivesObserver>(pRepeatingTexturecomponent, pPlayerComponent, pLevelComponent)));
+	pLivesComponent->GetSubject().AddObserver(Qbert::GetInstance().GetSoundObserver());
 
 	pQbertSpriteComponent->AddState(make_sdbm_hash("up"), SpriteComponent::State{ 0, 0, 0, 0 });
 	pQbertSpriteComponent->AddState(make_sdbm_hash("down"), SpriteComponent::State{ 3, 0, 0, 0 });
@@ -117,6 +118,7 @@ void dae::SingleplayerLevelScene::OnSetup() {
 	auto levelObserver{ std::make_shared<LevelObserver>(pScoreTextComponent, pRoundTextComponent) };
 	m_pScoreComponent->GetSubject().AddObserver(std::static_pointer_cast<Observer>(levelObserver));
 	pLevelComponent->GetSubject().AddObserver(std::static_pointer_cast<Observer>(levelObserver));
+	pLevelComponent->GetSubject().AddObserver(Qbert::GetInstance().GetSoundObserver());
 
 	Add(std::move(livesObject));
 	Add(std::move(mapObject));

@@ -32,6 +32,10 @@ void dae::CoilyStateBall::OnEnter() {
 }
 
 void dae::CoilyStateBall::Update(float) {
+	if (m_pGridMovementComponent->HasArrived()) {
+		GetCoilyComponent()->GetSubject().Notify("ball_jump");
+	}
+
 	int ownRow{ m_pGridMovementComponent->GetRow() };
 
 	if (ownRow >= GetCoilyComponent()->GetLevel()->GetRhombilleGrid()->GetRows() - 1) {

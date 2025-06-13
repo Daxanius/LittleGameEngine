@@ -14,6 +14,10 @@ void dae::UggAndWrongwayComponent::Update(float) {
 	int ownRow = m_pOwnMovementComponent->GetRow();
 	int ownCol = m_pOwnMovementComponent->GetCol();
 
+	if (m_pOwnMovementComponent->HasArrived()) {
+		m_subject.Notify("enemy_jump");
+	}
+
 	if (m_pOwnMovementComponent->IsJumping()) {
 		return;
 	}
@@ -41,4 +45,8 @@ void dae::UggAndWrongwayComponent::Update(float) {
 			m_pNavigationComponent->SetTarget(nextRow, nextCol);
 		}
 	}
+}
+
+dae::Subject& dae::UggAndWrongwayComponent::GetSubject() {
+	return m_subject;
 }

@@ -36,6 +36,7 @@ void dae::CoilyComponent::Update(float deltaTime) {
 	int ownCol{ m_pOwnMovementComponent->GetCol() };
 
 	if (m_pLevelComponent->GetRhombilleGrid()->GetTile(ownRow, ownCol) == nullptr) {
+		m_subject.Notify("coily_fall");
 		GetOwner().Destroy();
 		return;
 	}
@@ -52,4 +53,8 @@ void dae::CoilyComponent::Update(float deltaTime) {
 			player->Kill();
 		}
 	}
+}
+
+dae::Subject& dae::CoilyComponent::GetSubject() {
+	return m_subject;
 }

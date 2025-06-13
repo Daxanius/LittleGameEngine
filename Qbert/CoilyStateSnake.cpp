@@ -23,6 +23,10 @@ void dae::CoilyStateSnake::OnEnter() {
 }
 
 void dae::CoilyStateSnake::Update(float) {
+	if (m_pGridMovementComponent->HasArrived()) {
+		GetCoilyComponent()->GetSubject().Notify("snake_jump");
+	}
+
 	if (m_pGridMovementComponent->IsJumping()) {
 		return;
 	}

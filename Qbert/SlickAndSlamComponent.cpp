@@ -12,6 +12,10 @@ void dae::SlickAndSlamComponent::Update(float) {
 		return;
 	}
 
+	if (m_pOwnMovementComponent->HasArrived()) {
+		m_subject.Notify("enemy_jump");
+	}
+
 	int ownRow{ m_pOwnMovementComponent->GetRow() };
 	int ownCol{ m_pOwnMovementComponent->GetCol() };
 
@@ -28,6 +32,7 @@ void dae::SlickAndSlamComponent::Update(float) {
 		int playerCol{ player->GetMovementComponent()->GetCol() };
 
 		if (ownRow == playerRow && ownCol == playerCol) {
+			m_subject.Notify("slicksam_caught");
 			GetOwner().Destroy();
 		}
 	}
@@ -42,4 +47,8 @@ void dae::SlickAndSlamComponent::Update(float) {
 	if (m_pNavigationComponent != nullptr && m_pNavigationComponent->HasArrived()) {
 		GetOwner().Destroy();
 	}
+}
+
+dae::Subject& dae::SlickAndSlamComponent::GetSubject() {
+	return m_subject;
 }

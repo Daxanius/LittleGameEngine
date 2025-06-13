@@ -9,6 +9,7 @@
 #include "Scene.h"
 #include "RhombilleGridAnimationComponent.h"
 #include "SceneManager.h"
+#include "Qbert.h"
 #include <iostream>
 
 dae::LevelComponent::LevelComponent(GameObject& pOwner, float resetTime, const Level& levelInfo) 
@@ -226,7 +227,9 @@ void dae::LevelComponent::SpawnSpinningDiscs() {
 
 		auto discObject{ std::make_unique<GameObject>(Transform{ -999.f, -999.f })};
 		auto pSpriteComponent{ discObject->AddComponent<SpriteComponent>("Disk Spritesheet.png", 16, 10, 2.f) };
-		m_spinningDiscs.emplace_back(discObject->AddComponent<SpinningDiscComponent>(m_pRhombilleGrid, row, col));
+		auto pDiscComponent{ discObject->AddComponent<SpinningDiscComponent>(m_pRhombilleGrid, row, col) };
+		m_spinningDiscs.emplace_back(pDiscComponent);
+		pDiscComponent->GetSubject().AddObserver(Qbert::GetInstance().GetSoundObserver());
 
 		int variant{ m_pRhombilleGrid->GetVariant() };
 		pSpriteComponent->AddState(make_sdbm_hash("idle"), SpriteComponent::State{ variant * 5, 0, 4, 10 });
