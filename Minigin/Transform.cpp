@@ -17,6 +17,10 @@ dae::Transform::Transform(const glm::vec3& position) {
 	m_position = position;
 }
 
+float dae::Transform::GetZ() const {
+	return m_position.z;
+}
+
 void dae::Transform::SetPosition(const float x, const float y, const float z)
 {
 	m_position.x = x;

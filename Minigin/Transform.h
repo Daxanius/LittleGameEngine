@@ -14,6 +14,8 @@ namespace dae
 		void SetPosition(float x, float y, float z);
 		void SetPosition(const glm::vec3& position);
 
+		float GetZ() const;
+
 		const glm::vec3& GetPosition() const { return m_position; };
 
 		// Operator to add and subtract transforms lol

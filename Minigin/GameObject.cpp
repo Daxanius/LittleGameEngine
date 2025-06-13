@@ -89,11 +89,16 @@ void dae::GameObject::SetLocalTransform(const Transform& transform) {
 	MarkTransformDirty();
 }
 
+void dae::GameObject::SetLocalPosition(const glm::vec2& position) {
+	m_localTransform.SetPosition(position.x, position.y, m_localTransform.GetZ());
+	MarkTransformDirty();
+}
+
 const dae::Transform& dae::GameObject::GetLocalTransform() const {
 	return m_localTransform;
 }
 
-const dae::Transform& dae::GameObject::GetWorldTransform() {
+const dae::Transform& dae::GameObject::GetWorldTransform() const {
 	UpdateWorldTransform();
 	return m_worldTransform;
 }
@@ -136,7 +141,7 @@ std::vector<dae::GameObject*>& dae::GameObject::GetChildren() {
 	return m_pChildren;
 }
 
-void dae::GameObject::MarkTransformDirty() {
+void dae::GameObject::MarkTransformDirty() const  {
 	m_transformDirty = true;
 
 	// Mark the transforms for all children dirty
@@ -145,7 +150,7 @@ void dae::GameObject::MarkTransformDirty() {
 	}
 }
 
-void dae::GameObject::UpdateWorldTransform() {
+void dae::GameObject::UpdateWorldTransform() const  {
 	if (m_transformDirty) {
 		if (m_pParent) {
 			m_worldTransform = m_localTransform + m_pParent->GetWorldTransform();

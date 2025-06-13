@@ -14,7 +14,7 @@ void dae::GridMovementComponent::Update(float deltaTime) {
 	// If not jumping, just snap to position (e.g. at start)
 	if (!m_isJumping) {
 		glm::vec2 standingPosition{ ToStandingPosition(m_row, m_col) };
-		GetOwner().SetLocalTransform(Transform{ standingPosition.x, standingPosition.y });
+		GetOwner().SetLocalPosition(standingPosition);
 		return;
 	}
 
@@ -28,7 +28,7 @@ void dae::GridMovementComponent::Update(float deltaTime) {
 	float arc = -4 * JUMP_HEIGHT * (t - 0.5f) * (t - 0.5f) + JUMP_HEIGHT;
 	pos.y -= arc;
 
-	GetOwner().SetLocalTransform(pos);
+	GetOwner().SetLocalPosition(pos);
 	if (t >= 1.f) {
 		m_isJumping = false;
 
@@ -92,7 +92,7 @@ void dae::GridMovementComponent::ResetPosition() {
 	m_prevCol = 0;
 
 	auto pos = ToStandingPosition(m_row, m_col);
-	GetOwner().SetLocalTransform(pos);
+	GetOwner().SetLocalPosition(pos);
 }
 
 void dae::GridMovementComponent::MoveUp() {

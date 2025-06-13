@@ -1,5 +1,6 @@
 #include "Scene.h"
 #include "GameObject.h"
+#include "Transform.h"
 
 #include <algorithm>
 
@@ -60,11 +61,28 @@ void Scene::Update(float deltaTime) {
 	ProcessPendingChanges();
 }
 
-void Scene::Render() const {
-	for (const auto& object : m_objects) {
-		if (object->IsEnabled()) {
-			object->Render();
+// Yes, for z-ordering I could mark objects as dirty that have their Z changed
+// and then only sort the global object list based on z-values when required, but the performance
+// impact of copying like maybe 20 objects (pointers even) at most is negligble for
+// the use case of this engine.
+void dae::Scene::Render() const {
+	// Create a sorted copy of pointers for rendering with z-ordering
+	std::vector<const GameObject*> sortedObjects;
+	sortedObjects.reserve(m_objects.size());
+
+	for (const auto& obj : m_objects) {
+		if (obj->IsEnabled()) {
+			sortedObjects.emplace_back(obj.get());
 		}
+	}
+
+	std::sort(sortedObjects.begin(), sortedObjects.end(), [](const GameObject* a, const GameObject* b) {
+		return a->GetWorldTransform().GetZ() < b->GetWorldTransform().GetZ();
+	});
+
+	// Render based on z-order sorted objects
+	for (const auto* obj : sortedObjects) {
+		obj->Render();
 	}
 }
 

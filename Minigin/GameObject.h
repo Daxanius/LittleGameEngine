@@ -34,8 +34,9 @@ namespace dae
 		void Render() const;
 
 		void SetLocalTransform(const Transform& transform);
+		void SetLocalPosition(const glm::vec2& position);
 		const Transform& GetLocalTransform() const;
-		const Transform& GetWorldTransform();
+		const Transform& GetWorldTransform() const;
 
 		bool IsChild(GameObject* pObj) const;
 		bool IsEnabled() const;
@@ -114,14 +115,17 @@ namespace dae
 		void Destroy();
 		[[nodiscard]] bool IsDestroyed() const;
 	private:
-		void MarkTransformDirty();
-		void UpdateWorldTransform();
+		void MarkTransformDirty() const ;
+		void UpdateWorldTransform() const ;
 		void RemoveDestroyedComponents();
 
 		// The transform for this game object
 		Transform m_localTransform{};
-		Transform m_worldTransform{};
-		bool m_transformDirty{ true };
+
+		// Mutable allows me to fetch positions in a const context
+		mutable Transform m_worldTransform{}; 
+		mutable bool m_transformDirty{ true };
+
 		bool m_destroyed{ false };
 		bool m_enabled{ true };
 

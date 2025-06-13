@@ -10,7 +10,7 @@ void dae::SpinningDiscComponent::Update(float deltaTime) {
 	// If we're not transporting a player, ignore
 	if (m_pCurrentPlayer == nullptr) {
 		const auto newPosition = m_pRhombileGridComponent->ToWorldPosition(m_row, m_col);
-		GetOwner().SetLocalTransform(Transform{ newPosition.x + 8.f, newPosition.y + 5.f });
+		GetOwner().SetLocalPosition(glm::vec2{ newPosition.x + 8.f, newPosition.y + 5.f });
 		return;
 	}
 
@@ -27,7 +27,7 @@ void dae::SpinningDiscComponent::Update(float deltaTime) {
 	float progress{ (m_elapsedTime / m_travelTime) };
 	progress = std::clamp(progress, 0.f, 1.f);
 	const auto newPosition = m_startPosition + (progress * (m_goalPosition - m_startPosition));
-	GetOwner().SetLocalTransform(Transform{ newPosition });
+	GetOwner().SetLocalPosition(newPosition);
 	
 	m_elapsedTime += deltaTime;
 }
@@ -49,7 +49,7 @@ bool dae::SpinningDiscComponent::TransportPlayer(PlayerComponent* pPlayerCompone
 	m_pCurrentPlayer->EnableFreeMovement();
 	m_pCurrentPlayer->SetInvulnerable(true);
 	m_pCurrentPlayer->GetOwner().SetParent(&GetOwner(), false);
-	m_pCurrentPlayer->GetOwner().SetLocalTransform(Transform{ 2.f, -24.f });
+	m_pCurrentPlayer->GetOwner().SetLocalPosition(glm::vec2{ 2.f, -24.f });
 	m_elapsedTime = 0.f;
 
 	m_startPosition = GetOwner().GetWorldTransform().GetPosition();
