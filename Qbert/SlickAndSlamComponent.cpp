@@ -33,6 +33,7 @@ void dae::SlickAndSlamComponent::Update(float) {
 
 		if (ownRow == playerRow && ownCol == playerCol) {
 			m_subject.Notify("slicksam_caught");
+			player->GetScoreComponent()->AddToScore(300);
 			GetOwner().Destroy();
 		}
 	}

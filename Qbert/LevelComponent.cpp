@@ -25,6 +25,12 @@ bool dae::LevelComponent::NextRound() {
 	// If it's larger or equal to the rounds per level,
 	// reset it, go to the next level, and notify the subject
 	if (m_round >= static_cast<int>(m_levelInfo.rounds.size())) {
+		if (m_spinningDiscs.size() > 0) {
+			for (auto player : m_Players) {
+				player->GetScoreComponent()->AddToScore(50);
+			}
+		}
+
 		for (auto& command : m_nextLevelCommands) {
 			command->Execute();
 		}

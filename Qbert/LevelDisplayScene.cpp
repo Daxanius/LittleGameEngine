@@ -52,5 +52,5 @@ void dae::LevelDisplayScene::OnEnter() {
 	auto levelScene{ std::make_unique<SingleplayerLevelScene>(m_level, m_score) };
 	SceneManager::GetInstance().AddScene(std::move(levelScene));
 
-	m_pTimerComponent->Start(2.f);
+	m_pTimerComponent->Start(2.5f);
 }
