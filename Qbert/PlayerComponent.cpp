@@ -44,6 +44,7 @@ void dae::PlayerComponent::Reset() {
 
 	if (m_died) {
 		m_pGridMovementComponent->GoToPrevPosition();
+		m_died = false;
 	} else {
 		m_pGridMovementComponent->ResetPosition();
 		m_pSpriteComponent->SetState(make_sdbm_hash("right"));
@@ -52,6 +53,7 @@ void dae::PlayerComponent::Reset() {
 
 void dae::PlayerComponent::Kill() {
 	if (m_pLivesComponent->IsInvulnerable()) {
+		m_died = false;
 		return;
 	}
 
