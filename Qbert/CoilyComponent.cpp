@@ -26,6 +26,11 @@ void dae::CoilyComponent::Update(float deltaTime) {
 	int ownRow{ m_pOwnMovementComponent->GetRow() };
 	int ownCol{ m_pOwnMovementComponent->GetCol() };
 
+	if (m_pLevelComponent->GetRhombilleGrid().GetTile(ownRow, ownCol) == nullptr) {
+		GetOwner().Destroy();
+		return;
+	}
+
 	int playerRow{ m_pPlayerMovementComponent->GetRow() };
 	int playerCol{ m_pPlayerMovementComponent->GetCol() };
 
