@@ -47,7 +47,12 @@ void dae::ScoreboardScene::UpdateScoreText() {
 		return;
 	}
 
-	const auto& scores{ Qbert::GetInstance().GetScoreInfo() };
+	// Sort the scores using a copy
+	auto scores{ Qbert::GetInstance().GetScoreInfo() };
+	std::sort(scores.begin(), scores.end(), [](const Score& a, const Score& b) {
+		return a.score > b.score;
+	});
+
 	std::ostringstream oss;
 
 	for (int index = 0; index < m_scoresToDisplay; ++index) {
@@ -62,7 +67,7 @@ void dae::ScoreboardScene::UpdateScoreText() {
 			for (char& c : name) c = static_cast<char>(std::toupper(static_cast<unsigned char>(c)));
 
 			oss << std::setw(3) << std::left << name << " "
-					<< std::setw(5) << std::setfill('0') << std::right << score.score;
+				<< std::setw(5) << std::setfill('0') << std::right << score.score;
 		}
 	}
 

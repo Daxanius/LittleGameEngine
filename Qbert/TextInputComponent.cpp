@@ -16,7 +16,9 @@ void dae::TextInputComponent::Update(float) {
 
 	for (int c : m_values) {
 		char character{ AVAILABLE_CHARACTERS[c] };
-		m_textValue.push_back(character);
+		if (c != 0) {
+			m_textValue.push_back(character);
+		}
 
 		// Generate texture
 		std::string charStr(1, character);
@@ -81,6 +83,10 @@ void dae::TextInputComponent::Down() {
 	m_needsUpdate = true;
 }
 
-const std::string& dae::TextInputComponent::GetValue() {
+const std::string& dae::TextInputComponent::GetValue() const {
 	return m_textValue;
+}
+
+bool dae::TextInputComponent::IsDone() const {
+	return m_textValue.size() == m_stringSize;
 }

@@ -3,6 +3,7 @@
 #include "TextInputCommand.h"
 #include "TextureComponent.h"
 #include "InputManager.h"
+#include "EnterScoreCommand.h"
 #include "Qbert.h"
 
 dae::SingleplayerScoreDisplayScene::SingleplayerScoreDisplayScene(int score) 
@@ -49,5 +50,10 @@ void dae::SingleplayerScoreDisplayScene::OnEnter() {
 	InputManager::GetInstance().BindKeyboardCommand(
 		Keyboard::KeyState{ Keyboard::Key::Right, Keyboard::ActionType::Press },
 		std::move(std::make_unique<TextInputCommand>(m_pTextInputComponent, TextInputCommand::InputCommand::Right))
+	);
+
+	InputManager::GetInstance().BindKeyboardCommand(
+		Keyboard::KeyState{ Keyboard::Key::Enter, Keyboard::ActionType::Release },
+		std::move(std::make_unique<EnterScoreCommand>(m_score, m_pTextInputComponent))
 	);
 }

@@ -2,5 +2,13 @@
     {
         "name": "QBT",
         "score": 500
+    },
+    {
+        "name": "DCC",
+        "score": 0
+    },
+    {
+        "name": "BOB",
+        "score": 2350
     }
 ]

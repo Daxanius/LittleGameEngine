@@ -21,7 +21,9 @@ namespace dae {
 		void Up();
 		void Down();
 
-		const std::string& GetValue();
+		const std::string& GetValue() const;
+
+		bool IsDone() const;
 
 		TextInputComponent(const TextInputComponent&) = delete;
 		TextInputComponent& operator=(const TextInputComponent&) = delete;

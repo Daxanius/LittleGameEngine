@@ -176,7 +176,9 @@
     <ClCompile Include="CoilySnakeMovementObserver.cpp" />
     <ClCompile Include="CoilyStateBall.cpp" />
     <ClCompile Include="CoilyStateSnake.cpp" />
+    <ClCompile Include="EndGameCommand.cpp" />
     <ClCompile Include="EnemySpawnerComponent.cpp" />
+    <ClCompile Include="EnterScoreCommand.cpp" />
     <ClCompile Include="IntroScene.cpp" />
     <ClCompile Include="KillCommand.cpp" />
     <ClCompile Include="GridNavigationComponent.cpp" />
@@ -226,7 +228,9 @@
     <ClInclude Include="CoilySnakeMovementObserver.h" />
     <ClInclude Include="CoilyStateBall.h" />
     <ClInclude Include="CoilyStateSnake.h" />
+    <ClInclude Include="EndGameCommand.h" />
     <ClInclude Include="EnemySpawnerComponent.h" />
+    <ClInclude Include="EnterScoreCommand.h" />
     <ClInclude Include="IntroScene.h" />
     <ClInclude Include="json.hpp" />
     <ClInclude Include="KillCommand.h" />

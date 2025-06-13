@@ -13,6 +13,7 @@
 #include "MoveCommand.h"
 #include "RepeatingTextureComponent.h"
 #include "RhombilleGridAnimationComponent.h"
+#include "EndGameCommand.h"
 #include "PlayerComponent.h"
 #include "ChangeToComponent.h"
 #include "TimerComponent.h"
@@ -48,8 +49,6 @@ void dae::SingleplayerLevelScene::OnSetup() {
 	auto pLevelComponent{ mapObject->AddComponent<LevelComponent>(2.f, m_levelInfo) };
 	auto pGridAnimationComponent{ mapObject->AddComponent<RhombilleGridAnimationComponent>(2.f, 4) };
 
-	pLevelComponent->AddGameOverCommand(std::make_unique<ChangeSceneCommand>("SingleplayerScoreDisplay"));
-
 	auto nextTextObject(std::make_unique<GameObject>(Transform(10.f, 66.f)));
 	nextTextObject->AddComponent<TextComponent>("CHANGE TO", Qbert::GetInstance().GetFontSmall());
 
@@ -63,6 +62,7 @@ void dae::SingleplayerLevelScene::OnSetup() {
 	m_pScoreComponent = qbertObject->AddComponent<ScoreComponent>(m_score);
 
 	pLevelComponent->AddNextLevelCommand(std::make_unique<NextLevelCommand>(m_pScoreComponent, m_level + 1));
+	pLevelComponent->AddGameOverCommand(std::make_unique<EndGameCommand>(m_pScoreComponent));
 
 	auto textBalloonObject{ std::make_unique<GameObject>() };
 	textBalloonObject->AddComponent<TextureComponent>("Qbert Curses.png", 1.f);
