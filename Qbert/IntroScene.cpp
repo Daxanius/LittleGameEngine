@@ -5,6 +5,8 @@
 #include "TextComponent.h"
 #include "SingleplayerLevelScene.h"
 #include "SceneManager.h"
+#include "ToggleSoundCommand.h"
+#include "InputManager.h"
 #include "Level.h"
 #include "Qbert.h"
 #include <iostream>
@@ -28,5 +30,12 @@ void dae::IntroScrene::OnSetup() {
 }
 
 void dae::IntroScrene::OnEnter() {
+	InputManager::GetInstance().ClearAllBindings();
+
+	InputManager::GetInstance().BindKeyboardCommand(
+		Keyboard::KeyState{ Keyboard::Key::F2, Keyboard::ActionType::Press },
+		std::move(std::make_unique<ToggleSoundCommand>())
+	);
+
 	m_pTimerComponent->Start(1.5f);
 }

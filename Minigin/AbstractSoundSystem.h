@@ -9,6 +9,8 @@ namespace dae {
 		virtual ~AbstractSoundSystem() = default;
 		virtual void Play(const SoundId id, const float volume) = 0;
 		virtual SoundId RegisterSound(const std::string& filePath) = 0;
+		virtual void SetMuted(bool muted) = 0;
+		virtual bool IsMuted() const = 0;
 
 		AbstractSoundSystem() = default;
 		AbstractSoundSystem(const AbstractSoundSystem& other) = delete;

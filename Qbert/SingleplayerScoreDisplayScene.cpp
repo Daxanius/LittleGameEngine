@@ -4,6 +4,7 @@
 #include "TextureComponent.h"
 #include "InputManager.h"
 #include "EnterScoreCommand.h"
+#include "ToggleSoundCommand.h"
 #include "Qbert.h"
 
 dae::SingleplayerScoreDisplayScene::SingleplayerScoreDisplayScene(int score) 
@@ -31,6 +32,11 @@ void dae::SingleplayerScoreDisplayScene::OnSetup() {
 
 void dae::SingleplayerScoreDisplayScene::OnEnter() {
 	InputManager::GetInstance().ClearAllBindings();
+
+	InputManager::GetInstance().BindKeyboardCommand(
+		Keyboard::KeyState{ Keyboard::Key::F2, Keyboard::ActionType::Press },
+		std::move(std::make_unique<ToggleSoundCommand>())
+	);
 
 	InputManager::GetInstance().BindKeyboardCommand(
 		Keyboard::KeyState{ Keyboard::Key::Up, Keyboard::ActionType::Press },

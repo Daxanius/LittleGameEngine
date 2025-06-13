@@ -2,6 +2,7 @@
 #include "TextureComponent.h"
 #include "InputManager.h"
 #include "ChangeSceneCommand.h"
+#include "ToggleSoundCommand.h"
 
 dae::PauseScene::PauseScene(const std::string& resumeScene) 
 	: Scene("Pause"), m_resumeScene(resumeScene) {
@@ -15,6 +16,11 @@ void dae::PauseScene::OnSetup() {
 
 void dae::PauseScene::OnEnter() {
 	InputManager::GetInstance().ClearAllBindings();
+
+	InputManager::GetInstance().BindKeyboardCommand(
+		Keyboard::KeyState{ Keyboard::Key::F2, Keyboard::ActionType::Press },
+		std::move(std::make_unique<ToggleSoundCommand>())
+	);
 
 	InputManager::GetInstance().BindKeyboardCommand(
 		Keyboard::KeyState{ Keyboard::Key::Tab, Keyboard::ActionType::Press },

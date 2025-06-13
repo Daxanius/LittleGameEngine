@@ -7,3 +7,10 @@ void dae::NullSoundSystem::Play(const SoundId, const float) {
 dae::SoundId dae::NullSoundSystem::RegisterSound(const std::string&) {
 	return SoundId();
 }
+
+void dae::NullSoundSystem::SetMuted(bool) {
+}
+
+bool dae::NullSoundSystem::IsMuted() const {
+    return false;
+}

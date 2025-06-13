@@ -10,6 +10,9 @@ namespace dae {
 		void Play(const SoundId id, const float volume) override;
 		SoundId RegisterSound(const std::string& path) override;
 
+		void SetMuted(bool muted) override;
+		bool IsMuted() const override;
+
 		// Delete these monkeys 
 		LoggingSoundSystem(const LoggingSoundSystem& other) = delete;
 		LoggingSoundSystem(LoggingSoundSystem&& other) noexcept = delete;
@@ -18,5 +21,7 @@ namespace dae {
 		virtual ~LoggingSoundSystem() override = default;
 	private:
 		std::unique_ptr<AbstractSoundSystem> m_soundSystem;
+
+		bool m_muted{};
 	};
 }

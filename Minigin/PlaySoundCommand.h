@@ -5,7 +5,7 @@
 #include <string>
 
 namespace dae {
-	class PlaySoundCommand : public Command {
+	class PlaySoundCommand final : public Command {
 	public:
 		PlaySoundCommand(const std::string& file, float volume);
 

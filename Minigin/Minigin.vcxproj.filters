@@ -183,6 +183,9 @@
     <ClInclude Include="ParagraphComponent.h">
       <Filter>Engine\Components</Filter>
     </ClInclude>
+    <ClInclude Include="ToggleSoundCommand.h">
+      <Filter>Engine\Commands</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Minigin.cpp">
@@ -301,6 +304,9 @@
     </ClCompile>
     <ClCompile Include="ParagraphComponent.cpp">
       <Filter>Engine\Components</Filter>
+    </ClCompile>
+    <ClCompile Include="ToggleSoundCommand.cpp">
+      <Filter>Engine\Commands</Filter>
     </ClCompile>
   </ItemGroup>
 </Project>

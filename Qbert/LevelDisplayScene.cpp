@@ -5,6 +5,8 @@
 #include "TextComponent.h"
 #include "SingleplayerLevelScene.h"
 #include "SceneManager.h"
+#include "ToggleSoundCommand.h"
+#include "InputManager.h"
 #include "Level.h"
 #include "Qbert.h"
 #include <iostream>
@@ -37,6 +39,13 @@ void dae::LevelDisplayScene::OnSetup() {
 }
 
 void dae::LevelDisplayScene::OnEnter() {
+	InputManager::GetInstance().ClearAllBindings();
+
+	InputManager::GetInstance().BindKeyboardCommand(
+		Keyboard::KeyState{ Keyboard::Key::F2, Keyboard::ActionType::Press },
+		std::move(std::make_unique<ToggleSoundCommand>())
+	);
+
 	// Basically reload the level scene at a new level with a new score
 	auto levelScene{ std::make_unique<SingleplayerLevelScene>(m_level, m_score) };
 	SceneManager::GetInstance().AddScene(std::move(levelScene));

@@ -23,6 +23,7 @@
 #include "LevelObserver.h"
 #include "LevelComponent.h"
 #include "SinglePlayerLevelScene.h"
+#include "ToggleSoundCommand.h"
 #include "ChangeSceneCommand.h"
 #include "Qbert.h"
 
@@ -71,6 +72,11 @@ void dae::SingleplayerIntroScene::OnSetup() {
 
 void dae::SingleplayerIntroScene::OnEnter() {
 	InputManager::GetInstance().ClearAllBindings();
+
+	InputManager::GetInstance().BindKeyboardCommand(
+		Keyboard::KeyState{ Keyboard::Key::F2, Keyboard::ActionType::Press },
+		std::move(std::make_unique<ToggleSoundCommand>())
+	);
 
 	InputManager::GetInstance().BindKeyboardCommand(
 		Keyboard::KeyState{ Keyboard::Key::Enter, Keyboard::ActionType::Press },

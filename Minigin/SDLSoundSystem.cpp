@@ -80,7 +80,7 @@ public:
 	}
 
 	void Play(const dae::SoundId id, const float volume) {
-		if (!m_initialized) {
+		if (!m_initialized || m_muted) {
 			return;
 		}
 
@@ -91,6 +91,14 @@ public:
 		}
 
 		m_conditionVariable.notify_one();
+	}
+
+	void SetMuted(bool muted) {
+		m_muted = muted;
+	}
+
+	bool IsMuted() const {
+		return m_muted;
 	}
 
 	dae::SoundId RegisterSound(const std::string& filePath) {
@@ -146,9 +154,18 @@ private:
 
 	bool m_initialized;
 	bool m_running; // Determines whether we should keep processing the queue
+	bool m_muted{};
 };
 
 dae::SDLSoundSystem::~SDLSoundSystem() = default;
+
+void dae::SDLSoundSystem::SetMuted(bool muted) {
+	m_pImpl->SetMuted(muted);
+}
+
+bool dae::SDLSoundSystem::IsMuted() const {
+	return m_pImpl->IsMuted();
+}
 
 dae::SDLSoundSystem::SDLSoundSystem() : m_pImpl(std::make_unique<dae::SDLSoundSystem::Impl>()) {
 	

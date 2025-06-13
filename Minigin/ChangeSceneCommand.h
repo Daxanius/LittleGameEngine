@@ -4,7 +4,7 @@
 #include "Command.h"
 
 namespace dae {
-	class ChangeSceneCommand : public Command {
+	class ChangeSceneCommand final : public Command {
 	public:
 		ChangeSceneCommand(const std::string& scene);
 

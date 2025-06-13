@@ -3,6 +3,7 @@
 #include "ChangeSceneCommand.h"
 #include "Qbert.h"
 #include "TextComponent.h"
+#include "ToggleSoundCommand.h"
 #include <memory>
 #include <iomanip>
 #include <sstream>
@@ -28,6 +29,11 @@ void dae::ScoreboardScene::OnSetup() {
 
 void dae::ScoreboardScene::OnEnter() {
 	InputManager::GetInstance().ClearAllBindings();
+
+	InputManager::GetInstance().BindKeyboardCommand(
+		Keyboard::KeyState{ Keyboard::Key::F2, Keyboard::ActionType::Press },
+		std::move(std::make_unique<ToggleSoundCommand>())
+	);
 
 	InputManager::GetInstance().BindKeyboardCommand(
 		Keyboard::KeyState{ Keyboard::Key::Escape, Keyboard::ActionType::Press },

@@ -13,6 +13,7 @@
 #include "Qbert.h"
 #include "SinglePlayerLevelScene.h"
 #include "LevelDisplayScene.h"
+#include "ToggleSoundCommand.h"
 #include "Scene.h"
 #include <memory>
 
@@ -52,6 +53,11 @@ void dae::MenuScene::OnEnter() {
 
 	// Rebind the input system for the new scene
 	InputManager::GetInstance().ClearAllBindings();
+
+	InputManager::GetInstance().BindKeyboardCommand(
+		Keyboard::KeyState{ Keyboard::Key::F2, Keyboard::ActionType::Press },
+		std::move(std::make_unique<ToggleSoundCommand>())
+	);
 
 	InputManager::GetInstance().BindKeyboardCommand(
 		Keyboard::KeyState{ Keyboard::Key::Up, Keyboard::ActionType::Press },
