@@ -226,7 +226,7 @@ void dae::LevelComponent::SpawnSpinningDiscs() {
 		bool exists{};
 		do {
 			row = m_pRhombilleGrid->GetRandomRow();
-			col = rand() % 1 == 0 ? -1 : row + 1;
+			col = rand() % 2 == 0 ? -1 : row + 1;
 
 			for (const auto& disc : m_spinningDiscs) {
 				exists = disc->GetRow() == row && disc->GetCol() == col;
@@ -248,7 +248,7 @@ void dae::LevelComponent::SpawnSpinningDiscs() {
 
 void dae::LevelComponent::DestroySpinningDiscs() {
 	for (auto disc : m_spinningDiscs) {
-		disc->Destroy();
+		disc->GetOwner().Destroy();
 	}
 
 	m_spinningDiscs.clear();
