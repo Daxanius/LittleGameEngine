@@ -16,6 +16,7 @@
 #include "SingleplayerScoreDisplayScene.h"
 #include "ScoreboardScene.h"
 #include "LevelDisplayScene.h"
+#include "IntroScene.h"
 #include "PauseScene.h"
 #include "MenuScene.h"
 #include "hash.h"
@@ -34,8 +35,8 @@ void dae::Qbert::Start() {
 	std::unique_ptr<Scene> menuScene{ std::make_unique<MenuScene>() };
 	SceneManager::GetInstance().AddScene(std::move(menuScene));
 
-	std::unique_ptr<Scene> introScene{ std::make_unique<SingleplayerIntroScene>() };
-	SceneManager::GetInstance().AddScene(std::move(introScene));
+	std::unique_ptr<Scene> spIntroScene{ std::make_unique<SingleplayerIntroScene>() };
+	SceneManager::GetInstance().AddScene(std::move(spIntroScene));
 
 	std::unique_ptr<Scene> scoreDisplayScene{ std::make_unique<SingleplayerScoreDisplayScene>() };
 	SceneManager::GetInstance().AddScene(std::move(scoreDisplayScene));
@@ -46,7 +47,10 @@ void dae::Qbert::Start() {
 	std::unique_ptr<Scene> scoreboardScene{ std::make_unique<ScoreboardScene>(10) };
 	SceneManager::GetInstance().AddScene(std::move(scoreboardScene));
 
-	SceneManager::GetInstance().SetScene("Menu");
+	std::unique_ptr<Scene> introScene{ std::make_unique<IntroScrene>() };
+	SceneManager::GetInstance().AddScene(std::move(introScene));
+
+	SceneManager::GetInstance().SetScene("Intro");
 }
 
 std::shared_ptr<dae::Font> dae::Qbert::GetFontLarge() const {

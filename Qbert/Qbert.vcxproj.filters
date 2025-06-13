@@ -171,6 +171,9 @@
     <ClCompile Include="NextLevelCommand.cpp">
       <Filter>Source\Commands</Filter>
     </ClCompile>
+    <ClCompile Include="IntroScene.cpp">
+      <Filter>Source\Scenes</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="KillCommand.h">
@@ -313,6 +316,9 @@
     </ClInclude>
     <ClInclude Include="NextLevelCommand.h">
       <Filter>Source\Commands</Filter>
+    </ClInclude>
+    <ClInclude Include="IntroScene.h">
+      <Filter>Source\Scenes</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>
