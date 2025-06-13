@@ -105,9 +105,9 @@ void dae::SingleplayerLevelScene::OnSetup() {
 	auto pRoundTextComponent{ roundObject->AddComponent<TextComponent>("ROUND:1", Qbert::GetInstance().GetFontLarge()) };
 
 	auto levelObject{ std::make_unique<GameObject>(Transform(420.f, 75.f)) };
-	auto pLevelTextComponent{ levelObject->AddComponent<TextComponent>("LEVEL:1", Qbert::GetInstance().GetFontLarge()) };
+	auto pLevelTextComponent{ levelObject->AddComponent<TextComponent>("LEVEL:" + std::to_string(m_level), Qbert::GetInstance().GetFontLarge())};
 
-	auto levelObserver{ std::make_shared<LevelObserver>(pScoreTextComponent, pRoundTextComponent, pLevelTextComponent) };
+	auto levelObserver{ std::make_shared<LevelObserver>(pScoreTextComponent, pRoundTextComponent) };
 	m_pScoreComponent->GetSubject().AddObserver(std::static_pointer_cast<Observer>(levelObserver));
 	pLevelComponent->GetSubject().AddObserver(std::static_pointer_cast<Observer>(levelObserver));
 
