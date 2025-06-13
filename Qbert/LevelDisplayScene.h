@@ -1,6 +1,8 @@
 #pragma once
 #include <Scene.h>
 #include "TimerComponent.h"
+#include "AbstractSoundSystem.h"
+#include "ServiceLocator.h"
 
 namespace dae {
 	class LevelDisplayScene : public Scene {
@@ -15,6 +17,8 @@ namespace dae {
 		int m_score{};
 
 		TimerComponent* m_pTimerComponent{};
+
+		SoundId m_enterSfx{};
 	};
 }
 

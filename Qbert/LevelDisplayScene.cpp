@@ -14,6 +14,7 @@
 
 dae::LevelDisplayScene::LevelDisplayScene(int level, int score)
 	: Scene("LevelDisplay"), m_level(level), m_score(score) {
+	m_enterSfx = ServiceLocator::GetInstance().GetSoundSystem().RegisterSound("../Data/Sounds/Level Screen Tune.wav");
 }
 
 void dae::LevelDisplayScene::OnSetup() {
@@ -39,6 +40,7 @@ void dae::LevelDisplayScene::OnSetup() {
 }
 
 void dae::LevelDisplayScene::OnEnter() {
+	ServiceLocator::GetInstance().GetSoundSystem().Play(m_enterSfx, 0.2f); // Oopsies, a little rule breaking here :)
 	InputManager::GetInstance().ClearAllBindings();
 
 	InputManager::GetInstance().BindKeyboardCommand(
