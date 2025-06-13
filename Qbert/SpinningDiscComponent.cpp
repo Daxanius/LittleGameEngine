@@ -10,7 +10,7 @@ void dae::SpinningDiscComponent::Update(float deltaTime) {
 	// If we're not transporting a player, ignore
 	if (m_pCurrentPlayer == nullptr) {
 		const auto newPosition = m_pRhombileGridComponent->ToWorldPosition(m_row, m_col);
-		GetOwner().SetLocalTransform(Transform{ newPosition });
+		GetOwner().SetLocalTransform(Transform{ newPosition.x + 8.f, newPosition.y + 5.f });
 		return;
 	}
 
