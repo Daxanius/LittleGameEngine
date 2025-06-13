@@ -49,10 +49,16 @@ void dae::SingleplayerLevelScene::OnSetup() {
 	auto pLevelComponent{ mapObject->AddComponent<LevelComponent>(2.f, m_levelInfo) };
 	auto pGridAnimationComponent{ mapObject->AddComponent<RhombilleGridAnimationComponent>(2.f, 4) };
 
-	auto nextTextObject(std::make_unique<GameObject>(Transform(10.f, 66.f)));
+	auto playerInfoObject(std::make_unique<GameObject>(Transform(10.f, 20.f)));
+	auto pPlayerInfoSprite{ playerInfoObject->AddComponent<SpriteComponent>("Player Titles.png", 65, 11, 3.f) };
+
+	pPlayerInfoSprite->AddState(make_sdbm_hash("Player1"), SpriteComponent::State{ 0, 0, 1, 0 });
+	pPlayerInfoSprite->SetState(make_sdbm_hash("Player1"));
+
+	auto nextTextObject(std::make_unique<GameObject>(Transform(10.f, 106.f)));
 	nextTextObject->AddComponent<TextComponent>("CHANGE TO", Qbert::GetInstance().GetFontSmall());
 
-	auto nextObject{ std::make_unique<GameObject>(Transform(140.f, 60.f) )};
+	auto nextObject{ std::make_unique<GameObject>(Transform(140.f, 100.f) )};
 	nextObject->AddComponent<ChangeToComponent>(pLevelComponent, "Color Icons Spritesheet.png", 14, 12, 2.f);
 
 	auto qbertObject{ std::make_unique<GameObject>() };
@@ -73,7 +79,7 @@ void dae::SingleplayerLevelScene::OnSetup() {
 	auto pPlayerComponent{ qbertObject->AddComponent<PlayerComponent>() };
 
 	// Create a lives display for the player
-	auto livesObject{ std::make_unique<GameObject>(Transform{ 10.f, 100.f }) };
+	auto livesObject{ std::make_unique<GameObject>(Transform{ 10.f, 130.f }) };
 	auto pRepeatingTexturecomponent{ livesObject->AddComponent<RepeatingTextureComponent>("Heart.png", 15, 14, 0, 0, 10.f, 2.f)};
 	pRepeatingTexturecomponent->SetCols(1); // We only need 1 column value
 
@@ -98,14 +104,14 @@ void dae::SingleplayerLevelScene::OnSetup() {
 	m_pPlayerMovementComponent->GetSubject().AddObserver(std::static_pointer_cast<Observer>(movementObserver));
 	m_pPlayerMovementComponent->GetSubject().AddObserver(std::static_pointer_cast<Observer>(Qbert::GetInstance().GetSoundObserver()));
 
-	auto scoreObject{ std::make_unique<GameObject>(Transform(10.f, 20.f)) };
+	auto scoreObject{ std::make_unique<GameObject>(Transform(10.f, 60.f)) };
 	auto pScoreTextComponent{ scoreObject->AddComponent<TextComponent>("SCORE:0", Qbert::GetInstance().GetFontLarge()) };
 
 	auto roundObject{ std::make_unique<GameObject>(Transform(420.f, 50.f)) };
 	auto pRoundTextComponent{ roundObject->AddComponent<TextComponent>("ROUND:1", Qbert::GetInstance().GetFontLarge()) };
 
 	auto levelObject{ std::make_unique<GameObject>(Transform(420.f, 75.f)) };
-	auto pLevelTextComponent{ levelObject->AddComponent<TextComponent>("LEVEL:" + std::to_string(m_level), Qbert::GetInstance().GetFontLarge())};
+	levelObject->AddComponent<TextComponent>("LEVEL:" + std::to_string(m_level), Qbert::GetInstance().GetFontLarge());
 
 	auto levelObserver{ std::make_shared<LevelObserver>(pScoreTextComponent, pRoundTextComponent) };
 	m_pScoreComponent->GetSubject().AddObserver(std::static_pointer_cast<Observer>(levelObserver));
@@ -114,6 +120,7 @@ void dae::SingleplayerLevelScene::OnSetup() {
 	Add(std::move(livesObject));
 	Add(std::move(mapObject));
 	Add(std::move(nextTextObject));
+	Add(std::move(playerInfoObject));
 	Add(std::move(roundObject));
 	Add(std::move(levelObject));
 	Add(std::move(nextObject));

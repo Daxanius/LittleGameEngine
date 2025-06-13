@@ -2,7 +2,7 @@
 #include "hash.h"
 
 dae::LevelObserver::LevelObserver(TextComponent* pScoreText, TextComponent* pRoundText) 
-	: m_pScoreText(pScoreText), m_pRoundText(pRoundText), m_pLevelText(pLevelText) {
+	: m_pScoreText(pScoreText), m_pRoundText(pRoundText) {
 }
 
 void dae::LevelObserver::Notify(const Event& event) {
