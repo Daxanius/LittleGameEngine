@@ -23,6 +23,10 @@ void dae::CoilyStateSnake::OnEnter() {
 }
 
 void dae::CoilyStateSnake::Update(float) {
+	if (m_pGridMovementComponent->IsJumping()) {
+		return;
+	}
+
 	const auto& players = GetCoilyComponent()->GetLevel()->GetPlayers();
 
 	int ownRow = m_pGridMovementComponent->GetRow();

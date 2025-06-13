@@ -30,10 +30,8 @@ bool dae::LevelComponent::NextRound() {
 		return false;
 	}
 
-	if (m_pEnemySpawner) {
-		const auto& enemies = m_levelInfo.rounds[m_round].enemies;
-		m_pEnemySpawner->PrepareEnemies(enemies);
-	}
+	const auto& enemies = m_levelInfo.rounds[m_round].enemies;
+	m_pEnemySpawner->PrepareEnemies(enemies);
 
 	m_hasUpdated = false;
 	ResetLevel();
@@ -100,6 +98,8 @@ void dae::LevelComponent::RegisterPlayer(PlayerComponent* pPlayer) {
 
 void dae::LevelComponent::RegisterSpawner(EnemySpawnerComponent* pSpawner) {
 	m_pEnemySpawner = pSpawner;
+	const auto& enemies = m_levelInfo.rounds[m_round].enemies;
+	m_pEnemySpawner->PrepareEnemies(enemies);
 }
 
 void dae::LevelComponent::AddNextLevelCommand(std::unique_ptr<Command> pCommand) {
@@ -185,6 +185,8 @@ void dae::LevelComponent::Update(float deltaTime) {
 
 		if (m_pEnemySpawner != nullptr) {
 			m_pEnemySpawner->KillAllEnemies();
+			const auto& enemies = m_levelInfo.rounds[m_round].enemies;
+			m_pEnemySpawner->PrepareEnemies(enemies);
 		}
 
 		m_pRhombilleGrid->SetVariant(GetTileVariant());

@@ -10,6 +10,7 @@ void dae::CoilyComponent::SetState(std::shared_ptr<AbstractCoilyState> pState) {
 	if (m_pCurrentState) {
 		m_pCurrentState->OnExit();
 	}
+
 	m_pCurrentState = std::move(pState);
 	if (m_pCurrentState) {
 		m_pCurrentState->OnEnter();
@@ -25,6 +26,10 @@ void dae::CoilyComponent::Update(float deltaTime) {
 		return;
 	}
 
+	if (m_pOwnMovementComponent->IsJumping()) {
+		return;
+	}
+
 	m_pCurrentState->Update(deltaTime);
 	
 	int ownRow{ m_pOwnMovementComponent->GetRow() };
@@ -32,10 +37,6 @@ void dae::CoilyComponent::Update(float deltaTime) {
 
 	if (m_pLevelComponent->GetRhombilleGrid()->GetTile(ownRow, ownCol) == nullptr) {
 		GetOwner().Destroy();
-		return;
-	}
-
-	if (m_pOwnMovementComponent->IsJumping()) {
 		return;
 	}
 
