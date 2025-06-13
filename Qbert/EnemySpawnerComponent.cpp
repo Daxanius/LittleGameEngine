@@ -87,8 +87,8 @@ dae::GameObject* dae::EnemySpawnerComponent::SpawnCoily() {
 	coilyObject->AddComponent<GridNavigationComponent>(0.5f);
 	auto coilyComponent{ coilyObject->AddComponent<CoilyComponent>(m_pLevelComponent) };
 
-	movementComponent->SetOffsetX(32 + 16);
-	movementComponent->SetOffsetY(32);
+	movementComponent->SetOffsetX(16);
+	movementComponent->SetOffsetY(-16);
 
 	coilySprite->AddState(make_sdbm_hash("ball_idle"), SpriteComponent::State{ 0, 0, 1, 0 });
 	coilySprite->AddState(make_sdbm_hash("ball_jump"), SpriteComponent::State{ 1, 0, 1, 0 });

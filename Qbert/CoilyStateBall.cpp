@@ -21,7 +21,7 @@ dae::CoilyStateBall::CoilyStateBall(CoilyComponent* pCoilyComponent) : AbstractC
 void dae::CoilyStateBall::OnEnter() {
 	m_pSpriteComponent->SetState(make_sdbm_hash("ball_idle"));
 
-	int maxRow = m_pGridMovementComponent->GetRhombilleGrid()->GetRows() -2;
+	int maxRow = m_pGridMovementComponent->GetRhombilleGrid()->GetRows() -1;
 
 	int randomCol = m_pGridMovementComponent->GetRhombilleGrid()->GetRandomCol(maxRow);
 
@@ -34,7 +34,7 @@ void dae::CoilyStateBall::OnEnter() {
 void dae::CoilyStateBall::Update(float) {
 	int ownRow{ m_pGridMovementComponent->GetRow() };
 
-	if (ownRow >= GetCoilyComponent()->GetLevel()->GetRhombilleGrid()->GetRows() - 2) {
+	if (ownRow >= GetCoilyComponent()->GetLevel()->GetRhombilleGrid()->GetRows() - 1) {
 		GetCoilyComponent()->SetState(std::make_shared<CoilyStateSnake>(GetCoilyComponent()));
 	}
 }

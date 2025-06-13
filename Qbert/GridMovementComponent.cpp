@@ -195,18 +195,10 @@ void dae::GridMovementComponent::MoveToPosition(int row, int col) {
 }
 
 void dae::GridMovementComponent::SetOffsetX(int width) {
-	if (width < 0) {
-		return;
-	}
-
 	m_offsetX = width;
 }
 
 void dae::GridMovementComponent::SetOffsetY(int height) {
-	if (height < 0) {
-		return;
-	}
-
 	m_offsetY = height;
 }
 
