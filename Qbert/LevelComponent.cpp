@@ -214,9 +214,22 @@ const std::vector<dae::PlayerComponent*>& dae::LevelComponent::GetPlayers() cons
 
 void dae::LevelComponent::SpawnSpinningDiscs() {
 	for (size_t discIndex{ m_spinningDiscs.size() }; discIndex < static_cast<size_t>(m_totalSpinningDiscs); discIndex++) {
+		// Compute position for disc:
+		int row{};
+		int col{};
+		bool exists{};
+		do {
+			row = m_pRhombilleGrid->GetRandomRow();
+			col = rand() % 1 == 0 ? -1 : row + 1;
+
+			for (const auto& disc : m_spinningDiscs) {
+				exists = disc->GetRow() == row && disc->GetCol() == col;
+			}
+		} while (exists);
+
 		auto discObject{ std::make_unique<GameObject>() };
 		auto pSpriteComponent{ discObject->AddComponent<SpriteComponent>("Disk Spritesheet.png", 16, 10, 2.f) };
-		m_spinningDiscs.emplace_back(discObject->AddComponent<SpinningDiscComponent>(m_pRhombilleGrid, 3, 4));
+		m_spinningDiscs.emplace_back(discObject->AddComponent<SpinningDiscComponent>(m_pRhombilleGrid, row, col));
 
 		int variant{ m_pRhombilleGrid->GetVariant() };
 		pSpriteComponent->AddState(make_sdbm_hash("idle"), SpriteComponent::State{ variant * 5, 0, 4, 10 });

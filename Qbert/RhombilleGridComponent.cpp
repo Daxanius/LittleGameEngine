@@ -123,6 +123,10 @@ int dae::RhombilleGridComponent::GetRandomCol(int row) const {
     return rand() % (row + 1);
 }
 
+int dae::RhombilleGridComponent::GetRandomRow() const {
+	return rand() % m_rows -1;
+}
+
 int dae::RhombilleGridComponent::GetRows() const {
     return m_rows;
 }

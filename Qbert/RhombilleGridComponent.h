@@ -34,6 +34,7 @@ namespace dae {
 
 		void GetRandomTile(int& row, int& col) const;
 		int GetRandomCol(int row) const;
+		int GetRandomRow() const;
 
 		int GetRows() const;
 
