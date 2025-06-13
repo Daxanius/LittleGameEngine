@@ -112,18 +112,16 @@ dae::GameObject* dae::EnemySpawnerComponent::SpawnUggOrWrongWay() {
 	// Spawn position
 	int row{ m_pRhombilleGridComponent->GetRows() -1 };
 	int col{ (rand() % 2) * row};
+	int variant{ rand() % 2 };
 
 	auto pSpriteComponent{ enemyObject->AddComponent<SpriteComponent>("Ugg Wrongway Spritesheet.png", 16, 16, 2.f) };
 	auto pMovementComponent{ enemyObject->AddComponent<GridMovementComponent>(m_pRhombilleGridComponent, m_pLevelComponent, row, col, 0.5f) };
-	auto pNavigationComponent{ enemyObject->AddComponent<GridNavigationComponent>(0.5f) };
-	enemyObject->AddComponent<UggAndWrongwayComponent>(m_pTargetComponent, m_pLevelComponent);
-
-	pNavigationComponent->SetTarget(0, 0);
+	enemyObject->AddComponent<GridNavigationComponent>(0.5f);
+	enemyObject->AddComponent<UggAndWrongwayComponent>(m_pTargetComponent, m_pLevelComponent, variant == 0);
 
 	pMovementComponent->SetOffsetX(16);
 	pMovementComponent->SetOffsetY(16);
 
-	int variant{ rand() % 2 };
 
 	pSpriteComponent->AddState(make_sdbm_hash("roll1"), SpriteComponent::State{ 0, variant, 1, 0 });
 	pSpriteComponent->AddState(make_sdbm_hash("roll2"), SpriteComponent::State{ 1, variant, 1, 0 });
