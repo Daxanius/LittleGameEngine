@@ -20,7 +20,7 @@ void dae::LevelDisplayScene::OnSetup() {
 	SceneManager::GetInstance().AddScene(std::move(levelScene));
 
 	const auto& levels{ Qbert::GetInstance().GetLevelInfo() };
-	if (m_level >= levels.size()) {
+	if (m_level >= static_cast<int>(levels.size())) {
 		std::cout << "Level does not exist, idiot" << std::endl;
 		return;
 	}

@@ -88,5 +88,5 @@ const std::string& dae::TextInputComponent::GetValue() const {
 }
 
 bool dae::TextInputComponent::IsDone() const {
-	return m_textValue.size() == m_stringSize;
+	return static_cast<int>(m_textValue.size()) == m_stringSize;
 }
