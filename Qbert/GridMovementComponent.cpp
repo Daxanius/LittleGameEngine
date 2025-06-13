@@ -107,7 +107,7 @@ void dae::GridMovementComponent::MoveUp() {
 }
 
 void dae::GridMovementComponent::MoveDown() {
-	if (m_pLevelComponent->LevelPaused()) {
+	if (m_pLevelComponent->LevelPaused() || !IsEnabled() || !GetOwner().IsEnabled()) {
 		return;
 	}
 
@@ -118,7 +118,7 @@ void dae::GridMovementComponent::MoveDown() {
 }
 
 void dae::GridMovementComponent::MoveLeft() {
-	if (m_pLevelComponent->LevelPaused()) {
+	if (m_pLevelComponent->LevelPaused() || !IsEnabled() || !GetOwner().IsEnabled()) {
 		return;
 	}
 
@@ -129,7 +129,7 @@ void dae::GridMovementComponent::MoveLeft() {
 }
 
 void dae::GridMovementComponent::MoveRight() {
-	if (m_pLevelComponent->LevelPaused()) {
+	if (m_pLevelComponent->LevelPaused() || !IsEnabled() || !GetOwner().IsEnabled()) {
 		return;
 	}
 
@@ -140,7 +140,7 @@ void dae::GridMovementComponent::MoveRight() {
 }
 
 void dae::GridMovementComponent::MoveUpLeft() {
-	if (m_pLevelComponent->LevelPaused()) {
+	if (m_pLevelComponent->LevelPaused() || !IsEnabled() || !GetOwner().IsEnabled()) {
 		return;
 	}
 
@@ -151,7 +151,7 @@ void dae::GridMovementComponent::MoveUpLeft() {
 }
 
 void dae::GridMovementComponent::MoveUpRight() {
-	if (m_pLevelComponent->LevelPaused()) {
+	if (m_pLevelComponent->LevelPaused() || !IsEnabled() || !GetOwner().IsEnabled()) {
 		return;
 	}
 
@@ -162,7 +162,7 @@ void dae::GridMovementComponent::MoveUpRight() {
 }
 
 void dae::GridMovementComponent::MoveDownLeft() {
-	if (m_pLevelComponent->LevelPaused()) {
+	if (m_pLevelComponent->LevelPaused() || !IsEnabled() || !GetOwner().IsEnabled()) {
 		return;
 	}
 
@@ -173,7 +173,7 @@ void dae::GridMovementComponent::MoveDownLeft() {
 }
 
 void dae::GridMovementComponent::MoveDownRight() {
-	if (m_pLevelComponent->LevelPaused()) {
+	if (m_pLevelComponent->LevelPaused() || !IsEnabled() || !GetOwner().IsEnabled()) {
 		return;
 	}
 
@@ -184,7 +184,7 @@ void dae::GridMovementComponent::MoveDownRight() {
 }
 
 void dae::GridMovementComponent::MoveToPosition(int row, int col) {
-	if (m_pLevelComponent->LevelPaused()) {
+	if (m_pLevelComponent->LevelPaused() || !IsEnabled()) {
 		return;
 	}
 
