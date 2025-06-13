@@ -8,7 +8,7 @@
 namespace dae {
 	class SingleplayerScoreDisplayScene final : public Scene {
 	public:
-		SingleplayerScoreDisplayScene();
+		SingleplayerScoreDisplayScene(int score = 0);
 
 		void OnSetup() override;
 		void OnEnter() override;
@@ -19,6 +19,8 @@ namespace dae {
 		SingleplayerScoreDisplayScene& operator=(SingleplayerScoreDisplayScene&&) = delete;
 		~SingleplayerScoreDisplayScene() = default;
 	private:
+		int m_score{};
+
 		TextInputComponent* m_pTextInputComponent{};
 	};
 }
