@@ -24,6 +24,8 @@ namespace dae {
 		const std::vector<Level>& GetLevelInfo() const;
 		const std::vector<Score>& GetScoreInfo() const;
 
+		int GetLevelCount() const;
+
 		void AddScore(const Score& score);
 
 		Qbert(const Qbert&) = delete;

@@ -81,6 +81,10 @@ const std::vector<dae::Score>& dae::Qbert::GetScoreInfo() const {
 	return m_scoreInfo;
 }
 
+int dae::Qbert::GetLevelCount() const {
+	return static_cast<int>(m_levelInfo.size());
+}
+
 void dae::Qbert::AddScore(const Score& score) {
 	m_scoreInfo.emplace_back(score);
 	Score::ToFile(m_scoreInfo, "../Data/Scores.json");

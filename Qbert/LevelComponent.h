@@ -35,8 +35,8 @@ namespace dae {
 		void RegisterPlayer(PlayerComponent* pPlayer);
 		void RegisterSpawner(EnemySpawnerComponent* pSpawner);
 
-		void AddGameOverCommand(std::unique_ptr<Command>&& pCommand);
-		void AddNextLevelCommand(std::unique_ptr<Command>&& pCommand);
+		void AddGameOverCommand(std::unique_ptr<Command> pCommand);
+		void AddNextLevelCommand(std::unique_ptr<Command> pCommand);
 
 		bool FlickTile(Tile* tile) const;
 
@@ -65,9 +65,9 @@ namespace dae {
 		int m_totalSpinningDiscs{ 1 };
 
 		// Keeping track of them rounds
-		int m_Round{};
+		int m_round{};
 
-		bool m_Paused{};
+		bool m_paused{};
 
 		bool m_inResetAnimation{};
 		bool m_shouldResetState{};
@@ -82,6 +82,7 @@ namespace dae {
 
 		std::vector<PlayerComponent*> m_Players;
 		std::vector<SpinningDiscComponent*> m_spinningDiscs;
+
 		std::vector<std::unique_ptr<Command>> m_gameOverCommands;
 		std::vector<std::unique_ptr<Command>> m_nextLevelCommands;
 	};

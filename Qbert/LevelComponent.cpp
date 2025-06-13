@@ -17,14 +17,11 @@ dae::LevelComponent::LevelComponent(GameObject& pOwner, float resetTime, const L
 
 bool dae::LevelComponent::NextRound() {
 	// Go to the next round
-	m_Round++;
+	m_round++;
 
 	// If it's larger or equal to the rounds per level,
 	// reset it, go to the next level, and notify the subject
-	if (m_Round >= m_levelInfo.rounds.size()) {
-		m_Round = 0;
-		m_Subject.Notify("next_level");
-
+	if (m_round >= m_levelInfo.rounds.size()) {
 		for (auto& command : m_nextLevelCommands) {
 			command->Execute();
 		}
@@ -34,24 +31,24 @@ bool dae::LevelComponent::NextRound() {
 	m_hasUpdated = false;
 
 	// Otherwise notify subjects the next round has been triggered
-	m_Subject.Notify("next_round", m_Round);
+	m_Subject.Notify("next_round", m_round);
 	return true;
 }
 
 int dae::LevelComponent::GetRound() const {
-	return m_Round;
+	return m_round;
 }
 
 int dae::LevelComponent::GetTileVariant() const {
-	return m_levelInfo.rounds[m_Round].variant;
+	return m_levelInfo.rounds[m_round].variant;
 }
 
 void dae::LevelComponent::PauseLevel() {
-	m_Paused = true;
+	m_paused = true;
 }
 
 void dae::LevelComponent::UnpauseLevel() {
-	m_Paused = false;
+	m_paused = false;
 }
 
 bool dae::LevelComponent::CheckSpinningDiscs() {
@@ -87,7 +84,7 @@ void dae::LevelComponent::ResetLevel(bool resetState) {
 }
 
 bool dae::LevelComponent::LevelPaused() const {
-	return m_Paused || m_inResetAnimation;
+	return m_paused || m_inResetAnimation;
 }
 
 bool dae::LevelComponent::InResetAnimation() const {
@@ -102,12 +99,12 @@ void dae::LevelComponent::RegisterSpawner(EnemySpawnerComponent* pSpawner) {
 	m_pEnemySpawner = pSpawner;
 }
 
-void dae::LevelComponent::AddGameOverCommand(std::unique_ptr<Command>&& pCommand) {
-	m_gameOverCommands.emplace_back(std::forward<std::unique_ptr<Command>>(pCommand));
+void dae::LevelComponent::AddGameOverCommand(std::unique_ptr<Command> pCommand) {
+	m_gameOverCommands.emplace_back(std::move(pCommand));
 }
 
-void dae::LevelComponent::AddNextLevelCommand(std::unique_ptr<Command>&& pCommand) {
-	m_nextLevelCommands.emplace_back(std::forward<std::unique_ptr<Command>>(pCommand));
+void dae::LevelComponent::AddNextLevelCommand(std::unique_ptr<Command> pCommand) {
+	m_nextLevelCommands.emplace_back(std::move(pCommand));
 }
 
 bool dae::LevelComponent::FlickTile(Tile* tile) const {
@@ -162,7 +159,7 @@ dae::EnemySpawnerComponent& dae::LevelComponent::GetEnemySpawner() {
 void dae::LevelComponent::Update(float deltaTime) {
 	if (!m_hasUpdated) {
 		DestroySpinningDiscs();
-		m_totalSpinningDiscs = m_levelInfo.rounds[m_Round].discs;
+		m_totalSpinningDiscs = m_levelInfo.rounds[m_round].discs;
 
 		SpawnSpinningDiscs();
 		m_hasUpdated = true;
