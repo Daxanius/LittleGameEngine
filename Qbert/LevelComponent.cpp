@@ -7,12 +7,14 @@
 #include "SpinningDiscComponent.h"
 #include "Command.h"
 #include "Scene.h"
+#include "RhombilleGridAnimationComponent.h"
 #include "SceneManager.h"
 #include <iostream>
 
 dae::LevelComponent::LevelComponent(GameObject& pOwner, float resetTime, const Level& levelInfo) 
 	: BaseComponent(pOwner), m_resetTime(resetTime), m_levelInfo(levelInfo) {
-	m_pRhombilleGrid = GetOwner().GetComponent<RhombilleGridComponent>();
+	m_pRhombilleGrid = GetComponent<RhombilleGridComponent>();
+	m_pRhombilleGridAnimationComponent = GetComponent<RhombilleGridAnimationComponent>();
 }
 
 bool dae::LevelComponent::NextRound() {
@@ -34,6 +36,7 @@ bool dae::LevelComponent::NextRound() {
 	}
 
 	m_hasUpdated = false;
+	ResetLevel();
 
 	// Otherwise notify subjects the next round has been triggered
 	m_Subject.Notify("next_round", m_round);
@@ -78,14 +81,9 @@ bool dae::LevelComponent::CheckSpinningDiscs() {
 	return false;
 }
 
-void dae::LevelComponent::ResetLevel(bool resetState) {
+void dae::LevelComponent::ResetLevel() {
 	m_inResetAnimation = true;
-	m_shouldResetState = resetState;
 	m_resetTimeLeft = m_resetTime;
-
-	for (auto player : m_Players) {
-		player->GetOwner().Disable();
-	}
 }
 
 bool dae::LevelComponent::LevelPaused() const {
@@ -102,10 +100,6 @@ void dae::LevelComponent::RegisterPlayer(PlayerComponent* pPlayer) {
 
 void dae::LevelComponent::RegisterSpawner(EnemySpawnerComponent* pSpawner) {
 	m_pEnemySpawner = pSpawner;
-}
-
-void dae::LevelComponent::AddGameOverCommand(std::unique_ptr<Command> pCommand) {
-	m_gameOverCommands.emplace_back(std::move(pCommand));
 }
 
 void dae::LevelComponent::AddNextLevelCommand(std::unique_ptr<Command> pCommand) {
@@ -157,12 +151,16 @@ dae::Subject& dae::LevelComponent::GetSubject() {
 	return m_Subject;
 }
 
-dae::RhombilleGridComponent& dae::LevelComponent::GetRhombilleGrid() {
-	return *m_pRhombilleGrid;
+dae::RhombilleGridComponent* dae::LevelComponent::GetRhombilleGrid() {
+	return m_pRhombilleGrid;
 }
 
-dae::EnemySpawnerComponent& dae::LevelComponent::GetEnemySpawner() {
-	return *m_pEnemySpawner;
+dae::RhombilleGridAnimationComponent* dae::LevelComponent::GetRhombileGridAnimationComponent() {
+	return m_pRhombilleGridAnimationComponent;
+}
+
+dae::EnemySpawnerComponent* dae::LevelComponent::GetEnemySpawner() {
+	return m_pEnemySpawner;
 }
 
 void dae::LevelComponent::Update(float deltaTime) {
@@ -181,24 +179,15 @@ void dae::LevelComponent::Update(float deltaTime) {
 	if (m_resetTimeLeft <= 0.f) {
 		m_inResetAnimation = false;
 
-		if (m_shouldResetState) {
-			m_pRhombilleGrid->SetAllStates(0);
-		}
-
 		for (auto player : m_Players) {
-			player->GetOwner().Enable();
 			player->Reset(); // Reset the player component
-
-			if (player->GetLivesComponent()->GetLives() <= 0) {
-				for (auto& command : m_gameOverCommands) {
-					command->Execute();
-				}
-			}
 		}
 
 		if (m_pEnemySpawner != nullptr) {
 			m_pEnemySpawner->KillAllEnemies();
 		}
+
+		m_pRhombilleGrid->SetVariant(GetTileVariant());
 	}
 
 	m_resetTimeLeft -= deltaTime;

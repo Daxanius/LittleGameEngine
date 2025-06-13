@@ -27,14 +27,13 @@ void dae::SlickAndSlamComponent::Update(float) {
 	}
 
 	if (m_pOwnMovementComponent->HasArrived()) {
-		auto tile{ m_pLevelComponent->GetRhombilleGrid().GetTile(ownRow, ownCol) };
+		auto tile{ m_pLevelComponent->GetRhombilleGrid()->GetTile(ownRow, ownCol) };
 		if (tile != nullptr) {
 			tile->state = tile->state - 1 >= 0 ? tile->state - 1 : 0; // Revert the state of the tile
 		}
 	}
 
 	if (m_pNavigationComponent != nullptr && m_pNavigationComponent->HasArrived()) {
-		// TODO: observe how these guys move to make a correct implementation
 		GetOwner().Destroy();
 	}
 }

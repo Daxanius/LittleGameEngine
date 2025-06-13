@@ -24,6 +24,8 @@ void dae::EnemySpawnerComponent::KillAllEnemies() {
 	for (auto& enemy : m_spawnedEnemies) {
 		enemy->Destroy();
 	}
+
+	m_spawnedEnemies.clear();
 }
 
 void dae::EnemySpawnerComponent::PrepareEnemies(const std::vector<Enemy>& enemies) {
@@ -41,8 +43,9 @@ void dae::EnemySpawnerComponent::PrepareEnemies(const std::vector<Enemy>& enemie
 }
 
 void dae::EnemySpawnerComponent::Update(float deltaTime) {
-	if (m_pLevelComponent->LevelPaused() || m_currentEnemyIndex >= m_enemiesToSpawn.size())
+	if (m_pLevelComponent->LevelPaused() || m_currentEnemyIndex >= m_enemiesToSpawn.size()) {
 		return;
+	}
 
 	m_nextEnemyDelay -= deltaTime;
 	if (m_nextEnemyDelay <= 0.f) {

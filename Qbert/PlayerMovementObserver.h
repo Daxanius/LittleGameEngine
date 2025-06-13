@@ -6,19 +6,16 @@
 #include "LivesComponent.h"
 #include "LevelComponent.h"
 #include "ScoreComponent.h"
+#include "PlayerComponent.h"
 
 namespace dae {
 	class PlayerMovementObserver : public Observer {
 	public:
-		PlayerMovementObserver(SpriteComponent* pPlayerSpriteComponent, RhombilleGridComponent* pRhombilleGridComponent, LivesComponent* pLivesComponent, ScoreComponent* pScoreComponent, LevelComponent* pLevelComponent, RhombilleGridAnimationComponent* pRhombilleGridAnimationComponent);
+		PlayerMovementObserver(PlayerComponent* pPlayerComponent, LevelComponent* pLevelComponent);
 
 		void Notify(const Event& event) override;
 	private:
-		SpriteComponent* m_pPlayerSpriteComponent;
-		RhombilleGridComponent* m_pRhombilleGridComponent;
-		RhombilleGridAnimationComponent* m_pRhombileGridAnimationComponent;
-		LivesComponent* m_pLivesComponent;
-		ScoreComponent* m_pScoreComponent;
+		PlayerComponent* m_pPlayerComponent;
 		LevelComponent* m_pLevelComponent;
 	};
 }

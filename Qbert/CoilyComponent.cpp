@@ -26,7 +26,7 @@ void dae::CoilyComponent::Update(float deltaTime) {
 	int ownRow{ m_pOwnMovementComponent->GetRow() };
 	int ownCol{ m_pOwnMovementComponent->GetCol() };
 
-	if (m_pLevelComponent->GetRhombilleGrid().GetTile(ownRow, ownCol) == nullptr) {
+	if (m_pLevelComponent->GetRhombilleGrid()->GetTile(ownRow, ownCol) == nullptr) {
 		GetOwner().Destroy();
 		return;
 	}

@@ -46,8 +46,8 @@ void dae::SingleplayerLevelScene::OnSetup() {
 
 	auto mapObject{ std::make_unique<GameObject>(Transform((640 / 2) - 32, 75)) };
 	auto pRhombileGridComponent{ mapObject->AddComponent<RhombilleGridComponent>("Qbert Cubes.png", 32, 32, 7, 2.f) };
+	mapObject->AddComponent<RhombilleGridAnimationComponent>(2.f, 4);
 	auto pLevelComponent{ mapObject->AddComponent<LevelComponent>(2.f, m_levelInfo) };
-	auto pGridAnimationComponent{ mapObject->AddComponent<RhombilleGridAnimationComponent>(2.f, 4) };
 
 	auto playerInfoObject(std::make_unique<GameObject>(Transform(10.f, 20.f)));
 	auto pPlayerInfoSprite{ playerInfoObject->AddComponent<SpriteComponent>("Player Titles.png", 65, 11, 3.f) };
@@ -68,7 +68,6 @@ void dae::SingleplayerLevelScene::OnSetup() {
 	m_pScoreComponent = qbertObject->AddComponent<ScoreComponent>(m_score);
 
 	pLevelComponent->AddNextLevelCommand(std::make_unique<NextLevelCommand>(m_pScoreComponent, m_level + 1));
-	pLevelComponent->AddGameOverCommand(std::make_unique<EndGameCommand>(m_pScoreComponent));
 
 	auto textBalloonObject{ std::make_unique<GameObject>() };
 	textBalloonObject->AddComponent<TextureComponent>("Qbert Curses.png", 1.f);
@@ -77,6 +76,7 @@ void dae::SingleplayerLevelScene::OnSetup() {
 	textBalloonObject->Disable();
 
 	auto pPlayerComponent{ qbertObject->AddComponent<PlayerComponent>() };
+	pPlayerComponent->AddGameOverCommand(std::make_unique<EndGameCommand>(m_pScoreComponent));
 
 	// Create a lives display for the player
 	auto livesObject{ std::make_unique<GameObject>(Transform{ 10.f, 130.f }) };
@@ -100,7 +100,7 @@ void dae::SingleplayerLevelScene::OnSetup() {
 	pLevelComponent->RegisterPlayer(pPlayerComponent);
 	pLevelComponent->RegisterSpawner(pEnemySpawner);
 
-	auto movementObserver{ std::make_shared<PlayerMovementObserver>(pQbertSpriteComponent, pRhombileGridComponent, pLivesComponent, m_pScoreComponent, pLevelComponent, pGridAnimationComponent) };
+	auto movementObserver{ std::make_shared<PlayerMovementObserver>(pPlayerComponent, pLevelComponent) };
 	m_pPlayerMovementComponent->GetSubject().AddObserver(std::static_pointer_cast<Observer>(movementObserver));
 	m_pPlayerMovementComponent->GetSubject().AddObserver(std::static_pointer_cast<Observer>(Qbert::GetInstance().GetSoundObserver()));
 

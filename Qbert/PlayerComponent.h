@@ -4,6 +4,8 @@
 #include "GridMovementComponent.h"
 #include "SpriteComponent.h"
 #include "LivesComponent.h"
+#include "ScoreComponent.h"
+#include "Command.h"
 #include <memory>
 
 namespace dae {
@@ -14,8 +16,12 @@ namespace dae {
 		void ShowTextBalloon();
 		void HideTextBalloon();
 
+		SpriteComponent* GetSpriteComponent();
 		GridMovementComponent* GetMovementComponent();
 		LivesComponent* GetLivesComponent();
+		ScoreComponent* GetScoreComponent();
+
+		void AddGameOverCommand(std::unique_ptr<Command> pCommand);
 
 		void Reset();
 
@@ -37,8 +43,11 @@ namespace dae {
 		GridMovementComponent* m_pGridMovementComponent{};
 		SpriteComponent* m_pSpriteComponent{};
 		LivesComponent* m_pLivesComponent{};
+		ScoreComponent* m_pScoreComponent{};
 		GameObject* m_pTextBalloonGo{};
 
 		bool m_died{};
+
+		std::vector<std::unique_ptr<Command>> m_gameOverCommands;
 	};
 }

@@ -5,6 +5,7 @@ dae::PlayerComponent::PlayerComponent(GameObject& pOwner) : BaseComponent(pOwner
 	m_pGridMovementComponent = GetComponent<GridMovementComponent>();
 	m_pLivesComponent = GetComponent<LivesComponent>();
 	m_pSpriteComponent = GetComponent<SpriteComponent>();
+	m_pScoreComponent = GetComponent<ScoreComponent>();
 	m_pTextBalloonGo =	GetOwner().GetChildren().front(); // First child is the text balloon
 }
 
@@ -16,12 +17,24 @@ void dae::PlayerComponent::HideTextBalloon() {
 	m_pTextBalloonGo->Disable();
 }
 
+dae::SpriteComponent* dae::PlayerComponent::GetSpriteComponent() {
+	return m_pSpriteComponent;
+}
+
 dae::GridMovementComponent* dae::PlayerComponent::GetMovementComponent() {
 	return m_pGridMovementComponent;
 }
 
+void dae::PlayerComponent::AddGameOverCommand(std::unique_ptr<Command> pCommand) {
+	m_gameOverCommands.emplace_back(std::move(pCommand));
+}
+
 dae::LivesComponent* dae::PlayerComponent::GetLivesComponent() {
 	return m_pLivesComponent;
+}
+
+dae::ScoreComponent* dae::PlayerComponent::GetScoreComponent() {
+	return m_pScoreComponent;
 }
 
 void dae::PlayerComponent::Reset() {
@@ -40,6 +53,13 @@ void dae::PlayerComponent::Reset() {
 void dae::PlayerComponent::Kill() {
 	ShowTextBalloon();
 	m_died = true;
+	m_pLivesComponent->Kill();
+
+	if (m_pLivesComponent->GetLives() <= 0) {
+		for (auto& command : m_gameOverCommands) {
+			command->Execute();
+		}
+	}
 }
 
 bool dae::PlayerComponent::HasDied() const {

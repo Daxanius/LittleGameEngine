@@ -1,6 +1,5 @@
 #pragma once
 #include <BaseComponent.h>
-#include "LevelComponent.h"
 #include "RhombilleGridComponent.h"
 #include "Subject.h"
 
@@ -20,7 +19,6 @@ namespace dae {
 
 		bool IsPlaying() const;
 	private:
-		LevelComponent* m_pLevelComponent{};
 		RhombilleGridComponent* m_pRhombilleGridComponent{};
 
 		float m_animationDuration;

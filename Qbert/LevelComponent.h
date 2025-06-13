@@ -3,6 +3,7 @@
 #include "Subject.h"
 #include "Level.h"
 #include "RhombilleGridComponent.h"
+#include "RhombilleGridAnimationComponent.h"
 #include <vector>
 
 namespace dae {
@@ -27,7 +28,7 @@ namespace dae {
 
 		bool CheckSpinningDiscs();
 
-		void ResetLevel(bool resetState = false);
+		void ResetLevel();
 
 		bool LevelPaused() const;
 		bool InResetAnimation() const;
@@ -35,7 +36,6 @@ namespace dae {
 		void RegisterPlayer(PlayerComponent* pPlayer);
 		void RegisterSpawner(EnemySpawnerComponent* pSpawner);
 
-		void AddGameOverCommand(std::unique_ptr<Command> pCommand);
 		void AddNextLevelCommand(std::unique_ptr<Command> pCommand);
 
 		bool FlickTile(Tile* tile) const;
@@ -46,8 +46,9 @@ namespace dae {
 
 		const Level& GetLevelInfo() const;
 
-		RhombilleGridComponent& GetRhombilleGrid();
-		EnemySpawnerComponent& GetEnemySpawner();
+		RhombilleGridComponent* GetRhombilleGrid();
+		RhombilleGridAnimationComponent* GetRhombileGridAnimationComponent();
+		EnemySpawnerComponent* GetEnemySpawner();
 
 		void FixedUpdate() override {};
 		void Update(float deltaTime) override;
@@ -72,20 +73,19 @@ namespace dae {
 		bool m_paused{};
 
 		bool m_inResetAnimation{};
-		bool m_shouldResetState{};
 		bool m_hasUpdated{};
 
 		Subject m_Subject{};
 
 		RhombilleGridComponent* m_pRhombilleGrid{};
 		EnemySpawnerComponent* m_pEnemySpawner{};
+		RhombilleGridAnimationComponent* m_pRhombilleGridAnimationComponent{};
 
 		Level m_levelInfo;
 
 		std::vector<PlayerComponent*> m_Players;
 		std::vector<SpinningDiscComponent*> m_spinningDiscs;
 
-		std::vector<std::unique_ptr<Command>> m_gameOverCommands;
 		std::vector<std::unique_ptr<Command>> m_nextLevelCommands;
 	};
 }
