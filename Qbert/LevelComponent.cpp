@@ -233,7 +233,7 @@ void dae::LevelComponent::SpawnSpinningDiscs() {
 			}
 		} while (exists);
 
-		auto discObject{ std::make_unique<GameObject>() };
+		auto discObject{ std::make_unique<GameObject>(Transform{ -999.f, -999.f })};
 		auto pSpriteComponent{ discObject->AddComponent<SpriteComponent>("Disk Spritesheet.png", 16, 10, 2.f) };
 		m_spinningDiscs.emplace_back(discObject->AddComponent<SpinningDiscComponent>(m_pRhombilleGrid, row, col));
 

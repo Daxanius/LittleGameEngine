@@ -78,7 +78,7 @@ void dae::EnemySpawnerComponent::SpawnEnemyOfType(const std::string& type) {
 }
 
 dae::GameObject* dae::EnemySpawnerComponent::SpawnCoily() {
-	auto coilyObject{ std::make_unique<GameObject>(Transform{ 0.f, 0.f }) };
+	auto coilyObject{ std::make_unique<GameObject>(Transform{ -999.f, -999.f }) };
 	auto coilySprite{ coilyObject->AddComponent<SpriteComponent>("Coily Spritesheet.png", 16, 32, 2.f) };
 	auto movementComponent{ coilyObject->AddComponent<GridMovementComponent>(m_pRhombilleGridComponent, m_pLevelComponent, 0, 0, 0.5f) };
 	coilyObject->AddComponent<GridNavigationComponent>(0.5f);
@@ -107,7 +107,7 @@ dae::GameObject* dae::EnemySpawnerComponent::SpawnCoily() {
 }
 
 dae::GameObject* dae::EnemySpawnerComponent::SpawnUggOrWrongWay() {
-	auto enemyObject{ std::make_unique<GameObject>(Transform{ 0.f, 0.f }) };
+	auto enemyObject{ std::make_unique<GameObject>(Transform{ -999.f, -999.f }) };
 
 	// Spawn position
 	int row{ m_pRhombilleGridComponent->GetRows() -1 };
@@ -140,7 +140,7 @@ dae::GameObject* dae::EnemySpawnerComponent::SpawnUggOrWrongWay() {
 }
 
 dae::GameObject* dae::EnemySpawnerComponent::SpawnSlickOrSlam() {
-	auto enemyObject{ std::make_unique<GameObject>(Transform{ 0.f, 0.f }) };
+	auto enemyObject{ std::make_unique<GameObject>(Transform{ -999.f, -999.f }) };
 
 	auto pSpriteComponent{ enemyObject->AddComponent<SpriteComponent>("Slick Sam Spritesheet.png", 12, 16, 2.f) };
 	auto pMovementComponent{ enemyObject->AddComponent<GridMovementComponent>(m_pRhombilleGridComponent, m_pLevelComponent, 0, 0, 0.5f) };
