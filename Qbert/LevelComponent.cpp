@@ -28,6 +28,11 @@ bool dae::LevelComponent::NextRound() {
 		return false;
 	}
 
+	if (m_pEnemySpawner) {
+		const auto& enemies = m_levelInfo.rounds[m_round].enemies;
+		m_pEnemySpawner->PrepareEnemies(enemies);
+	}
+
 	m_hasUpdated = false;
 
 	// Otherwise notify subjects the next round has been triggered
@@ -105,6 +110,10 @@ void dae::LevelComponent::AddGameOverCommand(std::unique_ptr<Command> pCommand) 
 
 void dae::LevelComponent::AddNextLevelCommand(std::unique_ptr<Command> pCommand) {
 	m_nextLevelCommands.emplace_back(std::move(pCommand));
+}
+
+const dae::Level& dae::LevelComponent::GetLevelInfo() const {
+	return m_levelInfo;
 }
 
 bool dae::LevelComponent::FlickTile(Tile* tile) const {

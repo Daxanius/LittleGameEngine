@@ -89,7 +89,7 @@ void dae::SingleplayerLevelScene::OnSetup() {
 
 	pQbertSpriteComponent->SetState(make_sdbm_hash("right"));
 
-	auto pEnemySpawner{ mapObject->AddComponent<EnemySpawnerComponent>(m_pPlayerMovementComponent, pLevelComponent, 10.f) };
+	auto pEnemySpawner{ mapObject->AddComponent<EnemySpawnerComponent>(m_pPlayerMovementComponent, pLevelComponent) };
 
 	pLevelComponent->RegisterPlayer(pPlayerComponent);
 	pLevelComponent->RegisterSpawner(pEnemySpawner);

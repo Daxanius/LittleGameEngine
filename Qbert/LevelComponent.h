@@ -44,6 +44,8 @@ namespace dae {
 
 		Subject& GetSubject();
 
+		const Level& GetLevelInfo() const;
+
 		RhombilleGridComponent& GetRhombilleGrid();
 		EnemySpawnerComponent& GetEnemySpawner();
 

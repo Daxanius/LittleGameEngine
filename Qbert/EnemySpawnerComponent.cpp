@@ -12,10 +12,12 @@
 #include "UggAndWrongwayComponent.h"
 #include "LevelComponent.h"
 #include "Scene.h"
+#include <iostream>
 
-dae::EnemySpawnerComponent::EnemySpawnerComponent(GameObject& pOwner, GridMovementComponent* pTargetComponent, LevelComponent* pLevelComponent, float spawnInterval) 
-	: BaseComponent(pOwner), m_pTargetComponent(pTargetComponent), m_pLevelComponent(pLevelComponent), m_spawnInterval(spawnInterval), m_timeUntilSpawn(m_spawnInterval) {
+dae::EnemySpawnerComponent::EnemySpawnerComponent(GameObject& pOwner, GridMovementComponent* pTargetComponent, LevelComponent* pLevelComponent) 
+	: BaseComponent(pOwner), m_pTargetComponent(pTargetComponent), m_pLevelComponent(pLevelComponent) {
 	m_pRhombilleGridComponent = GetOwner().GetComponent<RhombilleGridComponent>();
+	m_levelInfo = m_pLevelComponent->GetLevelInfo();
 }
 
 void dae::EnemySpawnerComponent::KillAllEnemies() {
@@ -24,15 +26,33 @@ void dae::EnemySpawnerComponent::KillAllEnemies() {
 	}
 }
 
-void dae::EnemySpawnerComponent::Update(float deltaTime) {
-	if (m_pLevelComponent->LevelPaused()) {
-		return;
+void dae::EnemySpawnerComponent::PrepareEnemies(const std::vector<Enemy>& enemies) {
+	m_enemiesToSpawn.clear();
+	for (const auto& enemy : enemies) {
+		for (int i = 0; i < enemy.count; ++i) {
+			m_enemiesToSpawn.push_back(enemy); // Copy each instance
+		}
 	}
 
-	m_timeUntilSpawn -= deltaTime;
-	if (m_timeUntilSpawn <= 0.f) {
-		SpawnEnemy();
-		m_timeUntilSpawn = m_spawnInterval;
+	m_currentEnemyIndex = 0;
+	if (!m_enemiesToSpawn.empty()) {
+		m_nextEnemyDelay = m_enemiesToSpawn[0].delay;
+	}
+}
+
+void dae::EnemySpawnerComponent::Update(float deltaTime) {
+	if (m_pLevelComponent->LevelPaused() || m_currentEnemyIndex >= m_enemiesToSpawn.size())
+		return;
+
+	m_nextEnemyDelay -= deltaTime;
+	if (m_nextEnemyDelay <= 0.f) {
+		const auto& enemy = m_enemiesToSpawn[m_currentEnemyIndex];
+		SpawnEnemyOfType(enemy.type);
+		++m_currentEnemyIndex;
+
+		if (m_currentEnemyIndex < m_enemiesToSpawn.size()) {
+			m_nextEnemyDelay = m_enemiesToSpawn[m_currentEnemyIndex].delay;
+		}
 	}
 }
 
@@ -45,19 +65,15 @@ void dae::EnemySpawnerComponent::PostUpdate() {
 			}), m_spawnedEnemies.end());
 }
 
-void dae::EnemySpawnerComponent::SpawnEnemy() {
-	int enemyType{ rand() % 3 };
-
-	switch (enemyType) {
-		case 0:
-			m_spawnedEnemies.emplace_back(SpawnCoily());
-			break;
-		case 1:
-			m_spawnedEnemies.emplace_back(SpawnUggOrWrongWay());
-			break;
-		case 2:
-			m_spawnedEnemies.emplace_back(SpawnSlickOrSlam());
-			break;
+void dae::EnemySpawnerComponent::SpawnEnemyOfType(const std::string& type) {
+	if (type == "Coily") {
+		m_spawnedEnemies.emplace_back(SpawnCoily());
+	} else if (type == "UggAndWrongway") {
+		m_spawnedEnemies.emplace_back(SpawnUggOrWrongWay());
+	} else if (type == "SlickAndSam") {
+		m_spawnedEnemies.emplace_back(SpawnSlickOrSlam());
+	} else {
+		std::cout << "Enemy of type: " << type << " does not exist!";
 	}
 }
 
