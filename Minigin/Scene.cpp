@@ -56,7 +56,7 @@ void Scene::Update(float deltaTime) {
 	// of when the object is enabled or disabled
 	for(auto& object : m_objects) {
 			object->PostUpdate();
-			m_sortDirty = m_sortDirty || object->IsZDirty();
+			m_sortDirty = m_sortDirty || object->IsZDirty() || object->IsDestroyed();
 	}
 
 	ProcessPendingChanges();
@@ -69,10 +69,8 @@ void dae::Scene::Render() const {
 		m_sortedRenderables.reserve(m_objects.size());
 
 		for (const auto& obj : m_objects) {
-			if (obj->IsEnabled()) {
 				m_sortedRenderables.emplace_back(obj.get());
 				obj->ClearZDirty(); // Clear Z-dirty flag
-			}
 		}
 
 		std::sort(m_sortedRenderables.begin(), m_sortedRenderables.end(),
@@ -85,7 +83,9 @@ void dae::Scene::Render() const {
 
 	// Render using cached sorted list
 	for (const GameObject* obj : m_sortedRenderables) {
-		obj->Render();
+		if (obj->IsEnabled()) {
+			obj->Render();
+		}
 	}
 }
 
