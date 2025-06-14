@@ -135,7 +135,7 @@ void dae::CoopLevelScene::OnSetup() {
 												
 	pQbertSpriteComponentP2->SetState(make_sdbm_hash("right"));
 
-	auto pEnemySpawner{ mapObject->AddComponent<EnemySpawnerComponent>(pLevelComponent) };
+	auto pEnemySpawner{ mapObject->AddComponent<EnemySpawnerComponent>(pLevelComponent, false) };
 
 	pLevelComponent->RegisterPlayer(pPlayerComponentP1);
 	pLevelComponent->RegisterPlayer(pPlayerComponentP2);

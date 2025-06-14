@@ -189,7 +189,12 @@
     <ClCompile Include="ScoreObserver.cpp">
       <Filter>Source\Observers</Filter>
     </ClCompile>
-    <ClCompile Include="CoilyStateSnakePlayer.cpp" />
+    <ClCompile Include="CoilyStateSnakePlayer.cpp">
+      <Filter>Source\States\Coily</Filter>
+    </ClCompile>
+    <ClCompile Include="VersusIntroScene.cpp">
+      <Filter>Source\Scenes</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="KillCommand.h">
@@ -351,6 +356,11 @@
     <ClInclude Include="ScoreObserver.h">
       <Filter>Source\Observers</Filter>
     </ClInclude>
-    <ClInclude Include="CoilyStateSnakePlayer.h" />
+    <ClInclude Include="CoilyStateSnakePlayer.h">
+      <Filter>Source\States\Coily</Filter>
+    </ClInclude>
+    <ClInclude Include="VersusIntroScene.h">
+      <Filter>Source\Scenes</Filter>
+    </ClInclude>
   </ItemGroup>
 </Project>

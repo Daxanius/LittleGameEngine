@@ -8,7 +8,7 @@
 namespace dae {
 	class SingleplayerLevelScene final : public Scene {
 	public:
-		SingleplayerLevelScene(int level = 0, int score = 0);
+		SingleplayerLevelScene(int level = 0, int score = 0, bool isVersus = false);
 
 		void OnSetup() override;
 		void OnEnter() override;
@@ -25,5 +25,7 @@ namespace dae {
 
 		int m_score;
 		int m_level;
+
+		bool m_isVersus;
 	};
 }

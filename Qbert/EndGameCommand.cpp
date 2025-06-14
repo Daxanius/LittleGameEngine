@@ -12,6 +12,7 @@ dae::EndGameCommand::EndGameCommand(LevelType levelType, ScoreComponent* pScoreC
 void dae::EndGameCommand::Execute() {
 	switch (m_levelType) {
 		case LevelType::Singleplayer:
+		case LevelType::Versus:
 			GoToEndscreenSingleplayer();
 			break;
 		case LevelType::Coop:

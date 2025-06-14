@@ -31,21 +31,36 @@ void dae::LevelDisplayScene::OnSetup() {
 	levelDisplayObject->AddComponent<TextureComponent>(levelInfo.icon);
 
 	m_pTimerComponent = levelDisplayObject->AddComponent<TimerComponent>();
-	auto gamemodeTextObject{ std::make_unique<GameObject>(Transform((640 / 2) - 100, 350)) };
 
 	switch (m_levelType) {
 		case LevelType::Singleplayer:
+		{
+			auto gamemodeTextObject{ std::make_unique<GameObject>(Transform((640 / 2) - 100, 350)) };
 			m_pTimerComponent->AddCommand(std::make_unique<ChangeSceneCommand>("SingleplayerLevel"));
 			gamemodeTextObject->AddComponent<TextComponent>("Solo Mode", Qbert::GetInstance().GetFontLarge());
+			Add(std::move(gamemodeTextObject));
 			break;
+		}
 		case LevelType::Coop:
+		{
+			auto gamemodeTextObject{ std::make_unique<GameObject>(Transform((640 / 2) - 110, 350)) };
 			m_pTimerComponent->AddCommand(std::make_unique<ChangeSceneCommand>("CoopLevel"));
 			gamemodeTextObject->AddComponent<TextComponent>("Co-op Mode", Qbert::GetInstance().GetFontLarge());
+			Add(std::move(gamemodeTextObject));
 			break;
+		}
+
+		case LevelType::Versus:
+		{
+			auto gamemodeTextObject{ std::make_unique<GameObject>(Transform((640 / 2) - 120, 350)) };
+			m_pTimerComponent->AddCommand(std::make_unique<ChangeSceneCommand>("VersusLevel"));
+			gamemodeTextObject->AddComponent<TextComponent>("Versus Mode", Qbert::GetInstance().GetFontLarge());
+			Add(std::move(gamemodeTextObject));
+			break;
+		}
 	}
 
 	Add(std::move(levelDisplayObject));
-	Add(std::move(gamemodeTextObject));
 }
 
 void dae::LevelDisplayScene::OnEnter() {
@@ -63,6 +78,11 @@ void dae::LevelDisplayScene::OnEnter() {
 
 	auto levelSceneCoop{ std::make_unique<CoopLevelScene>(m_level, m_scoreP1, m_scoreP2) };
 	SceneManager::GetInstance().AddScene(std::move(levelSceneCoop));
+
+	// The versus level is just a single player level with a single property changed lol
+	// my level loading system isn't exactly the greatest :/
+	auto levelSceneVerus{ std::make_unique<SingleplayerLevelScene>(m_level, m_scoreP1, true) };
+	SceneManager::GetInstance().AddScene(std::move(levelSceneVerus));
 
 	m_pTimerComponent->Start(2.5f);
 }

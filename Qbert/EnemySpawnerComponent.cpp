@@ -15,8 +15,8 @@
 #include "Scene.h"
 #include <iostream>
 
-dae::EnemySpawnerComponent::EnemySpawnerComponent(GameObject& pOwner, LevelComponent* pLevelComponent) 
-	: BaseComponent(pOwner), m_pLevelComponent(pLevelComponent) {
+dae::EnemySpawnerComponent::EnemySpawnerComponent(GameObject& pOwner, LevelComponent* pLevelComponent, bool spawnsPlayerCoily) 
+	: BaseComponent(pOwner), m_pLevelComponent(pLevelComponent), m_spawnsPlayerCoily(spawnsPlayerCoily) {
 	m_pRhombilleGridComponent = GetOwner().GetComponent<RhombilleGridComponent>();
 	m_levelInfo = m_pLevelComponent->GetLevelInfo();
 }
@@ -27,6 +27,7 @@ void dae::EnemySpawnerComponent::KillAllEnemies() {
 	}
 
 	m_spawnedEnemies.clear();
+	m_hasPlayerCoily = false;
 }
 
 void dae::EnemySpawnerComponent::PrepareEnemies(const std::vector<Enemy>& enemies) {
@@ -64,8 +65,15 @@ void dae::EnemySpawnerComponent::PostUpdate() {
 	// Remove any potentially destroyed enemies from the list of spawned game enemies
 	m_spawnedEnemies.erase(
 		std::remove_if(m_spawnedEnemies.begin(), m_spawnedEnemies.end(),
-			[](const GameObject* enemy) {
-				return enemy->IsDestroyed();
+			[this](const GameObject* enemy) {
+				if (enemy->IsDestroyed()) {
+					auto coily = enemy->GetComponent<CoilyComponent>();
+					if (coily && coily->IsPlayer()) {
+						m_hasPlayerCoily = false; // Reset flag after coily has been destroyed
+					}
+					return true;
+				}
+				return false;
 			}), m_spawnedEnemies.end());
 }
 
@@ -88,6 +96,11 @@ dae::GameObject* dae::EnemySpawnerComponent::SpawnCoily() {
 	coilyObject->AddComponent<GridNavigationComponent>(0.5f);
 	auto coilyComponent{ coilyObject->AddComponent<CoilyComponent>(m_pLevelComponent) };
 	coilyComponent->GetSubject().AddObserver(Qbert::GetInstance().GetSoundObserver());
+
+	if (!m_hasPlayerCoily && m_spawnsPlayerCoily) {
+		coilyComponent->SetAsPlayer();
+		m_hasPlayerCoily = true;
+	}
 
 	movementComponent->SetOffsetX(16);
 	movementComponent->SetOffsetY(-16);

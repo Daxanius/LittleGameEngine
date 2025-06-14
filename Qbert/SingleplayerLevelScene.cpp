@@ -33,8 +33,11 @@
 #include <iostream>
 #include "Qbert.h"
 
-dae::SingleplayerLevelScene::SingleplayerLevelScene(int level, int score) 
-	: Scene("SingleplayerLevel"), m_level(level), m_score(score) {
+dae::SingleplayerLevelScene::SingleplayerLevelScene(int level, int score, bool isVersus) 
+	: Scene("SingleplayerLevel"), m_level(level), m_score(score), m_isVersus(isVersus) {
+	if (isVersus) {
+		SetName("VersusLevel");
+	}
 }
 
 void dae::SingleplayerLevelScene::OnSetup() {
@@ -69,7 +72,12 @@ void dae::SingleplayerLevelScene::OnSetup() {
 	auto pQbertSpriteComponent{ qbertObject->AddComponent<SpriteComponent>("Qbert P1 Spritesheet.png", 17, 17, 2.f) };
 	m_pScoreComponent = qbertObject->AddComponent<ScoreComponent>(m_score);
 
-	pLevelComponent->AddNextLevelCommand(std::make_unique<NextLevelCommand>(LevelType::Singleplayer, m_level + 1, m_pScoreComponent));
+	LevelType type{ LevelType::Singleplayer };
+	if (m_isVersus) {
+		type = LevelType::Versus;
+	}
+
+	pLevelComponent->AddNextLevelCommand(std::make_unique<NextLevelCommand>(type, m_level + 1, m_pScoreComponent));
 
 	auto textBalloonObject{ std::make_unique<GameObject>() };
 	textBalloonObject->AddComponent<TextureComponent>("Qbert Curses.png", 1.f);
@@ -78,7 +86,7 @@ void dae::SingleplayerLevelScene::OnSetup() {
 	textBalloonObject->Disable();
 
 	auto pPlayerComponent{ qbertObject->AddComponent<PlayerComponent>() };
-	pPlayerComponent->AddGameOverCommand(std::make_unique<EndGameCommand>(LevelType::Singleplayer, m_pScoreComponent));
+	pPlayerComponent->AddGameOverCommand(std::make_unique<EndGameCommand>(type, m_pScoreComponent));
 
 	// Create a lives display for the player
 	auto livesObject{ std::make_unique<GameObject>(Transform{ 10.f, 130.f, 20.f }) };
@@ -98,7 +106,7 @@ void dae::SingleplayerLevelScene::OnSetup() {
 
 	pQbertSpriteComponent->SetState(make_sdbm_hash("right"));
 
-	auto pEnemySpawner{ mapObject->AddComponent<EnemySpawnerComponent>(pLevelComponent) };
+	auto pEnemySpawner{ mapObject->AddComponent<EnemySpawnerComponent>(pLevelComponent, m_isVersus) };
 
 	pLevelComponent->RegisterPlayer(pPlayerComponent);
 	pLevelComponent->RegisterSpawner(pEnemySpawner);
@@ -143,16 +151,29 @@ void dae::SingleplayerLevelScene::OnEnter() {
 		std::move(std::make_unique<ToggleSoundCommand>())
 	);
 
-	std::unique_ptr<Scene> pauseScene{ std::make_unique<PauseScene>("SingleplayerLevel")};
+	std::string pauseSceneName{ "SingleplayerLevel" };
+
+	if (m_isVersus) {
+		pauseSceneName = "VersusLevel";
+	}
+
+	std::unique_ptr<Scene> pauseScene{ std::make_unique<PauseScene>(pauseSceneName)};
 	SceneManager::GetInstance().AddScene(std::move(pauseScene));
 
-	InputManager::GetInstance().BindKeyboardCommand(
-		Keyboard::KeyState{ Keyboard::Key::F1, Keyboard::ActionType::Press },
-		std::move(std::make_unique<NextLevelCommand>(LevelType::Singleplayer,  m_level + 1, m_pScoreComponent))
-	);
+	if (m_isVersus) {
+		InputManager::GetInstance().BindKeyboardCommand(
+			Keyboard::KeyState{ Keyboard::Key::F1, Keyboard::ActionType::Press },
+			std::move(std::make_unique<NextLevelCommand>(LevelType::Versus,  m_level + 1, m_pScoreComponent))
+		);
+	} else {
+		InputManager::GetInstance().BindKeyboardCommand(
+			Keyboard::KeyState{ Keyboard::Key::F1, Keyboard::ActionType::Press },
+			std::move(std::make_unique<NextLevelCommand>(LevelType::Singleplayer,  m_level + 1, m_pScoreComponent))
+		);
+	}
 
 	InputManager::GetInstance().BindKeyboardCommand(
-		Keyboard::KeyState{ Keyboard::Key::Up, Keyboard::ActionType::Press },
+		Keyboard::KeyState{ Keyboard::Key::W, Keyboard::ActionType::Press },
 		std::move(std::make_unique<MoveCommand>(m_pPlayerMovementComponent, MoveCommand::Direction::Up))
 	);
 
@@ -163,7 +184,7 @@ void dae::SingleplayerLevelScene::OnEnter() {
 	);
 
 	InputManager::GetInstance().BindKeyboardCommand(
-		Keyboard::KeyState{ Keyboard::Key::Down, Keyboard::ActionType::Press },
+		Keyboard::KeyState{ Keyboard::Key::S, Keyboard::ActionType::Press },
 		std::move(std::make_unique<MoveCommand>(m_pPlayerMovementComponent, MoveCommand::Direction::Down))
 	);
 
@@ -174,7 +195,7 @@ void dae::SingleplayerLevelScene::OnEnter() {
 	);
 
 	InputManager::GetInstance().BindKeyboardCommand(
-		Keyboard::KeyState{ Keyboard::Key::Left, Keyboard::ActionType::Press },
+		Keyboard::KeyState{ Keyboard::Key::A, Keyboard::ActionType::Press },
 		std::move(std::make_unique<MoveCommand>(m_pPlayerMovementComponent, MoveCommand::Direction::Left))
 	);
 
@@ -185,7 +206,7 @@ void dae::SingleplayerLevelScene::OnEnter() {
 	);
 
 	InputManager::GetInstance().BindKeyboardCommand(
-		Keyboard::KeyState{ Keyboard::Key::Right, Keyboard::ActionType::Press },
+		Keyboard::KeyState{ Keyboard::Key::D, Keyboard::ActionType::Press },
 		std::move(std::make_unique<MoveCommand>(m_pPlayerMovementComponent, MoveCommand::Direction::Right))
 	);
 

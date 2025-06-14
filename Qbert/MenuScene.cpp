@@ -38,7 +38,7 @@ void dae::MenuScene::OnSetup() {
 	SelectionMenuComponent::Option optionCoop{ "Co-op Mode", std::make_unique<ChangeSceneCommand>("CoopIntro") };
 	m_pSelectionMenuComponent->AddOption(std::move(optionCoop));
 
-	SelectionMenuComponent::Option optionVersus{ "Versus Mode", std::make_unique<ChangeSceneCommand>("SingleplayerIntro") };
+	SelectionMenuComponent::Option optionVersus{ "Versus Mode", std::make_unique<ChangeSceneCommand>("VersusIntro") };
 	m_pSelectionMenuComponent->AddOption(std::move(optionVersus));
 
 	SelectionMenuComponent::Option optionScoreboard{ "Scoreboard", std::make_unique<ChangeSceneCommand>("Scoreboard") };

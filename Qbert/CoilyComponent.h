@@ -17,6 +17,9 @@ namespace dae {
 
 		LevelComponent* GetLevel() const;
 
+		void SetAsPlayer();
+		bool IsPlayer() const;
+
 		void FixedUpdate() override {};
 		void Update(float deltaTime) override;  
 		void PostUpdate() override;
@@ -36,5 +39,7 @@ namespace dae {
 		LevelComponent* m_pLevelComponent{};
 
 		Subject m_subject{};
+
+		bool m_isPlayer{};
 	};
 }

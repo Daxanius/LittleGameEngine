@@ -45,6 +45,7 @@ namespace dae
 		virtual void OnSetup() {};
 		virtual void OnEnter() {};
 
+		void SetName(const std::string& name);
 	private: 
 		void ProcessPendingChanges();
 

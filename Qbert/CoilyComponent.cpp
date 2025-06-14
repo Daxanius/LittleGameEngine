@@ -21,6 +21,14 @@ dae::LevelComponent* dae::CoilyComponent::GetLevel() const {
 	return m_pLevelComponent;
 }
 
+void dae::CoilyComponent::SetAsPlayer() {
+	m_isPlayer = true;
+}
+
+bool dae::CoilyComponent::IsPlayer() const {
+	return m_isPlayer;
+}
+
 void dae::CoilyComponent::Update(float deltaTime) {
 	if (m_pLevelComponent->LevelPaused()) {
 		return;

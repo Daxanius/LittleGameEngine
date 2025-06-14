@@ -86,6 +86,10 @@ void dae::Scene::Render() const {
 	}
 }
 
+void dae::Scene::SetName(const std::string& name) {
+	m_name = name;
+}
+
 void dae::Scene::ProcessPendingChanges() {
 	for (auto& obj : m_objectsToAdd) {
 		m_objects.push_back(std::move(obj));

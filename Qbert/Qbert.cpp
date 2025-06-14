@@ -15,6 +15,7 @@
 #include "SingleplayerIntroScene.h"
 #include "SingleplayerScoreDisplayScene.h"
 #include "CoopIntroScene.h"
+#include "VersusIntroScene.h"
 #include "ScoreboardScene.h"
 #include "LevelDisplayScene.h"
 #include "IntroScene.h"
@@ -41,6 +42,9 @@ void dae::Qbert::Start() {
 
 	std::unique_ptr<Scene> coopIntroScene{ std::make_unique<CoopIntroScene>() };
 	SceneManager::GetInstance().AddScene(std::move(coopIntroScene));
+
+	std::unique_ptr<Scene> versusIntroScene{ std::make_unique<VersusIntroScene>() };
+	SceneManager::GetInstance().AddScene(std::move(versusIntroScene));
 
 	std::unique_ptr<Scene> scoreDisplayScene{ std::make_unique<SingleplayerScoreDisplayScene>() };
 	SceneManager::GetInstance().AddScene(std::move(scoreDisplayScene));

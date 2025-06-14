@@ -13,6 +13,7 @@ dae::NextLevelCommand::NextLevelCommand(LevelType type, int level, ScoreComponen
 void dae::NextLevelCommand::Execute() {
 	switch (m_levelType) {
 		case LevelType::Singleplayer:
+		case LevelType::Versus:
 			GoToSinglePlayerLevel();
 			break;
 		case LevelType::Coop:

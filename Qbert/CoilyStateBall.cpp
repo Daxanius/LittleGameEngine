@@ -3,6 +3,7 @@
 #include "hash.h"
 #include "GridMovementComponent.h"
 #include "CoilyStateSnake.h"
+#include "CoilyStateSnakePlayer.h"
 #include <random> 
 
 dae::CoilyStateBall::CoilyStateBall(CoilyComponent* pCoilyComponent) : AbstractCoilyState(pCoilyComponent) {
@@ -39,7 +40,11 @@ void dae::CoilyStateBall::Update(float) {
 	int ownRow{ m_pGridMovementComponent->GetRow() };
 
 	if (ownRow >= GetCoilyComponent()->GetLevel()->GetRhombilleGrid()->GetRows() - 1) {
-		GetCoilyComponent()->SetState(std::make_shared<CoilyStateSnake>(GetCoilyComponent()));
+		if (GetCoilyComponent()->IsPlayer()) {
+			GetCoilyComponent()->SetState(std::make_shared<CoilyStateSnakePlayer>(GetCoilyComponent()));
+		} else {
+			GetCoilyComponent()->SetState(std::make_shared<CoilyStateSnake>(GetCoilyComponent()));
+		}
 	}
 }
 

@@ -9,7 +9,7 @@ namespace dae {
 
 	class EnemySpawnerComponent : public BaseComponent {
 	public:
-		EnemySpawnerComponent(GameObject& pOwner, LevelComponent* pLevelComponent);
+		EnemySpawnerComponent(GameObject& pOwner, LevelComponent* pLevelComponent, bool spawnsPlayerCoily);
 
 		void KillAllEnemies();
 
@@ -27,6 +27,9 @@ namespace dae {
 		EnemySpawnerComponent& operator=(EnemySpawnerComponent&&) = delete;
 		~EnemySpawnerComponent() = default;
 	private:
+		bool m_hasPlayerCoily{ false };
+		bool m_spawnsPlayerCoily{ false };
+
 		std::vector<Enemy> m_enemiesToSpawn;
 		size_t m_currentEnemyIndex{ 0 };
 		float m_nextEnemyDelay{ 0.f };

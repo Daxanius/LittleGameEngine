@@ -221,6 +221,7 @@
     <ClCompile Include="TextInputComponent.cpp" />
     <ClCompile Include="UggAndWrongwayComponent.cpp" />
     <ClCompile Include="UggAndWrongwayObserver.cpp" />
+    <ClCompile Include="VersusIntroScene.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="AbstractCoilyState.h" />
@@ -277,6 +278,7 @@
     <ClInclude Include="TextInputComponent.h" />
     <ClInclude Include="UggAndWrongwayComponent.h" />
     <ClInclude Include="UggAndWrongwayObserver.h" />
+    <ClInclude Include="VersusIntroScene.h" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\Minigin\Minigin.vcxproj">
