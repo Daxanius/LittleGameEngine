@@ -18,6 +18,14 @@ namespace dae {
 		Subject& GetSubject();
 
 		int GetScore() const;
+
+
+		ScoreComponent(const ScoreComponent&) = delete;
+		ScoreComponent& operator=(const ScoreComponent&) = delete;
+		ScoreComponent(ScoreComponent&&) = delete;
+		ScoreComponent& operator=(ScoreComponent&&) = delete;
+		~ScoreComponent() = default;
+
 	private:
 		int m_pScore;
 

@@ -13,6 +13,12 @@ namespace dae {
 		void PostUpdate() override;
 	  void Render() override {};
 
+		
+		FpsComponent(const FpsComponent&) = delete;
+		FpsComponent& operator=(const FpsComponent&) = delete;
+		FpsComponent(FpsComponent&&) = delete;
+		FpsComponent& operator=(FpsComponent&&) = delete;
+		~FpsComponent() = default;
 	private:
 		TextComponent* m_pTextComponent{ nullptr };
 	};

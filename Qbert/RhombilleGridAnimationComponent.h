@@ -18,6 +18,13 @@ namespace dae {
 		void PlayAnimation();
 
 		bool IsPlaying() const;
+
+
+		RhombilleGridAnimationComponent(const RhombilleGridAnimationComponent&) = delete;
+		RhombilleGridAnimationComponent& operator=(const RhombilleGridAnimationComponent&) = delete;
+		RhombilleGridAnimationComponent(RhombilleGridAnimationComponent&&) = delete;
+		RhombilleGridAnimationComponent& operator=(RhombilleGridAnimationComponent&&) = delete;
+		~RhombilleGridAnimationComponent() = default;
 	private:
 		RhombilleGridComponent* m_pRhombilleGridComponent{};
 

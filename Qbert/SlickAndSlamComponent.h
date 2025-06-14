@@ -16,6 +16,13 @@ namespace dae {
 		void Render() override {};
 
 		Subject& GetSubject();
+
+
+		SlickAndSlamComponent(const SlickAndSlamComponent&) = delete;
+		SlickAndSlamComponent& operator=(const SlickAndSlamComponent&) = delete;
+		SlickAndSlamComponent(SlickAndSlamComponent&&) = delete;
+		SlickAndSlamComponent& operator=(SlickAndSlamComponent&&) = delete;
+		~SlickAndSlamComponent() = default;
 	private:
 		GridMovementComponent* m_pOwnMovementComponent{};
 		GridNavigationComponent* m_pNavigationComponent{};

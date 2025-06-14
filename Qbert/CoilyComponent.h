@@ -19,10 +19,16 @@ namespace dae {
 
 		void FixedUpdate() override {};
 		void Update(float deltaTime) override;  
-		void PostUpdate() override {};
+		void PostUpdate() override;
 		void Render() override {};
 
 		Subject& GetSubject();
+
+
+		CoilyComponent(const CoilyComponent&) = delete;
+		CoilyComponent& operator=(const CoilyComponent&) = delete;
+		CoilyComponent(CoilyComponent&&) = delete;
+		CoilyComponent& operator=(CoilyComponent&&) = delete;
 	private: 
 		std::shared_ptr<AbstractCoilyState> m_pCurrentState;
 

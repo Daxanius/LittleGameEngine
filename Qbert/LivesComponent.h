@@ -26,6 +26,13 @@ namespace dae {
 		void Reset();
 
 		Subject& GetSubject();
+
+
+		LivesComponent(const LivesComponent&) = delete;
+		LivesComponent& operator=(const LivesComponent&) = delete;
+		LivesComponent(LivesComponent&&) = delete;
+		LivesComponent& operator=(LivesComponent&&) = delete;
+		~LivesComponent() = default;
 	private:
 		int m_maxLives;
 		int m_lives;

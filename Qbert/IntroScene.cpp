@@ -12,10 +12,10 @@
 #include <iostream>
 #include <memory>
 
-dae::IntroScrene::IntroScrene() : Scene("Intro") {
+dae::IntroScene::IntroScene() : Scene("Intro") {
 }
 
-void dae::IntroScrene::OnSetup() {
+void dae::IntroScene::OnSetup() {
 	auto backgroundObject{ std::make_unique<GameObject>() };
 	backgroundObject->AddComponent<TextureComponent>("background.jpg");
 
@@ -29,7 +29,7 @@ void dae::IntroScrene::OnSetup() {
 	Add(std::move(daeObject));
 }
 
-void dae::IntroScrene::OnEnter() {
+void dae::IntroScene::OnEnter() {
 	InputManager::GetInstance().ClearAllBindings();
 
 	InputManager::GetInstance().BindKeyboardCommand(

@@ -19,6 +19,13 @@ namespace dae {
 		void Update(float deltaTime) override;
 		void PostUpdate() override;
 		void Render() override {};
+
+
+		EnemySpawnerComponent(const EnemySpawnerComponent&) = delete;
+		EnemySpawnerComponent& operator=(const EnemySpawnerComponent&) = delete;
+		EnemySpawnerComponent(EnemySpawnerComponent&&) = delete;
+		EnemySpawnerComponent& operator=(EnemySpawnerComponent&&) = delete;
+		~EnemySpawnerComponent() = default;
 	private:
 		std::vector<Enemy> m_enemiesToSpawn;
 		size_t m_currentEnemyIndex{ 0 };

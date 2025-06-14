@@ -58,6 +58,13 @@ namespace dae {
 		const std::vector<PlayerComponent*>& GetPlayers() const;
 
 		static constexpr int ROUNDS_PER_LEVEL{ 4 };
+
+
+		LevelComponent(const LevelComponent&) = delete;
+		LevelComponent& operator=(const LevelComponent&) = delete;
+		LevelComponent(LevelComponent&&) = delete;
+		LevelComponent& operator=(LevelComponent&&) = delete;
+		~LevelComponent() = default;
 	private:
 		void SpawnSpinningDiscs();
 		void DestroySpinningDiscs();

@@ -39,6 +39,13 @@ namespace dae {
 		void Update(float) override {};
 		void PostUpdate() override {};
 		void Render() override {};
+
+
+		PlayerComponent(const PlayerComponent&) = delete;
+		PlayerComponent& operator=(const PlayerComponent&) = delete;
+		PlayerComponent(PlayerComponent&&) = delete;
+		PlayerComponent& operator=(PlayerComponent&&) = delete;
+		~PlayerComponent() = default;
 	private:
 		GridMovementComponent* m_pGridMovementComponent{};
 		SpriteComponent* m_pSpriteComponent{};

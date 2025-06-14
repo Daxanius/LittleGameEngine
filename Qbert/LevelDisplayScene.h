@@ -13,6 +13,13 @@ namespace dae {
 		void OnSetup() override;
 		void OnEnter() override;
 
+
+		LevelDisplayScene(const LevelDisplayScene&) = delete;
+		LevelDisplayScene& operator=(const LevelDisplayScene&) = delete;
+		LevelDisplayScene(LevelDisplayScene&&) = delete;
+		LevelDisplayScene& operator=(LevelDisplayScene&&) = delete;
+		~LevelDisplayScene() = default;
+
 	private:
 		int m_level{};
 		int m_scoreP1{};

@@ -41,6 +41,13 @@ namespace dae {
 		int GetTileWidth() const;
 		int GetTileHeight() const;
 		float GetScale() const;
+
+
+		RhombilleGridComponent(const RhombilleGridComponent&) = delete;
+		RhombilleGridComponent& operator=(const RhombilleGridComponent&) = delete;
+		RhombilleGridComponent(RhombilleGridComponent&&) = delete;
+		RhombilleGridComponent& operator=(RhombilleGridComponent&&) = delete;
+		~RhombilleGridComponent() = default;
 	private:
 		int m_rows;
 		int m_tileWidth;

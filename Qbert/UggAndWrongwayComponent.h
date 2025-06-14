@@ -16,6 +16,12 @@ namespace dae {
 		void Render() override {};
 
 		Subject& GetSubject();
+
+		UggAndWrongwayComponent(const UggAndWrongwayComponent&) = delete;
+		UggAndWrongwayComponent& operator=(const UggAndWrongwayComponent&) = delete;
+		UggAndWrongwayComponent(UggAndWrongwayComponent&&) = delete;
+		UggAndWrongwayComponent& operator=(UggAndWrongwayComponent&&) = delete;
+		~UggAndWrongwayComponent() = default;
 	private:
 		GridMovementComponent* m_pOwnMovementComponent{};
 		GridNavigationComponent* m_pNavigationComponent{};

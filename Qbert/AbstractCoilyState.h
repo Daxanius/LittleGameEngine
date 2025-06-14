@@ -5,6 +5,8 @@ namespace dae {
 
 	class AbstractCoilyState {
 	public:
+		virtual ~AbstractCoilyState() = default;
+
 		virtual void OnEnter() = 0;
 
 		virtual void Update(float deltaTime) = 0;
@@ -12,6 +14,12 @@ namespace dae {
 		virtual void OnExit() = 0;
 
 		CoilyComponent* GetCoilyComponent() const;
+
+
+		AbstractCoilyState(const AbstractCoilyState&) = delete;
+		AbstractCoilyState& operator=(const AbstractCoilyState&) = delete;
+		AbstractCoilyState(AbstractCoilyState&&) = delete;
+		AbstractCoilyState& operator=(AbstractCoilyState&&) = delete;
 	protected:
 		AbstractCoilyState(CoilyComponent* pCoilyComponent);
 

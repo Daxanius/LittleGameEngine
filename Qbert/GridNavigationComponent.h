@@ -18,6 +18,13 @@ namespace dae {
 		void Enable();
 		void Disable();
 		bool IsEnabled() const;
+
+
+		GridNavigationComponent(const GridNavigationComponent&) = delete;
+		GridNavigationComponent& operator=(const GridNavigationComponent&) = delete;
+		GridNavigationComponent(GridNavigationComponent&&) = delete;
+		GridNavigationComponent& operator=(GridNavigationComponent&&) = delete;
+		~GridNavigationComponent() = default;
 	private:
 		GridMovementComponent* m_pMovementComponent{};
 

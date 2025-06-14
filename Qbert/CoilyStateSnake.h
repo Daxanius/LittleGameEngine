@@ -15,6 +15,12 @@ namespace dae {
 		void Update(float deltaTime) override;
 		void OnExit() override;
 
+
+		CoilyStateSnake(const CoilyStateSnake&) = delete;
+		CoilyStateSnake& operator=(const CoilyStateSnake&) = delete;
+		CoilyStateSnake(CoilyStateSnake&&) = delete;
+		CoilyStateSnake& operator=(CoilyStateSnake&&) = delete;
+		~CoilyStateSnake() = default;
 	private:
 		GridMovementComponent* m_pGridMovementComponent{};
 		SpriteComponent* m_pSpriteComponent{};

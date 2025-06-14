@@ -15,6 +15,13 @@ namespace dae{
 		void Update(float) override {};
 		void PostUpdate() override {};
 		void Render() override;
+
+
+		RepeatingTextureComponent(const RepeatingTextureComponent&) = delete;
+		RepeatingTextureComponent& operator=(const RepeatingTextureComponent&) = delete;
+		RepeatingTextureComponent(RepeatingTextureComponent&&) = delete;
+		RepeatingTextureComponent& operator=(RepeatingTextureComponent&&) = delete;
+		~RepeatingTextureComponent() = default;
 	private:
 		int m_textureWidth;
 		int m_textureHeight;

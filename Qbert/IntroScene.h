@@ -3,12 +3,19 @@
 #include "TimerComponent.h"
 
 namespace dae {
-	class IntroScrene final : public Scene {
+	class IntroScene final : public Scene {
 	public:
-		IntroScrene();
+		IntroScene();
 
 		void OnSetup() override;
 		void OnEnter() override;
+
+
+		IntroScene(const IntroScene&) = delete;
+		IntroScene& operator=(const IntroScene&) = delete;
+		IntroScene(IntroScene&&) = delete;
+		IntroScene& operator=(IntroScene&&) = delete;
+		~IntroScene() = default;
 
 	private:
 		TimerComponent* m_pTimerComponent{};

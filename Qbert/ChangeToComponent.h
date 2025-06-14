@@ -14,6 +14,13 @@ namespace dae {
 		void PostUpdate() override {};
 		void Render() override;
 
+
+		ChangeToComponent(const ChangeToComponent&) = delete;
+		ChangeToComponent& operator=(const ChangeToComponent&) = delete;
+		ChangeToComponent(ChangeToComponent&&) = delete;
+		ChangeToComponent& operator=(ChangeToComponent&&) = delete;
+		~ChangeToComponent() = default;
+
 	private:
 		LevelComponent* m_pLevelComponent;
 

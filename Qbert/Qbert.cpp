@@ -48,7 +48,7 @@ void dae::Qbert::Start() {
 	std::unique_ptr<Scene> scoreboardScene{ std::make_unique<ScoreboardScene>(10) };
 	SceneManager::GetInstance().AddScene(std::move(scoreboardScene));
 
-	std::unique_ptr<Scene> introScene{ std::make_unique<IntroScrene>() };
+	std::unique_ptr<Scene> introScene{ std::make_unique<IntroScene>() };
 	SceneManager::GetInstance().AddScene(std::move(introScene));
 
 	SceneManager::GetInstance().SetScene("Intro");

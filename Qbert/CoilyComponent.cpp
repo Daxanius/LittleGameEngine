@@ -60,6 +60,15 @@ void dae::CoilyComponent::Update(float deltaTime) {
 	}
 }
 
+void dae::CoilyComponent::PostUpdate() {
+	if (IsDestroyed() || GetOwner().IsDestroyed()) {
+		if (m_pCurrentState) {
+			// Allow components to exit upon being destroyed
+			m_pCurrentState->OnExit();
+		}
+	}
+}
+
 dae::Subject& dae::CoilyComponent::GetSubject() {
 	return m_subject;
 }

@@ -23,6 +23,13 @@ namespace dae {
 		bool IsTransportingPlayer() const;
 
 		Subject& GetSubject();
+
+
+		SpinningDiscComponent(const SpinningDiscComponent&) = delete;
+		SpinningDiscComponent& operator=(const SpinningDiscComponent&) = delete;
+		SpinningDiscComponent(SpinningDiscComponent&&) = delete;
+		SpinningDiscComponent& operator=(SpinningDiscComponent&&) = delete;
+		~SpinningDiscComponent() = default;
 	private:
 		glm::vec2 m_startPosition{};
 		glm::vec2 m_goalPosition{};

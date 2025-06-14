@@ -60,6 +60,13 @@ namespace dae {
 		Subject& GetSubject();
 
 		RhombilleGridComponent* GetRhombilleGrid() const;
+
+
+		GridMovementComponent(const GridMovementComponent&) = delete;
+		GridMovementComponent& operator=(const GridMovementComponent&) = delete;
+		GridMovementComponent(GridMovementComponent&&) = delete;
+		GridMovementComponent& operator=(GridMovementComponent&&) = delete;
+		~GridMovementComponent() = default;
 	private:
 		glm::vec2 ToStandingPosition(int row, int col) const;
 		bool StartJump(int newRow, int newCol);

@@ -8,6 +8,13 @@ namespace dae {
 	
 		virtual void OnSetup();
 		virtual void OnEnter();
+
+
+		PauseScene(const PauseScene&) = delete;
+		PauseScene& operator=(const PauseScene&) = delete;
+		PauseScene(PauseScene&&) = delete;
+		PauseScene& operator=(PauseScene&&) = delete;
+		~PauseScene() = default;
 	private:
 		std::string m_resumeScene;
 	};

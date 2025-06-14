@@ -29,7 +29,6 @@ namespace dae {
 		TimerComponent(TimerComponent&&) = delete;
 		TimerComponent& operator=(TimerComponent&&) = delete;
 		~TimerComponent() = default;
-
 	private:
 		float m_timeLeft{};
 		bool m_isPaused{ true };

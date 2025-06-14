@@ -189,6 +189,7 @@
     <ClCompile Include="ScoreObserver.cpp">
       <Filter>Source\Observers</Filter>
     </ClCompile>
+    <ClCompile Include="CoilyStateSnakePlayer.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="KillCommand.h">
@@ -350,5 +351,6 @@
     <ClInclude Include="ScoreObserver.h">
       <Filter>Source\Observers</Filter>
     </ClInclude>
+    <ClInclude Include="CoilyStateSnakePlayer.h" />
   </ItemGroup>
 </Project>

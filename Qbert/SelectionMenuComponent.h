@@ -29,6 +29,14 @@ namespace dae {
 		void Render() override;
 
 		Subject& GetSubject();
+
+
+		SelectionMenuComponent(const SelectionMenuComponent&) = delete;
+		SelectionMenuComponent& operator=(const SelectionMenuComponent&) = delete;
+		SelectionMenuComponent(SelectionMenuComponent&&) = delete;
+		SelectionMenuComponent& operator=(SelectionMenuComponent&&) = delete;
+		~SelectionMenuComponent() = default;
+
 	private:
 		std::shared_ptr<Texture2D> CreateTextureFromText(const std::string& text);
 
