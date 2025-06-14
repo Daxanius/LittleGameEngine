@@ -175,6 +175,7 @@
     <ClCompile Include="CoilySnakeMovementObserver.cpp" />
     <ClCompile Include="CoilyStateBall.cpp" />
     <ClCompile Include="CoilyStateSnake.cpp" />
+    <ClCompile Include="CoopIntroScene.cpp" />
     <ClCompile Include="CoopLevelScene.cpp" />
     <ClCompile Include="CoopScoreDisplayScene.cpp" />
     <ClCompile Include="EndGameCommand.cpp" />
@@ -228,6 +229,7 @@
     <ClInclude Include="CoilySnakeMovementObserver.h" />
     <ClInclude Include="CoilyStateBall.h" />
     <ClInclude Include="CoilyStateSnake.h" />
+    <ClInclude Include="CoopIntroScene.h" />
     <ClInclude Include="CoopLevelScene.h" />
     <ClInclude Include="CoopScoreDisplayScene.h" />
     <ClInclude Include="EndGameCommand.h" />

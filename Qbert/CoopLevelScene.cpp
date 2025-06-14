@@ -237,7 +237,7 @@ void dae::CoopLevelScene::OnEnter() {
 	);
 
 	InputManager::GetInstance().BindKeyboardCommand(
-		Keyboard::KeyState{ Keyboard::Key::D, Keyboard::ActionType::Press },
+		Keyboard::KeyState{ Keyboard::Key::A, Keyboard::ActionType::Press },
 		std::move(std::make_unique<MoveCommand>(m_pPlayer1MovementComponent, MoveCommand::Direction::Left))
 	);
 
@@ -248,7 +248,7 @@ void dae::CoopLevelScene::OnEnter() {
 	);
 
 	InputManager::GetInstance().BindKeyboardCommand(
-		Keyboard::KeyState{ Keyboard::Key::A, Keyboard::ActionType::Press },
+		Keyboard::KeyState{ Keyboard::Key::D, Keyboard::ActionType::Press },
 		std::move(std::make_unique<MoveCommand>(m_pPlayer1MovementComponent, MoveCommand::Direction::Right))
 	);
 

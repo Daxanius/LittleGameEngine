@@ -31,18 +31,18 @@ void dae::LevelDisplayScene::OnSetup() {
 	levelDisplayObject->AddComponent<TextureComponent>(levelInfo.icon);
 
 	m_pTimerComponent = levelDisplayObject->AddComponent<TimerComponent>();
+	auto gamemodeTextObject{ std::make_unique<GameObject>(Transform((640 / 2) - 100, 350)) };
 
 	switch (m_levelType) {
 		case LevelType::Singleplayer:
 			m_pTimerComponent->AddCommand(std::make_unique<ChangeSceneCommand>("SingleplayerLevel"));
+			gamemodeTextObject->AddComponent<TextComponent>("Solo Mode", Qbert::GetInstance().GetFontLarge());
 			break;
 		case LevelType::Coop:
 			m_pTimerComponent->AddCommand(std::make_unique<ChangeSceneCommand>("CoopLevel"));
+			gamemodeTextObject->AddComponent<TextComponent>("Co-op Mode", Qbert::GetInstance().GetFontLarge());
 			break;
 	}
-
-	auto gamemodeTextObject{ std::make_unique<GameObject>(Transform((640 / 2) - 100, 350)) };
-	gamemodeTextObject->AddComponent<TextComponent>("Solo Mode", Qbert::GetInstance().GetFontLarge());
 
 	Add(std::move(levelDisplayObject));
 	Add(std::move(gamemodeTextObject));

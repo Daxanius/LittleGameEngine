@@ -19,9 +19,7 @@ namespace dae {
 		int m_scoreP2{};
 
 		TimerComponent* m_pTimerComponent{};
-
 		LevelType m_levelType{};
-
 		SoundId m_enterSfx{};
 	};
 }

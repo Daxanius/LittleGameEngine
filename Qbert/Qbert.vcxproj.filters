@@ -183,6 +183,9 @@
     <ClCompile Include="CoopScoreDisplayScene.cpp">
       <Filter>Source\Scenes</Filter>
     </ClCompile>
+    <ClCompile Include="CoopIntroScene.cpp">
+      <Filter>Source\Scenes</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="KillCommand.h">
@@ -336,6 +339,9 @@
       <Filter>Source\Scenes</Filter>
     </ClInclude>
     <ClInclude Include="CoopScoreDisplayScene.h">
+      <Filter>Source\Scenes</Filter>
+    </ClInclude>
+    <ClInclude Include="CoopIntroScene.h">
       <Filter>Source\Scenes</Filter>
     </ClInclude>
   </ItemGroup>

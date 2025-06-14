@@ -14,4 +14,3 @@ namespace dae {
 		TimerComponent* m_pTimerComponent{};
 	};
 }
-
