@@ -66,7 +66,7 @@ For this reason, this engine uses a simple audio system provided as a service, w
 
 The service can be accessed via the ResourceLocator singleton. 
 
-# Scenes
+## Scenes
 I took a rather unconventional / unusual approach to scenes. Instead of making a scene in some arbitrary builder, and then registering it with the scene system, scenes are built by themselves.
 
 This is done through inheritance. My scenes inherit from Scene, which allows me to avoid global state by having custom scene constructors. I tried my very best to avoid any form of global state in my Q*Bert game as an experimental thing.
