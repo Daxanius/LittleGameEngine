@@ -84,9 +84,22 @@ void dae::GameObject::Render() const {
 	}
 }
 
+void dae::GameObject::MarkZDirty() const {
+	m_zDirty = true;
+}
+
+bool dae::GameObject::IsZDirty() const {
+	return m_zDirty;
+}
+
+void dae::GameObject::ClearZDirty() const {
+	m_zDirty = false;
+}
+
 void dae::GameObject::SetLocalTransform(const Transform& transform) {
 	m_localTransform = transform;
 	MarkTransformDirty();
+	MarkZDirty(); // Transform can modify Z value
 }
 
 void dae::GameObject::SetLocalPosition(const glm::vec2& position) {

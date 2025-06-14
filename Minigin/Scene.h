@@ -49,10 +49,13 @@ namespace dae
 	private: 
 		void ProcessPendingChanges();
 
+		static unsigned int m_idCounter; 
+
 		std::string m_name;
 		std::vector<std::unique_ptr<GameObject>> m_objects{};
 		std::vector<std::unique_ptr<GameObject>> m_objectsToAdd{};
 
-		static unsigned int m_idCounter; 
+		mutable std::vector<const GameObject*> m_sortedRenderables{};
+		mutable bool m_sortDirty{ true };
 	};
 }

@@ -56,32 +56,35 @@ void Scene::Update(float deltaTime) {
 	// of when the object is enabled or disabled
 	for(auto& object : m_objects) {
 			object->PostUpdate();
+			m_sortDirty = m_sortDirty || object->IsZDirty();
 	}
 
 	ProcessPendingChanges();
 }
 
-// Yes, for z-ordering I could mark objects as dirty that have their Z changed
-// and then only sort the global object list based on z-values when required, but the performance
-// impact of copying like maybe 20 objects (pointers even) at most is negligble for
-// the use case of this engine.
 void dae::Scene::Render() const {
-	// Create a sorted copy of pointers for rendering with z-ordering
-	std::vector<const GameObject*> sortedObjects;
-	sortedObjects.reserve(m_objects.size());
+	if (m_sortDirty) {
+		// Rebuild and sort the list
+		m_sortedRenderables.clear();
+		m_sortedRenderables.reserve(m_objects.size());
 
-	for (const auto& obj : m_objects) {
-		if (obj->IsEnabled()) {
-			sortedObjects.emplace_back(obj.get());
+		for (const auto& obj : m_objects) {
+			if (obj->IsEnabled()) {
+				m_sortedRenderables.emplace_back(obj.get());
+				obj->ClearZDirty(); // Clear Z-dirty flag
+			}
 		}
+
+		std::sort(m_sortedRenderables.begin(), m_sortedRenderables.end(),
+			[](const GameObject* a, const GameObject* b) {
+				return a->GetWorldTransform().GetZ() < b->GetWorldTransform().GetZ();
+			});
+
+		m_sortDirty = false;
 	}
 
-	std::sort(sortedObjects.begin(), sortedObjects.end(), [](const GameObject* a, const GameObject* b) {
-		return a->GetWorldTransform().GetZ() < b->GetWorldTransform().GetZ();
-	});
-
-	// Render based on z-order sorted objects
-	for (const auto* obj : sortedObjects) {
+	// Render using cached sorted list
+	for (const GameObject* obj : m_sortedRenderables) {
 		obj->Render();
 	}
 }

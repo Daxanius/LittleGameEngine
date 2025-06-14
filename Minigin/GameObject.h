@@ -33,6 +33,10 @@ namespace dae
 		void PostUpdate();
 		void Render() const;
 
+		// Gets modifed in rendering, which is const
+		bool IsZDirty() const;
+		void ClearZDirty() const;
+
 		void SetLocalTransform(const Transform& transform);
 		void SetLocalPosition(const glm::vec2& position);
 		const Transform& GetLocalTransform() const;
@@ -115,7 +119,8 @@ namespace dae
 		void Destroy();
 		[[nodiscard]] bool IsDestroyed() const;
 	private:
-		void MarkTransformDirty() const ;
+		void MarkZDirty() const;
+		void MarkTransformDirty() const;
 		void UpdateWorldTransform() const ;
 		void RemoveDestroyedComponents();
 
@@ -125,6 +130,7 @@ namespace dae
 		// Mutable allows me to fetch positions in a const context
 		mutable Transform m_worldTransform{}; 
 		mutable bool m_transformDirty{ true };
+		mutable bool m_zDirty{ true };
 
 		bool m_destroyed{ false };
 		bool m_enabled{ true };
