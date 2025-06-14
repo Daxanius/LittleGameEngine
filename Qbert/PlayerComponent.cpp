@@ -37,17 +37,17 @@ dae::ScoreComponent* dae::PlayerComponent::GetScoreComponent() {
 	return m_pScoreComponent;
 }
 
-void dae::PlayerComponent::Reset() {
+void dae::PlayerComponent::Reset(bool resetPosition) {
 	HideTextBalloon();
 	DisableFreeMovement();
 	SetInvulnerable(false);
+	m_died = false;
 
-	if (m_died) {
-		if (m_shouldGoBack) {
-			m_pGridMovementComponent->GoToPrevPosition();
-		}
-		m_died = false;
-	} else {
+	if (m_shouldGoBack) {
+		m_pGridMovementComponent->GoToPrevPosition();
+	}
+
+	if (!m_pGridMovementComponent->IsValidPosition() || resetPosition) {
 		m_pGridMovementComponent->ResetPosition();
 		m_pSpriteComponent->SetState(make_sdbm_hash("right"));
 	}

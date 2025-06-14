@@ -12,6 +12,7 @@
 #include "MenuCommand.h"
 #include "Qbert.h"
 #include "SinglePlayerLevelScene.h"
+#include "CoopLevelScene.h"
 #include "LevelDisplayScene.h"
 #include "ToggleSoundCommand.h"
 #include "Scene.h"
@@ -22,6 +23,9 @@ dae::MenuScene::MenuScene() : Scene("Menu") {
 }
 
 void dae::MenuScene::OnSetup() {
+	auto coopScene{ std::make_unique<CoopLevelScene>(0, 0, 0) };
+	SceneManager::GetInstance().AddScene(std::move(coopScene));
+
 	auto titleObject{ std::make_unique<GameObject>(Transform((640 / 2) - (474 / 2), 50)) };
 	titleObject->AddComponent<TextureComponent>("Game Title.png");
 
@@ -31,7 +35,7 @@ void dae::MenuScene::OnSetup() {
 	SelectionMenuComponent::Option optionSolo{ "Solo Mode", std::make_unique<ChangeSceneCommand>("SingleplayerIntro")};
 	m_pSelectionMenuComponent->AddOption(std::move(optionSolo));
 
-	SelectionMenuComponent::Option optionCoop{ "Co-op Mode", std::make_unique<ChangeSceneCommand>("SingleplayerIntro") };
+	SelectionMenuComponent::Option optionCoop{ "Co-op Mode", std::make_unique<ChangeSceneCommand>("CoopLevel") };
 	m_pSelectionMenuComponent->AddOption(std::move(optionCoop));
 
 	SelectionMenuComponent::Option optionVersus{ "Versus Mode", std::make_unique<ChangeSceneCommand>("SingleplayerIntro") };
@@ -47,10 +51,6 @@ void dae::MenuScene::OnSetup() {
 }
 
 void dae::MenuScene::OnEnter() {
-	// Reset level display scene
-	auto levelScene{ std::make_unique<LevelDisplayScene>() };
-	SceneManager::GetInstance().AddScene(std::move(levelScene));
-
 	// Rebind the input system for the new scene
 	InputManager::GetInstance().ClearAllBindings();
 

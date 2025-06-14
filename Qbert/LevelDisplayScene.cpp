@@ -4,6 +4,7 @@
 #include "TimerComponent.h"
 #include "TextComponent.h"
 #include "SingleplayerLevelScene.h"
+#include "CoopLevelScene.h"
 #include "SceneManager.h"
 #include "ToggleSoundCommand.h"
 #include "InputManager.h"
@@ -12,8 +13,8 @@
 #include <iostream>
 #include <memory>
 
-dae::LevelDisplayScene::LevelDisplayScene(int level, int score)
-	: Scene("LevelDisplay"), m_level(level), m_score(score) {
+dae::LevelDisplayScene::LevelDisplayScene(LevelType levelType, int level, int scoreP1, int scoreP2)
+	: Scene("LevelDisplay"), m_levelType(levelType), m_level(level), m_scoreP1(scoreP1), m_scoreP2(scoreP2) {
 	m_enterSfx = ServiceLocator::GetInstance().GetSoundSystem().RegisterSound("../Data/Sounds/Level Screen Tune.wav");
 }
 
@@ -30,7 +31,15 @@ void dae::LevelDisplayScene::OnSetup() {
 	levelDisplayObject->AddComponent<TextureComponent>(levelInfo.icon);
 
 	m_pTimerComponent = levelDisplayObject->AddComponent<TimerComponent>();
-	m_pTimerComponent->AddCommand(std::make_unique<ChangeSceneCommand>("SingleplayerLevel"));
+
+	switch (m_levelType) {
+		case LevelType::Singleplayer:
+			m_pTimerComponent->AddCommand(std::make_unique<ChangeSceneCommand>("SingleplayerLevel"));
+			break;
+		case LevelType::Coop:
+			m_pTimerComponent->AddCommand(std::make_unique<ChangeSceneCommand>("CoopLevel"));
+			break;
+	}
 
 	auto gamemodeTextObject{ std::make_unique<GameObject>(Transform((640 / 2) - 100, 350)) };
 	gamemodeTextObject->AddComponent<TextComponent>("Solo Mode", Qbert::GetInstance().GetFontLarge());
@@ -48,9 +57,12 @@ void dae::LevelDisplayScene::OnEnter() {
 		std::move(std::make_unique<ToggleSoundCommand>())
 	);
 
-	// Basically reload the level scene at a new level with a new score
-	auto levelScene{ std::make_unique<SingleplayerLevelScene>(m_level, m_score) };
+	// Basically reload the level scenes at a new level with a new score
+	auto levelScene{ std::make_unique<SingleplayerLevelScene>(m_level, m_scoreP1) };
 	SceneManager::GetInstance().AddScene(std::move(levelScene));
+
+	auto levelSceneCoop{ std::make_unique<CoopLevelScene>(m_level, m_scoreP1, m_scoreP2) };
+	SceneManager::GetInstance().AddScene(std::move(levelSceneCoop));
 
 	m_pTimerComponent->Start(2.5f);
 }

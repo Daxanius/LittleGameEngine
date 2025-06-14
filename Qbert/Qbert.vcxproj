@@ -168,7 +168,6 @@
   </ItemDefinitionGroup>
   <ItemGroup>
     <ClCompile Include="AbstractCoilyState.cpp" />
-    <ClCompile Include="AnimationObserver.cpp" />
     <ClCompile Include="ChangeCoilyStateCommand.cpp" />
     <ClCompile Include="ChangeToComponent.cpp" />
     <ClCompile Include="CoilyComponent.cpp" />
@@ -176,6 +175,8 @@
     <ClCompile Include="CoilySnakeMovementObserver.cpp" />
     <ClCompile Include="CoilyStateBall.cpp" />
     <ClCompile Include="CoilyStateSnake.cpp" />
+    <ClCompile Include="CoopLevelScene.cpp" />
+    <ClCompile Include="CoopScoreDisplayScene.cpp" />
     <ClCompile Include="EndGameCommand.cpp" />
     <ClCompile Include="EnemySpawnerComponent.cpp" />
     <ClCompile Include="EnterScoreCommand.cpp" />
@@ -220,7 +221,6 @@
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="AbstractCoilyState.h" />
-    <ClInclude Include="AnimationObserver.h" />
     <ClInclude Include="ChangeCoilyStateCommand.h" />
     <ClInclude Include="ChangeToComponent.h" />
     <ClInclude Include="CoilyComponent.h" />
@@ -228,6 +228,8 @@
     <ClInclude Include="CoilySnakeMovementObserver.h" />
     <ClInclude Include="CoilyStateBall.h" />
     <ClInclude Include="CoilyStateSnake.h" />
+    <ClInclude Include="CoopLevelScene.h" />
+    <ClInclude Include="CoopScoreDisplayScene.h" />
     <ClInclude Include="EndGameCommand.h" />
     <ClInclude Include="EnemySpawnerComponent.h" />
     <ClInclude Include="EnterScoreCommand.h" />

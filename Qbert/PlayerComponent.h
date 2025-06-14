@@ -23,7 +23,7 @@ namespace dae {
 
 		void AddGameOverCommand(std::unique_ptr<Command> pCommand);
 
-		void Reset();
+		void Reset(bool resetPosition);
 
 		void Kill(bool shouldGoBack);
 		
@@ -48,6 +48,9 @@ namespace dae {
 
 		bool m_died{};
 		bool m_shouldGoBack{};
+
+		int m_pStartRow{};
+		int m_pStartCol{};
 
 		std::vector<std::unique_ptr<Command>> m_gameOverCommands;
 	};

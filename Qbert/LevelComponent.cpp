@@ -41,6 +41,7 @@ bool dae::LevelComponent::NextRound() {
 	m_pEnemySpawner->PrepareEnemies(enemies);
 
 	m_hasUpdated = false;
+	m_resetPlayerPositions = true;
 	ResetLevel();
 
 	// Otherwise notify subjects the next round has been triggered
@@ -187,7 +188,8 @@ void dae::LevelComponent::Update(float deltaTime) {
 		m_inResetAnimation = false;
 
 		for (auto player : m_Players) {
-			player->Reset(); // Reset the player component
+			player->Reset(m_resetPlayerPositions);
+			m_resetPlayerPositions = false;
 		}
 
 		if (m_pEnemySpawner != nullptr) {

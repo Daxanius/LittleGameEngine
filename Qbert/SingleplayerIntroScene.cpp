@@ -24,6 +24,8 @@
 #include "LevelComponent.h"
 #include "SinglePlayerLevelScene.h"
 #include "ToggleSoundCommand.h"
+#include "SceneManager.h"
+#include "LevelDisplayScene.h"
 #include "ChangeSceneCommand.h"
 #include "Qbert.h"
 
@@ -71,6 +73,9 @@ void dae::SingleplayerIntroScene::OnSetup() {
 }
 
 void dae::SingleplayerIntroScene::OnEnter() {
+	std::unique_ptr<Scene> levelDisplayScene{ std::make_unique<LevelDisplayScene>(LevelType::Singleplayer) };
+	SceneManager::GetInstance().AddScene(std::move(levelDisplayScene));
+
 	InputManager::GetInstance().ClearAllBindings();
 
 	InputManager::GetInstance().BindKeyboardCommand(

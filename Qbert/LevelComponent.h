@@ -71,7 +71,7 @@ namespace dae {
 		int m_round{};
 
 		bool m_paused{};
-
+		bool m_resetPlayerPositions{};
 		bool m_inResetAnimation{};
 		bool m_hasUpdated{};
 

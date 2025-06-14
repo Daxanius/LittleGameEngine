@@ -6,6 +6,12 @@
 namespace dae {
 	using json = nlohmann::json;
 
+	enum class LevelType {
+		Singleplayer,
+		Coop,
+		Versus,
+	};
+
 	struct Enemy {
 			std::string type;
 			int count;

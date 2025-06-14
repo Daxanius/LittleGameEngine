@@ -41,9 +41,6 @@ void dae::Qbert::Start() {
 	std::unique_ptr<Scene> scoreDisplayScene{ std::make_unique<SingleplayerScoreDisplayScene>() };
 	SceneManager::GetInstance().AddScene(std::move(scoreDisplayScene));
 
-	std::unique_ptr<Scene> levelDisplayScene{ std::make_unique<LevelDisplayScene>() };
-	SceneManager::GetInstance().AddScene(std::move(levelDisplayScene));
-
 	std::unique_ptr<Scene> scoreboardScene{ std::make_unique<ScoreboardScene>(10) };
 	SceneManager::GetInstance().AddScene(std::move(scoreboardScene));
 

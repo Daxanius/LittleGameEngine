@@ -111,9 +111,6 @@
     <ClCompile Include="RhombilleGridAnimationComponent.cpp">
       <Filter>Source\Components</Filter>
     </ClCompile>
-    <ClCompile Include="AnimationObserver.cpp">
-      <Filter>Source\Observers</Filter>
-    </ClCompile>
     <ClCompile Include="ChangeToComponent.cpp">
       <Filter>Source\Components</Filter>
     </ClCompile>
@@ -179,6 +176,12 @@
     </ClCompile>
     <ClCompile Include="EndGameCommand.cpp">
       <Filter>Source\Commands</Filter>
+    </ClCompile>
+    <ClCompile Include="CoopLevelScene.cpp">
+      <Filter>Source\Scenes</Filter>
+    </ClCompile>
+    <ClCompile Include="CoopScoreDisplayScene.cpp">
+      <Filter>Source\Scenes</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -260,9 +263,6 @@
     <ClInclude Include="RhombilleGridAnimationComponent.h">
       <Filter>Source\Components</Filter>
     </ClInclude>
-    <ClInclude Include="AnimationObserver.h">
-      <Filter>Source\Observers</Filter>
-    </ClInclude>
     <ClInclude Include="ChangeToComponent.h">
       <Filter>Source\Components</Filter>
     </ClInclude>
@@ -331,6 +331,12 @@
     </ClInclude>
     <ClInclude Include="EndGameCommand.h">
       <Filter>Source\Commands</Filter>
+    </ClInclude>
+    <ClInclude Include="CoopLevelScene.h">
+      <Filter>Source\Scenes</Filter>
+    </ClInclude>
+    <ClInclude Include="CoopScoreDisplayScene.h">
+      <Filter>Source\Scenes</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>

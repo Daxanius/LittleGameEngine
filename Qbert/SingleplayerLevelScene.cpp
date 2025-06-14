@@ -68,7 +68,7 @@ void dae::SingleplayerLevelScene::OnSetup() {
 	auto pQbertSpriteComponent{ qbertObject->AddComponent<SpriteComponent>("Qbert P1 Spritesheet.png", 17, 17, 2.f) };
 	m_pScoreComponent = qbertObject->AddComponent<ScoreComponent>(m_score);
 
-	pLevelComponent->AddNextLevelCommand(std::make_unique<NextLevelCommand>(m_pScoreComponent, m_level + 1));
+	pLevelComponent->AddNextLevelCommand(std::make_unique<NextLevelCommand>(LevelType::Singleplayer, m_level + 1, m_pScoreComponent));
 
 	auto textBalloonObject{ std::make_unique<GameObject>() };
 	textBalloonObject->AddComponent<TextureComponent>("Qbert Curses.png", 1.f);
@@ -77,7 +77,7 @@ void dae::SingleplayerLevelScene::OnSetup() {
 	textBalloonObject->Disable();
 
 	auto pPlayerComponent{ qbertObject->AddComponent<PlayerComponent>() };
-	pPlayerComponent->AddGameOverCommand(std::make_unique<EndGameCommand>(m_pScoreComponent));
+	pPlayerComponent->AddGameOverCommand(std::make_unique<EndGameCommand>(LevelType::Singleplayer, m_pScoreComponent));
 
 	// Create a lives display for the player
 	auto livesObject{ std::make_unique<GameObject>(Transform{ 10.f, 130.f, 20.f }) };
@@ -107,7 +107,7 @@ void dae::SingleplayerLevelScene::OnSetup() {
 	m_pPlayerMovementComponent->GetSubject().AddObserver(std::static_pointer_cast<Observer>(Qbert::GetInstance().GetSoundObserver()));
 
 	auto scoreObject{ std::make_unique<GameObject>(Transform(10.f, 60.f, 20.f)) };
-	auto pScoreTextComponent{ scoreObject->AddComponent<TextComponent>("SCORE:0", Qbert::GetInstance().GetFontLarge()) };
+	auto pScoreTextComponent{ scoreObject->AddComponent<TextComponent>("SCORE:" + std::to_string(m_score), Qbert::GetInstance().GetFontLarge())};
 
 	auto roundObject{ std::make_unique<GameObject>(Transform(420.f, 50.f, 20.f)) };
 	auto pRoundTextComponent{ roundObject->AddComponent<TextComponent>("ROUND:1", Qbert::GetInstance().GetFontLarge()) };
@@ -145,7 +145,7 @@ void dae::SingleplayerLevelScene::OnEnter() {
 
 	InputManager::GetInstance().BindKeyboardCommand(
 		Keyboard::KeyState{ Keyboard::Key::F1, Keyboard::ActionType::Press },
-		std::move(std::make_unique<NextLevelCommand>(m_pScoreComponent, m_level + 1))
+		std::move(std::make_unique<NextLevelCommand>(LevelType::Singleplayer,  m_level + 1, m_pScoreComponent))
 	);
 
 	InputManager::GetInstance().BindKeyboardCommand(

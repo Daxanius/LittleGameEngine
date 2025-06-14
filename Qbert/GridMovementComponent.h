@@ -21,6 +21,7 @@ namespace dae {
 		void Render() override {};
 
 		bool HasArrived() const;
+		bool IsValidPosition() const;
 
 		int GetRow() const;
 		int GetCol() const;
@@ -75,6 +76,9 @@ namespace dae {
 		// Previous grid position
 		int m_prevRow{};
 		int m_prevCol{};
+
+		int m_initialRow{};
+		int m_initialCol{};
 
 		// Jump animation
 		bool m_isJumping{ false };
