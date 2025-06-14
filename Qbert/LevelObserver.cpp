@@ -1,18 +1,12 @@
 #include "LevelObserver.h"
 #include "hash.h"
 
-dae::LevelObserver::LevelObserver(TextComponent* pScoreText, TextComponent* pRoundText) 
-	: m_pScoreText(pScoreText), m_pRoundText(pRoundText) {
+dae::LevelObserver::LevelObserver(TextComponent* pRoundText) 
+	: m_pRoundText(pRoundText) {
 }
 
 void dae::LevelObserver::Notify(const Event& event) {
 	switch (event.id) {
-		case make_sdbm_hash("score_increased"):
-		{
-			auto score{ event.GetValue<std::pair<int, int>>() };
-			m_pScoreText->SetText("SCORE:" + std::to_string(score.second));
-			break;
-		}
 		case make_sdbm_hash("next_round"):
 		{
 			int round{ event.GetValue<int>() };

@@ -3,13 +3,14 @@
 #include "TextComponent.h"
 
 namespace dae {
-	class LevelObserver : public Observer {
+	class ScoreObserver : public Observer {
 	public:
-		LevelObserver(TextComponent* pRoundText);
+		ScoreObserver(TextComponent* pScoreText);
 
 		void Notify(const Event& event) override;
-
 	private:
-		TextComponent* m_pRoundText{ nullptr };
+		TextComponent* m_pScoreText{ nullptr };
 	};
 }
+
+

@@ -20,7 +20,6 @@
 #include "TextureComponent.h"
 #include "ScoreComponent.h"
 #include "TextComponent.h"
-#include "LevelObserver.h"
 #include "LevelComponent.h"
 #include "SinglePlayerLevelScene.h"
 #include "ToggleSoundCommand.h"

@@ -25,6 +25,7 @@
 #include "ScoreComponent.h"
 #include "NextLevelCommand.h"
 #include "TextComponent.h"
+#include "ScoreObserver.h"
 #include "LevelObserver.h"
 #include "LevelComponent.h"
 #include "SceneManager.h"
@@ -152,7 +153,7 @@ void dae::CoopLevelScene::OnSetup() {
 	auto pScoreTextComponentP1{ scoreObjectP1->AddComponent<TextComponent>("SCORE:" + std::to_string(m_scoreP1), Qbert::GetInstance().GetFontMedium()) };
 
 	auto scoreObjectP2{ std::make_unique<GameObject>(Transform(400.f, 60.f, 20.f)) };
-	scoreObjectP2->AddComponent<TextComponent>("SCORE:" + std::to_string(m_scoreP2), Qbert::GetInstance().GetFontMedium());
+	auto pScoreTextComponentP2{ scoreObjectP2->AddComponent<TextComponent>("SCORE:" + std::to_string(m_scoreP2), Qbert::GetInstance().GetFontMedium()) };
 
 	auto roundObject{ std::make_unique<GameObject>(Transform(370, 450.f, 20.f)) };
 	auto pRoundTextComponent{ roundObject->AddComponent<TextComponent>("ROUND:1", Qbert::GetInstance().GetFontSmall()) };
@@ -160,13 +161,14 @@ void dae::CoopLevelScene::OnSetup() {
 	auto levelObject{ std::make_unique<GameObject>(Transform(170, 450.f, 20.f)) };
 	levelObject->AddComponent<TextComponent>("LEVEL:" + std::to_string(m_level+1), Qbert::GetInstance().GetFontSmall());
 
-	auto levelObserverP1{ std::make_shared<LevelObserver>(pScoreTextComponentP1, pRoundTextComponent) };
-	m_pPlayer1ScoreComponent->GetSubject().AddObserver(std::static_pointer_cast<Observer>(levelObserverP1));
+	auto scoreObserverP1{ std::make_shared<ScoreObserver>(pScoreTextComponentP1) };
+	m_pPlayer1ScoreComponent->GetSubject().AddObserver(std::static_pointer_cast<Observer>(scoreObserverP1));
 
-	// auto levelObserverP2{ std::make_shared<LevelObserver>(pScoreTextComponentP2, pRoundTextComponent) };
-	// m_pPlayer1ScoreComponent->GetSubject().AddObserver(std::static_pointer_cast<Observer>(levelObserverP2));
+	auto scoreObserverP2{ std::make_shared<ScoreObserver>(pScoreTextComponentP2) };
+	m_pPlayer2ScoreComponent->GetSubject().AddObserver(std::static_pointer_cast<Observer>(scoreObserverP2));
 
-	pLevelComponent->GetSubject().AddObserver(std::static_pointer_cast<Observer>(levelObserverP1));
+	auto levelObserver{ std::make_shared<LevelObserver>(pRoundTextComponent) };
+	pLevelComponent->GetSubject().AddObserver(std::static_pointer_cast<Observer>(levelObserver));
 	pLevelComponent->GetSubject().AddObserver(Qbert::GetInstance().GetSoundObserver());
 
 	Add(std::move(livesObjectP1));

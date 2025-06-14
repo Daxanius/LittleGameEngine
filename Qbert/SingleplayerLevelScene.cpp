@@ -24,6 +24,7 @@
 #include "TextureComponent.h"
 #include "ScoreComponent.h"
 #include "NextLevelCommand.h"
+#include "ScoreObserver.h"
 #include "TextComponent.h"
 #include "LevelObserver.h"
 #include "LevelComponent.h"
@@ -115,8 +116,10 @@ void dae::SingleplayerLevelScene::OnSetup() {
 	auto levelObject{ std::make_unique<GameObject>(Transform(420.f, 75.f, 20.f)) };
 	levelObject->AddComponent<TextComponent>("LEVEL:" + std::to_string(m_level+1), Qbert::GetInstance().GetFontLarge());
 
-	auto levelObserver{ std::make_shared<LevelObserver>(pScoreTextComponent, pRoundTextComponent) };
-	m_pScoreComponent->GetSubject().AddObserver(std::static_pointer_cast<Observer>(levelObserver));
+	auto scoreObserver{ std::make_shared<ScoreObserver>(pScoreTextComponent) };
+	m_pScoreComponent->GetSubject().AddObserver(std::static_pointer_cast<Observer>(scoreObserver));
+
+	auto levelObserver{ std::make_shared<LevelObserver>(pRoundTextComponent) };
 	pLevelComponent->GetSubject().AddObserver(std::static_pointer_cast<Observer>(levelObserver));
 	pLevelComponent->GetSubject().AddObserver(Qbert::GetInstance().GetSoundObserver());
 

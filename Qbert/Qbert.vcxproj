@@ -207,6 +207,7 @@
     <ClCompile Include="ScoreboardScene.cpp" />
     <ClCompile Include="ScoreComponent.cpp" />
     <ClCompile Include="LevelObserver.cpp" />
+    <ClCompile Include="ScoreObserver.cpp" />
     <ClCompile Include="SelectionMenuComponent.cpp" />
     <ClCompile Include="SingleplayerLevelScene.cpp" />
     <ClCompile Include="SingleplayerIntroScene.cpp" />
@@ -261,6 +262,7 @@
     <ClInclude Include="ScoreboardScene.h" />
     <ClInclude Include="ScoreComponent.h" />
     <ClInclude Include="LevelObserver.h" />
+    <ClInclude Include="ScoreObserver.h" />
     <ClInclude Include="SelectionMenuComponent.h" />
     <ClInclude Include="SingleplayerLevelScene.h" />
     <ClInclude Include="SingleplayerIntroScene.h" />

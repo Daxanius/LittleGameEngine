@@ -21,7 +21,7 @@ void dae::CoopScoreDisplayScene::OnSetup() {
 	auto p2ScoreObject{ std::make_unique<GameObject>(Transform((640 / 2) - 160, 300)) };
 	p2ScoreObject->AddComponent<TextComponent>("P2 Score: " + std::to_string(m_scoreP2), Qbert::GetInstance().GetFontLarge());
 
-	auto returnPromptObject{ std::make_unique<GameObject>(Transform((640 / 2) - 180, 440)) };
+	auto returnPromptObject{ std::make_unique<GameObject>(Transform((640 / 2) - 210, 440)) };
 	returnPromptObject->AddComponent<TextComponent>("Press ENTER or START to return to the menu", Qbert::GetInstance().GetFontVerySmall());
 
 	Add(std::move(gameOverTextGameObject));

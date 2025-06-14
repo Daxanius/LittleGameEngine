@@ -186,6 +186,9 @@
     <ClCompile Include="CoopIntroScene.cpp">
       <Filter>Source\Scenes</Filter>
     </ClCompile>
+    <ClCompile Include="ScoreObserver.cpp">
+      <Filter>Source\Observers</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="KillCommand.h">
@@ -343,6 +346,9 @@
     </ClInclude>
     <ClInclude Include="CoopIntroScene.h">
       <Filter>Source\Scenes</Filter>
+    </ClInclude>
+    <ClInclude Include="ScoreObserver.h">
+      <Filter>Source\Observers</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>
